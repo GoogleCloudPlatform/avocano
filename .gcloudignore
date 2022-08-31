@@ -1,0 +1,31 @@
+.git
+
+# provisioning/.gitignore
+
+
+# client/.gitignore
+.firebaserc
+.firebase/
+.idea
+.vscode
+.DS_Store
+node_modules/
+npm-debug.log
+
+coverage/
+.tmp/
+_site/
+dist/
+out-tsc/
+
+storybook-static
+custom-elements.json
+
+# server/.gitignore
+venv/
+__pycache__/
+static/
+/media/
+
+.env
+db.sqlite3

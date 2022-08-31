@@ -1,0 +1,5 @@
+web: gunicorn --bind 0.0.0.0:$PORT avocano_api.wsgi:application
+migrate: python3 manage.py migrate
+collectstatic: python3 manage.py collectstatic --noinput
+
+firstload: bash scripts/prime_database.sh

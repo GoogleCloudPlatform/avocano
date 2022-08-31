@@ -1,0 +1,58 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+steps:
+  - id: server build
+    name: gcr.io/k8s-skaffold/pack
+    entrypoint: pack
+    args:
+      - build
+      - gcr.io/$PROJECT_ID/server
+      - --builder=gcr.io/buildpacks/builder:v1
+      - --path=server/
+
+  # Because this image is immediately used in the next step, this action must happen now. 
+  - id: server push
+    name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - gcr.io/$PROJECT_ID/server
+
+  - id: terraform
+    name: hashicorp/terraform
+    dir: provisioning/terraform
+    env:
+      - PROJECT_ID=$PROJECT_ID
+    script: |
+      #!/bin/sh
+
+      terraform init
+      terraform apply -var project=${PROJECT_ID} -auto-approve
+
+  # Since the client is also node-based, the firebase image can be used for this step.
+  - id: client deploy
+    name: gcr.io/$PROJECT_ID/firebase
+    dir: client
+    env:
+      - PROJECT_ID=$PROJECT_ID
+    script: |
+      #!/bin/bash
+
+      npm i
+      npm run build
+      sed -i "s/__api_url__/\/api/g" dist/*.js
+      firebase deploy --project $PROJECT_ID --only hosting
+
+
+timeout: 1800s
