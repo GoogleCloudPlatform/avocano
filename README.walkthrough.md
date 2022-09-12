@@ -19,6 +19,12 @@ Before you begin, you will need a Google Cloud project.
 
 1. <walkthrough-project-setup billing="true"></walkthrough-project-setup>
 
+1. Confirm the Cloud Shell is configured with your selected project: 
+
+    ```bash
+    gcloud config set project <walkthrough-project-id/>
+    ```
+
 1. <walkthrough-enable-apis apis="cloudresourcemanager.googleapis.com,cloudbuild.googleapis.com,iam.googleapis.com"></walkthrough-enable-apis>
 
 1. Add Firebase to your Google Cloud project: 
@@ -26,6 +32,8 @@ Before you begin, you will need a Google Cloud project.
     ```bash
     firebase projects:addfirebase <walkthrough-project-id/>
     ```
+
+    *Issues running this command? [Use this manual instructions](/docs/admin/firebase-manual-setup.md).*
 
 ## Automated deployment
 
