@@ -33,7 +33,7 @@ Before you begin, you will need a Google Cloud project.
     firebase projects:addfirebase <walkthrough-project-id/>
     ```
 
-    *Issues running this command? [Use this manual instructions](/docs/admin/firebase-manual-setup.md).*
+    *Issues running this command? [Use these manual instructions](https://github.com/GoogleCloudPlatform/avocano/blob/main/docs/admin/firebase-manual-setup.md).*
 
 ## Automated deployment
 
