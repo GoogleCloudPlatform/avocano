@@ -1,7 +1,7 @@
 ---
 name: "\U0001F4C4 Documentation Request"
 about: Want more documentation? Ask us!
-title: "\U0001F4C4"
+title: "\U0001F4C4 [Documentation Request] - "
 labels: documentation
 assignees: ''
 
