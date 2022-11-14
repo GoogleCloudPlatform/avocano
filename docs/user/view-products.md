@@ -13,4 +13,4 @@ If on any product listing you click "Buy", you'll be told "Oops! Sorry! This is 
 
 **This is expected**. This application isn't designed as a full retail store, merely an "April's Fools Day" "fake product" listing site. 
 
-Yes, we wish there were such things as Sparkly Avocadoes, too. 
+Yes, we wish there were such things as Sparkly Avocados, too. 
