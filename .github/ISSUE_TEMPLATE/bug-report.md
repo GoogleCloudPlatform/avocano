@@ -1,7 +1,7 @@
 ---
 name: "\U0001F41E Bug report"
 about: Did something break? Let us know!
-title: "\U0001F41E [Bug Report]"
+title: "\U0001F41E [Bug Report] - "
 labels: bug
 assignees: ''
 
