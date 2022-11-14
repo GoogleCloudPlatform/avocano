@@ -8,9 +8,9 @@
     ],
     "rewrites": [
       {
-        "source": "/api/**",
+        "source": "/server/**",
         "run": {
-          "serviceId": "api",
+          "serviceId": "server",
           "region": "us-central1"
         }
       }

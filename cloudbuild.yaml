@@ -54,7 +54,7 @@ steps:
 
       npm i
       npm run build
-      sed -i "s/__api_url__/\/api/g" dist/*.js
+      sed -i "s/__api_url__/\/server/g" dist/*.js
       firebase deploy --project $PROJECT_ID --only hosting
 
 timeout: 1800s
