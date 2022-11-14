@@ -38,7 +38,7 @@ export default {
     replace({
       include: ['src/utils/config.js'],
       preventAssignment: false,
-      __api_url__: '/api', // set set in firebase.json
+      __api_url__: '/server', // set in firebase.json
     }),
     /** Enable using HTML as rollup entrypoint */
     html({
