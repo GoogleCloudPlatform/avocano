@@ -37,8 +37,8 @@ steps:
     script: |
       #!/bin/sh
 
-      if [ ! -f provisioning/terraform/state.tf ]; then
-        echo 'terraform { backend gcs { bucket = "terraform-${PROJECT_ID}" }' > provisioning/terraform/state.tf
+      if [ ! -f state.tf ]; then
+        echo 'terraform { backend gcs { bucket = "terraform-${PROJECT_ID}" }' > state.tf
       fi
 
       terraform init
