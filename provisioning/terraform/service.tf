@@ -1,5 +1,3 @@
-
-
 resource "google_cloud_run_service" "server" {
   name                       = var.service_name
   location                   = var.region
@@ -22,9 +20,9 @@ resource "google_cloud_run_service" "server" {
     }
     metadata {
       annotations = {
-        "autoscaling.knative.dev/maxScale"         = "100"
-        "run.googleapis.com/cloudsql-instances"    = google_sql_database_instance.postgres.connection_name
-        "run.googleapis.com/client-name"           = "terraform"
+        "autoscaling.knative.dev/maxScale"      = "100"
+        "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.postgres.connection_name
+        "run.googleapis.com/client-name"        = "terraform"
       }
     }
   }
@@ -32,6 +30,10 @@ resource "google_cloud_run_service" "server" {
     percent         = 100
     latest_revision = true
   }
+
+  depends_on = [
+    google_secret_manager_secret.django_settings
+  ]
 }
 
 

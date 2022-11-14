@@ -41,7 +41,7 @@ resource "google_secret_manager_secret" "django_settings" {
 
 ## Django configuration settings
 resource "google_secret_manager_secret_version" "django_settings" {
-  secret = google_secret_manager_secret.django_settings.id
+  secret      = google_secret_manager_secret.django_settings.id
   secret_data = <<EOF
 DATABASE_URL="postgres://${google_sql_user.django.name}:${google_sql_user.django.password}@//cloudsql/${google_sql_database_instance.postgres.project}:${google_sql_database_instance.postgres.region}:${google_sql_database_instance.postgres.name}/${google_sql_database.database.name}"
 GS_BUCKET_NAME="${google_storage_bucket.media.name}"
