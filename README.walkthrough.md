@@ -25,7 +25,7 @@ Before you begin, you will need a Google Cloud project.
     gcloud config set project <walkthrough-project-id/>
     ```
 
-1. <walkthrough-enable-apis apis="cloudresourcemanager.googleapis.com,cloudbuild.googleapis.com,iam.googleapis.com"></walkthrough-enable-apis>
+1. <walkthrough-enable-apis apis="cloudresourcemanager.googleapis.com,cloudbuild.googleapis.com,iam.googleapis.com,sqladmin.googleapis.com"></walkthrough-enable-apis>
 
 1. Add Firebase to your Google Cloud project: 
 
