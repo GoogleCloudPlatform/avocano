@@ -16,8 +16,7 @@
 
 # This script should be run first time the server is deployed to prime the database. 
 
-
-# These two commands should have been already done, but it's a noop to complete them again
+# Run migrations and static.
 python3 manage.py migrate
 python3 manage.py collectstatic --noinput --clear
 

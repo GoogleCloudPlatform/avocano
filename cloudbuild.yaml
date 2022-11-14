@@ -42,12 +42,6 @@ steps:
       terraform apply -auto-approve -no-color \
         -var project=${PROJECT_ID} \
         -var region=${REGION}
- 
-  - id: server migrate
-    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-    entrypoint: gcloud
-    args: ["beta", "run", "jobs", "execute",  "migrate-database", 
-           "--region", $_REGION, "--wait"] 
     
   # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy

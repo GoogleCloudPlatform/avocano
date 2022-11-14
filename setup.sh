@@ -71,6 +71,9 @@ quiet gsutil iam ch \
         serviceAccount:${CLOUDBUILD_SA}:roles/storage.admin \
         gs://$TFSTATE_BUCKET
 
+aecho "Running Cloud Build"
+gcloud builds submit --substitutions _REGION=${REGION}
+
 aecho "Creating Cloud Run Jobs"
 export IMAGE_NAME=gcr.io/${PROJECT_ID}/${SERVICE_NAME}
 export SQL_INSTANCE=${PROJECT_ID}:${REGION}:${INSTANCE_NAME}
@@ -90,10 +93,6 @@ gcloud beta run jobs create migrate-database \
   --set-secrets DJANGO_ENV=django_settings:latest \
   --set-cloudsql-instances $SQL_INSTANCE \
   --command "migrate" 
-
-
-aecho "Running Cloud Build"
-gcloud builds submit --substitutions _REGION=${REGION}
 
 aecho "Applying database migrations"
 gcloud beta run jobs execute setup-database --wait --region $REGION
