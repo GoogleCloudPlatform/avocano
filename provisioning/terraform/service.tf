@@ -1,7 +1,7 @@
 
 
 resource "google_cloud_run_service" "server" {
-  name                       = "api"
+  name                       = var.service_name
   location                   = var.region
   autogenerate_revision_name = true
   template {

@@ -34,13 +34,22 @@ steps:
     dir: provisioning/terraform
     env:
       - PROJECT_ID=$PROJECT_ID
+      - REGION=$_REGION
     script: |
       #!/bin/sh
 
       terraform init
-      terraform apply -var project=${PROJECT_ID} -auto-approve
-
-  # Since the client is also node-based, the firebase image can be used for this step.
+      terraform apply -auto-approve -no-color \
+        -var project=${PROJECT_ID} \
+        -var region=${REGION}
+ 
+  - id: server migrate
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: gcloud
+    args: ["beta", "run", "jobs", "execute",  "migrate-database", 
+           "--region", $_REGION, "--wait"] 
+    
+  # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy
     name: gcr.io/$PROJECT_ID/firebase
     dir: client
@@ -54,5 +63,7 @@ steps:
       sed -i "s/__api_url__/\/api/g" dist/*.js
       firebase deploy --project $PROJECT_ID --only hosting
 
-
 timeout: 1800s
+
+substitutions:
+  _REGION: us-central1

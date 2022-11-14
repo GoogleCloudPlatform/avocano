@@ -16,9 +16,8 @@ resource "google_sql_database_instance" "postgres" {
 }
 
 ## Database
-
 resource "google_sql_database" "database" {
-  name     = "django"
+  name     = var.database_name
   instance = google_sql_database_instance.postgres.name
 }
 
@@ -26,7 +25,7 @@ resource "google_sql_database" "database" {
 ## Details used in Django config settings
 # NOTE: users created this way automatically gain cloudsqladmin rights.
 resource "google_sql_user" "django" {
-  name     = "server"
+  name     = var.database_username
   instance = google_sql_database_instance.postgres.name
   password = random_password.database_user_password.result
 }

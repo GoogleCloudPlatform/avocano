@@ -16,17 +16,15 @@
 
 # This script should be run first time the server is deployed to prime the database. 
 
-# Create database elements
-python3 manage.py migrate
 
-# Populate storage
+# These two commands should have been already done, but it's a noop to complete them again
+python3 manage.py migrate
 python3 manage.py collectstatic --noinput --clear
 
 # Load configurations
 python3 manage.py loaddata demo_config.yaml
 
 # Create products through management commands.
-
 ls store/fixtures/media
 
 python3 manage.py create_new_product \
@@ -51,7 +49,6 @@ python3 manage.py create_new_product \
     --price "12.49" \
     --inventory_count 71
 
-
 # Last added entry is the active product
 python3 manage.py create_new_product \
     --name "Sparkly Avocado" \
@@ -61,4 +58,5 @@ python3 manage.py create_new_product \
     --discount "14" \
     --inventory_count 42
 
+# Generate some random testimonials
 python3 manage.py generate_testimonials

@@ -13,8 +13,8 @@ data "google_client_config" "default" {}
 
 locals {
   # these match the values in /cloudbuild.yaml
-  gcr_hostname = "gcr.io"
-  server_image   = "server"
+  gcr_hostname   = "gcr.io"
+  server_image   = var.service_name
   image_registry = "${local.gcr_hostname}/${var.project}"
 }
 
