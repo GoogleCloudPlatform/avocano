@@ -17,9 +17,17 @@ python -m pytest
 ```
 gcloud iam service-accounts create robot-account \
     --display-name "Robot account"
+
+# permissions on parent
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
     --member serviceAccount:robot-account@${PROJECT_ID}.iam.gserviceaccount.com \
     --role roles/owner
+
+# permissions on child. 
+gcloud projects add-iam-policy-binding ${CI_PROJECT} \
+    --member serviceAccount:robot-account@${PROJECT_ID}.iam.gserviceaccount.com \
+    --role roles/owner
+
 gcloud iam service-accounts keys create ~/robot-account-key.json \
     --iam-account robot-account@${PROJECT_ID}.iam.gserviceaccount.com
 export GOOGLE_APPLICATION_CREDENTIALS=~/robot-account-key.json
