@@ -18,6 +18,8 @@ if not PROJECT_ID:
 
 print("PROJECT", PROJECT_ID)
 
+httpclient = httpx.Client(timeout=15, follow_redirects=True)
+
 
 @pytest.fixture
 def cloudrun_service():
@@ -53,13 +55,13 @@ def test_server_exists(cloudrun_service):
 
 
 def test_server_index(cloudrun_url):
-    response = httpx.get(cloudrun_url, timeout=30)
+    response = httpclient.get(cloudrun_url)
     assert response.status_code == 200
     assert "✨🥑✨" in response.text
 
 
 def test_server_admin(cloudrun_url):
-    response = httpx.get(cloudrun_url + "/admin", follow_redirects=True)
+    response = httpclient.get(cloudrun_url + "/admin", follow_redirects=True)
     assert response.status_code == 200
     assert "Django administration" in response.text
 
@@ -85,7 +87,7 @@ def test_server_admin_csrf(cloudrun_url, django_admin_password):
 
 
 def test_server_api_content(cloudrun_url):
-    response = httpx.get(cloudrun_url + "/api/")
+    response = httpclient.get(cloudrun_url + "/api/")
     assert response.status_code == 200
     assert response.json() is not None
 
@@ -99,12 +101,12 @@ def test_server_api_content(cloudrun_url):
         "active/site_config",
     ]:
         endpoint_url = base_json[endpoint]
-        response = httpx.get(endpoint_url)
+        response = httpclient.get(endpoint_url)
         assert len(response.json()) > 0
 
 
 def test_client(firebase_url):
-    response = httpx.get(firebase_url)
+    response = httpclient.get(firebase_url)
 
     assert response.status_code == 200
     assert "🥑" in response.text
