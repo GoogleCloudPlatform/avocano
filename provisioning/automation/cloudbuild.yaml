@@ -36,7 +36,10 @@ steps:
     script: |
         #!/bin/bash
         python -m pip install -r test/requirements.txt
+        playwright install-deps  
+        playwright install
         python -m pytest
+
 
   - id: "cleanup"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
