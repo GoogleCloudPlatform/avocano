@@ -26,6 +26,7 @@ venv/
 __pycache__/
 static/
 /media/
+.pytest_cache/
 
 .env
 db.sqlite3
