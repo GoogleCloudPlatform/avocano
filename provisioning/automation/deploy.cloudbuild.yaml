@@ -1,0 +1,6 @@
+steps:
+  - id: "deploy"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    script: |
+      #!/bin/bash
+      bash setup.sh

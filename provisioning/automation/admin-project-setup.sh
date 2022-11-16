@@ -7,23 +7,7 @@
 # borrows heavily from fourkeys https://github.com/GoogleCloudPlatform/fourkeys/blob/main/experimental/terraform/setup.sh
 # this script copied from unicodex https://github.com/GoogleCloudPlatform/django-demo-app-unicodex/blob/latest/experimental/project_setup.sh
 
-# Bash helpers
-function quiet {
-    $* > /dev/null 2>&1 
-}
-
-stepdo() { 
-    echo "→ ${1}..."
-}
-
-# this will only capture the most recent return code, sadly.
-stepdone(){
-    statuscode=$?
-    msg="... done"
-    if [ $statuscode -ne 0 ]; then msg="❌  done, but non-zero return code ($statuscode)"; fi
-    echo $msg
-    echo " "
-}
+source bashhelpers.sh
 
 # Sets up a parent project for CI work
 export PARENT_PROJECT=$(gcloud config get-value project)
@@ -50,8 +34,12 @@ gcloud services enable --project $PARENT_PROJECT  \
     cloudbilling.googleapis.com \
     cloudbuild.googleapis.com \
     iam.googleapis.com \
-    sqladmin.googleapis.com
+    sqladmin.googleapis.com \
+    firebase.googleapis.com
 stepdone
+
+stepdo "Create firebase builder"
+gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
 
 stepdo "Create service account"
 SA_NAME=ci-serviceaccount

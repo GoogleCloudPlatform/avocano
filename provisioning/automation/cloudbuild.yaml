@@ -1,0 +1,66 @@
+steps:
+  - id: "setup"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: /bin/bash
+    args:
+      - "-c"
+      - |
+        source ./provisioning/automation/project-setup.sh \
+          -f ${_PARENT_FOLDER} \
+          -p ${_CI_PROJECT} \
+          -r ${_REGION} \
+          -s ${_SA_NAME}
+
+  # So long as firebase API is enabled on the parent, and parent has permission on the child, this is possible.
+  - id: "firebase"
+    name: "gcr.io/$PROJECT_ID/firebase"
+    entrypoint: firebase
+    args: ["projects:addfirebase", $_CI_PROJECT]
+
+  - id: "provision"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    entrypoint: gcloud
+    args:
+      [
+        "builds",
+        "submit",
+        "--config=$_CLOUDBUILD_CONFIG",
+        "--timeout=1500",
+        "--project=$_CI_PROJECT",
+      ]
+
+  - id: "test"
+    name: python:3.11-slim
+    dir: provisioning
+    env: ["CI_PROJECT=${_CI_PROJECT}"]
+    script: |
+        #!/bin/bash
+        python -m pip install -r test/requirements.txt
+        python -m pytest
+
+  - id: "cleanup"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    env: ["KEEP_PROJECT=${_KEEP_PROJECT}"]
+    script:
+      #!/bin/bash
+
+      if [ $KEEP_PROJECT  = 'true' ]; then echo "Configuration says to keep project around. Not deleting."; exit 0; fi
+
+      echo "Deleting project..."
+      gcloud projects delete ${_CI_PROJECT} --quiet;
+
+options:
+  dynamic_substitutions: true
+  machineType: "E2_HIGHCPU_8"
+
+logsBucket: ${PROJECT_ID}-buildlogs
+serviceAccount: projects/${PROJECT_ID}/serviceAccounts/ci-serviceaccount@avocano-admin.iam.gserviceaccount.com
+
+substitutions:
+  _KEEP_PROJECT: "false"
+  _REGION: us-central1
+  _SA_NAME: ci-serviceaccount
+  _CI_PROJECT: "avocano-ephemeral-${BUILD_ID:0:8}"
+  _CLOUDBUILD_CONFIG: provisioning/automation/deploy.cloudbuild.yaml
+
+timeout: "1500s"
