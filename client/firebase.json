@@ -8,7 +8,7 @@
     ],
     "rewrites": [
       {
-        "source": "/server/**",
+        "source": "/api/**",
         "run": {
           "serviceId": "server",
           "region": "us-central1"

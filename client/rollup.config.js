@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import nodeResolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import html from '@web/rollup-plugin-html';
@@ -38,7 +37,7 @@ export default {
     replace({
       include: ['src/utils/config.js'],
       preventAssignment: false,
-      __api_url__: '/server', // set in firebase.json
+      __api_url__: '/api', // set in firebase.json
     }),
     /** Enable using HTML as rollup entrypoint */
     html({
