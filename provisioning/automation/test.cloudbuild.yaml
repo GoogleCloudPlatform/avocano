@@ -1,0 +1,26 @@
+steps:
+
+  # Only run tests. Useful for iterative testing. 
+  - id: "test"
+    name: python:3.10-slim
+    dir: provisioning
+    env: ["CI_PROJECT=${_CI_PROJECT}"]
+    script: |
+        #!/bin/bash
+        python -m pip install -r test/requirements.txt
+        playwright install-deps  
+        playwright install
+        python -m pytest
+
+
+options:
+  dynamic_substitutions: true
+  machineType: "E2_HIGHCPU_8"
+
+logsBucket: ${PROJECT_ID}-buildlogs
+serviceAccount: projects/${PROJECT_ID}/serviceAccounts/ci-serviceaccount@avocano-admin.iam.gserviceaccount.com
+
+substitutions:
+  _CI_PROJECT: "avocano-ephemeral-${BUILD_ID:0:8}"
+
+timeout: "1500s"

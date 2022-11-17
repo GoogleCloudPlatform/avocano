@@ -32,6 +32,8 @@ terraform {
 }
 ```
 
+This is automatically added in the root `cloudbuild.yaml`, but if you're doing local testing, be sure to add it. 
+
 
 ## Creating migrations
 

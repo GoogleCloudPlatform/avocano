@@ -16,7 +16,7 @@
 
 export PROJECT_ID=${PROJECT_ID:=$(gcloud config get project)}
 export REGION=${REGION:=us-centra1} 
-export SERVICE_NAME=api
+export SERVICE_NAME=server
 
 # Build server image
 gcloud builds submit --config provisioning/server.cloudbuild.yaml
@@ -24,19 +24,5 @@ gcloud builds submit --config provisioning/server.cloudbuild.yaml
 # Apply Terraform (updates server)
 gcloud builds submit --config provisioning/terraform.cloudbuild.yaml
 
-# Get values from updated service
-
-export IMAGE_NAME=$(gcloud run services describe $SERVICE_NAME --region $REGION \
-    --format "value(spec.template.spec.containers.image)")
-export SQL_INSTANCE=$(gcloud run services describe $SERVICE_NAME --region $REGION \
-    --format  "value(spec.template.metadata.annotations.'run.googleapis.com/cloudsql-instances')")
-
-# Run job
-gcloud beta run jobs create migrate-database-$(date +"%s") \
-  --image $IMAGE_NAME \
-  --region $REGION \
-  --service-account automation@${PROJECT_ID}.iam.gserviceaccount.com \
-  --set-secrets DJANGO_ENV=django_settings:latest,ADMIN_PASSWORD=django_admin_password:latest \
-  --set-cloudsql-instances $SQL_INSTANCE \
-  --command "migrate" \
-  --execute-now --wait --max-retries 1
+# Run database migration job
+gcloud beta run jobs execute database-migrate --region $REGION

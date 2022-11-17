@@ -38,6 +38,14 @@ steps:
     script: |
       #!/bin/sh
 
+      if [ ! -f state.tf ]; then
+        echo "terraform { 
+          backend gcs { 
+            bucket = \"terraform-${PROJECT_ID}\" 
+        } 
+      }" > state.tf
+      fi
+
       terraform init
       terraform apply -auto-approve -no-color \
         -var project=${PROJECT_ID} \

@@ -1,0 +1,9 @@
+steps:
+
+  # designed to be called against the child project,
+  # to kickstart the build within the scope of that project.
+  - id: "deploy"
+    name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    script: |
+      #!/bin/bash
+      bash setup.sh

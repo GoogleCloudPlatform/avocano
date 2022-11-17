@@ -35,7 +35,7 @@ export default ({
     replace({
       include: ['src/utils/config.js'],
       preventAssignment: false,
-      '__api_url__': (process.env.API_URL || 'http://localhost:8000') + "/server"
+      '__api_url__': (process.env.API_URL || 'http://localhost:8000') + "/api"
     }),
   ]
 });
