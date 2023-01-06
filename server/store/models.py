@@ -77,7 +77,7 @@ class Transaction(models.Model):
 
 
 def google_font_help():
-    return "Any valid <a href='https://fonts.google.com/ target=_blank'>Google Font name</a>. Dynamically loaded at runtime."
+    return "Any valid <a href='https://fonts.google.com/' target='_blank'>Google Font name</a>. Dynamically loaded at runtime."
 
 
 class SiteConfig(models.Model):
