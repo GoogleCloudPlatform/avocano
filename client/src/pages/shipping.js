@@ -28,7 +28,7 @@ export class Shipping extends LitElement {
         <div class="shippingWrapper">
           This website ships no products, but this website was shipped through
           Google Cloud automation.
-          <a href="https://github.com/GoogleCloudPlatform/avocano/tree/latest/docs">Learn more.</a>
+          <a href="https://github.com/GoogleCloudPlatform/avocano/tree/main/docs">Learn more.</a>
         </div>
       </div>
     `;
