@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "config:base",
+   ":disableDependencyDashboard"
+  ],
+  "rangeStrategy": "auto",
+  "packageRules": [
+    {
+      "paths": [
+        "client/"
+      ],
+      "pinVersions": false,
+      "rebaseStalePrs": true,
+      "lockFileMaintenance": {
+        "enabled": true,
+        "recreateClosed": true
+      }
+    }
+  ]
+}
