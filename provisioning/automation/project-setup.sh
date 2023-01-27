@@ -44,7 +44,7 @@ else
     stepdone
 
     stepdo "assign IAM policies to service account"
-    for role in iam.serviceAccountTokenCreator iam.serviceAccountUser billing.projectManager; do
+    for role in cloudbuild.builds.editor iam.serviceAccountTokenCreator iam.serviceAccountUser billing.projectManager; do
     quiet gcloud projects add-iam-policy-binding $CI_PROJECT \
         --member serviceAccount:${SA_EMAIL} \
         --role roles/${role}

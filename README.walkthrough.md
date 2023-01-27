@@ -72,4 +72,4 @@ Here's what to do next:
 * Learn more about [what you can do with this website][project-docs]
 * Learn about [Managing Infrastrcutre as Code](https://cloud.google.com/architecture/managing-infrastructure-as-code)
 
-[project-docs]: https://github.com/GoogleCloudPlatform/avocano/tree/latest/docs
+[project-docs]: https://github.com/GoogleCloudPlatform/avocano/tree/main/docs
