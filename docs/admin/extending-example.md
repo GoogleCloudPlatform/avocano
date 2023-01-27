@@ -38,9 +38,41 @@ This is automatically added in the root `cloudbuild.yaml`, but if you're doing l
 ## Creating migrations
 
 When automatically generating Django migrations, you'll need to run these on your local machine so you can commit the
-results to source. 
+results to source. You will follow a fairly standard practice, but you'll provide blank default settings to Django, as these are normally expected in the deployment environment. 
 
-To do this, you'll need a connection to your Cloud SQL database, and your settings locally. 
+1. Navigate to the `server` directory, and install the Python dependencies
+ 
+    ```bash
+    cd server
+    pip install -r requirements.txt
+    ```
+ 
+1. Generate the Django migration files: 
+ 
+    ```bash
+    SECRET_KEY="" DATABASE_URL="" python manage.py makemigrations
+    ```
+ 
+    _Ignore any "Engine not recognized from url" warnings._
+ 
+1. Run the standard update process in Cloud Build: 
+ 
+    ```bash
+    gcloud builds submit
+    ```
+ 
+1. Apply the database migrations using Cloud Run Jobs:
+ 
+    ```bash
+    gcloud beta run jobs execute migrate
+    ```
+ 
+Open the linked execution logs to see the output from this command. 
+
+## Local testing
+
+If you need to run the application locally, such as for more complex development tasks, you will need to setup a proxy to the production database, and adjust your Django settings. 
+
 
 ### Setup Cloud SQL Auth Proxy
 
@@ -85,6 +117,5 @@ This will redirect this Cloud SQL instance to localhost. Because of this, you'll
     ```
     python manage.py runserver
     ```
-
-
-From here, you should be able to run `makemigrations` and other tasks. 
+    
+From here, you can open localhost to see your code running against the production database. 
