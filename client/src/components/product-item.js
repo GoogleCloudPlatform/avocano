@@ -12,23 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { LitElement, html } from 'lit';
 import styles from './styles/product-item.js';
-import {
-  buyProduct,
-  getProductTestimonials
-} from '../utils/fetch.js';
+import { buyProduct, getProductTestimonials } from '../utils/fetch.js';
 
 const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
-const oopsAvocado = new URL('../../assets/oops-avocado.png', import.meta.url).href;
+const oopsAvocado = new URL('../../assets/oops-avocado.png', import.meta.url)
+  .href;
 
 export class ProductItem extends LitElement {
-  static properties = {
-    productId: { type: Number },
-    productItem: { type: Object }
-  };
-  
+  static get properties() {
+    return {
+      productId: { type: Number },
+      productItem: { type: Object },
+    };
+  }
+
   static get styles() {
     return styles;
   }
@@ -39,52 +38,52 @@ export class ProductItem extends LitElement {
       count: 0,
       openDialog: false,
       openSoldOutDialog: false,
-      testimonials: []
+      testimonials: [],
     };
   }
 
   /**
    * Executes when component has initially loaded
-   * To read more about lifecycle methods: 
+   * To read more about lifecycle methods:
    * https://lit.dev/docs/v1/components/lifecycle/#firstupdated
-   */ 
+   */
   async firstUpdated() {
     let testimonials = [];
 
-    if(this.__productItem.id) {
+    if (this.__productItem.id) {
       testimonials = await getProductTestimonials(this.__productItem.id);
     }
-    
+
     this.state = {
       count: this.productItem.inventory_count,
-      testimonials
+      testimonials,
     };
 
     this.requestUpdate();
   }
-  
+
   /**
    * Toggle the fake product dialog
-   */ 
+   */
   toggleDialog() {
     this.state.openDialog = !this.state.openDialog;
     this.requestUpdate();
   }
-  
+
   /**
    * Toggle the sold out product dialog
-   */ 
+   */
   toggleSoldOutDialog() {
     this.state.openSoldOutDialog = !this.state.openSoldOutDialog;
     this.requestUpdate();
   }
-  
+
   /**
    * 'Purchase' the product, but display to
    * user that this is in fact a fake product
-   */ 
+   */
   async buyProduct() {
-    if(this.state.count > 0) { 
+    if (this.state.count > 0) {
       await buyProduct(this.productItem?.id, () => {
         this.state.count--;
         // Open fake product dialog
@@ -95,59 +94,84 @@ export class ProductItem extends LitElement {
       this.toggleSoldOutDialog();
     }
   }
-   
-  render() {
-    const { count, testimonials, openDialog, openSoldOutDialog } = this.state; 
-    const { name, price, discount_price, discount_percent, image, description  } = this.productItem || {};
 
+  render() {
+    const { count, testimonials, openDialog, openSoldOutDialog } = this.state;
+    const {
+      name,
+      price,
+      discount_price,
+      discount_percent,
+      image,
+      description,
+    } = this.productItem || {};
 
     return html`
-      <div class='productItemContainer'>
+      <div class="productItemContainer">
         <div class="productItemWrapper">
           <div class="productimageWrapper">
-            <img class='productimage' alt='product logo' src=${image} loading='lazy' onerror=${`this.src='${noimage}';`} />
+            <img
+              class="productimage"
+              alt="product logo"
+              src=${image}
+              loading="lazy"
+              onerror=${`this.src='${noimage}';`}
+            />
           </div>
           <div class="productItemContent">
             <h2 class="itemTitle">${name}</h2>
-            ${ discount_percent > 0 ? 
-              html`<div class="price">
-              <div class="retailPrice">RRP $${price}</div>
-              <div class="discountPrice">Now $${discount_price}</div>
-              <div class="discountRate">Save ${discount_percent}%</div>
-            </div>`
-            : 
-              html`<div class="price"><div class="discountPrice">$${discount_price}</div></div>`
-            }
+            ${discount_percent > 0
+              ? html`<div class="price">
+                  <div class="retailPrice">RRP $${price}</div>
+                  <div class="discountPrice">Now $${discount_price}</div>
+                  <div class="discountRate">Save ${discount_percent}%</div>
+                </div>`
+              : html`<div class="price">
+                  <div class="discountPrice">$${discount_price}</div>
+                </div>`}
             <div class="inventory">${`Only ${count} left!`}</div>
-            <a href="#" class="buyButton" label="Buy" @click="${this.buyProduct}">Buy</a>
+            <a
+              href="#"
+              class="buyButton"
+              label="Buy"
+              @click="${this.buyProduct}"
+              >Buy</a
+            >
           </div>
         </div>
-          <div class="productDescription">${description}
-        </div>
+        <div class="productDescription">${description}</div>
         <div class="testimonialsWrapper">
           <div class="testimonialsHeader">
             <h3>Testimonials</h3>
           </div>
           <div class="testimonialsContent">
-            ${testimonials?.length 
-              ? testimonials.map((item, index) => (
-                html`
-                  <div class='testimonialsItem'>
-                    <div class='testimonialItemContent'>
-                      <div class='rating'>${`★`.repeat(item.rating)}${`☆`.repeat(5 - item.rating)}</div>
-                      <div class='reviewerDetails'>${item.reviewer_name} from ${item.reviewer_location}</div>
-                      <div class='reviewSummary'>${item.summary}</div>
-                      <div class='reviewDescription'>${item.description}</div>
-                    </div>
-                  </div>
-                  `
-              ))
-              : html`<p>No testimonials ... yet</p>`
-            }
+            ${testimonials?.length
+              ? testimonials.map(
+                  (item, index) =>
+                    html`
+                      <div class="testimonialsItem">
+                        <div class="testimonialItemContent">
+                          <div class="rating">
+                            ${`★`.repeat(item.rating)}${`☆`.repeat(
+                              5 - item.rating
+                            )}
+                          </div>
+                          <div class="reviewerDetails">
+                            ${item.reviewer_name} from ${item.reviewer_location}
+                          </div>
+                          <div class="reviewSummary">${item.summary}</div>
+                          <div class="reviewDescription">
+                            ${item.description}
+                          </div>
+                        </div>
+                      </div>
+                    `
+                )
+              : html`<p>No testimonials ... yet</p>`}
           </div>
         </div>
         ${openDialog
-            ? html`
+          ? html`
               <mwc-dialog open>
                 <div class="dialogWrapper">
                   <img class="oopsAvocado" src=${oopsAvocado} />
@@ -155,38 +179,48 @@ export class ProductItem extends LitElement {
                     <h2>Oops!</h2>
                     <div>Sorry! This is not a real product.</div>
                     <div>
-                    <br> There isn't such thing as a ${name}, at least in this storefront. But thank you for your interest in this product!
+                      <br />
+                      There isn't such thing as a ${name}, at least in this
+                      storefront. But thank you for your interest in this
+                      product!
                     </div>
                   </div>
                 </div>
-                <mwc-button label="Oh no! 😭" slot="primaryAction" @click="${this.toggleDialog}"></mwc-button>
+                <mwc-button
+                  label="Oh no! 😭"
+                  slot="primaryAction"
+                  @click="${this.toggleDialog}"
+                ></mwc-button>
               </mwc-dialog>
             `
-            : ''
-        }
+          : ''}
         ${openSoldOutDialog
-            ? html`
+          ? html`
               <mwc-dialog open>
                 <div class="dialogWrapper">
                   <div>
                     <h2>Sold out!</h2>
                     <div>This is product is no longer available.</div>
                     <div>
-                      Lucas ipsum dolor sit amet solo sidious hutt jade wampa darth leia yavin vader tatooine.
-                      Jawa yoda amidala wedge chewbacca. Qui-gon jinn qui-gon hutt yavin mon solo anakin hutt.
-                      Darth darth organa luke. Leia c-3po calamari lando boba palpatine mandalore boba.
+                      Lucas ipsum dolor sit amet solo sidious hutt jade wampa
+                      darth leia yavin vader tatooine. Jawa yoda amidala wedge
+                      chewbacca. Qui-gon jinn qui-gon hutt yavin mon solo anakin
+                      hutt. Darth darth organa luke. Leia c-3po calamari lando
+                      boba palpatine mandalore boba.
                     </div>
                   </div>
                 </div>
-                <mwc-button label="Close" slot="primaryAction" @click="${this.toggleSoldOutDialog}"></mwc-button>
+                <mwc-button
+                  label="Close"
+                  slot="primaryAction"
+                  @click="${this.toggleSoldOutDialog}"
+                ></mwc-button>
               </mwc-dialog>
             `
-            : ''
-        }
+          : ''}
       </div>
     `;
   }
 }
 
 customElements.define('app-product-item', ProductItem);
-

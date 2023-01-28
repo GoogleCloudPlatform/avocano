@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { LitElement, html } from 'lit';
 import { router } from 'lit-element-router';
 import { getSiteConfig } from './utils/fetch.js';
@@ -36,7 +35,7 @@ export class AvocanoShell extends router(LitElement) {
   static get properties() {
     return {
       route: { type: String },
-      params: { type: Object }
+      params: { type: Object },
     };
   }
 
@@ -53,14 +52,14 @@ export class AvocanoShell extends router(LitElement) {
     this.route = '';
     this.params = {};
     this.state = {
-      config: {}
+      config: {},
     };
   }
 
   async connectedCallback() {
     super.connectedCallback();
 
-    const config = await getSiteConfig(); 
+    const config = await getSiteConfig();
 
     // Set django site config properties as
     // global variables for our css to leverage
@@ -71,7 +70,7 @@ export class AvocanoShell extends router(LitElement) {
     this.style.setProperty('--site-name-color', config.site_name_color);
     this.style.setProperty('--site-name-font', config.site_name_font);
     this.style.setProperty('--base-font', config.base_font);
-  
+
     this.state.config = config;
 
     this.requestUpdate();
@@ -81,35 +80,37 @@ export class AvocanoShell extends router(LitElement) {
     this.route = route;
     this.params = params;
   }
-  
+
   render() {
     const { config } = this.state;
 
     /* Dynamically pull fonts we require */
-    WebFont.load({
-      google: {
-        families: [config.base_font, config.site_name_font]
-      }
-    });
+    if (window.WebFont) {
+      window.WebFont.load({
+        google: {
+          families: [config.base_font, config.site_name_font],
+        },
+      });
+    }
     return html`
       <app-header .headerTitle=${config.site_name}></app-header>
       <app-main active-route=${this.route}>
-        <div class='route' route='home'>
+        <div class="route" route="home">
           <app-home></app-home>
         </div>
-        <div class='route' route='product'>
+        <div class="route" route="product">
           <app-product .productId=${parseInt(this.params.id, 10)}></app-product>
         </div>
-        <div class='route' route='product-list'>
+        <div class="route" route="product-list">
           <app-product-list></app-product-list>
         </div>
-        <div class='route' route='shipping'>
+        <div class="route" route="shipping">
           <app-shipping></app-shipping>
         </div>
-        <div class='route' route='contact'>
+        <div class="route" route="contact">
           <app-contact></app-contact>
         </div>
-        <div class='route' route='not-found'>Not Found</div>
+        <div class="route" route="not-found">Not Found</div>
       </app-main>
       <app-footer></app-footer>
     `;

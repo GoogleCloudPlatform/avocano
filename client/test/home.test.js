@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import '../src/avocano-shell.js';
+import '../src/pages/home.js';
 
-describe('AvocanoShell', () => {
+describe('Home', () => {
   let element;
+
   beforeEach(async () => {
-    element = await fixture(html`<avocano-shell></avocano-shell>`);
+    element = await fixture(html`<app-home></app-home>`);
   });
 
-  it('renders a h1', () => {
-    const h1 = element.shadowRoot.querySelector('h1');
-    expect(h1).to.exist;
-    expect(h1.textContent).to.equal('My app');
-  });
+  it('renders loading element', () => {
+    const loadingElement = element.shadowRoot.querySelector('.homeBase > p');
 
-  it('passes the a11y audit', async () => {
-    await expect(element).shadowDom.to.be.accessible();
+    expect(loadingElement).to.exist;
+    expect(loadingElement.textContent).to.equal('loading...');
   });
 });

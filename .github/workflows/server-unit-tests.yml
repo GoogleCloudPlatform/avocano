@@ -1,0 +1,34 @@
+name: Server unit tests
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'server/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'server/**'
+jobs:
+  server-unit-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: server
+    steps:
+    - name: Python Unit Tests
+      timeout-minutes: 20
+      run: |
+        set -x
+          echo "testing server"
+          pushd
+            python -m venv venv
+            source venv/bin/activate
+            cp .env.local .env
+            pip install --upgrade pip
+            pip install -r requirements.txt
+            python -m pytest -v -p no:warnings
+            bash scripts/prime_database.sh
+            pytest
+            deactivate
+          popd

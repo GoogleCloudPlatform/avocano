@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { css } from 'lit';
+import { html } from 'lit';
+import { fixture, expect } from '@open-wc/testing';
 
-const styles = css`
-  h1 {
-    color: var(--color-secondary);
-  }
+import '../src/pages/product-list.js';
 
-  .contactContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px;
-  }
-`;
+describe('ProductList', () => {
+  let element;
 
-export default styles;
+  beforeEach(async () => {
+    element = await fixture(html`<app-product-list></app-product-list>`);
+  });
+
+  it('renders title element', () => {
+    const titleElement = element.shadowRoot.querySelector(
+      '.productContainer > h1'
+    );
+
+    expect(titleElement).to.exist;
+    expect(titleElement.textContent).to.equal('Product List');
+  });
+});

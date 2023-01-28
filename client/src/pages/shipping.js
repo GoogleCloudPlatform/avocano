@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { LitElement, html } from 'lit';
 import styles from './styles/shipping.js';
 
@@ -28,7 +27,10 @@ export class Shipping extends LitElement {
         <div class="shippingWrapper">
           This website ships no products, but this website was shipped through
           Google Cloud automation.
-          <a href="https://github.com/GoogleCloudPlatform/avocano/tree/main/docs">Learn more.</a>
+          <a
+            href="https://github.com/GoogleCloudPlatform/avocano/tree/main/docs"
+            >Learn more.</a
+          >
         </div>
       </div>
     `;
