@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { css } from 'lit';
 
 const styles = css`
@@ -27,6 +26,6 @@ const styles = css`
     flex-direction: column;
     margin: 20px;
   }
-`;  
+`;
 
 export default styles;

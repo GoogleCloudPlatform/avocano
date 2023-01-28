@@ -22,10 +22,12 @@ export class Footer extends LitElement {
   }
 
   render() {
-    return html` <div class="footer">
-      Made with 💚 from the
-      <a href="ttps://github.com/GoogleCloudPlatform/avocano/">Pit Crew</a>
-      </div> `;
+    return html`
+      <div class="footer">
+        Made with 💚 from the
+        <a href="ttps://github.com/GoogleCloudPlatform/avocano/">Pit Crew</a>
+      </div>
+    `;
   }
 }
 

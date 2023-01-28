@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { LitElement, html } from 'lit';
 import { navigator } from 'lit-element-router';
 import { getProductList } from '../utils/fetch.js';
@@ -30,45 +29,55 @@ export class ProductList extends navigator(LitElement) {
     this.title = 'Product List';
     this.state = {
       status: 'loading',
-      products: []
+      products: [],
     };
   }
 
   async firstUpdated() {
     let products = await getProductList();
-    
+
     this.state = {
       status: 'loaded',
-      products
+      products,
     };
-     
+
     if (this.state.status === 'loaded') {
       this.requestUpdate();
     }
   }
-  
+
   render() {
     return html`
-      <div class='productContainer'>
-        <h1 class='productTitle'>Product List</h1>
-        <div class='productWrapper'>
+      <div class="productContainer">
+        <h1 class="productTitle">Product List</h1>
+        <div class="productWrapper">
           ${this.state.status === 'loading'
             ? html`<p>loading...</p>`
-            : this.state.products.map(item => (
-                html`
-                  <div class='productItem' @click=${() => item.id && this.navigate(`/products/${item.id}`)}>
-                    <div class="productimageWrapper">
-                      <img class='productimage' alt='Product Image' src=${item.image} loading='lazy' onerror=${`this.src='${noimage}';`} />
+            : this.state.products.map(
+                item =>
+                  html`
+                    <div
+                      class="productItem"
+                      @click=${() =>
+                        item.id && this.navigate(`/products/${item.id}`)}
+                    >
+                      <div class="productimageWrapper">
+                        <img
+                          class="productimage"
+                          alt="Product Image"
+                          src=${item.image}
+                          loading="lazy"
+                          onerror=${`this.src='${noimage}';`}
+                        />
+                      </div>
+                      <div class="productItemContent">
+                        <div class="itemTitle">${item.name}</div>
+                        <div>${`Price: $${item.discount_price}`}</div>
+                        <div>${`Available: ${item.inventory_count}`}</div>
+                      </div>
                     </div>
-                    <div class='productItemContent'>
-                      <div class='itemTitle'>${item.name}</div>
-                      <div>${`Price: $${item.discount_price}`}</div>
-                      <div>${`Available: ${item.inventory_count}`}</div>
-                    </div>
-                  </div>
-                `
-            ))
-          }
+                  `
+              )}
         </div>
       </div>
     `;
@@ -76,4 +85,3 @@ export class ProductList extends navigator(LitElement) {
 }
 
 customElements.define('app-product-list', ProductList);
-

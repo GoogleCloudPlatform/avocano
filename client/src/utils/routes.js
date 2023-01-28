@@ -12,26 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-const routes =   
-  [{
+const routes = [
+  {
     name: 'home',
-    pattern: ''
-  }, {
+    pattern: '',
+  },
+  {
     name: 'product-list',
-    pattern: 'products'
-  }, {
+    pattern: 'products',
+  },
+  {
     name: 'product',
-    pattern: 'products/:id'
-  }, {
+    pattern: 'products/:id',
+  },
+  {
     name: 'shipping',
-    pattern: 'shipping'
-  }, {
+    pattern: 'shipping',
+  },
+  {
     name: 'contact',
-    pattern: 'contact'
-  }, {
+    pattern: 'contact',
+  },
+  {
     name: 'not-found',
-    pattern: '*'
-  }];
+    pattern: '*',
+  },
+];
 
 export default routes;

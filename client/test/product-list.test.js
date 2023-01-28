@@ -12,25 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import '../src/avocano-shell.js';
+import '../src/pages/product-list.js';
 
-describe('AvocanoShell', () => {
+describe('ProductList', () => {
   let element;
+
   beforeEach(async () => {
-    element = await fixture(html`<avocano-shell></avocano-shell>`);
+    element = await fixture(html`<app-product-list></app-product-list>`);
   });
 
-  it('renders a h1', () => {
-    const h1 = element.shadowRoot.querySelector('h1');
-    expect(h1).to.exist;
-    expect(h1.textContent).to.equal('My app');
-  });
+  it('renders title element', () => {
+    const titleElement = element.shadowRoot.querySelector(
+      '.productContainer > h1'
+    );
 
-  it('passes the a11y audit', async () => {
-    await expect(element).shadowDom.to.be.accessible();
+    expect(titleElement).to.exist;
+    expect(titleElement.textContent).to.equal('Product List');
   });
 });

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 import { LitElement, html } from 'lit';
 import { getActiveProduct } from '../utils/fetch.js';
 import styles from './styles/home.js';

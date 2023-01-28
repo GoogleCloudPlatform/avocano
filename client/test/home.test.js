@@ -12,20 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { css } from 'lit';
+import { html } from 'lit';
+import { fixture, expect } from '@open-wc/testing';
 
-const styles = css`
-  h1 {
-    color: var(--color-secondary);
-  }
+import '../src/pages/home.js';
 
-  .contactContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 20px;
-  }
-`;
+describe('Home', () => {
+  let element;
 
-export default styles;
+  beforeEach(async () => {
+    element = await fixture(html`<app-home></app-home>`);
+  });
+
+  it('renders loading element', () => {
+    const loadingElement = element.shadowRoot.querySelector('.homeBase > p');
+
+    expect(loadingElement).to.exist;
+    expect(loadingElement.textContent).to.equal('loading...');
+  });
+});
