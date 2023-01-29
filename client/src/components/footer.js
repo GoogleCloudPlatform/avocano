@@ -25,7 +25,7 @@ export class Footer extends LitElement {
     return html`
       <div class="footer">
         Made with 💚 from the
-        <a href="ttps://github.com/GoogleCloudPlatform/avocano/">Pit Crew</a>
+        <a href="https://github.com/GoogleCloudPlatform/avocano/">Pit Crew</a>
       </div>
     `;
   }
