@@ -32,7 +32,6 @@ from googleapiclient.errors import HttpError as GAPIHTTPError
 # Will only work if the service is running Cloud Run, and will quickly error
 # at the first point of issue trying to contact the metadata server.
 
-
 class MetadataError(Exception):
     def __init__(self, message):
         self.message = message
