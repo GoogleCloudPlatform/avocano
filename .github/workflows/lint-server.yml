@@ -24,4 +24,4 @@ jobs:
       - name: Python Checkstyle
         timeout-minutes: 20
         run: |
-          pylint --rcfile=./.pylintrc ./server/*/*.py
+          pylint ./*/*.py
