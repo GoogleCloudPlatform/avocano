@@ -24,4 +24,5 @@ jobs:
       - name: Python Checkstyle
         timeout-minutes: 20
         run: |
+          pip install pylint
           pylint ./*/*.py
