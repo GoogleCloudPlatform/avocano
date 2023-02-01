@@ -27,14 +27,6 @@ Before you begin, you will need a Google Cloud project.
 
 1. <walkthrough-enable-apis apis="cloudresourcemanager.googleapis.com,cloudbuild.googleapis.com,iam.googleapis.com"></walkthrough-enable-apis>
 
-1. Add Firebase to your Google Cloud project: 
-
-    ```bash
-    firebase projects:addfirebase <walkthrough-project-id/>
-    ```
-
-    *Issues running this command? [Use these manual instructions](https://github.com/GoogleCloudPlatform/avocano/blob/main/docs/admin/firebase-manual-setup.md).*
-
 ## Automated deployment
 
 

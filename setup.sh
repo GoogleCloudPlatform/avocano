@@ -41,10 +41,6 @@ export PROJECT_ID=${PROJECT_ID:=$(gcloud config get project)}
 export REGION=${REGION:=us-central1} # default us-central1 region if not defined
 export PROJECTNUM=$(gcloud projects describe ${PROJECT_ID} --format='value(projectNumber)')  
 
-# defaults from provisioning/terraform/variables.tf
-export SERVICE_NAME="server"
-export INSTANCE_NAME="psql"
-
 aecho "Running setup.sh against ${PROJECT_ID} in ${REGION}"
 
 aecho "Setup Firebase Builder"
@@ -53,14 +49,6 @@ gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no
 aecho "Configuring Terraform"
 export TFSTATE_BUCKET=terraform-${PROJECT_ID}
 gsutil mb gs://$TFSTATE_BUCKET || true 
-
-cat >provisioning/terraform/state.tf <<_EOF
-terraform { 
-  backend gcs {
-    bucket = "$TFSTATE_BUCKET"
-  }
-}
-_EOF
 
 aecho "Granting Cloud Build permissions"
 export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
@@ -74,28 +62,7 @@ quiet gsutil iam ch \
 aecho "Running Cloud Build"
 gcloud builds submit --substitutions _REGION=${REGION}
 
-aecho "Creating Cloud Run Jobs"
-export IMAGE_NAME=gcr.io/${PROJECT_ID}/${SERVICE_NAME}
-export SQL_INSTANCE=${PROJECT_ID}:${REGION}:${INSTANCE_NAME}
-
-gcloud beta run jobs create setup-database \
-  --image $IMAGE_NAME \
-  --region $REGION \
-  --service-account automation@${PROJECT_ID}.iam.gserviceaccount.com \
-  --set-secrets DJANGO_ENV=django_settings:latest,ADMIN_PASSWORD=django_admin_password:latest \
-  --set-cloudsql-instances $SQL_INSTANCE \
-  --command "setup" 
-
-gcloud beta run jobs create migrate-database \
-  --image $IMAGE_NAME \
-  --region $REGION \
-  --service-account automation@${PROJECT_ID}.iam.gserviceaccount.com \
-  --set-secrets DJANGO_ENV=django_settings:latest \
-  --set-cloudsql-instances $SQL_INSTANCE \
-  --command "migrate" 
-
 aecho "Applying database migrations"
 gcloud beta run jobs execute setup-database --wait --region $REGION
-
 
 eecho "Website now available at https://${PROJECT_ID}.web.app"
