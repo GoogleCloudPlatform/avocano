@@ -1,6 +1,6 @@
 # Avocano API Server
 
-Powered by Django REST Framework. 
+Powered by Django REST Framework.  
 
 ## Local dev
 
