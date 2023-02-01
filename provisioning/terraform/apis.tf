@@ -10,7 +10,8 @@ locals {
     "sqladmin.googleapis.com",
     "cloudbuild.googleapis.com",
     "secretmanager.googleapis.com",
-    "cloudresourcemanager.googleapis.com"
+    "cloudresourcemanager.googleapis.com",
+    "firebase.googleapis.com",
   ]
 }
 
