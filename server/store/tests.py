@@ -16,23 +16,18 @@
 
 
 import json
+from decimal import Decimal
 
-import pytest
 from django.contrib.auth.models import User
 from django.test import TransactionTestCase
 from model_bakery import baker
+from rest_framework.reverse import reverse
 from rest_framework.test import APIClient, APIRequestFactory
-
-client = APIClient()
-
 from store.serializers import ProductSerializer
 
+client = APIClient()
 factory = APIRequestFactory()
 
-
-from decimal import Decimal
-
-from rest_framework.reverse import reverse
 
 
 class DecimalEncoder(json.JSONEncoder):
@@ -40,6 +35,7 @@ class DecimalEncoder(json.JSONEncoder):
         if isinstance(obj, Decimal):
             return float(obj)
         return json.JSONEncoder.default(self, obj)
+
 
 
 class AvocanoUnitTest(TransactionTestCase):
@@ -57,11 +53,3 @@ class AvocanoUnitTest(TransactionTestCase):
         )
 
         self.assertEqual(response.status_code, 201)
-        new_data = response.json()
-
-        breakpoint()
-        # TODO(glasnt) test
-        # print(reverse("product-purchase"))
-        # url = reverse("product-purchase")
-        # response = client.post(url, {"id": new_data["id"]},  format="json" )
-        # breakpoint()
