@@ -1,0 +1,25 @@
+name: Terraform linting
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'provisioning/terraform/**/*.tf'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'provisioning/terraform/**/*.tf'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: provisioning/terraform
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+      - name: Analysing the code with terraform
+        timeout-minutes: 5
+        run: |
+          terraform fmt -check
