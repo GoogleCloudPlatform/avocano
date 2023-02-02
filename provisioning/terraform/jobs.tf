@@ -8,14 +8,14 @@ resource "google_cloud_run_v2_job" "setup" {
     template {
       service_account = google_service_account.automation.email
       containers {
-        image = data.google_container_registry_image.server.image_url
+        image   = data.google_container_registry_image.server.image_url
         command = ["setup"]
         env {
           name = "DJANGO_ENV"
           value_source {
             secret_key_ref {
-              secret = google_secret_manager_secret.django_settings.secret_id
-              version  = "latest"
+              secret  = google_secret_manager_secret.django_settings.secret_id
+              version = "latest"
             }
           }
         }
@@ -23,13 +23,13 @@ resource "google_cloud_run_v2_job" "setup" {
           name = "ADMIN_PASSWORD"
           value_source {
             secret_key_ref {
-              secret = google_secret_manager_secret.django_admin_password.secret_id
-              version  = "latest"
+              secret  = google_secret_manager_secret.django_admin_password.secret_id
+              version = "latest"
             }
           }
         }
         volume_mounts {
-          name = "cloudsql"
+          name       = "cloudsql"
           mount_path = "/cloudsql"
         }
       }
@@ -54,19 +54,19 @@ resource "google_cloud_run_v2_job" "migrate" {
     template {
       service_account = google_service_account.automation.email
       containers {
-        image = data.google_container_registry_image.server.image_url
+        image   = data.google_container_registry_image.server.image_url
         command = ["migrate"]
         env {
           name = "DJANGO_ENV"
           value_source {
             secret_key_ref {
-              secret = google_secret_manager_secret.django_settings.secret_id
-              version  = "latest"
+              secret  = google_secret_manager_secret.django_settings.secret_id
+              version = "latest"
             }
           }
         }
         volume_mounts {
-          name = "cloudsql"
+          name       = "cloudsql"
           mount_path = "/cloudsql"
         }
       }
