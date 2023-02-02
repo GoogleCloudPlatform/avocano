@@ -33,6 +33,7 @@ git push -u origin ${USER}-${BRANCH_NAME}
 1. In Cloud Build, go to [Triggers](https://console.cloud.google.com/cloud-build/triggers?project=avocano-preview) and click "Run". 
 1. In the "Run trigger" side panel, enter the branch name just created. 
    * This should auto-populate after removing the default "main" value. 
+1. Populate the `_RUN_TESTS` variable (any value will do) to also run playwright tests. 
 1. Click **Run trigger**. 
 
 
