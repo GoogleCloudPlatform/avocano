@@ -69,6 +69,8 @@ steps:
   - id: "test deployment"
     name: python:3.10-slim
     dir: provisioning
+    env:
+        - _RUN_TESTS=$_RUN_TESTS
     script: |
         #!/bin/bash
         if [ -z $_RUN_TESTS ]; then
@@ -86,3 +88,4 @@ timeout: 1800s
 
 substitutions:
   _REGION: us-central1
+  _RUN_TESTS: ""
