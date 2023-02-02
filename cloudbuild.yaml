@@ -65,6 +65,23 @@ steps:
       sed -i "s/__api_url__/\/server/g" dist/*.js
       firebase deploy --project $PROJECT_ID --only hosting
 
+  # Optionally run tests, confirming deployment
+  - id: "test deployment"
+    name: python:3.10-slim
+    dir: provisioning
+    script: |
+        #!/bin/bash
+        if [ -z $_RUN_TESTS ]; then
+          echo "_RUN_TESTS not defined, so not running tests."
+          exit 0
+        fi
+
+        python -m pip install -r test/requirements.txt
+        playwright install-deps
+        playwright install
+        python -m pytest
+
+
 timeout: 1800s
 
 substitutions:
