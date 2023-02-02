@@ -37,3 +37,5 @@ git push -u origin ${USER}-${BRANCH_NAME}
 
 
 The trigger will run `cloudbuild.yaml` with the code in the pull request against the `avocano-preview` deployment, and the status of the check will be updated against the HEAD commit (which will also then show up against the pull request checks.)
+
+Ensure that after changes are merged that the branch is removed, to clear the branches and auto-complete for the next test. 
