@@ -65,7 +65,7 @@ steps:
       sed -i "s/__api_url__/\/server/g" dist/*.js
       firebase deploy --project $PROJECT_ID --only hosting
 
-  # Optionally run tests, confirming deployment
+  # Optionally run tests, confirming deployment (run with '--substitutions=_RUN_TESTS=yes')
   - id: "test deployment"
     name: python:3.10-slim
     dir: provisioning
