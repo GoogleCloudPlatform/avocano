@@ -15,7 +15,7 @@ locals {
   # these match the values in /cloudbuild.yaml
   gcr_hostname   = "gcr.io"
   server_image   = var.service_name
-  image_registry = "${local.gcr_hostname}/${var.project}"
+  image_registry = "${local.gcr_hostname}/${var.project_id}"
 }
 
 
@@ -36,6 +36,6 @@ data "docker_registry_image" "server" {
 # Get exact image information
 data "google_container_registry_image" "server" {
   name    = local.server_image
-  project = var.project
+  project = var.project_id
   digest  = data.docker_registry_image.server.sha256_digest
 }
