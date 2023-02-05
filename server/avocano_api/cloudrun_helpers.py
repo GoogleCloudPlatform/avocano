@@ -42,7 +42,10 @@ class MetadataError(Exception):
 
 def _project_id():
     """Use the Google Auth helper (via the metadata service) to get the Google Cloud Project"""
-    _, project = google.auth.default()
+    try:
+        _, project = google.auth.default()
+    except google.auth.exceptions.DefaultCredentialsError:
+        raise MetadataError("Could not automatically determine credentials")
     if not project:
         raise MetadataError("Could not determine project from credentials.")
     return project

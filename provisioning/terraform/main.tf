@@ -5,7 +5,7 @@ terraform {
     google = {
       source = "hashicorp/google"
     }
-    docker = { 
+    docker = {
       source = "kreuzwerker/docker"
     }
 
@@ -14,7 +14,7 @@ terraform {
 
 provider "google" {
   project = var.project
-  region = var.region
+  region  = var.region
 }
 
 data "google_project" "project" {
