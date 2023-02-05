@@ -30,3 +30,11 @@ static/
 
 .env
 db.sqlite3
+
+# provisioning/terraform/.gitignore
+
+.terraform
+.terraform.lock.hcl
+
+terraform.tfstate*
+state.tf
