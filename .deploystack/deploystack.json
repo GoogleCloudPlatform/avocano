@@ -3,6 +3,7 @@
     "duration": 15,
     "collect_project": true,
     "collect_region": true,
+    "region_type": "run", 
     "region_default": "us-central1",
     "path_terraform": "provisioning/terraform"
   }
