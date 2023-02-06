@@ -1,9 +1,11 @@
 {
-    "title": "API-based Firebase Retail Website",
+    "title": "FIREBASE CLOUD RUN API",
+    "name": "firebase-cloudrun-api",
+    "description": "API-based Firebase Retail Website",
     "duration": 15,
     "collect_project": true,
     "collect_region": true,
-    "region_type": "run", 
+    "region_type": "run",
     "region_default": "us-central1",
     "path_terraform": "provisioning/terraform"
-  }
+}
