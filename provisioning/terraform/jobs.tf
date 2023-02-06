@@ -82,7 +82,7 @@ resource "google_cloud_run_v2_job" "migrate" {
       }
     }
   }
-  
+
   depends_on = [
     google_secret_manager_secret.django_settings
   ]
