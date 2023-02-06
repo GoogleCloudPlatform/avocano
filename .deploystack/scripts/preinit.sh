@@ -4,9 +4,9 @@ echo "Enable additional APIs"
 gcloud services enable cloudresourcemanager.googleapis.com cloudbuild.googleapis.com iam.googleapis.com
 
 echo "Update Cloud Build permissions"
-export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
+export CLOUDBUILD_SA="$(gcloud projects describe $GOOGLE_CLOUD_PROJECT \
     --format 'value(projectNumber)')@cloudbuild.gserviceaccount.com"
-gcloud projects add-iam-policy-binding $PROJECT_ID \
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
     --member serviceAccount:$CLOUDBUILD_SA --role roles/firebasehosting.admin
 
 echo "Create Firebase Image"
