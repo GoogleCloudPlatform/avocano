@@ -5,7 +5,7 @@ If you want to apply database migrations, a convenience Cloud Run job has been c
 To run migrations: 
 
 ```
-gcloud beta run jobs execute migrate-database \
+gcloud beta run jobs execute migrate \
     --region us-central1 --wait
 ```
 
@@ -15,7 +15,7 @@ To run migrations as part of the Cloud Build, add a step to the `cloudbuild.yaml
   - id: server migrate
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     entrypoint: gcloud
-    args: ["beta", "run", "jobs", "execute",  "migrate-database", 
+    args: ["beta", "run", "jobs", "execute",  "migrate", 
            "--region", $_REGION, "--wait"] 
 ```
 
