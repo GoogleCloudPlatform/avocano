@@ -1,6 +1,9 @@
 # After Terraform
-# TODO(glasnt): this file is set by terraform, unsure how else to get user input
-PROJECT_ID=$(cat provisioning/terraform/terraform.tfvars | grep project_id | cut -d'"' -f2)
+
+TERRAFORM_DIR=provisioning/terraform
+
+PROJECT_ID=$(terraform -chdir=${TERRAFORM_DIR} output project_id | tr -d '"')
+REGION=$(terraform -chdir=${TERRAFORM_DIR} output region | tr -d '"')
 
 echo "Setup database"
 gcloud beta run jobs execute setup --wait --region $REGION
