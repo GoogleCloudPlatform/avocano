@@ -21,4 +21,4 @@ steps:
      args: [ '.deploystack/test' ]
 timeout: 4800s
 options:
-  machineType: 'N1_HIGHCPU_8'
+  machineType: 'N1_HIGHCPU_32'
