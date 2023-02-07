@@ -154,7 +154,7 @@ section_open "Test google_cloud_run_v2_job migrate does not exists"
 section_close
 
 section_open "Test google_storage_bucket does not exists"
-    evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "EXPECTERROR"
+    evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "0"
 section_close
 
 section_open "Test google_sql_database_instance does not exists"
