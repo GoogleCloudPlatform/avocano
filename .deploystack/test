@@ -75,6 +75,9 @@ get_project_number PROJECT_NUMBER $PROJECT
 PROJECT_ID=ds-tester-firebase-cloudrun
 SERVICE_NAME=server
 INSTANCE_NAME=psql
+DATABASE_NAME=django
+DATABASE_USERNAME=server
+
 REGION=us-central1
 
 terraformDIR=provisioning/terraform

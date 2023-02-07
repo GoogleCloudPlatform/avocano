@@ -85,6 +85,10 @@ gcloud services enable cloudresourcemanager.googleapis.com --project=$PROJECT
 get_project_number PROJECT_NUMBER $PROJECT
 REGION=us-central1
 BASENAME=firebase-cloudrun-api
+SERVICE_NAME=server
+INSTANCE_NAME=psql
+DATABASE_NAME=django
+DATABASE_USERNAME=server
 gcloud config set project ${PROJECT}
 
 
@@ -97,6 +101,24 @@ section_close
 section_open "Delete secrets"
 	gcloud secrets delete django_settings -q
 	gcloud secrets delete django_admin_password -q
+section_close
+
+section_open "Delete database elements"
+    gcloud sql database delete $DATABASE_NAME --instance $INSTANCE_NAME -q
+    gcloud sql users delete $DATABASE_USERNAME --instance $INSTANCE_NAME
+    gcloud sql instances delete psql -q
+section_close
+
+section_open "Delete cloud run elements"
+    gcloud run services delete $SERVICE_NAME --region $REGION -q
+    gcloud beta run jobs delete setup --region $REGION -q
+    gcloud beta run jobs delete migrate --region $REGION -q
+section_close
+
+section_open "Delete service accounts"
+    gcloud iam service-accounts delete api-backend@${PROJECT}.iam.gserviceaccount.com -q  
+    gcloud iam service-accounts delete automation@${PROJECT}.iam.gserviceaccount.com -q   
+    gcloud iam service-accounts delete client-frontend@${PROJECT}.iam.gserviceaccount.com -q              
 section_close
 
 
