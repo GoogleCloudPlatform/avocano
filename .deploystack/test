@@ -128,6 +128,10 @@ section_open "Test google_secret_manager_secret exists"
     evalTest 'gcloud secrets describe django_settings --format="value(name)"' ""
 section_close
 
+section_open "Test google_project_iam_binding exists"
+    evalTest 'gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --filter="bindings.role=roles/run.viewer" --format="value(bindings.members)"'  "serviceAccount:api-backend@${PROJECT_ID}.iam.gserviceaccount.com"
+section_close
+
 
 terraform -chdir="$terraformDIR"  destroy  \
    -var project_id=$PROJECT_ID \
