@@ -90,6 +90,16 @@ gcloud config set project ${PROJECT}
 
 # TODO(glasnt): clean up everything. 
 
+section_open "Delete bucket"
+	gsutil rm gs://media-${PROJECT} -q
+section_close
+
+section_open "Delete secrets"
+	gcloud secrets delete django_settings -q
+	gcloud secrets delete django_admin_password -q
+section_close
+
+
 
 printf "$DIVIDER"
 printf "CONGRATS!!!!!!! \n"
