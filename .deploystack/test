@@ -112,7 +112,11 @@ section_open "Test google_sql_database_instance exists"
 section_close
 
 section_open "Test google_secret_manager_secret exists"
-    evalTest 'gcloud secrets describe django_admin_password --format="value(name)"' "django_admin_password"
+    evalTest 'gcloud secrets describe django_settings --format="value(name)"' "projects/$PROJECT_NUMBER/secrets/django_settings"
+section_close
+
+section_open "Test google_secret_manager_secret exists"
+    evalTest 'gcloud secrets describe django_admin_password --format="value(name)"' "projects/$PROJECT_NUMBER/secrets/django_admin_password"
 section_close
 
 section_open "Test google_service_account exists"
@@ -125,10 +129,6 @@ section_close
 
 section_open "Test google_service_account exists"
     evalTest 'gcloud iam service-accounts describe automation@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "automation@${PROJECT_ID}.iam.gserviceaccount.com"
-section_close
-
-section_open "Test google_secret_manager_secret exists"
-    evalTest 'gcloud secrets describe django_settings --format="value(name)"' "projects/$PROJECT_NUMBER/secrets/django_settings-ff20"
 section_close
 
 section_open "Test google_project_iam_binding exists"
