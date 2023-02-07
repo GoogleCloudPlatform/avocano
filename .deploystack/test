@@ -2,7 +2,7 @@
 
 # The following terraform resources or modules are missing mappings in the resources file:
 # google_project_iam_binding
-# google_cloud_run_v2_job
+# 
 # google_firebase_project
 # google_storage_bucket_iam_policy
 # TODO(glasnt): manually add. 
@@ -90,8 +90,12 @@ section_open "Test google_cloud_run_service exists"
     evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' ""
 section_close
 
-section_open "Test google_cloud_run_v2_job exists"
-    evalTest 'gcloud beta run jobs describe $SERVICE_NAME --region $REGION --format="value(name)"' ""
+section_open "Test google_cloud_run_v2_job setup exists"
+    evalTest 'gcloud beta run jobs describe setup --region $REGION --format="value(name)"' ""
+section_close
+
+section_open "Test google_cloud_run_v2_job migrate exists"
+    evalTest 'gcloud beta run jobs describe migrate --region $REGION --format="value(name)"' ""
 section_close
 
 section_open "Test google_storage_bucket exists"
@@ -134,6 +138,14 @@ terraform destroy  \
 
 section_open "Test google_cloud_run_service does not exists"
     evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_cloud_run_v2_job setup does not exists"
+    evalTest 'gcloud run services describe setup --region $REGION --format="value(name)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_cloud_run_v2_job migrate does not exists"
+    evalTest 'gcloud run services describe migrate --region $REGION --format="value(name)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_storage_bucket does not exists"
