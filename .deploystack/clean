@@ -95,7 +95,7 @@ gcloud config set project ${PROJECT}
 # TODO(glasnt): clean up everything. 
 
 section_open "Delete bucket"
-	gsutil rm gs://media-${PROJECT} -q
+	gsutil rm -r gs://media-${PROJECT}
 section_close
 
 section_open "Delete secrets"
@@ -104,7 +104,7 @@ section_open "Delete secrets"
 section_close
 
 section_open "Delete database elements"
-    gcloud sql database delete $DATABASE_NAME --instance $INSTANCE_NAME -q
+    gcloud sql databases delete $DATABASE_NAME --instance $INSTANCE_NAME -q
     gcloud sql users delete $DATABASE_USERNAME --instance $INSTANCE_NAME
     gcloud sql instances delete psql -q
 section_close
