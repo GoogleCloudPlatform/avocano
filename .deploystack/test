@@ -73,6 +73,8 @@ get_project_id PROJECT
 get_project_number PROJECT_NUMBER $PROJECT
 # TODO: Script is pretty rudimentary, so make sure all of these variables are actually needed for test
 PROJECT_ID=ds-tester-firebase-cloudrun
+SERVICE_NAME=server
+INSTANCE_NAME=psql
  
 
 gcloud config set project ${PROJECT}
@@ -85,7 +87,11 @@ terraform apply  \
 
 
 section_open "Test google_cloud_run_service exists"
-    evalTest 'gcloud run services describe var.service_name --region $REGION --format="value(name)"' ""
+    evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' ""
+section_close
+
+section_open "Test google_cloud_run_v2_job exists"
+    evalTest 'gcloud beta run jobs describe $SERVICE_NAME --region $REGION --format="value(name)"' ""
 section_close
 
 section_open "Test google_storage_bucket exists"
@@ -93,7 +99,7 @@ section_open "Test google_storage_bucket exists"
 section_close
 
 section_open "Test google_sql_database_instance exists"
-    evalTest 'gcloud sql instances describe var.instance_name --format="value(name)"' ""
+    evalTest 'gcloud sql instances describe $INSTANCE_NAME --format="value(name)"' ""
 section_close
 
 section_open "Test google_secret_manager_secret exists"
@@ -127,7 +133,7 @@ terraform destroy  \
 
 
 section_open "Test google_cloud_run_service does not exists"
-    evalTest 'gcloud run services describe var.service_name --region $REGION --format="value(name)"' "EXPECTERROR"
+    evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_storage_bucket does not exists"
@@ -135,7 +141,7 @@ section_open "Test google_storage_bucket does not exists"
 section_close
 
 section_open "Test google_sql_database_instance does not exists"
-    evalTest 'gcloud sql instances describe var.instance_name --format="value(name)"' "EXPECTERROR"
+    evalTest 'gcloud sql instances describe $INSTANCE_NAME --format="value(name)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_secret_manager_secret does not exists"
