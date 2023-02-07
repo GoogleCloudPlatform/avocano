@@ -1,0 +1,181 @@
+#!/bin/sh
+
+# The following terraform resources or modules are missing mappings in the resources file:
+# google_project_iam_binding
+# google_cloud_run_v2_job
+# google_firebase_project
+# google_storage_bucket_iam_policy
+# TODO(glasnt): manually add. 
+
+
+# DON'T REMOVE FROM test script.
+CYAN='\033[0;36m'
+BCYAN='\033[1;36m'
+NC='\033[0m' # No Color
+DIVIDER=$(printf %"$(tput cols)"s | tr " " "*")
+DIVIDER+="\n"
+
+function get_project_id() {
+    local __resultvar=$1
+    VALUE=$(gcloud config get-value project | xargs)
+    eval $__resultvar="'$VALUE'"
+}
+
+function get_project_number() {
+    local __resultvar=$1
+    local PRO=$2
+    VALUE=$(gcloud projects list --filter="project_id=$PRO" --format="value(PROJECT_NUMBER)" | xargs)
+    eval $__resultvar="'$VALUE'"
+}
+
+# DISPLAY HELPERS
+function section_open() {
+    section_description=$1
+    printf "$DIVIDER"
+    printf "${CYAN}$section_description${NC} \n"
+    printf "$DIVIDER"
+}
+
+function section_close() {
+    printf "$DIVIDER"
+    printf "${CYAN}$section_description ${BCYAN}- done${NC}\n"
+    printf "\n\n"
+}
+
+function evalTest() {
+    local command=$1
+    local expected=$2
+
+    local ERR=""
+    got=$(eval $command 2>errFile)
+    ERR=$(<errFile)
+
+    if [ ${#ERR} -gt 0 ]; then
+        if [ "$expected" = "EXPECTERROR" ]; then
+            printf "Expected Error thrown \n"
+            return
+        fi
+
+        printf "Halting - error: '$ERR'  \n"
+        exit 1
+    fi
+
+    if [ "$got" != "$expected" ]; then
+        printf "Halting: '$got' expected '$expected'  \n"
+        exit 1
+    fi
+
+    printf "$expected is ok\n"
+}
+# END DON'T REMOVE FROM test script.
+
+get_project_id PROJECT
+get_project_number PROJECT_NUMBER $PROJECT
+# TODO: Script is pretty rudimentary, so make sure all of these variables are actually needed for test
+PROJECT_ID=[SET VALUE HERE]
+ 
+
+gcloud config set project ${PROJECT}
+
+terraform init
+# TODO: Make sure all of these variables are correct and actually need to be passed in.:
+terraform apply  \
+   -var project_id=$PROJECT_ID \
+   -auto-approve
+
+
+section_open "Test google_cloud_run_service exists"
+    evalTest 'gcloud run services describe var.service_name --region $REGION --format="value(name)"' ""
+section_close
+
+section_open "Test google_storage_bucket exists"
+    evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "0"
+section_close
+
+section_open "Test google_sql_database_instance exists"
+    evalTest 'gcloud sql instances describe var.instance_name --format="value(name)"' ""
+section_close
+
+section_open "Test google_secret_manager_secret exists"
+    evalTest 'gcloud secrets describe django_admin_password --format="value(name)"' ""
+section_close
+
+section_open "Test google_service_account exists"
+    #TODO: This should be an email and not just an account, so add the @domain.com bit
+    evalTest 'gcloud iam service-accounts describe api-backend --format="value(email)"' ""
+section_close
+
+section_open "Test google_service_account exists"
+    #TODO: This should be an email and not just an account, so add the @domain.com bit
+    evalTest 'gcloud iam service-accounts describe client-frontend --format="value(email)"' ""
+section_close
+
+section_open "Test google_project exists"
+    evalTest 'gcloud projects describe  --format="value(name)"' ""
+section_close
+
+section_open "Test google_service_account exists"
+    #TODO: This should be an email and not just an account, so add the @domain.com bit
+    evalTest 'gcloud iam service-accounts describe automation --format="value(email)"' ""
+section_close
+
+section_open "Test google_secret_manager_secret exists"
+    evalTest 'gcloud secrets describe django_settings --format="value(name)"' ""
+section_close
+
+
+# TODO: Make sure all of these variables are correct and actually need to be passed in.:
+terraform destroy  \
+   -var project_id=$PROJECT_ID \
+   -var region=$REGION \
+   -var instance_name=$INSTANCE_NAME \
+   -var service_name=$SERVICE_NAME \
+   -var database_name=$DATABASE_NAME \
+   -var database_username=$DATABASE_USERNAME \
+   -auto-approve
+
+
+section_open "Test google_cloud_run_service does not exists"
+    evalTest 'gcloud run services describe var.service_name --region $REGION --format="value(name)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_storage_bucket does not exists"
+    evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "EXPECTERROR"
+section_close
+
+section_open "Test google_sql_database_instance does not exists"
+    evalTest 'gcloud sql instances describe var.instance_name --format="value(name)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_secret_manager_secret does not exists"
+    evalTest 'gcloud secrets describe django_admin_password --format="value(name)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_service_account does not exists"
+    #TODO: This should be an email and not just an account, so add the @domain.com bit
+    evalTest 'gcloud iam service-accounts describe api-backend --format="value(email)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_service_account does not exists"
+    #TODO: This should be an email and not just an account, so add the @domain.com bit
+    evalTest 'gcloud iam service-accounts describe client-frontend --format="value(email)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_project does not exists"
+    evalTest 'gcloud projects describe  --format="value(name)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_service_account does not exists"
+    #TODO: This should be an email and not just an account, so add the @domain.com bit
+    evalTest 'gcloud iam service-accounts describe automation --format="value(email)"' "EXPECTERROR"
+section_close
+
+section_open "Test google_secret_manager_secret does not exists"
+    evalTest 'gcloud secrets describe django_settings --format="value(name)"' "EXPECTERROR"
+section_close
+
+
+printf "$DIVIDER"
+printf "CONGRATS!!!!!!! \n"
+printf "You got the end the of your test with everything working. \n"
+printf "$DIVIDER"
