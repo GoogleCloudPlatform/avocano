@@ -92,15 +92,15 @@ terraform -chdir="$terraformDIR"  apply  \
 
 
 section_open "Test google_cloud_run_service exists"
-    evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' ""
+    evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' "$SERVICE_NAME"
 section_close
 
 section_open "Test google_cloud_run_v2_job setup exists"
-    evalTest 'gcloud beta run jobs describe setup --region $REGION --format="value(name)"' ""
+    evalTest 'gcloud beta run jobs describe setup --region $REGION --format="value(name)"' "setup"
 section_close
 
 section_open "Test google_cloud_run_v2_job migrate exists"
-    evalTest 'gcloud beta run jobs describe migrate --region $REGION --format="value(name)"' ""
+    evalTest 'gcloud beta run jobs describe migrate --region $REGION --format="value(name)"' "migrate"
 section_close
 
 section_open "Test google_storage_bucket exists"
@@ -108,27 +108,27 @@ section_open "Test google_storage_bucket exists"
 section_close
 
 section_open "Test google_sql_database_instance exists"
-    evalTest 'gcloud sql instances describe $INSTANCE_NAME --format="value(name)"' ""
+    evalTest 'gcloud sql instances describe $INSTANCE_NAME --format="value(name)"' "$INSTANCE_NAME"
 section_close
 
 section_open "Test google_secret_manager_secret exists"
-    evalTest 'gcloud secrets describe django_admin_password --format="value(name)"' ""
+    evalTest 'gcloud secrets describe django_admin_password --format="value(name)"' "django_admin_password"
 section_close
 
 section_open "Test google_service_account exists"
-    evalTest 'gcloud iam service-accounts describe api-backend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' ""
+    evalTest 'gcloud iam service-accounts describe api-backend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "api-backend@${PROJECT_ID}.iam.gserviceaccount.com"
 section_close
 
 section_open "Test google_service_account exists"
-    evalTest 'gcloud iam service-accounts describe client-frontend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' ""
+    evalTest 'gcloud iam service-accounts describe client-frontend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "client-frontend@${PROJECT_ID}.iam.gserviceaccount.com"
 section_close
 
 section_open "Test google_service_account exists"
-    evalTest 'gcloud iam service-accounts describe automation@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' ""
+    evalTest 'gcloud iam service-accounts describe automation@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "automation@${PROJECT_ID}.iam.gserviceaccount.com"
 section_close
 
 section_open "Test google_secret_manager_secret exists"
-    evalTest 'gcloud secrets describe django_settings --format="value(name)"' ""
+    evalTest 'gcloud secrets describe django_settings --format="value(name)"' "projects/$PROJECT_NUMBER/secrets/django_settings-ff20"
 section_close
 
 section_open "Test google_project_iam_binding exists"
