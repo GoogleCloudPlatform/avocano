@@ -20,3 +20,5 @@ steps:
      entrypoint: bash
      args: [ '.deploystack/test' ]
 timeout: 4800s
+options:
+  machineType: 'N1_HIGHCPU_8'
