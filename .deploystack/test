@@ -72,7 +72,7 @@ function evalTest() {
 get_project_id PROJECT
 get_project_number PROJECT_NUMBER $PROJECT
 # TODO: Script is pretty rudimentary, so make sure all of these variables are actually needed for test
-PROJECT_ID=[SET VALUE HERE]
+PROJECT_ID=ds-tester-firebase-cloudrun
  
 
 gcloud config set project ${PROJECT}
@@ -101,13 +101,11 @@ section_open "Test google_secret_manager_secret exists"
 section_close
 
 section_open "Test google_service_account exists"
-    #TODO: This should be an email and not just an account, so add the @domain.com bit
-    evalTest 'gcloud iam service-accounts describe api-backend --format="value(email)"' ""
+    evalTest 'gcloud iam service-accounts describe api-backend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' ""
 section_close
 
 section_open "Test google_service_account exists"
-    #TODO: This should be an email and not just an account, so add the @domain.com bit
-    evalTest 'gcloud iam service-accounts describe client-frontend --format="value(email)"' ""
+    evalTest 'gcloud iam service-accounts describe client-frontend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' ""
 section_close
 
 section_open "Test google_project exists"
@@ -115,8 +113,7 @@ section_open "Test google_project exists"
 section_close
 
 section_open "Test google_service_account exists"
-    #TODO: This should be an email and not just an account, so add the @domain.com bit
-    evalTest 'gcloud iam service-accounts describe automation --format="value(email)"' ""
+    evalTest 'gcloud iam service-accounts describe automation@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' ""
 section_close
 
 section_open "Test google_secret_manager_secret exists"
@@ -124,14 +121,8 @@ section_open "Test google_secret_manager_secret exists"
 section_close
 
 
-# TODO: Make sure all of these variables are correct and actually need to be passed in.:
 terraform destroy  \
    -var project_id=$PROJECT_ID \
-   -var region=$REGION \
-   -var instance_name=$INSTANCE_NAME \
-   -var service_name=$SERVICE_NAME \
-   -var database_name=$DATABASE_NAME \
-   -var database_username=$DATABASE_USERNAME \
    -auto-approve
 
 
@@ -152,13 +143,11 @@ section_open "Test google_secret_manager_secret does not exists"
 section_close
 
 section_open "Test google_service_account does not exists"
-    #TODO: This should be an email and not just an account, so add the @domain.com bit
-    evalTest 'gcloud iam service-accounts describe api-backend --format="value(email)"' "EXPECTERROR"
+    evalTest 'gcloud iam service-accounts describe api-backend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_service_account does not exists"
-    #TODO: This should be an email and not just an account, so add the @domain.com bit
-    evalTest 'gcloud iam service-accounts describe client-frontend --format="value(email)"' "EXPECTERROR"
+    evalTest 'gcloud iam service-accounts describe client-frontend@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_project does not exists"
@@ -166,8 +155,7 @@ section_open "Test google_project does not exists"
 section_close
 
 section_open "Test google_service_account does not exists"
-    #TODO: This should be an email and not just an account, so add the @domain.com bit
-    evalTest 'gcloud iam service-accounts describe automation --format="value(email)"' "EXPECTERROR"
+    evalTest 'gcloud iam service-accounts describe automation@${PROJECT_ID}.iam.gserviceaccount.com --format="value(email)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_secret_manager_secret does not exists"
