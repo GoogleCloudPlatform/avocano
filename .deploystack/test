@@ -75,13 +75,15 @@ get_project_number PROJECT_NUMBER $PROJECT
 PROJECT_ID=ds-tester-firebase-cloudrun
 SERVICE_NAME=server
 INSTANCE_NAME=psql
- 
+REGION=us-central1
+
+terraformDIR=provisioning/terraform
 
 gcloud config set project ${PROJECT}
 
-terraform init
+terraform -chdir="$terraformDIR"  init
 # TODO: Make sure all of these variables are correct and actually need to be passed in.:
-terraform apply  \
+terraform -chdir="$terraformDIR"  apply  \
    -var project_id=$PROJECT_ID \
    -auto-approve
 
@@ -131,7 +133,7 @@ section_open "Test google_secret_manager_secret exists"
 section_close
 
 
-terraform destroy  \
+terraform -chdir="$terraformDIR"  destroy  \
    -var project_id=$PROJECT_ID \
    -auto-approve
 
