@@ -104,7 +104,7 @@ section_open "Test google_cloud_run_v2_job migrate exists"
 section_close
 
 section_open "Test google_storage_bucket exists"
-    evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "0"
+    evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "1"
 section_close
 
 section_open "Test google_sql_database_instance exists"
