@@ -149,6 +149,10 @@ terraform -chdir="$terraformDIR"  destroy  \
    -var project_id=$PROJECT_ID \
    -auto-approve
 
+### Terraform is configured to persist some elements. We don't need them to hang around, so let's be forceful and delete. 
+gcloud storage buckets delete gs://media-${PROJECT_ID}
+gcloud sql instances delete $INSTANCE_NAME
+
 
 section_open "Test google_cloud_run_service does not exists"
     evalTest 'gcloud run services describe $SERVICE_NAME --region $REGION --format="value(name)"' "EXPECTERROR"

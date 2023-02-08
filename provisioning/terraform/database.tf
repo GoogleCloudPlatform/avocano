@@ -3,11 +3,10 @@
 ## Instance
 
 resource "google_sql_database_instance" "postgres" {
-  name                = var.instance_name
-  database_version    = "POSTGRES_14"
-  project             = var.project_id
-  region              = var.region
-  deletion_protection = false
+  name             = var.instance_name
+  database_version = "POSTGRES_14"
+  project          = var.project_id
+  region           = var.region
 
   settings {
     tier = "db-custom-2-4096" # 2 CPU, 4GB Memory

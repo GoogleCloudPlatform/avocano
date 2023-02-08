@@ -2,7 +2,6 @@ resource "google_storage_bucket" "media" {
   name          = "media-${var.project_id}"
   location      = "us-central1"
   storage_class = "REGIONAL"
-  force_destroy = true
 }
 
 data "google_iam_policy" "mediaaccess" {
