@@ -166,8 +166,8 @@ section_open "Test google_storage_bucket does not exists"
     evalTest 'gsutil ls | grep -c gs://media-$PROJECT' "0"
 section_close
 
-section_open "Test google_sql_database_instance does STILL exist (instance protection)"
-    evalTest 'gcloud sql instances describe $INSTANCE_NAME --format="value(name)"' "$INSTANCE_NAME"
+section_open "Test google_sql_database_instance does not exist"
+    evalTest 'gcloud sql instances describe $INSTANCE_NAME --format="value(name)"' "EXPECTERROR"
 section_close
 
 section_open "Test google_secret_manager_secret does not exists"
