@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
-
 import rollupReplace from '@rollup/plugin-replace';
 import { fromRollup } from '@web/dev-server-rollup';
 
@@ -21,9 +19,11 @@ const replace = fromRollup(rollupReplace);
 const hmr = process.argv.includes('--hmr');
 
 export default ({
-  open: '/',
   watch: !hmr,
   port: 8081,
+  open: true,
+  appIndex: 'index.html',
+  nodeResolve: true,
   /** Resolve bare module imports */
   nodeResolve: {
     exportConditions: ['browser', 'development'],
