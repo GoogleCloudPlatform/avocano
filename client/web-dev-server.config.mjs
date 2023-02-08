@@ -23,7 +23,6 @@ export default ({
   port: 8081,
   open: true,
   appIndex: 'index.html',
-  nodeResolve: true,
   /** Resolve bare module imports */
   nodeResolve: {
     exportConditions: ['browser', 'development'],
