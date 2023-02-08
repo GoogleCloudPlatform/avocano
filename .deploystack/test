@@ -131,8 +131,8 @@ section_close
 
 section_open "Test google_project_iam_binding exists"
     evalTest 'gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --filter="bindings.role=roles/run.viewer" --format="value(bindings.members)"'  "serviceAccount:api-backend@${PROJECT_ID}.iam.gserviceaccount.com"
-    evalTest 'gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --filter="bindings.role=roles/cloudsql.client" --filter="bindings.members~api-backend" --format="value(bindings.members)"'  "serviceAccount:api-backend@${PROJECT_ID}.iam.gserviceaccount.com"
-    evalTest 'gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --filter="bindings.role=roles/cloudsql.client" --filter="bindings.members~automation" --format="value(bindings.members)"'  "serviceAccount:automation@${PROJECT_ID}.iam.gserviceaccount.com"
+    evalTest 'gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --filter="bindings.role=roles/cloudsql.client bindings.members~api-backend" --format="value(bindings.members)"'  "serviceAccount:api-backend@${PROJECT_ID}.iam.gserviceaccount.com"
+    evalTest 'gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --filter="bindings.role=roles/cloudsql.client bindings.members~automation" --format="value(bindings.members)"'  "serviceAccount:automation@${PROJECT_ID}.iam.gserviceaccount.com"
 section_close
 
 terraform -chdir="$terraformDIR"  destroy  \
