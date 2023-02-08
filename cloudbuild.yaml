@@ -62,7 +62,6 @@ steps:
 
       npm i
       npm run build
-      sed -i "s/__api_url__/\/server/g" dist/*.js
       firebase deploy --project $PROJECT_ID --only hosting
 
   # Optionally run tests, confirming deployment (run with '--substitutions=_RUN_TESTS=yes')

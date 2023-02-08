@@ -11,12 +11,6 @@ steps:
           -r ${_REGION} \
           -s ${_SA_NAME}
 
-  # So long as firebase API is enabled on the parent, and parent has permission on the child, this is possible.
-  - id: "firebase"
-    name: "gcr.io/$PROJECT_ID/firebase"
-    entrypoint: firebase
-    args: ["projects:addfirebase", $_CI_PROJECT]
-
   - id: "provision"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     entrypoint: gcloud
