@@ -91,9 +91,6 @@ DATABASE_NAME=django
 DATABASE_USERNAME=server
 gcloud config set project ${PROJECT}
 
-
-# TODO(glasnt): clean up everything. 
-
 section_open "Delete bucket"
 	gsutil rm -r gs://media-${PROJECT}
 section_close

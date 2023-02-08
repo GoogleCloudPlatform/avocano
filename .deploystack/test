@@ -69,7 +69,6 @@ function evalTest() {
 
 get_project_id PROJECT
 get_project_number PROJECT_NUMBER $PROJECT
-# TODO: Script is pretty rudimentary, so make sure all of these variables are actually needed for test
 PROJECT_ID=ds-tester-firebase-cloudrun
 SERVICE_NAME=server
 INSTANCE_NAME=psql
@@ -83,9 +82,11 @@ terraformDIR=provisioning/terraform
 gcloud config set project ${PROJECT}
 
 terraform -chdir="$terraformDIR"  init
-# TODO: Make sure all of these variables are correct and actually need to be passed in.:
 terraform -chdir="$terraformDIR"  apply  \
    -var project_id=$PROJECT_ID \
+   -var service_name=$SERVICE_NAME \
+   -var database_name=$DATABASE_NAME \
+   -var instance_name=$INSTANCE_NAME \
    -auto-approve
 
 

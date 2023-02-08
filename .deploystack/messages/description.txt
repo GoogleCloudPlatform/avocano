@@ -1,8 +1,8 @@
-🥑 Avocano
+This process will create the following:
+	* Client front end - Firebase Hosting
+	* API backend - Cloud Run Service
+	* Database - Cloud SQL Postgres instance
+    * Media - Cloud Storage
+	* Secrets - Cloud Secret Manager
 
-a.k.a API-based Firebase Retail Website
-
-This deployment will: 
-
- * TODO(glasnt): list. 
-
+This will deploy a sample dropship retail application site, including sample products and reviews. 
