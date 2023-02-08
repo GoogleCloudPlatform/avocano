@@ -150,8 +150,8 @@ terraform -chdir="$terraformDIR"  destroy  \
    -auto-approve
 
 ### Terraform is configured to persist some elements. We don't need them to hang around, so let's be forceful and delete. 
-gcloud storage buckets delete gs://media-${PROJECT_ID}
-gcloud sql instances delete $INSTANCE_NAME
+gcloud storage rm -r gs://media-${PROJECT_ID} # Remove all objects and bucket in one step. 
+gcloud sql instances delete $INSTANCE_NAME -q
 
 
 section_open "Test google_cloud_run_service does not exists"
