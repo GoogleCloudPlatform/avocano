@@ -25,4 +25,4 @@ gcloud builds submit --config provisioning/server.cloudbuild.yaml
 gcloud builds submit --config provisioning/terraform.cloudbuild.yaml
 
 # Run database migration job
-gcloud beta run jobs execute database-migrate --region $REGION
+gcloud beta run jobs execute migrate --region $REGION

@@ -82,7 +82,10 @@ export class ProductItem extends LitElement {
    * 'Purchase' the product, but display to
    * user that this is in fact a fake product
    */
-  async buyProduct() {
+  async buyProduct(event) {
+    if (event) {
+      event.preventDefault();
+    }
     if (this.state.count > 0) {
       await buyProduct(this.productItem?.id, () => {
         this.state.count--;

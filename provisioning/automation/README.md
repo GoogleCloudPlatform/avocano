@@ -2,7 +2,9 @@
 
 This folder is for meta automation. 
 
-TODO(glasnt) describe integration test setup. 
+This folder defines the tests and configurations to test deployments that themselves create new projects. 
+
+## Setup
 
 Run once:
  * `admin-project-setup.sh $FOLDER_ID`
@@ -10,8 +12,10 @@ Run once:
 
 Run periodically: 
 
- * `gcloud builds submit [--config cloudbuild.yaml]`
+ * `gcloud builds submit --config provisioning/automation/cloudbuild.yaml`
     - runs `project-setup.sh` to create a new project
-    - runs `deploy.cloudbuild.yaml` to create a new deployment in that project.
-    - runs `TODO` to test project
-    - deletes project.
+    - runs `deploy.cloudbuild.yaml`, which runs the same `bash setup.sh` as usual.
+    - runs `test.cloudbuild.yaml`, which runs client tests
+    - deletes project, if all other steps succeeded.
+
+
