@@ -64,7 +64,27 @@ steps:
       npm run build
       firebase deploy --project $PROJECT_ID --only hosting
 
+  # Optionally run tests, confirming deployment (run with '--substitutions=_RUN_TESTS=yes')
+  - id: "test deployment"
+    name: python:3.10-slim
+    dir: provisioning
+    env:
+        - _RUN_TESTS=$_RUN_TESTS
+    script: |
+        #!/bin/bash
+        if [ -z $_RUN_TESTS ]; then
+          echo "_RUN_TESTS not defined, so not running tests."
+          exit 0
+        fi
+
+        python -m pip install -r test/requirements.txt
+        playwright install-deps
+        playwright install
+        python -m pytest
+
+
 timeout: 1800s
 
 substitutions:
   _REGION: us-central1
+  _RUN_TESTS: ""

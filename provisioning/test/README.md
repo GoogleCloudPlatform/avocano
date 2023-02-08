@@ -1,18 +1,34 @@
-# Provisioing Tests
+# Provisioning Tests
 
-Tests that are run against a deployment to confirm it works. 
+These tests are designed to be run against a deployment. 
 
-TODO(glasnt) describe. 
+They are either run against the current project, or a defined project (using the `CI_PROJECT` value)
 
+
+## Test scope
+
+These tests use [playwright](https://playwright.dev/), and automate the clicking of website buttons to test client deployments. 
+
+There are also other tests, see `test/` for details. 
 
 ## Local dev
 
+Install the dependencies
+
 ```
-export CI_PROJECT=[projectid]
+python -m pip install -r test/requirements.txt
+playwright install-deps  
+playwright install
+```
+
+Then run the tests: 
+
+```
 python -m pytest
 ```
 
-`googleapiclient.discovery` requires authentication, so setup a dedicated service account:
+
+`googleapiclient.discovery` requires authentication, so you may need to setup a dedicated service account:
 
 ```
 gcloud iam service-accounts create robot-account \
