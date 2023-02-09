@@ -46,7 +46,7 @@ export class ProductItem extends LitElement {
   /**
    * Executes when component has initially loaded
    * To read more about lifecycle methods:
-   * https://lit.dev/docs/v1/components/lifecycle/#firstupdated
+   * https://lit.dev/docs/v1/components/lifecycle/#updated
    */
   async updated() {
     let testimonials = [];
