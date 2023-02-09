@@ -39,6 +39,7 @@ export class ProductItem extends LitElement {
       openDialog: false,
       openSoldOutDialog: false,
       testimonials: [],
+      productItem: {},
     };
   }
 
@@ -47,19 +48,24 @@ export class ProductItem extends LitElement {
    * To read more about lifecycle methods:
    * https://lit.dev/docs/v1/components/lifecycle/#firstupdated
    */
-  async firstUpdated() {
+  async updated() {
     let testimonials = [];
+    const { id, inventory_count } = this.productItem || {};
 
-    if (this.__productItem.id) {
-      testimonials = await getProductTestimonials(this.__productItem.id);
+    // Ensure we are retrieving current product testimonials
+    if (this.state.productItem?.id !== id) {
+      if (id) {
+        testimonials = await getProductTestimonials(id);
+      }
+
+      this.state = {
+        count: inventory_count,
+        testimonials,
+      };
+
+      this.state.productItem = this.productItem;
+      this.requestUpdate();
     }
-
-    this.state = {
-      count: this.productItem.inventory_count,
-      testimonials,
-    };
-
-    this.requestUpdate();
   }
 
   /**
