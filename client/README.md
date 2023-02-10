@@ -1,4 +1,4 @@
-# Avocano Front end
+# Avocano Frontend
 
 This client app uses [Lit](https://lit.dev/) front-end and [open-wc](https://open-wc.org/) for project scaffolding.
 
