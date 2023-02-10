@@ -32,6 +32,6 @@ steps:
       fi
 
       terraform init
-      terraform apply -var project=${PROJECT_ID} -auto-approve
+      terraform apply -var project_id=${PROJECT_ID} -auto-approve
 
 timeout: 1800s
