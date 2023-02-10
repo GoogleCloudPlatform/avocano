@@ -18,16 +18,20 @@ import { getSiteConfig } from './utils/fetch.js';
 import routes from './utils/routes.js';
 import styles from './styles/shell.js';
 
+// Pages
 import './pages/home.js';
 import './pages/contact.js';
 import './pages/product.js';
 import './pages/product-list.js';
 import './pages/shipping.js';
+import './pages/not-found.js';
 
+// Components
 import './components/header.js';
 import './components/footer.js';
 import './components/main.js';
 
+// Material design
 import '@material/mwc-button';
 import '@material/mwc-dialog';
 
@@ -110,7 +114,9 @@ export class AvocanoShell extends router(LitElement) {
         <div class="route" route="contact">
           <app-contact></app-contact>
         </div>
-        <div class="route" route="not-found">Not Found</div>
+        <div class="route" route="not-found">
+          <app-not-found></app-not-found>
+        </div>
       </app-main>
       <app-footer></app-footer>
     `;
