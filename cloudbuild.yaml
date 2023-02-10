@@ -48,7 +48,7 @@ steps:
 
       terraform init
       terraform apply -auto-approve -no-color \
-        -var project=${PROJECT_ID} \
+        -var project_id=${PROJECT_ID} \
         -var region=${REGION}
     
   # Only since the client is also node-based can the firebase image can be used for this step.

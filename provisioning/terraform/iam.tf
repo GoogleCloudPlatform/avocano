@@ -28,7 +28,7 @@ resource "google_service_account" "automation" {
 
 # Both the server and Cloud Build can access the database
 resource "google_project_iam_binding" "server_permissions" {
-  project    = var.project
+  project    = var.project_id
   role       = "roles/cloudsql.client"
   members    = [local.server_SA, local.automation_SA]
   depends_on = [google_service_account.server, google_service_account.automation]
@@ -37,7 +37,7 @@ resource "google_project_iam_binding" "server_permissions" {
 
 # Server needs introspection permissions
 resource "google_project_iam_binding" "server_introspection" {
-  project    = var.project
+  project    = var.project_id
   role       = "roles/run.viewer"
   members    = [local.server_SA]
   depends_on = [google_service_account.server]
