@@ -18,7 +18,7 @@ import { fromRollup } from '@web/dev-server-rollup';
 const replace = fromRollup(rollupReplace);
 const hmr = process.argv.includes('--hmr');
 
-export default ({
+export default {
   watch: !hmr,
   port: 8081,
   open: true,
@@ -36,7 +36,7 @@ export default ({
     replace({
       include: ['src/utils/config.js'],
       preventAssignment: false,
-      '__api_url__': (process.env.API_URL || 'http://localhost:8000') + "/api"
+      __api_url__: (process.env.API_URL || 'http://localhost:8000') + '/api',
     }),
-  ]
-});
+  ],
+};
