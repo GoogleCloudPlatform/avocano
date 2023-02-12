@@ -29,6 +29,8 @@ provider "docker" {
   }
 }
 
+
+# Server
 # Establish image name
 data "docker_registry_image" "server" {
   name = "${local.image_registry}/${local.server_image}"
@@ -41,8 +43,16 @@ data "google_container_registry_image" "server" {
   digest  = data.docker_registry_image.server.sha256_digest
 }
 
+
+# Client
+# Establish image name
+data "docker_registry_image" "client" {
+  name = "${local.image_registry}/${local.client_image}"
+}
+
+# Get exact image information
 data "google_container_registry_image" "client" {
   name    = local.client_image
   project = var.project_id
-  digest  = data.docker_registry_image.server.sha256_digest
+  digest  = data.docker_registry_image.client.sha256_digest
 }
