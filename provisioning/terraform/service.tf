@@ -32,7 +32,7 @@ resource "google_cloud_run_service" "server" {
   }
 
   depends_on = [
-    google_secret_manager_secret.django_settings
+    google_secret_manager_secret_version.django_settings
   ]
 }
 
