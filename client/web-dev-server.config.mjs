@@ -22,6 +22,10 @@ export default {
   open: '/',
   watch: !hmr,
   port: 8081,
+  open: true,
+  rootDir: '.',
+  basePath: '/',
+  appIndex: 'index.html',
   /** Resolve bare module imports */
   nodeResolve: {
     exportConditions: ['browser', 'development'],
