@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "media" {
-  name          = "media-${var.project}"
+  name          = "media-${var.project_id}"
   location      = "us-central1"
   storage_class = "REGIONAL"
 }
@@ -8,11 +8,11 @@ data "google_iam_policy" "mediaaccess" {
 
   binding {
     role    = "roles/storage.legacyBucketOwner"
-    members = ["projectOwner:${var.project}", "projectEditor:${var.project}", local.server_SA, local.automation_SA]
+    members = ["projectOwner:${var.project_id}", "projectEditor:${var.project_id}", local.server_SA, local.automation_SA]
   }
   binding {
     role    = "roles/storage.legacyBucketReader"
-    members = ["projectViewer:${var.project}"]
+    members = ["projectViewer:${var.project_id}"]
   }
 }
 

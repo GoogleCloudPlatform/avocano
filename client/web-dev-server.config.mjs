@@ -19,6 +19,7 @@ const replace = fromRollup(rollupReplace);
 const hmr = process.argv.includes('--hmr');
 
 export default {
+  open: '/',
   watch: !hmr,
   port: 8081,
   open: true,
