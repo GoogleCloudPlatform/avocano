@@ -87,3 +87,23 @@ resource "google_cloud_run_v2_job" "migrate" {
     google_secret_manager_secret_version.django_settings
   ]
 }
+
+
+resource "google_cloud_run_v2_job" "client" {
+
+  name         = "client"
+  location     = var.region
+  launch_stage = "BETA"
+
+  template {
+    template {
+      service_account = google_service_account.automation.email
+      containers {
+        image   = data.google_container_registry_image.client.image_url
+        command = ["firebase"]
+        args = ["deploy","--project","$PROJECT_ID","--only","hosting"]
+        
+      }
+    }
+  }
+}
