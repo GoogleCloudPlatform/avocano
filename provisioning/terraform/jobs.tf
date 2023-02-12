@@ -97,12 +97,11 @@ resource "google_cloud_run_v2_job" "client" {
 
   template {
     template {
-      service_account = google_service_account.automation.email
       containers {
         image   = data.google_container_registry_image.client.image_url
         command = ["firebase"]
-        args = ["deploy","--project","$PROJECT_ID","--only","hosting"]
-        
+        args    = ["deploy", "--project", var.project_id, "--only", "hosting"]
+
       }
     }
   }
