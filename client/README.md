@@ -28,9 +28,12 @@ export API_URL=http://localhost:8000
 Install, build, and start client.
 
 ```bash
-npm i // Install app dependencies
-npm build  // Bundle the app
-npm run start // Runs the app locally!
+# Install app dependencies
+npm i
+# Bundle the app
+npm build
+# Runs the app locally!
+npm run start
 ```
 
 Open your browser to `localhost:8000`.
