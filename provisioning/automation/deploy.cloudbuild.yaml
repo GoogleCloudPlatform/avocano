@@ -4,6 +4,8 @@ steps:
   # to kickstart the build within the scope of that project.
   - id: "deploy"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
+    env: 
+    - RUN_TESTS_CONFIG=",_RUN_TESTS=yes"
     script: |
       #!/bin/bash
       bash setup.sh

@@ -60,7 +60,7 @@ quiet gsutil iam ch \
         gs://$TFSTATE_BUCKET
 
 aecho "Running Cloud Build"
-gcloud builds submit --substitutions _REGION=${REGION}
+gcloud builds submit --substitutions _REGION=${REGION}${RUN_TESTS_CONFIG}
 
 aecho "Setup database"
 gcloud beta run jobs execute setup --wait --region $REGION
