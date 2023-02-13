@@ -46,6 +46,9 @@ aecho "Running setup.sh against ${PROJECT_ID} in ${REGION}"
 aecho "Setup Firebase Builder"
 gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
 
+aecho "Build client image"
+gcloud builds submit --config provisioning/client-image.cloudbuild.yaml
+
 aecho "Configuring Terraform"
 export TFSTATE_BUCKET=terraform-${PROJECT_ID}
 gsutil mb gs://$TFSTATE_BUCKET || true 
