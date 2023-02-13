@@ -21,7 +21,7 @@ steps:
         "--config=$_CLOUDBUILD_CONFIG",
         "--timeout=1500",
         "--project=$_CI_PROJECT",
-        "--substitutions=$_RUN_TESTS=yes"
+        "--substitutions=_RUN_TESTS=yes"
       ]
 
   - id: "cleanup"
