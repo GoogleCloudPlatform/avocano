@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Execute with "--build-arg PROJECT_ID=$PROJECT_ID"
+# This dockerfile is used when using Cloud Run Jobs-based client deployment
+# May not be used in all cases. 
 
+# Execute with "--build-arg PROJECT_ID=$PROJECT_ID"
 ARG PROJECT_ID=YOURPROJECTID
 FROM gcr.io/$PROJECT_ID/firebase
 
@@ -21,3 +23,6 @@ COPY package*.json ./
 RUN npm i
 COPY . ./
 RUN npm run build 
+
+RUN npm install -g json
+ENTRYPOINT ./docker-deploy.sh
