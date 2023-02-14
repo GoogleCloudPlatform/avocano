@@ -24,6 +24,18 @@ steps:
         "--substitutions=_RUN_TESTS=yes"
       ]
 
+  - id: "test"
+    name: python:3.10-slim
+    dir: provisioning
+    script: |
+        #!/bin/bash
+
+        python -m pip install -r test/requirements.txt
+        playwright install-deps
+        playwright install
+        python -m pytest
+
+
   - id: "cleanup"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     env: ["KEEP_PROJECT=${_KEEP_PROJECT}"]
