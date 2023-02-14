@@ -39,3 +39,9 @@ npm run start
 ```
 
 Open your browser to `localhost:8000`.
+
+## Deployment
+
+This code is deployed directly in Cloud Build steps, as seen in the root [`cloudbuild.yaml`](/cloudbuild.yaml), and [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml). 
+
+It can also be deployed by building an image [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml), and running as a Cloud Run job, which can be customised by environment variables (see [`docker-deploy.yaml`](docker-deploy.sh))
