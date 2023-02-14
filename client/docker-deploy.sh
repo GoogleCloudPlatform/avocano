@@ -1,5 +1,6 @@
 #!/bin/bash
 # Script to assist in Dockerfile-based deployments. 
+# 'json' was installed from npm in Dockerfile as a utility to assist in inline json file editing
 
 # any errors? exit immediately. 
 set -e
