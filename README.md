@@ -1,4 +1,4 @@
-# Avocano - A Fake Product Website
+# 🥑 Avocano - a fake dropship sample website
 
 Avocano is a sample dropship/fake product website, combining: 
  
