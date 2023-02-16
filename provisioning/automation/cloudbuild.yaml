@@ -26,6 +26,8 @@ steps:
   - id: "test"
     name: python:3.10-slim
     dir: provisioning
+    env: 
+      - 'CI_PROJECT=$_CI_PROJECT'
     script: |
         #!/bin/bash
 
