@@ -1,6 +1,6 @@
 ## Description
 
-**Fixes:** #<ISSUE-NUMBER>
+Fixes #<ISSUE-NUMBER>
 
 **Note:** Before submitting a pull request, please open an issue for discussion if you are not associated with Google.
 
