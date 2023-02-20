@@ -43,7 +43,8 @@ resource "google_cloud_run_v2_job" "setup" {
   }
 
   depends_on = [
-    google_secret_manager_secret_version.django_settings
+    google_secret_manager_secret_version.django_settings,
+    google_project_service.enabled
   ]
 }
 
@@ -84,7 +85,8 @@ resource "google_cloud_run_v2_job" "migrate" {
   }
 
   depends_on = [
-    google_secret_manager_secret_version.django_settings
+    google_secret_manager_secret_version.django_settings,
+    google_project_service.enabled
   ]
 }
 

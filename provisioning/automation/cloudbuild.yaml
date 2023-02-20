@@ -20,9 +20,22 @@ steps:
         "submit",
         "--config=$_CLOUDBUILD_CONFIG",
         "--timeout=1500",
-        "--project=$_CI_PROJECT",
-        "--substitutions=_RUN_TESTS=yes"
+        "--project=$_CI_PROJECT"
       ]
+
+  - id: "test"
+    name: python:3.10-slim
+    dir: provisioning
+    env: 
+      - 'CI_PROJECT=$_CI_PROJECT'
+    script: |
+        #!/bin/bash
+
+        python -m pip install -r test/requirements.txt
+        playwright install-deps
+        playwright install
+        python -m pytest
+
 
   - id: "cleanup"
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
