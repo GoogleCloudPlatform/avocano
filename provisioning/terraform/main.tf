@@ -8,8 +8,9 @@ terraform {
     docker = {
       source = "kreuzwerker/docker"
     }
-
   }
+  backend "gcs" {}
+  # Bucket dynamically set in "terraform init" calls
 }
 
 provider "google" {
