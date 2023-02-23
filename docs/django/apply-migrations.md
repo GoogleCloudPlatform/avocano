@@ -14,10 +14,12 @@ To run migrations as part of the Cloud Build, add a step to the `cloudbuild.yaml
 ```
   - id: server migrate
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
-    entrypoint: gcloud
-    args: ["beta", "run", "jobs", "execute",  "migrate", 
-           "--region", $_REGION, "--wait"] 
+    env:
+    - "CLOUDSDK_RUN_REGION=$_REGION"
+    script: gcloud beta run jobs execute migrate --wait
 ```
+
+In this case, `CLOUDSDK_RUN_REGION` automatically sets the `--region` parameter for the `gcloud run` command. 
 
 This step must be after the image push step, but can be before or after Terraform (the terraform step
 updates the Cloud Run service to the latest image). If your database changes must be made **before**
