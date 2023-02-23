@@ -22,7 +22,7 @@ steps:
       - --builder=gcr.io/buildpacks/builder:v1
       - --path=server/
 
-  # Because this image is immediately used in the next step, this action must happen now. 
+  # Because this image is immediately used in the next step, this action must happen now.
   - id: server push
     name: gcr.io/cloud-builders/docker
     args:
@@ -61,19 +61,18 @@ steps:
     name: python:3.10-slim
     dir: provisioning
     env:
-        - _RUN_TESTS=$_RUN_TESTS
+      - _RUN_TESTS=$_RUN_TESTS
     script: |
-        #!/bin/bash
-        if [ -z $_RUN_TESTS ]; then
-          echo "_RUN_TESTS not defined, so not running tests."
-          exit 0
-        fi
+      #!/bin/bash
+      if [ -z $_RUN_TESTS ]; then
+        echo "_RUN_TESTS not defined, so not running tests."
+        exit 0
+      fi
 
-        python -m pip install -r test/requirements.txt
-        playwright install-deps
-        playwright install
-        python -m pytest
-
+      python -m pip install -r test/requirements.txt
+      playwright install-deps
+      playwright install
+      python -m pytest
 
 timeout: 1800s
 

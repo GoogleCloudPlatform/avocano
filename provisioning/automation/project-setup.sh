@@ -67,9 +67,6 @@ else
         firebase.googleapis.com
     stepdone
 
-    echo "DEBUG"
-    gcloud services list  --project $CI_PROJECT
-
     stepdo "assign IAM owner role to Cloud Build service account"
     CI_PROJECTNUMBER=$(gcloud projects describe ${CI_PROJECT} --format='value(projectNumber)')
     CLOUDBUILD_SA=$CI_PROJECTNUMBER@cloudbuild.gserviceaccount.com
