@@ -16,6 +16,10 @@ To disable:
 
 ## Terraform needs a backend
 
+This sample opts to use a Cloud Storage bucket to store terraform state, rather than storing the files on your local machine. 
+This allows you to invoke Terraform from Cloud Build, Cloud Run jobs, or otherwise, and they all share
+the same state. 
+
 If you're running the examples in an environment outside of Cloud Shell, you'll need to be aware that
 there was additional parameters added to the initialization of Terraform to store state in Cloud Storage,
 rather than your local machine: 
