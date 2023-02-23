@@ -20,18 +20,16 @@ steps:
     dir: provisioning/terraform
     env:
       - PROJECT_ID=$PROJECT_ID
+      - REGION=$_REGION
     script: |
       #!/bin/sh
 
-      if [ ! -f state.tf ]; then
-        echo "terraform {
-          backend gcs {
-            bucket = \"terraform-${PROJECT_ID}\"
-        }
-      }" > state.tf
-      fi
-
-      terraform init
-      terraform apply -var project_id=${PROJECT_ID} -auto-approve
+      terraform init -backend-config="bucket=terraform-${PROJECT_ID}"
+      terraform apply -auto-approve -no-color \
+        -var project_id=${PROJECT_ID} \
+        -var region=${REGION}
 
 timeout: 1800s
+
+substitutions:
+  _REGION: us-central1

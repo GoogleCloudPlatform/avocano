@@ -93,16 +93,3 @@ else
     echo "✅ Project '${CI_PROJECT}' is now ready to use."
     echo ""
 fi
-
-
-stepdo "setup Terraform state"
-cat >provisioning/terraform/state.tf <<_EOF
-terraform { 
-  backend gcs {
-    bucket = "$TF_STATE_BUCKET"
-  }
-}
-_EOF
-cat provisioning/terraform/state.tf
-stepdone
-

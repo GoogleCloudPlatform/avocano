@@ -38,19 +38,11 @@ steps:
     script: |
       #!/bin/sh
 
-      if [ ! -f state.tf ]; then
-        echo "terraform { 
-          backend gcs { 
-            bucket = \"terraform-${PROJECT_ID}\" 
-        } 
-      }" > state.tf
-      fi
-
-      terraform init
+      terraform init -backend-config="bucket=terraform-${PROJECT_ID}"
       terraform apply -auto-approve -no-color \
         -var project_id=${PROJECT_ID} \
         -var region=${REGION}
-    
+
   # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy
     name: gcr.io/$PROJECT_ID/firebase

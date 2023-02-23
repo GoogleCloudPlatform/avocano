@@ -14,25 +14,17 @@ To disable:
   * Under "Actions permissions", select "Disable actions".
   * Click **Save**. 
 
-## Terraform needs `state.tf` file
+## Terraform needs a backend
 
 If you're running the examples in an environment outside of Cloud Shell, you'll need to be aware that
-the `setup.sh` created a Terraform backend state configuration for you. It's a file that's `.gitignore`d,
-so you might have missed it. 
-
-Be sure to create a `provisioning/terraform/state.tf` file with the following contents: 
-
-*Note*: The `PROJECT_ID` is a literal replacement, and must be hardcoded (`backend` doesn't accept variables)
+there was additional parameters added to the initialization of Terraform to store state in Cloud Storage,
+rather than your local machine: 
 
 ```
-terraform {
-  backend gcs {
-    bucket = "terraform-PROJECT_ID"
-  }
-}
+terraform init -backend-config="bucket=terraform-${PROJECT_ID}" 
 ```
 
-This is automatically added in the root `cloudbuild.yaml`, but if you're doing local testing, be sure to add it. 
+This is automatically included in any `terraform init` calls, so if you're calling this yourself, be sure to add it.
 
 
 ## Creating migrations

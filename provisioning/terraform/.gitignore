@@ -2,4 +2,3 @@
 .terraform.lock.hcl
 
 terraform.tfstate*
-state.tf
