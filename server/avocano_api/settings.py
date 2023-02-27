@@ -85,6 +85,9 @@ TEMPLATES = [
 # Used for local dev, and cloud-run-proxy
 local_host = "http://localhost:8080"
 
+# Used for Cloud Shell dev with Web Preview
+cloudshell_host = "https://*.cloudshell.dev"
+
 
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 
@@ -102,7 +105,7 @@ if CLOUDRUN_SERVICE_URL:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 else:
     ALLOWED_HOSTS = ["*"]
-    CSRF_TRUSTED_ORIGINS = [local_host]
+    CSRF_TRUSTED_ORIGINS = [local_host, cloudshell_host]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
