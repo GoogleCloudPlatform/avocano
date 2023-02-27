@@ -67,9 +67,6 @@ else
         firebase.googleapis.com
     stepdone
 
-    echo "DEBUG"
-    gcloud services list  --project $CI_PROJECT
-
     stepdo "assign IAM owner role to Cloud Build service account"
     CI_PROJECTNUMBER=$(gcloud projects describe ${CI_PROJECT} --format='value(projectNumber)')
     CLOUDBUILD_SA=$CI_PROJECTNUMBER@cloudbuild.gserviceaccount.com
@@ -93,16 +90,3 @@ else
     echo "✅ Project '${CI_PROJECT}' is now ready to use."
     echo ""
 fi
-
-
-stepdo "setup Terraform state"
-cat >provisioning/terraform/state.tf <<_EOF
-terraform { 
-  backend gcs {
-    bucket = "$TF_STATE_BUCKET"
-  }
-}
-_EOF
-cat provisioning/terraform/state.tf
-stepdone
-

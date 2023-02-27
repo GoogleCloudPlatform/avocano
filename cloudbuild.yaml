@@ -22,7 +22,7 @@ steps:
       - --builder=gcr.io/buildpacks/builder:v1
       - --path=server/
 
-  # Because this image is immediately used in the next step, this action must happen now. 
+  # Because this image is immediately used in the next step, this action must happen now.
   - id: server push
     name: gcr.io/cloud-builders/docker
     args:
@@ -38,19 +38,11 @@ steps:
     script: |
       #!/bin/sh
 
-      if [ ! -f state.tf ]; then
-        echo "terraform { 
-          backend gcs { 
-            bucket = \"terraform-${PROJECT_ID}\" 
-        } 
-      }" > state.tf
-      fi
-
-      terraform init
+      terraform init -backend-config="bucket=terraform-${PROJECT_ID}"
       terraform apply -auto-approve -no-color \
         -var project_id=${PROJECT_ID} \
         -var region=${REGION}
-    
+
   # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy
     name: gcr.io/$PROJECT_ID/firebase
@@ -69,19 +61,18 @@ steps:
     name: python:3.10-slim
     dir: provisioning
     env:
-        - _RUN_TESTS=$_RUN_TESTS
+      - _RUN_TESTS=$_RUN_TESTS
     script: |
-        #!/bin/bash
-        if [ -z $_RUN_TESTS ]; then
-          echo "_RUN_TESTS not defined, so not running tests."
-          exit 0
-        fi
+      #!/bin/bash
+      if [ -z $_RUN_TESTS ]; then
+        echo "_RUN_TESTS not defined, so not running tests."
+        exit 0
+      fi
 
-        python -m pip install -r test/requirements.txt
-        playwright install-deps
-        playwright install
-        python -m pytest
-
+      python -m pip install -r test/requirements.txt
+      playwright install-deps
+      playwright install
+      python -m pytest
 
 timeout: 1800s
 
