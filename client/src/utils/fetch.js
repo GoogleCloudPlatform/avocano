@@ -28,6 +28,7 @@ export const getProduct = async productId => {
     try {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: 'GET',
+        credentials: 'include',
       });
       product = await response.json();
     } catch (e) {
@@ -53,6 +54,7 @@ export const getActiveProduct = async () => {
   try {
     const response = await fetch(`${API_URL}/active/product/`, {
       method: 'GET',
+      credentials: 'include',
     });
     activeProduct = await response.json();
   } catch (e) {
@@ -75,6 +77,7 @@ export const buyProduct = async (productId, callback) => {
     try {
       await fetch(`${API_URL}/products/${productId}/purchase/`, {
         method: 'POST',
+        credentials: 'include',
       });
       callback && callback();
     } catch (e) {
@@ -99,7 +102,10 @@ export const getProductTestimonials = async productId => {
     try {
       const response = await fetch(
         `${API_URL}/testimonials/?product_id=${productId}`,
-        { method: 'GET' }
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
       );
       testimonials = response.json();
     } catch (e) {
@@ -123,7 +129,10 @@ export const getProductList = async () => {
   let products;
 
   try {
-    const response = await fetch(`${API_URL}/products/`, { method: 'GET' });
+    const response = await fetch(`${API_URL}/products/`, {
+      method: 'GET',
+      credentials: 'include',
+    });
     products = await response.json();
   } catch (e) {
     console.error(e);
@@ -145,6 +154,7 @@ export const getSiteConfig = async () => {
   try {
     const response = await fetch(`${API_URL}/active/site_config/`, {
       method: 'GET',
+      credentials: 'include',
     });
     config = await response.json();
   } catch (e) {
