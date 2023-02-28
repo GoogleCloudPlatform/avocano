@@ -33,7 +33,7 @@ Install, build, and start client.
 # Install app dependencies
 npm i
 # Bundle the app
-npm build
+npm run build
 # Runs the app locally!
 npm run start
 ```
