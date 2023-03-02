@@ -37,7 +37,7 @@
     "@custom-elements-manifest/analyzer": "^0.6.0",
     "@open-wc/eslint-config": "^9.0.0",
     "@open-wc/testing": "next",
-    "@web/test-runner": "^0.13.22",
+    "@web/test-runner": "^0.15.0",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "deepmerge": "^4.2.2",
     "eslint": "^7.32.0",
