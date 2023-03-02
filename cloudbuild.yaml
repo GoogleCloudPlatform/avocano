@@ -58,7 +58,7 @@ steps:
 
   # Optionally run tests, confirming deployment (run with '--substitutions=_RUN_TESTS=yes')
   - id: "test deployment"
-    name: python:3.10-slim
+    name: python:3.11-slim
     dir: provisioning
     env:
       - _RUN_TESTS=$_RUN_TESTS
