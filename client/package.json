@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",
-    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@custom-elements-manifest/analyzer": "^0.6.0",
     "@open-wc/eslint-config": "^9.0.0",
     "@open-wc/testing": "next",
     "@web/test-runner": "^0.13.22",
