@@ -1,6 +1,6 @@
 resource "google_cloud_run_v2_service" "server" {
-  name                       = var.service_name
-  location                   = var.region
+  name     = var.service_name
+  location = var.region
   template {
     service_account = google_service_account.server.email
     containers {
@@ -9,8 +9,8 @@ resource "google_cloud_run_v2_service" "server" {
         name = "DJANGO_ENV"
         value_source {
           secret_key_ref {
-            secret = google_secret_manager_secret.django_settings.secret_id
-            version  = "latest"
+            secret  = google_secret_manager_secret.django_settings.secret_id
+            version = "latest"
           }
         }
       }
@@ -32,7 +32,7 @@ resource "google_cloud_run_v2_service" "server" {
     }
   }
   traffic {
-    type = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+    type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
     percent = 100
   }
 

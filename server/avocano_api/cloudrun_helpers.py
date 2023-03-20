@@ -76,8 +76,6 @@ def _service_url(project, region, service):
         run_api = google_api("run", "v2")
         fqname = f"projects/{project}/locations/{region}/services/{service}"
         service = run_api.projects().locations().services().get(name=fqname).execute()
-        logging.warn(service)
-        logging.warn("LOOK ABOVE!\n")
         return service["uri"]
     except (GAPIHTTPError, KeyError) as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
