@@ -17,19 +17,19 @@ resource "google_cloud_run_service" "server" {
           }
         }
         env {
-          name = "PYTHONPATH"
+          name  = "PYTHONPATH"
           value = ""
         }
         env {
-          name = "DJANGO_SETTINGS_MODULE"
+          name  = "DJANGO_SETTINGS_MODULE"
           value = "avocano_api.settings"
         }
         env {
-          name = "OTEL_METRICS_EXPORTER"
+          name  = "OTEL_METRICS_EXPORTER"
           value = "none"
         }
         env {
-          name = "OTEL_TRACES_EXPORTER"
+          name  = "OTEL_TRACES_EXPORTER"
           value = "gcp_trace"
         }
       }
