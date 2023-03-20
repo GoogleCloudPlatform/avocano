@@ -2,9 +2,9 @@
 
 Avocano is a sample dropship/fake product website, combining: 
  
- * Firebase Hosting front end, written with [Lit](https://lit.dev/),
+ * Firebase Hosting front end, written with [Lit](https://lit.dev/).
  * Cloud Run API backend, written with [Django REST Framework](https://www.django-rest-framework.org/),
- * Cloud SQL database, with migrations applied through Cloud Run Jobs, and
+ * Cloud SQL database, with migrations applied through Cloud Run Jobs.
  * Terraform and Cloud Build provisioning. 
 
 ## Launch
