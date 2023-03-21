@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.0.0...v1.1.0) (2023-03-21)
+
+
+### Features
+
+* introduce tagged image build configuration ([#107](https://github.com/GoogleCloudPlatform/avocano/issues/107)) ([fbd91c2](https://github.com/GoogleCloudPlatform/avocano/commit/fbd91c2045df985d5e1c1177422c134528f6f096))
+
 ## 1.0.0 (2023-03-20)
 
 
