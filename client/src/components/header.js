@@ -36,6 +36,7 @@ export class Header extends LitElement {
           <app-link href="/products">Products</app-link>
           <app-link href="/shipping">Shipping</app-link>
           <app-link href="/contact">Contact</app-link>
+          <app-link href="/checkout">Checkout</app-link>
         </div>
       </div>
     `;

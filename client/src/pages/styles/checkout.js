@@ -12,35 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const routes = [
-  {
-    name: 'home',
-    pattern: '',
-  },
-  {
-    name: 'product-list',
-    pattern: 'products',
-  },
-  {
-    name: 'product',
-    pattern: 'products/:id',
-  },
-  {
-    name: 'shipping',
-    pattern: 'shipping',
-  },
-  {
-    name: 'contact',
-    pattern: 'contact',
-  },
-  {
-    name: 'checkout',
-    pattern: 'checkout',
-  },
-  {
-    name: 'not-found',
-    pattern: '*',
-  },
-];
+import { css } from 'lit';
 
-export default routes;
+const styles = css`
+  .checkoutBase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+`;
+
+export default styles;

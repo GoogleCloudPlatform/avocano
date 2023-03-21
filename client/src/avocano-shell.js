@@ -20,6 +20,7 @@ import styles from './styles/shell.js';
 
 // Pages
 import './pages/home.js';
+import './pages/checkout.js';
 import './pages/contact.js';
 import './pages/product.js';
 import './pages/product-list.js';
@@ -113,6 +114,9 @@ export class AvocanoShell extends router(LitElement) {
         </div>
         <div class="route" route="contact">
           <app-contact></app-contact>
+        </div>
+        <div class="route" route="checkout">
+          <app-checkout></app-checkout>
         </div>
         <div class="route" route="not-found">
           <app-not-found></app-not-found>

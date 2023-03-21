@@ -12,35 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const routes = [
-  {
-    name: 'home',
-    pattern: '',
-  },
-  {
-    name: 'product-list',
-    pattern: 'products',
-  },
-  {
-    name: 'product',
-    pattern: 'products/:id',
-  },
-  {
-    name: 'shipping',
-    pattern: 'shipping',
-  },
-  {
-    name: 'contact',
-    pattern: 'contact',
-  },
-  {
-    name: 'checkout',
-    pattern: 'checkout',
-  },
-  {
-    name: 'not-found',
-    pattern: '*',
-  },
-];
+import { LitElement, html } from 'lit';
+//import { fulfillCheckout } from '../utils/fetch.js';
+import styles from './styles/checkout.js';
 
-export default routes;
+export class Checkout extends LitElement {
+  static get styles() {
+    return styles;
+  }
+
+  constructor() {
+    super();
+  }
+
+  render() {
+    return html`
+      <div class="checkoutBase">
+        <div>Checkout</div>
+      </div>
+    `;
+  }
+}
+
+customElements.define('app-checkout', Checkout);
