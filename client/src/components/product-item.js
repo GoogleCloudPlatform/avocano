@@ -15,6 +15,7 @@
 import { LitElement, html } from 'lit';
 import styles from './styles/product-item.js';
 import { buyProduct, getProductTestimonials } from '../utils/fetch.js';
+import cache from '../utils/cache.js';
 
 const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
 const oopsAvocado = new URL('../../assets/oops-avocado.png', import.meta.url)
@@ -92,6 +93,7 @@ export class ProductItem extends LitElement {
     if (event) {
       event.preventDefault();
     }
+
     if (this.state.count > 0) {
       await buyProduct(this.productItem?.id, () => {
         this.state.count--;
@@ -101,6 +103,31 @@ export class ProductItem extends LitElement {
     } else {
       // Open sold out dialog
       this.toggleSoldOutDialog();
+    }
+  }
+
+  /**
+   * Add fake product to cart
+   */
+  async addProductToCart(event) {
+    if (event) {
+      event.preventDefault();
+    }
+    const { productItem } = this.state;
+    const result = await cache.get(productItem.name);
+
+    if (result?.count) {
+      cache.set(productItem.name, {
+        name: productItem.name,
+        id: productItem.id,
+        count: result.count + 1,
+      });
+    } else {
+      cache.set(productItem.name, {
+        name: productItem.name,
+        id: productItem.id,
+        count: 1,
+      });
     }
   }
 
