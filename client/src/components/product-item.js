@@ -16,6 +16,7 @@ import { LitElement, html } from 'lit';
 import styles from './styles/product-item.js';
 import { buyProduct, getProductTestimonials } from '../utils/fetch.js';
 import cache from '../utils/cache.js';
+import { getConfig } from '../utils/config.js';
 
 const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
 const oopsAvocado = new URL('../../assets/oops-avocado.png', import.meta.url)
@@ -38,6 +39,7 @@ export class ProductItem extends LitElement {
     this.state = {
       count: 0,
       openDialog: false,
+      openCartDialog: false,
       openSoldOutDialog: false,
       testimonials: [],
       productItem: {},
@@ -78,6 +80,14 @@ export class ProductItem extends LitElement {
   }
 
   /**
+   * Toggle the Add To Cart success dialog
+   */
+  toggleCartDialog() {
+    this.state.openCartDialog = !this.state.openCartDialog;
+    this.requestUpdate();
+  }
+
+  /**
    * Toggle the sold out product dialog
    */
   toggleSoldOutDialog() {
@@ -109,7 +119,7 @@ export class ProductItem extends LitElement {
   /**
    * Add fake product to cart
    */
-  async addProductToCart(event) {
+  async addToCart(event) {
     if (event) {
       event.preventDefault();
     }
@@ -129,10 +139,20 @@ export class ProductItem extends LitElement {
         count: 1,
       });
     }
+
+    this.toggleCartDialog();
   }
 
   render() {
-    const { count, testimonials, openDialog, openSoldOutDialog } = this.state;
+    const { AVOCANO_PURCHASE_MODE } = getConfig();
+    const {
+      count,
+      testimonials,
+      openDialog,
+      openCartDialog,
+      openSoldOutDialog,
+    } = this.state;
+
     const {
       name,
       price,
@@ -166,13 +186,21 @@ export class ProductItem extends LitElement {
                   <div class="discountPrice">$${discount_price}</div>
                 </div>`}
             <div class="inventory">${`Only ${count} left!`}</div>
-            <a
-              href="#"
-              class="buyButton"
-              label="Buy"
-              @click="${this.buyProduct}"
-              >Buy</a
-            >
+            ${AVOCANO_PURCHASE_MODE === 'cart'
+              ? html`<a
+                  href="#"
+                  class="buyButton"
+                  label="Add to Cart"
+                  @click="${this.addToCart}"
+                  >Add to Cart</a
+                >`
+              : html`<a
+                  href="#"
+                  class="buyButton"
+                  label="Buy"
+                  @click="${this.buyProduct}"
+                  >Buy</a
+                >`}
           </div>
         </div>
         <div class="productDescription">${description}</div>
@@ -206,6 +234,31 @@ export class ProductItem extends LitElement {
               : html`<p>No testimonials ... yet</p>`}
           </div>
         </div>
+        ${openCartDialog
+          ? html`
+              <mwc-dialog open>
+                <div class="dialogWrapper">
+                  <div>
+                    <h2>Wonderful news!</h2>
+                    <div>"${name}" has been added to your cart.</div>
+                    <img
+                      class="productimage"
+                      alt="product logo"
+                      src=${image}
+                      style="height: 210px; width: auto;"
+                      loading="lazy"
+                      onerror=${`this.src='${noimage}';`}
+                    />
+                  </div>
+                </div>
+                <mwc-button
+                  label="Close"
+                  slot="primaryAction"
+                  @click="${this.toggleCartDialog}"
+                ></mwc-button>
+              </mwc-dialog>
+            `
+          : ''}
         ${openDialog
           ? html`
               <mwc-dialog open>

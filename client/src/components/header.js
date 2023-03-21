@@ -15,6 +15,7 @@
 import { LitElement, html } from 'lit';
 import { getConfig } from '../utils/config.js';
 import styles from './styles/header.js';
+
 import './link.js';
 
 export class Header extends LitElement {
