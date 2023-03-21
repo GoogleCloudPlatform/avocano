@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.1.0...v1.1.1) (2023-03-21)
+
+
+### Bug Fixes
+
+* syntax ([#111](https://github.com/GoogleCloudPlatform/avocano/issues/111)) ([67f798c](https://github.com/GoogleCloudPlatform/avocano/commit/67f798cb93d4f90186942a6c3b66dc4ba126157c))
+
 ## [1.1.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.0.0...v1.1.0) (2023-03-21)
 
 
