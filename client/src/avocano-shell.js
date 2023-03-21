@@ -15,6 +15,7 @@
 import { LitElement, html } from 'lit';
 import { router } from 'lit-element-router';
 import { getSiteConfig } from './utils/fetch.js';
+import { getConfig } from './utils/config.js';
 import routes from './utils/routes.js';
 import styles from './styles/shell.js';
 
@@ -88,6 +89,7 @@ export class AvocanoShell extends router(LitElement) {
 
   render() {
     const { config } = this.state;
+    const { AVOCANO_PURCHASE_MODE } = getConfig();
 
     /* Dynamically pull fonts we require */
     if (window.WebFont) {
@@ -97,6 +99,7 @@ export class AvocanoShell extends router(LitElement) {
         },
       });
     }
+
     return html`
       <app-header .headerTitle=${config.site_name}></app-header>
       <app-main active-route=${this.route}>
@@ -115,9 +118,10 @@ export class AvocanoShell extends router(LitElement) {
         <div class="route" route="contact">
           <app-contact></app-contact>
         </div>
-        <div class="route" route="checkout">
+        ${AVOCANO_PURCHASE_MODE === 'cart' &&
+        html`<div class="route" route="checkout">
           <app-checkout></app-checkout>
-        </div>
+        </div>`}
         <div class="route" route="not-found">
           <app-not-found></app-not-found>
         </div>

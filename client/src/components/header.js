@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
+import { getConfig } from '../utils/config.js';
 import styles from './styles/header.js';
 import './link.js';
 
@@ -29,6 +30,8 @@ export class Header extends LitElement {
 
   render() {
     document.title = this.headerTitle;
+    const { AVOCANO_PURCHASE_MODE } = getConfig();
+
     return html`
       <div class="header">
         <h1><a href="/">${this.headerTitle || 'Simulatum'}</a></h1>
@@ -36,7 +39,9 @@ export class Header extends LitElement {
           <app-link href="/products">Products</app-link>
           <app-link href="/shipping">Shipping</app-link>
           <app-link href="/contact">Contact</app-link>
-          <app-link href="/checkout">Checkout</app-link>
+          ${AVOCANO_PURCHASE_MODE === 'cart'
+            ? html`<app-link href="/checkout">Checkout</app-link>`
+            : ``}
         </div>
       </div>
     `;

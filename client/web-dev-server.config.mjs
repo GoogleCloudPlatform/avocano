@@ -37,7 +37,9 @@ export default {
     replace({
       include: ['src/utils/config.js'],
       preventAssignment: false,
-      __api_url__: (process.env.API_URL || 'http://localhost:8000') + '/api',
+      '__api_url__': (process.env.API_URL || 'http://localhost:8000') + '/api',
+      '__client_id__': process.env.CLIENT_ID,
+      '__purchase_mode__': process.env.AVOCANO_PURCHASE_MODE || 'cart',
     }),
   ],
-};
+}

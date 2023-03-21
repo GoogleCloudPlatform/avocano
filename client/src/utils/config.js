@@ -14,4 +14,5 @@
 
 export const getConfig = () => ({
   API_URL: '__api_url__',
+  AVOCANO_PURCHASE_MODE: '__purchase_mode__',
 });
