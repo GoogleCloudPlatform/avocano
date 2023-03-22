@@ -29,6 +29,17 @@ const styles = css`
     color: var(--color-secondary);
   }
 
+  .productItem {
+    display: flex;
+    align-item: flex-start;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    background: white;
+    cursor: pointer;
+  }
+
   .productItemContainer {
     display: flex;
     align-items: center;

@@ -29,6 +29,8 @@ import './pages/shipping.js';
 import './pages/not-found.js';
 
 // Components
+import './components/product-item.js';
+import './components/product-preview.js';
 import './components/header.js';
 import './components/footer.js';
 import './components/main.js';

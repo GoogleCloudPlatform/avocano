@@ -38,12 +38,12 @@ async function clear() {
   return (await dbPromise).clear(storeName);
 }
 
-async function keys() {
-  return (await dbPromise).getAllKeys(storeName);
+async function all() {
+  return (await dbPromise).getAll(storeName);
 }
 
 async function deleteDB() {
   return await deleteDB(dbName);
 }
 
-export default { get, set, del, clear, keys, deleteDB };
+export default { get, set, del, clear, all, deleteDB };

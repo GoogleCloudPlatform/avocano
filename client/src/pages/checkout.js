@@ -14,7 +14,10 @@
 
 import { LitElement, html } from 'lit';
 //import { fulfillCheckout } from '../utils/fetch.js';
+import cache from '../utils/cache.js';
 import styles from './styles/checkout.js';
+
+const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
 
 export class Checkout extends LitElement {
   static get styles() {
@@ -23,12 +26,71 @@ export class Checkout extends LitElement {
 
   constructor() {
     super();
+
+    this.state = {
+      status: 'loading',
+      cart: [],
+    };
+  }
+
+  async firstUpdated() {
+    let cart = await cache.all();
+
+    if (this.state.status === 'loading') {
+      this.state = {
+        status: 'loaded',
+        cart,
+      };
+
+      this.requestUpdate();
+    }
+  }
+
+  async clearCart(event) {
+    if (event) {
+      event.preventDefault();
+    }
+
+    await cache.clear();
+    location.reload();
   }
 
   render() {
+    const { cart } = this.state;
+
     return html`
-      <div class="checkoutBase">
-        <div>Checkout</div>
+      <div class="checkoutContainer">
+        <h1>Checkout</h1>
+        <div class="checkoutWrapper">
+          <div class="panel">
+            <h2>Cart</h2>
+            ${cart.length
+              ? cart.map(
+                  item =>
+                    html`<app-product-preview
+                      .productItem=${item}
+                    ></app-product-preview>`
+                )
+              : html`<p>No items in cart</p>`}
+            ${cart.length &&
+            html`<mwc-button
+              label="Clear Cart"
+              slot="primaryAction"
+              @click="${this.clearCart}"
+            ></mwc-button>`}
+          </div>
+          <div class="panel">
+            <h2>Delivery</h2>
+            <label for="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              pattern=".+@globex.com"
+              size="30"
+              required
+            />
+          </div>
+        </div>
       </div>
     `;
   }

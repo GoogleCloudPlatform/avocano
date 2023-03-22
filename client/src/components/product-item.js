@@ -128,14 +128,12 @@ export class ProductItem extends LitElement {
 
     if (result?.count) {
       cache.set(productItem.name, {
-        name: productItem.name,
-        id: productItem.id,
+        ...productItem,
         count: result.count + 1,
       });
     } else {
       cache.set(productItem.name, {
-        name: productItem.name,
-        id: productItem.id,
+        ...productItem,
         count: 1,
       });
     }

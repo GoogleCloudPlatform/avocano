@@ -15,11 +15,28 @@
 import { css } from 'lit';
 
 const styles = css`
-  .checkoutBase {
+  .checkoutContainer {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     text-align: center;
+  }
+
+  .checkoutWrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
   }
 `;
 
