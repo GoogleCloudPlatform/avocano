@@ -100,13 +100,16 @@ class ActiveSiteConfigViewSet(viewsets.ViewSet):
         serializer = SiteConfigSerializer(active)
         return Response(serializer.data)
 
-
 @require_http_methods(["POST"])
 def checkout(request):
     serializer = CartSerializer(data=json.loads(request.body))
 
     if not serializer.is_valid():
-        return JsonResponse(serializer.errors, status=status.HTTP_403_FORBIDDEN)
+        status_code = 400
+        if "payment" in serializer.errors:
+            status_code = 501
+        return JsonResponse(serializer.errors, status=status_code)
+
 
     cart = serializer.validated_data
 
