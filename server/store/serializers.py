@@ -95,7 +95,8 @@ class CartItemSerializer(serializers.Serializer):
 
         requested = data["countRequested"]
         if product.inventory_count < requested:
-            raise serializers.ValidationError(f"Insufficient product to fulfil request")
+            data["countFulfilled"] = product.inventory_count
+            raise serializers.ValidationError(detail={"status": "insufficient_product", "items": data})
         return data
 
 
