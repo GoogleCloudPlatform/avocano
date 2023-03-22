@@ -50,9 +50,13 @@ export class Checkout extends LitElement {
     if (event) {
       event.preventDefault();
     }
-
     await cache.clear();
     location.reload();
+  }
+
+  onSubmit(form) {
+    const formData = new FormData(form || {});
+    //formData.get('type');
   }
 
   render() {
@@ -64,31 +68,27 @@ export class Checkout extends LitElement {
         <div class="checkoutWrapper">
           <div class="panel">
             <h2>Cart</h2>
+            <!-- Cart -->
             ${cart.length
               ? cart.map(
                   item =>
-                    html`<app-product-preview
-                      .productItem=${item}
-                    ></app-product-preview>`
+                    html`<app-cart-item .productItem=${item}></app-cart-item>`
                 )
               : html`<p>No items in cart</p>`}
-            ${cart.length &&
-            html`<mwc-button
-              label="Clear Cart"
-              slot="primaryAction"
-              @click="${this.clearCart}"
-            ></mwc-button>`}
+
+            <!-- Clear Cart Button -->
+            ${cart.length
+              ? html`<mwc-button
+                  label="Clear Cart"
+                  slot="primaryAction"
+                  @click="${this.clearCart}"
+                ></mwc-button>`
+              : ''}
           </div>
           <div class="panel">
             <h2>Delivery</h2>
-            <label for="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              pattern=".+@globex.com"
-              size="30"
-              required
-            />
+            <div class="cartTotalWrapper"><b>Cart Total:</b>${'$100'}</div>
+            <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>
           </div>
         </div>
       </div>

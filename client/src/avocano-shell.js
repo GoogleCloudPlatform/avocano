@@ -29,14 +29,18 @@ import './pages/shipping.js';
 import './pages/not-found.js';
 
 // Components
+import './components/checkout-form.js';
+import './components/cart-item.js';
 import './components/product-item.js';
-import './components/product-preview.js';
 import './components/header.js';
 import './components/footer.js';
 import './components/main.js';
 
 // Material design
 import '@material/mwc-button';
+import '@material/mwc-textarea';
+import '@material/mwc-select';
+import '@material/mwc-list';
 import '@material/mwc-dialog';
 
 export class AvocanoShell extends router(LitElement) {

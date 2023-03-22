@@ -13,11 +13,11 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import styles from './styles/product-preview.js';
+import styles from './styles/cart-item.js';
 
 const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
 
-export class ProductPreview extends LitElement {
+export class CartItem extends LitElement {
   static get properties() {
     return {
       productItem: { type: Object },
@@ -36,40 +36,33 @@ export class ProductPreview extends LitElement {
   }
 
   render() {
-    const {
-      name,
-      price,
-      discount_price,
-      discount_percent,
-      inventory_count,
-      image,
-      description,
-    } = this.productItem || {};
+    const { name, discount_price, count, image, description } =
+      this.productItem || {};
 
     return html`
       <div
-        class="productItem"
+        class="cartItem"
         @click=${() =>
-          productItem?.id && this.navigate(`/products/${productItem?.id}`)}
+          cartItem?.id && this.navigate(`/products/${cartItem?.id}`)}
       >
-        <div class="productimageWrapper">
+        <div class="cartImageWrapper">
           <img
             class="productimage"
             alt="Product Image"
             src=${image}
-            style="height: 210px; width: auto;"
+            style="height: 110px; width: auto;"
             loading="lazy"
             onerror=${`this.src='${noimage}';`}
           />
         </div>
-        <div class="productItemContent">
+        <div class="cartItemContent">
           <div class="itemTitle">${name}</div>
           <div>${`Price: $${discount_price}`}</div>
-          <div>${`Available: ${inventory_count}`}</div>
+          <div>${`Count: ${count}`}</div>
         </div>
       </div>
     `;
   }
 }
 
-customElements.define('app-product-preview', ProductPreview);
+customElements.define('app-cart-item', CartItem);

@@ -19,9 +19,10 @@ const styles = css`
     color: var(--color-secondary);
   }
 
-  .productItem {
+  .cartItem {
     display: flex;
     align-item: flex-start;
+    justify-content: space-around;
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -30,7 +31,7 @@ const styles = css`
     cursor: pointer;
   }
 
-  .productItemContainer {
+  .cartItemContainer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,9 +39,22 @@ const styles = css`
     margin: 20px;
   }
 
-  .productItemWrapper {
+  .cartItemWrapper {
     display: flex;
     flex-direction: row;
+  }
+
+  .cartImageWrapper {
+    display: flex;
+    margin: 15px 10px;
+  }
+
+  .cartItemContent {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

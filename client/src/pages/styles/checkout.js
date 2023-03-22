@@ -29,6 +29,10 @@ const styles = css`
     width: 100%;
   }
 
+  .cartTotalWrapper {
+    padding: 10px;
+  }
+
   .panel {
     display: flex;
     flex-direction: column;
