@@ -15,24 +15,30 @@
 # limitations under the License.
 
 
+import json
+
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
-
 from store.models import Product, SiteConfig, Testimonial, Transaction
 from store.serializers import (
     ProductSerializer,
     SiteConfigSerializer,
     TestimonialSerializer,
+    CartSerializer,
+    CheckoutSerializer,
 )
 
 
-class ProductPurchaseExeption(APIException):
+class ProductPurchaseException(APIException):
     status_code = 405
     default_detail = {
         "code": status_code,
@@ -44,7 +50,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    class ProductPurchaseExeption(APIException):
+    class ProductPurchaseException(APIException):
         status_code = 405
         default_detail = {
             "code": status_code,
@@ -61,7 +67,7 @@ class ProductViewSet(viewsets.ModelViewSet):
                 datetime=timezone.now(), product_id=product, unit_price=product.price
             )
         else:
-            raise ProductPurchaseExeption()
+            raise ProductPurchaseException()
 
         serializer = ProductSerializer(product)
         return Response(serializer.data)
@@ -93,3 +99,32 @@ class ActiveSiteConfigViewSet(viewsets.ViewSet):
         active = SiteConfig.objects.get(active=True)
         serializer = SiteConfigSerializer(active)
         return Response(serializer.data)
+
+
+@require_http_methods(["POST"])
+def checkout(request):
+    serializer = CartSerializer(data=json.loads(request.body))
+
+    if not serializer.is_valid():
+        return JsonResponse(serializer.errors, status=status.HTTP_403_FORBIDDEN)
+
+    cart = serializer.validated_data
+
+    items = []
+    for item in cart["items"]:
+        product = get_object_or_404(Product, id=item["id"])
+        count = item["countRequested"]
+
+        product.inventory_count -= count
+        product.save()
+        for _ in range(count):
+            Transaction.objects.create(
+                datetime=timezone.now(), product_id=product, unit_price=product.price
+            )
+        items.append(
+            {"id": product.id, "countRequested": count, "countFulfilled": count}
+        )
+
+    response = CheckoutSerializer(data={"status": "complete", "items": items})
+    response.is_valid()
+    return JsonResponse(response.data)

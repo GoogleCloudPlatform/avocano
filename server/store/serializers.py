@@ -65,3 +65,38 @@ class SiteConfigSerializer(serializers.ModelSerializer):
             "site_name_color",
             "base_font",
         ]
+
+    
+class CartPaymentSerializer(serializers.Serializer):
+    method = serializers.ChoiceField(choices=["collect"])
+
+
+class CartCustomerSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+class CartItemSerializer(serializers.Serializer):
+    def valid_product(value):
+        try:
+            _ = Product.objects.get(pk=value)
+        except Product.DoesNotExist:
+            raise serializers.ValidationError(f'Product {value} not found')
+
+    id = serializers.IntegerField(validators=[valid_product])
+    countRequested = serializers.IntegerField(required=True)
+    countFulfilled = serializers.IntegerField(required=False)
+
+    def validate(self, data):
+        product = Product.objects.get(pk=data["id"])
+        requested = data["countRequested"]
+        if product.inventory_count < requested:
+            raise serializers.ValidationError(f'Insufficient product to fulfil request')
+        return data
+
+class CartSerializer(serializers.Serializer):
+    customer = CartCustomerSerializer(required=True)
+    payment = CartPaymentSerializer(required=True)
+    items = CartItemSerializer(many=True)
+
+class CheckoutSerializer(serializers.Serializer):
+    items = CartItemSerializer(many=True)
+    status = serializers.CharField()
