@@ -15,6 +15,7 @@
 # limitations under the License.
 
 
+import logging
 import os
 
 import google.auth
@@ -72,11 +73,11 @@ def _service_name():
 
 def _service_url(project, region, service):
     try:
-        run_api = google_api("run", "v1")
+        run_api = google_api("run", "v2")
         fqname = f"projects/{project}/locations/{region}/services/{service}"
         service = run_api.projects().locations().services().get(name=fqname).execute()
-        return service["status"]["url"]
-    except GAPIHTTPError as e:
+        return service["uri"]
+    except (GAPIHTTPError, KeyError) as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
