@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.1.1...v1.2.0) (2023-03-23)
+
+
+### Features
+
+* Add startup and liveness checks ([#102](https://github.com/GoogleCloudPlatform/avocano/issues/102)) ([ff3287b](https://github.com/GoogleCloudPlatform/avocano/commit/ff3287b8c3ddc21fc3a627cd79a390bda22696dd))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @web/dev-server-rollup to ^0.4.0 ([#99](https://github.com/GoogleCloudPlatform/avocano/issues/99)) ([9e046b5](https://github.com/GoogleCloudPlatform/avocano/commit/9e046b51906e6d6d5ae5fa5e8f98a013a4b7eced))
+
 ## [1.1.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.1.0...v1.1.1) (2023-03-21)
 
 
