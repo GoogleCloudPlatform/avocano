@@ -19,34 +19,16 @@ const styles = css`
     --mdc-theme-primary: darkgray;
   }
 
-  .checkoutContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .checkoutWrapper {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .cartTotalWrapper {
+  .checkoutButton {
+    margin-top: 10px;
     padding: 10px;
-  }
-
-  .checkoutPanel {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid green;
-    border-radius: 5px;
-    padding: 20px;
-    margin: 10px;
-    width: 100%;
-    max-height: 350px;
-    overflow-y: scroll;
+    color: gray;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: var(--mdc-typography-font-family, Roboto, sans-serif);
+    border: 1px solid darkgray;
+    text-transform: uppercase;
+    font-size: 14px;
   }
 `;
 

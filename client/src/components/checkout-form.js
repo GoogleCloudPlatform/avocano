@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
+import styles from './styles/checkout-form.js';
 
 class CheckoutForm extends LitElement {
   static properties() {
@@ -21,35 +22,132 @@ class CheckoutForm extends LitElement {
     };
   }
 
+  static get styles() {
+    return styles;
+  }
+
   constructor() {
     super();
     this.onSubmit = () => {};
     this.submitForm = this.submitForm.bind(this);
+
+    this.state = {
+      openFormErrorDialog: false,
+      openSuccessDialog: false,
+      openErrorDialog: false,
+    };
   }
 
-  submitForm(event) {
+  toggleFormErrorDialog() {
+    this.state.openFormErrorDialog = !this.state.openFormErrorDialog;
+    this.requestUpdate();
+  }
+
+  toggleSuccessDialog() {
+    this.state.openSuccessDialog = !this.state.openSuccessDialog;
+    this.requestUpdate();
+  }
+
+  toggleErrorDialog() {
+    this.state.openErrorDialog = !this.state.openErrorDialog;
+    this.requestUpdate();
+  }
+
+  async submitForm(event) {
     event?.preventDefault();
-    this.onSubmit(this.shadowRoot.querySelector('form'));
+    const form = new FormData(this.shadowRoot.querySelector('form') || {});
+
+    if (this.isValidEmail(form.get('email'))) {
+      try {
+        let response = this.onSubmit(form);
+        this.toggleSuccessDialog();
+      } catch (error) {
+        this.toggleErrorDialog();
+      }
+    } else {
+      this.toggleFormErrorDialog();
+    }
+  }
+
+  isValidEmail(text) {
+    return /[^ @]*@[^ @]*/.test(text);
   }
 
   render() {
-    return html`<form @submit=${this.submitForm}>
-      <div class="formControls">
-        <mwc-textarea
-          outlined
-          name="email"
-          label="email"
-          helper="foo@bar.com"
-          rows="1"
-        ></mwc-textarea>
-        <mwc-select name="type" label="Payment Type">
-          <mwc-list-item></mwc-list-item>
-          <mwc-list-item selected value="credit">Credit</mwc-list-item>
-          <mwc-list-item value="collect">Collect</mwc-list-item>
-        </mwc-select>
-        <button type="submit" class="fillButton button">Purchase</button>
-      </div>
-    </form>`;
+    const { openFormErrorDialog, openSuccessDialog, openErrorDialog } =
+      this.state;
+
+    return html` <div>
+      <form @submit=${this.submitForm}>
+        <div class="formControls">
+          <mwc-textfield
+            outlined
+            required
+            autoValidate
+            name="email"
+            helper="foo@bar.com"
+            pattern="[^ @]*@[^ @]*"
+            placeholder="Enter your email"
+            validationMessage="Field is required"
+          ></mwc-textfield>
+          <mwc-select
+            name="type"
+            label="Payment Type"
+            required
+            validationMessage="Field is required"
+          >
+            <mwc-list-item></mwc-list-item>
+            <mwc-list-item selected value="credit">Credit</mwc-list-item>
+            <mwc-list-item value="collect">Collect</mwc-list-item>
+          </mwc-select>
+          <button type="submit" class="checkoutButton">Purchase</button>
+        </div>
+      </form>
+      ${openFormErrorDialog
+        ? html` <mwc-dialog open>
+            <div class="dialogWrapper">
+              Please correctly format email (i.e foo@bar.com).
+            </div>
+            <mwc-button
+              label="Close"
+              class="dialogButton"
+              slot="primaryAction"
+              @click="${this.toggleFormErrorDialog}"
+            ></mwc-button>
+          </mwc-dialog>`
+        : ''}
+      ${openErrorDialog
+        ? html` <mwc-dialog open>
+            <div class="dialogWrapper">
+              <div>
+                <h2>Oh no! 😭</h2>
+                <div>Unable to complete your checkout.</div>
+                <div>// TODO: populate with errors from server</div>
+              </div>
+            </div>
+            <mwc-button
+              label="Close"
+              class="dialogButton"
+              slot="primaryAction"
+              @click="${this.toggleErrorDialog}"
+            ></mwc-button>
+          </mwc-dialog>`
+        : ''}
+      ${openSuccessDialog
+        ? html` <mwc-dialog open>
+            <div class="dialogWrapper">
+              <h2>Hooray! ⭐</h2>
+              <div>We've successfully processed your purchase request.</div>
+            </div>
+            <mwc-button
+              label="Close"
+              class="dialogButton"
+              slot="primaryAction"
+              @click="${this.toggleSuccessDialog}"
+            ></mwc-button>
+          </mwc-dialog>`
+        : ''}
+    </div>`;
   }
 }
 

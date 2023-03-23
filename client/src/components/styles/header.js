@@ -68,6 +68,7 @@ const styles = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 12px;
     background: floralwhite;
     position: relative;
     bottom: 23px;
@@ -75,7 +76,8 @@ const styles = css`
     border: 2px solid black;
     border-radius: 20px;
     text-align: center;
-    height: 25px;
+    height: 22px;
+    width: 22px;
   }
 `;
 

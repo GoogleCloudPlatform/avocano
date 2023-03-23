@@ -47,6 +47,7 @@ export class ProductItem extends LitElement {
       productItem: {},
     };
 
+    // Set default for function
     this.updateParent = () => {};
   }
 

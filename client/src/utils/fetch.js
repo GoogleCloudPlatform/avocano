@@ -30,8 +30,8 @@ export const getProduct = async productId => {
         method: 'GET',
       });
       product = await response.json();
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   } else {
     console.error('Error: id required');
@@ -55,8 +55,8 @@ export const getActiveProduct = async () => {
       method: 'GET',
     });
     activeProduct = await response.json();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
   return activeProduct;
@@ -77,8 +77,8 @@ export const buyProduct = async (productId, callback) => {
         method: 'POST',
       });
       callback && callback();
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   } else {
     console.error('Error: id required');
@@ -104,8 +104,8 @@ export const getProductTestimonials = async productId => {
         }
       );
       testimonials = response.json();
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   } else {
     console.error('Error: id required');
@@ -129,11 +129,34 @@ export const getProductList = async () => {
       method: 'GET',
     });
     products = await response.json();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
   return products;
+};
+
+/**
+ * checkout()
+ *
+ * POST /checkout
+ */
+export const checkout = async cart => {
+  const { API_URL } = getConfig();
+
+  console.log(cart);
+  /*if (cart?.length) {
+    try {
+      await fetch(`${API_URL}/checkout`, {
+        method: 'POST',
+        body: JSON.stringify(cart)
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    console.error('Error: cart is required');
+  }*/
 };
 
 /**
@@ -151,8 +174,8 @@ export const getSiteConfig = async () => {
       method: 'GET',
     });
     config = await response.json();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
   return config;

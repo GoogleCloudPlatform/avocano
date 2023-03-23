@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-//import { fulfillCheckout } from '../utils/fetch.js';
+import { checkout } from '../utils/fetch.js';
 import styles from './styles/checkout.js';
 import cache from '../utils/cache.js';
 
@@ -36,17 +36,23 @@ export class Checkout extends LitElement {
 
   async clearCart(event) {
     event?.preventDefault();
-
     // Clears idb instance
     await cache.clear();
-
     // Updates parent shell level component
     this.updateParent();
   }
 
-  onSubmit(form) {
-    const formData = new FormData(form || {});
-    //formData.get('type');
+  async onSubmit(form) {
+    if (!form) {
+      return new Promise.reject('Requires form data');
+    }
+
+    let cart = {
+      paymentType: form.get('type'),
+      email: form.get('email'),
+    };
+
+    return await checkout(cart);
   }
 
   render() {
@@ -76,10 +82,13 @@ export class Checkout extends LitElement {
           <div class="checkoutPanel">
             <h2>Delivery</h2>
             <div class="cartTotalWrapper">
-              <b>Cart Total:</b>$${this.cart.reduce(
-                (acc, item) => (acc += item.count * item.discount_price),
-                0
-              )}
+              <span>
+                Cart Total:
+                $${this.cart.reduce(
+                  (acc, item) => (acc += item.count * item.discount_price),
+                  0
+                )}
+              </span>
             </div>
             <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>
           </div>

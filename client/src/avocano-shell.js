@@ -39,7 +39,7 @@ import './components/main.js';
 
 // Material design
 import '@material/mwc-button';
-import '@material/mwc-textarea';
+import '@material/mwc-textfield';
 import '@material/mwc-select';
 import '@material/mwc-list';
 import '@material/mwc-dialog';
@@ -89,6 +89,15 @@ export class AvocanoShell extends router(LitElement) {
 
     this.state.config = config;
 
+    /* Dynamically pull fonts we require */
+    if (window.WebFont) {
+      window.WebFont.load({
+        google: {
+          families: [config.base_font, config.site_name_font],
+        },
+      });
+    }
+
     this.requestUpdate();
   }
 
@@ -110,15 +119,6 @@ export class AvocanoShell extends router(LitElement) {
   render() {
     const { config } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
-
-    /* Dynamically pull fonts we require */
-    if (window.WebFont) {
-      window.WebFont.load({
-        google: {
-          families: [config.base_font, config.site_name_font],
-        },
-      });
-    }
 
     return html`
       <app-header
