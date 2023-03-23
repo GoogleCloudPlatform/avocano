@@ -36,6 +36,7 @@ export class ProductItem extends LitElement {
 
   constructor() {
     super();
+
     this.state = {
       count: 0,
       openDialog: false,
@@ -100,9 +101,7 @@ export class ProductItem extends LitElement {
    * user that this is in fact a fake product
    */
   async buyProduct(event) {
-    if (event) {
-      event.preventDefault();
-    }
+    event?.preventDefault();
 
     if (this.state.count > 0) {
       await buyProduct(this.productItem?.id, () => {
@@ -120,23 +119,16 @@ export class ProductItem extends LitElement {
    * Add fake product to cart
    */
   async addToCart(event) {
-    if (event) {
-      event.preventDefault();
-    }
+    event?.preventDefault();
+
     const { productItem } = this.state;
     const result = await cache.get(productItem.name);
+    let count = result?.count ? result.count + 1 : 1;
 
-    if (result?.count) {
-      cache.set(productItem.name, {
-        ...productItem,
-        count: result.count + 1,
-      });
-    } else {
-      cache.set(productItem.name, {
-        ...productItem,
-        count: 1,
-      });
-    }
+    cache.set(productItem.name, {
+      ...productItem,
+      count,
+    });
 
     this.toggleCartDialog();
   }

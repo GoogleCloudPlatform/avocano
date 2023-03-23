@@ -16,6 +16,7 @@ import { LitElement, html } from 'lit';
 import { router } from 'lit-element-router';
 import { getSiteConfig } from './utils/fetch.js';
 import { getConfig } from './utils/config.js';
+import cache from './utils/cache.js';
 import routes from './utils/routes.js';
 import styles from './styles/shell.js';
 
@@ -65,6 +66,7 @@ export class AvocanoShell extends router(LitElement) {
     this.params = {};
     this.state = {
       config: {},
+      cart: [],
     };
   }
 
@@ -93,6 +95,11 @@ export class AvocanoShell extends router(LitElement) {
     this.params = params;
   }
 
+  async update(changed) {
+    this.state.cart = await cache.all();
+    super.update(changed);
+  }
+
   render() {
     const { config } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
@@ -107,7 +114,10 @@ export class AvocanoShell extends router(LitElement) {
     }
 
     return html`
-      <app-header .headerTitle=${config.site_name}></app-header>
+      <app-header
+        .headerTitle=${config.site_name}
+        .cart=${this.state.cart}
+      ></app-header>
       <app-main active-route=${this.route}>
         <div class="route" route="home">
           <app-home></app-home>
@@ -126,7 +136,7 @@ export class AvocanoShell extends router(LitElement) {
         </div>
         ${AVOCANO_PURCHASE_MODE === 'cart' &&
         html`<div class="route" route="checkout">
-          <app-checkout></app-checkout>
+          <app-checkout .cart=${this.state.cart}></app-checkout>
         </div>`}
         <div class="route" route="not-found">
           <app-not-found></app-not-found>

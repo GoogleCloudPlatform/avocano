@@ -24,6 +24,7 @@ export class Header extends LitElement {
   static get properties() {
     return {
       headerTitle: { type: String },
+      cart: { type: Array },
     };
   }
 
@@ -56,7 +57,7 @@ export class Header extends LitElement {
                   src=${cartIcon}
                   loading="lazy"
                 />
-                <div class="shoppingCartTotal">1</div>
+                <div class="shoppingCartTotal">${this.cart.length}</div>
               </div>
             </app-link>
           </div>

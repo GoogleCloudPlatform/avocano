@@ -14,40 +14,23 @@
 
 import { LitElement, html } from 'lit';
 //import { fulfillCheckout } from '../utils/fetch.js';
-import cache from '../utils/cache.js';
 import styles from './styles/checkout.js';
+import cache from '../utils/cache.js';
 
 export class Checkout extends LitElement {
+  static get properties() {
+    return {
+      cart: { type: Array },
+    };
+  }
+
   static get styles() {
     return styles;
   }
 
-  constructor() {
-    super();
-
-    this.state = {
-      status: 'loading',
-      cart: [],
-    };
-  }
-
-  async firstUpdated() {
-    let cart = await cache.all();
-
-    if (this.state.status === 'loading') {
-      this.state = {
-        status: 'loaded',
-        cart,
-      };
-
-      this.requestUpdate();
-    }
-  }
-
   async clearCart(event) {
-    if (event) {
-      event.preventDefault();
-    }
+    event?.preventDefault();
+
     await cache.clear();
     location.reload();
   }
@@ -58,8 +41,6 @@ export class Checkout extends LitElement {
   }
 
   render() {
-    const { cart } = this.state;
-
     return html`
       <div class="checkoutContainer">
         <h1>Checkout</h1>
@@ -67,15 +48,15 @@ export class Checkout extends LitElement {
           <div class="checkoutPanel">
             <h2>Cart</h2>
             <!-- Cart -->
-            ${cart.length
-              ? cart.map(
+            ${this.cart.length
+              ? this.cart.map(
                   item =>
                     html`<app-cart-item .productItem=${item}></app-cart-item>`
                 )
               : html`<p>No items in cart</p>`}
 
             <!-- Clear Cart Button -->
-            ${cart.length
+            ${this.cart.length
               ? html`<mwc-button
                   label="Clear Cart"
                   slot="primaryAction"
