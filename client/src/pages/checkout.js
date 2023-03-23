@@ -75,7 +75,12 @@ export class Checkout extends LitElement {
           </div>
           <div class="checkoutPanel">
             <h2>Delivery</h2>
-            <div class="cartTotalWrapper"><b>Cart Total:</b>${'$100'}</div>
+            <div class="cartTotalWrapper">
+              <b>Cart Total:</b>$${this.cart.reduce(
+                (acc, item) => (acc += item.count * item.discount_price),
+                0
+              )}
+            </div>
             <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>
           </div>
         </div>
