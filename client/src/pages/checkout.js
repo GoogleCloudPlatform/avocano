@@ -21,6 +21,7 @@ export class Checkout extends LitElement {
   static get properties() {
     return {
       cart: { type: Array },
+      updateParent: { type: Function },
     };
   }
 
@@ -28,11 +29,19 @@ export class Checkout extends LitElement {
     return styles;
   }
 
+  constructor() {
+    super();
+    this.updateParent = () => {};
+  }
+
   async clearCart(event) {
     event?.preventDefault();
 
+    // Clears idb instance
     await cache.clear();
-    location.reload();
+
+    // Updates parent shell level component
+    this.updateParent();
   }
 
   onSubmit(form) {

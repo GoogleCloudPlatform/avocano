@@ -68,6 +68,8 @@ export class AvocanoShell extends router(LitElement) {
       config: {},
       cart: [],
     };
+
+    this.childUpdateRequest = this.childUpdateRequest.bind(this);
   }
 
   async connectedCallback() {
@@ -100,6 +102,11 @@ export class AvocanoShell extends router(LitElement) {
     super.update(changed);
   }
 
+  async childUpdateRequest() {
+    this.state.cart = await cache.all();
+    this.requestUpdate();
+  }
+
   render() {
     const { config } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
@@ -123,7 +130,10 @@ export class AvocanoShell extends router(LitElement) {
           <app-home></app-home>
         </div>
         <div class="route" route="product">
-          <app-product .productId=${parseInt(this.params.id, 10)}></app-product>
+          <app-product
+            .productId=${parseInt(this.params.id, 10)}
+            .updateParent=${this.childUpdateRequest}
+          ></app-product>
         </div>
         <div class="route" route="product-list">
           <app-product-list></app-product-list>
@@ -136,7 +146,10 @@ export class AvocanoShell extends router(LitElement) {
         </div>
         ${AVOCANO_PURCHASE_MODE === 'cart' &&
         html`<div class="route" route="checkout">
-          <app-checkout .cart=${this.state.cart}></app-checkout>
+          <app-checkout
+            .cart=${this.state.cart}
+            .updateParent=${this.childUpdateRequest}
+          ></app-checkout>
         </div>`}
         <div class="route" route="not-found">
           <app-not-found></app-not-found>

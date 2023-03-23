@@ -27,6 +27,7 @@ export class ProductItem extends LitElement {
     return {
       productId: { type: Number },
       productItem: { type: Object },
+      updateParent: { type: Function },
     };
   }
 
@@ -45,6 +46,8 @@ export class ProductItem extends LitElement {
       testimonials: [],
       productItem: {},
     };
+
+    this.updateParent = () => {};
   }
 
   /**
@@ -81,18 +84,30 @@ export class ProductItem extends LitElement {
   }
 
   /**
-   * Toggle the Add To Cart success dialog
-   */
-  toggleCartDialog() {
-    this.state.openCartDialog = !this.state.openCartDialog;
-    this.requestUpdate();
-  }
-
-  /**
    * Toggle the sold out product dialog
    */
   toggleSoldOutDialog() {
     this.state.openSoldOutDialog = !this.state.openSoldOutDialog;
+    this.requestUpdate();
+  }
+
+  /**
+   * Show the Add To Cart success dialog
+   */
+  showCartDialog() {
+    this.state.openCartDialog = true;
+    // Updates "this" component
+    this.requestUpdate();
+    // Updates parent shell level component
+    this.updateParent();
+  }
+
+  /**
+   * Close the Add To Cart success dialog
+   * and bubble up update cart total value
+   */
+  hideCartDialog() {
+    this.state.openCartDialog = false;
     this.requestUpdate();
   }
 
@@ -130,7 +145,7 @@ export class ProductItem extends LitElement {
       count,
     });
 
-    this.toggleCartDialog();
+    this.showCartDialog();
   }
 
   render() {
@@ -244,7 +259,7 @@ export class ProductItem extends LitElement {
                 <mwc-button
                   label="Close"
                   slot="primaryAction"
-                  @click="${this.toggleCartDialog}"
+                  @click="${this.hideCartDialog}"
                 ></mwc-button>
               </mwc-dialog>
             `

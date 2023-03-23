@@ -28,9 +28,7 @@ class CheckoutForm extends LitElement {
   }
 
   submitForm(event) {
-    if (event) {
-      event.preventDefault();
-    }
+    event?.preventDefault();
     this.onSubmit(this.shadowRoot.querySelector('form'));
   }
 
