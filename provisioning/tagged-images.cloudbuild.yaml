@@ -1,0 +1,49 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Build containers with tags. 
+# Must be used with Cloud Build's "Push new tag" Events
+
+steps:
+  - id: client build
+    name: "gcr.io/cloud-builders/docker"
+    dir: client
+    args:
+      - build
+      - --build-arg
+      - PROJECT_ID=$PROJECT_ID
+      - "-t"
+      - gcr.io/$PROJECT_ID/$_CLIENT_IMAGE_NAME:$TAG_NAME
+      - "."
+      
+  - id: server build
+    name: gcr.io/k8s-skaffold/pack
+    entrypoint: pack
+    args:
+      - build
+      - gcr.io/$PROJECT_ID/$_SERVER_IMAGE_NAME:$TAG_NAME
+      - --builder=gcr.io/buildpacks/builder:v1
+      - --path=server/
+
+
+images:
+  - gcr.io/$PROJECT_ID/$_CLIENT_IMAGE_NAME:$TAG_NAME
+  - gcr.io/$PROJECT_ID/$_SERVER_IMAGE_NAME:$TAG_NAME
+
+substitutions:
+  _CLIENT_IMAGE_NAME: client
+  _SERVER_IMAGE_NAME: server
+
+options:
+  dynamic_substitutions: true
