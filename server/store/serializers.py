@@ -77,13 +77,7 @@ class CartCustomerSerializer(serializers.Serializer):
 
 
 class CartItemSerializer(serializers.Serializer):
-    def valid_product(value):
-        try:
-            _ = Product.objects.get(pk=value)
-        except Product.DoesNotExist:
-            raise serializers.ValidationError(f"Product {value} not found")
-
-    id = serializers.IntegerField(validators=[valid_product])
+    id = serializers.IntegerField()
     countRequested = serializers.IntegerField(required=True)
     countFulfilled = serializers.IntegerField(required=False)
 
@@ -91,12 +85,16 @@ class CartItemSerializer(serializers.Serializer):
         try:
             product = Product.objects.get(pk=data["id"])
         except Product.DoesNotExist:
-            raise serializers.ValidationError(f'Product {data["id"]} not found')
+            raise serializers.ValidationError(detail={"status": "product_not_found"})
 
         requested = data["countRequested"]
         if product.inventory_count < requested:
             data["countFulfilled"] = product.inventory_count
-            raise serializers.ValidationError(detail={"status": "insufficient_product", "items": data})
+            raise serializers.ValidationError(
+                detail={"status": "insufficient_product", "items": data}
+            )
+        else:
+            data["countFulfilled"] = requested
         return data
 
 

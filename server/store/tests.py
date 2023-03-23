@@ -57,7 +57,7 @@ class AvocanoUnitTest(TransactionTestCase):
         self.assertEqual(response.status_code, 201)
 
 
-class CartErrorsTest(TransactionTestCase):
+class CartSerializerErrorsTest(TransactionTestCase):
     def test_bad_email(self):
         cart = CartSerializer(data={"customer": {"email": "foo"}})
         assert not cart.is_valid()
@@ -72,12 +72,14 @@ class CartErrorsTest(TransactionTestCase):
     def test_bad_credit(self):
         cart = CartSerializer(data={"payment": {"method": "credit"}})
         assert not cart.is_valid()
+
         assert "payment" in set(cart.errors)
         assert "method" in set(cart.errors["payment"])
 
 
 class CartRequestTest(TransactionTestCase):
-    def test_cart_product(self):
+
+    def setUp(self): 
         Product.objects.create(
             id=1,
             name="test",
@@ -87,6 +89,7 @@ class CartRequestTest(TransactionTestCase):
             active=False,
         )
 
+    def test_cart_product(self):
         data = {
             "payment": {"method": "collect"},
             "customer": {"email": "foo@bar.com"},
@@ -103,3 +106,66 @@ class CartRequestTest(TransactionTestCase):
         )
 
         self.assertEqual(response.status_code, 200)
+
+    def test_cart_invalid_payment(self):
+        data = {
+            "payment": {"method": "credit"},
+            "customer": {"email": "foo@bar.com"},
+            "items": [{"id": 1, "countRequested": 1}],
+        }
+
+        response = client.post(
+            reverse("checkout"),
+            json.dumps(data),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 501)
+        self.assertEqual(response.json()["status"], "invalid_choice")
+
+
+    def test_cart_invalid_email(self):
+        data = {
+            "payment": {"method": "collect"},
+            "customer": {"email": "foo"},
+            "items": [{"id": 1, "countRequested": 1}],
+        }
+
+        response = client.post(
+            reverse("checkout"),
+            json.dumps(data),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["status"], "validation_error")
+
+
+    def test_cart_insufficient_inventory(self):
+        data = {
+            "payment": {"method": "collect"},
+            "customer": {"email": "foo@bar.com"},
+            "items": [{"id": 1, "countRequested": 100}],
+        }
+
+        response = client.post(
+            reverse("checkout"),
+            json.dumps(data),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["status"], "insufficient_product")
+
+
+    def test_cart_invalid_inventory(self):
+        data = {
+            "payment": {"method": "collect"},
+            "customer": {"email": "foo@bar.com"},
+            "items": [{"id": 111111, "countRequested": 1}],
+        }
+
+        response = client.post(
+            reverse("checkout"),
+            json.dumps(data),
+            content_type="application/json",
+        )
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.json()["status"], "product_not_found")

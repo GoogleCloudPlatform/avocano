@@ -100,16 +100,31 @@ class ActiveSiteConfigViewSet(viewsets.ViewSet):
         serializer = SiteConfigSerializer(active)
         return Response(serializer.data)
 
+
 @require_http_methods(["POST"])
 def checkout(request):
+    def lift_item_status(data):
+        status = ""
+        for item in data["items"]:
+            if "status" in item:
+                for i in item["status"]:
+                    status = str(i)
+
+        return status
+
     serializer = CartSerializer(data=json.loads(request.body))
 
     if not serializer.is_valid():
         status_code = 400
+        status = "validation_error"
         if "payment" in serializer.errors:
             status_code = 501
-        return JsonResponse(serializer.errors, status=status_code)
-
+            status = serializer.errors["payment"]["method"][0].code
+        if "items" in serializer.errors:
+            status = lift_item_status(serializer.errors)
+        return JsonResponse(
+            {"status": status, "errors": serializer.errors}, status=status_code
+        )
 
     cart = serializer.validated_data
 
