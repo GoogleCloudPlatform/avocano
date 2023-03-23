@@ -25,18 +25,16 @@ const styles = css`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-left: 2em;
+    padding: 0 2em;
     background-color: var(--color-primary);
     background-image: linear-gradient(to right, white, var(--color-primary));
-  }
-
-  .route {
   }
 
   h1 {
     font-family: var(--site-name-font), cursive;
     font-size: 45px;
   }
+
   h1 > a {
     color: var(--site-name-color) !important;
   }
@@ -51,9 +49,33 @@ const styles = css`
 
   .navigationBar {
     display: flex;
-    align-items: flex-end;
-    width: inherit;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 20px;
+  }
+
+  .navigationPanel {
+    display: flex;
+  }
+
+  .shoppingCartIcon {
+    width: auto;
+    height: 30px;
+  }
+
+  .shoppingCartTotal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: floralwhite;
+    position: relative;
+    bottom: 23px;
+    left: 18px;
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    height: 25px;
   }
 `;
 

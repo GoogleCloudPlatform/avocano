@@ -17,8 +17,6 @@ import { LitElement, html } from 'lit';
 import cache from '../utils/cache.js';
 import styles from './styles/checkout.js';
 
-const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
-
 export class Checkout extends LitElement {
   static get styles() {
     return styles;
@@ -66,7 +64,7 @@ export class Checkout extends LitElement {
       <div class="checkoutContainer">
         <h1>Checkout</h1>
         <div class="checkoutWrapper">
-          <div class="panel">
+          <div class="checkoutPanel">
             <h2>Cart</h2>
             <!-- Cart -->
             ${cart.length
@@ -85,7 +83,7 @@ export class Checkout extends LitElement {
                 ></mwc-button>`
               : ''}
           </div>
-          <div class="panel">
+          <div class="checkoutPanel">
             <h2>Delivery</h2>
             <div class="cartTotalWrapper"><b>Cart Total:</b>${'$100'}</div>
             <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>

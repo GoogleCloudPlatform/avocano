@@ -32,7 +32,7 @@ export class NavLink extends navigator(LitElement) {
     this.href = '';
   }
 
-  onClick(event) {
+  async onClick(event) {
     event?.preventDefault();
     this.navigate(this.href);
   }

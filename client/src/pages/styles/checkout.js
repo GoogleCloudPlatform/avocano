@@ -33,7 +33,7 @@ const styles = css`
     padding: 10px;
   }
 
-  .panel {
+  .checkoutPanel {
     display: flex;
     flex-direction: column;
     border: 1px solid green;
@@ -41,6 +41,8 @@ const styles = css`
     padding: 20px;
     margin: 10px;
     width: 100%;
+    max-height: 350px;
+    overflow-y: scroll;
   }
 `;
 
