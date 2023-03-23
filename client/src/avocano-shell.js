@@ -144,13 +144,14 @@ export class AvocanoShell extends router(LitElement) {
         <div class="route" route="contact">
           <app-contact></app-contact>
         </div>
-        ${AVOCANO_PURCHASE_MODE === 'cart' &&
-        html`<div class="route" route="checkout">
-          <app-checkout
-            .cart=${this.state.cart}
-            .updateParent=${this.childUpdateRequest}
-          ></app-checkout>
-        </div>`}
+        ${AVOCANO_PURCHASE_MODE === 'cart'
+          ? html`<div class="route" route="checkout">
+              <app-checkout
+                .cart=${this.state.cart}
+                .updateParent=${this.childUpdateRequest}
+              ></app-checkout>
+            </div>`
+          : ''}
         <div class="route" route="not-found">
           <app-not-found></app-not-found>
         </div>

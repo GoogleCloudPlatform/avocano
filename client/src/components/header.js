@@ -49,19 +49,21 @@ export class Header extends LitElement {
               : ``}
           </div>
           <div class="navigationPanel">
-            <app-link href="/checkout">
-              <div class="shoppingCart">
-                <img
-                  class="shoppingCartIcon"
-                  alt="Shopping Cart"
-                  src=${cartIcon}
-                  loading="lazy"
-                />
-                <div class="shoppingCartTotal">
-                  ${this.cart.reduce((acc, item) => (acc += item.count), 0)}
-                </div>
-              </div>
-            </app-link>
+            ${AVOCANO_PURCHASE_MODE === 'cart'
+              ? html`<app-link href="/checkout">
+                  <div class="shoppingCart">
+                    <img
+                      class="shoppingCartIcon"
+                      alt="Shopping Cart"
+                      src=${cartIcon}
+                      loading="lazy"
+                    />
+                    <div class="shoppingCartTotal">
+                      ${this.cart.reduce((acc, item) => (acc += item.count), 0)}
+                    </div>
+                  </div>
+                </app-link>`
+              : ``}
           </div>
         </div>
       </div>
