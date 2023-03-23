@@ -16,7 +16,7 @@ output "usage" {
 
     API Login:
 
-    ${google_cloud_run_service.server.status[0].url}/admin
+    ${google_cloud_run_v2_service.server.uri}/admin
 
     Username: admin
     Password: ${google_secret_manager_secret_version.django_admin_password.secret_data}
