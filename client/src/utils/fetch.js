@@ -141,20 +141,20 @@ export const getProductList = async () => {
  *
  * POST /checkout
  */
-export const checkout = async cart => {
+export const checkout = async payload => {
   const { API_URL } = getConfig();
 
-  if (cart?.length) {
+  if (payload?.items?.length) {
     try {
-      await fetch(`${API_URL}/checkout`, {
+      return await fetch(`${API_URL}/checkout`, {
         method: 'POST',
-        body: JSON.stringify(cart),
+        body: JSON.stringify(payload),
       });
     } catch (error) {
-      console.error(error);
+      throw new Error(error);
     }
   } else {
-    console.error('Error: cart is required');
+    throw new Error('Error: Insufficient information to process checkout.');
   }
 };
 

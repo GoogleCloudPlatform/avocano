@@ -56,17 +56,21 @@ class CheckoutForm extends LitElement {
   async submitForm(event) {
     event?.preventDefault();
     const form = new FormData(this.shadowRoot.querySelector('form') || {});
+    let response;
 
     if (this.isValidEmail(form.get('email'))) {
       try {
-        let response = this.onSubmit(form);
-        this.toggleSuccessDialog();
+        response = await this.onSubmit(form);
       } catch (error) {
-        this.toggleErrorDialog();
+        this.toggleFormErrorDialog();
       }
     } else {
       this.toggleFormErrorDialog();
     }
+
+    response?.status?.ok
+      ? this.toggleSuccessDialog()
+      : this.toggleErrorDialog();
   }
 
   isValidEmail(text) {
@@ -122,7 +126,6 @@ class CheckoutForm extends LitElement {
               <div>
                 <h2>Oh no! 😭</h2>
                 <div>Unable to complete your checkout.</div>
-                <div>// TODO: populate with errors from server</div>
               </div>
             </div>
             <mwc-button

@@ -32,6 +32,7 @@ export class Checkout extends LitElement {
   constructor() {
     super();
     this.updateParent = () => {};
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   async clearCart(event) {
@@ -43,16 +44,21 @@ export class Checkout extends LitElement {
   }
 
   async onSubmit(form) {
-    if (!form) {
-      return new Promise.reject('Requires form data');
+    if (!(form || this.cart?.length)) {
+      throw new Error('Error: Insufficient information to process checkout.');
     }
 
-    let cart = {
-      paymentType: form.get('type'),
-      email: form.get('email'),
+    let payload = {
+      customer: {
+        email: form.get('email'),
+      },
+      payment: {
+        method: form.get('type'),
+      },
+      items: this.cart,
     };
 
-    return await checkout(cart);
+    return await checkout(payload);
   }
 
   render() {
