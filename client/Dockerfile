@@ -19,6 +19,9 @@
 ARG PROJECT_ID=YOURPROJECTID
 FROM gcr.io/$PROJECT_ID/firebase
 
+# Override with "--build-arg AVOCANO_PURCHASE_MODE=cart"
+ARG AVOCANO_PURCHASE_MODE=""
+
 COPY package*.json ./
 RUN npm i
 COPY . ./

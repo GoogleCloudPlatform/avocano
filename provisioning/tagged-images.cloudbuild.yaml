@@ -23,6 +23,8 @@ steps:
       - build
       - --build-arg
       - PROJECT_ID=$PROJECT_ID
+      - --build-arg
+      - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
       - "-t"
       - gcr.io/$PROJECT_ID/$_CLIENT_IMAGE_NAME:$TAG_NAME
       - "."
@@ -44,6 +46,7 @@ images:
 substitutions:
   _CLIENT_IMAGE_NAME: client
   _SERVER_IMAGE_NAME: server
+  _PURCHASE_MODE: ""
 
 options:
   dynamic_substitutions: true
