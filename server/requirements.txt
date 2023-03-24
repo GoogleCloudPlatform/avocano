@@ -21,3 +21,12 @@ pyyaml
 model_bakery
 Faker
 httpx
+
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-distro
+opentelemetry-exporter-gcp-trace
+opentelemetry-instrumentation
+opentelemetry-resourcedetector-gcp
+opentelemetry-semantic-conventions
+opentelemetry-instrumentation-django

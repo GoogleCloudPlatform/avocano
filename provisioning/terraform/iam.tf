@@ -42,3 +42,11 @@ resource "google_project_iam_binding" "server_introspection" {
   members    = [local.server_SA]
   depends_on = [google_service_account.server]
 }
+
+# Server needs to write to Cloud Trace
+resource "google_project_iam_binding" "server_traceagent" {
+  project    = var.project_id
+  role       = "roles/cloudtrace.agent"
+  members    = [local.server_SA]
+  depends_on = [google_service_account.server]
+}
