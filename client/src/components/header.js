@@ -58,9 +58,14 @@ export class Header extends LitElement {
                       src=${cartIcon}
                       loading="lazy"
                     />
-                    <div class="shoppingCartTotal">
-                      ${this.cart.reduce((acc, item) => (acc += item.count), 0)}
-                    </div>
+                    ${this.cart.length
+                      ? html`<div class="shoppingCartTotal">
+                          ${this.cart.reduce(
+                            (acc, item) => (acc += item.count),
+                            0
+                          )}
+                        </div>`
+                      : ``}
                   </div>
                 </app-link>`
               : ``}

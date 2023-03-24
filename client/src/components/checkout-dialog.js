@@ -13,54 +13,61 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
+import styles from './styles/checkout-dialog.js';
 
 class CheckoutDialog extends LitElement {
   static properties() {
     return {
       isSuccess: { type: Boolean },
-      message: { type: String },
+      message: { type: Object },
     };
   }
 
-  constructor() {
-    super();
-    this.state = {
-      isSuccess: false,
-      message: '',
-    };
-  }
-
-  firstUpdated() {
-    super.firstUpdated();
-    this.state = {
-      isSuccess: this.isSuccess,
-      message: this.message,
-    };
+  static get styles() {
+    return styles;
   }
 
   render() {
-    const { isSuccess, message } = this.state;
+    const { isSuccess, message } = this;
 
-    return html` <mwc-dialog open>
-      ${isSuccess
-        ? html` <div class="dialogWrapper">
-            <h2>Hooray! ⭐</h2>
-            <div>We've successfully processed your purchase request.</div>
-            <div>${message}</div>
-          </div>`
-        : html` <div class="dialogWrapper">
-            <h2>Oh no! 😭</h2>
-            <div>Unable to complete your checkout.</div>
-            <div>${message}</div>
-          </div>`}
-      <mwc-button
-        label="Close"
-        class="dialogButton"
-        slot="primaryAction"
-        @click="${this.onClose}"
-      >
-      </mwc-button>
-    </mwc-dialog>`;
+    return html`
+      <mwc-dialog open>
+        ${isSuccess
+          ? html` <div class="dialogWrapper">
+              <h2>Hooray! ⭐</h2>
+              <div>We've successfully processed your purchase request.</div>
+              <div>
+                (This is just a sample.)
+                <div>${message}</div>
+              </div>
+            </div>`
+          : html` <div class="dialogWrapper">
+              <h2>Oh no! 😭</h2>
+              <div>Unable to complete your checkout.</div>
+              <div class="errors">
+                <div>${message?.payment?.method}</div>
+                <div>
+                  ${message?.items?.map(product =>
+                    product.items || product.status
+                      ? html`<div>
+                          ${`Product Id: ${
+                            product.items?.id
+                          } (${product.status?.[0]?.split('_')?.join(' ')})`}
+                        </div>`
+                      : ``
+                  )}
+                </div>
+              </div>
+            </div>`}
+        <mwc-button
+          label="Close"
+          class="dialogButton"
+          slot="primaryAction"
+          @click="${this.onClose}"
+        >
+        </mwc-button>
+      </mwc-dialog>
+    `;
   }
 }
 

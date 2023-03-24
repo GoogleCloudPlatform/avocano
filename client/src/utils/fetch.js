@@ -143,19 +143,23 @@ export const getProductList = async () => {
  */
 export const checkout = async payload => {
   const { API_URL } = getConfig();
+  let checkoutStatus;
 
   if (payload?.items?.length) {
     try {
-      return await fetch(`${API_URL}/checkout`, {
+      let response = await fetch(`${API_URL}/checkout`, {
         method: 'POST',
         body: JSON.stringify(payload),
       });
+      checkoutStatus = await response.json();
     } catch (error) {
       throw new Error(error);
     }
   } else {
     throw new Error('Error: Insufficient information to process checkout.');
   }
+
+  return checkoutStatus;
 };
 
 /**

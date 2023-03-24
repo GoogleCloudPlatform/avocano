@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,22 +15,9 @@
 import { css } from 'lit';
 
 const styles = css`
-  mwc-button {
-    --mdc-theme-primary: darkgray;
-  }
-
-  .checkoutButton {
-    margin-top: 10px;
-    padding: 10px;
-    color: gray;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-    font-family: var(--mdc-typography-font-family, Roboto, sans-serif);
+  .errors {
+    color: red;
     text-transform: uppercase;
-    font-size: 14px;
-    background-color: var(--color-action);
-    color: var(--color-action-text);
   }
 `;
 

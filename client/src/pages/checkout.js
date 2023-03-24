@@ -35,11 +35,11 @@ export class Checkout extends LitElement {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.toggleSuccessDialog = this.toggleSuccessDialog.bind(this);
-    this.toggleErrorDialog = this.toggleErrorDialog.bind(this);
+    this.setCheckoutErrors = this.setCheckoutErrors.bind(this);
 
     this.state = {
       openSuccessDialog: false,
-      openErrorDialog: false,
+      checkoutErrors: undefined, // Stating this explicity for page
     };
   }
 
@@ -56,15 +56,21 @@ export class Checkout extends LitElement {
     this.requestUpdate();
   }
 
-  toggleErrorDialog() {
-    this.state.openErrorDialog = !this.state.openErrorDialog;
+  setCheckoutErrors(errors) {
+    this.state.checkoutErrors = errors;
     this.requestUpdate();
+
+    /*setTimeout(() => {
+      this.state.openErrorDialog = !this.state.openErrorDialog;
+      this.requestUpdate();
+    }, 0);*/
   }
 
   async onSubmit(form) {
     if (!(form || this.cart?.length)) {
       throw new Error('Error: Insufficient information to process checkout.');
     }
+
     let items = this.cart.reduce((acc, item) => {
       acc?.push({
         id: item.id,
@@ -84,15 +90,16 @@ export class Checkout extends LitElement {
     };
 
     const response = await checkout(payload);
-    if (response?.ok) {
-      this.toggleSuccessDialog();
+
+    if (response?.errors) {
+      this.setCheckoutErrors(response.errors);
     } else {
-      this.toggleErrorDialog();
+      this.toggleSuccessDialog();
     }
   }
 
   render() {
-    const { openSuccessDialog, openErrorDialog } = this.state;
+    const { openSuccessDialog, checkoutErrors } = this.state;
 
     return html`
       <div class="checkoutContainer">
@@ -100,34 +107,36 @@ export class Checkout extends LitElement {
         <div class="checkoutWrapper">
           <div class="checkoutPanel">
             <h2>Cart</h2>
-            <!-- Cart -->
-            ${this.cart.length
+            <!-- Render cart list -->
+            ${this.cart?.length
               ? this.cart.map(
                   item =>
                     html`<app-cart-item .productItem=${item}></app-cart-item>`
                 )
               : html`<p>No items in cart</p>`}
-
             <!-- Clear Cart Button -->
-            ${this.cart.length
+            ${this.cart?.length
               ? html`<mwc-button
                   label="Clear Cart"
-                  slot="primaryAction"
                   @click="${this.clearCart}"
                 ></mwc-button>`
               : ''}
           </div>
           <div class="checkoutPanel">
             <h2>Delivery</h2>
+            <!-- Cart price total -->
             <div class="cartTotalWrapper">
               <span>
                 Cart Total:
-                $${this.cart.reduce(
-                  (acc, item) => (acc += item.count * item.discount_price),
-                  0
-                )}
+                $${Number.parseFloat(
+                  this.cart?.reduce(
+                    (acc, item) => (acc += item.count * item.discount_price),
+                    0
+                  )
+                ).toFixed(2)}
               </span>
             </div>
+            <!-- Checkout Form -->
             <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>
           </div>
         </div>
@@ -137,10 +146,11 @@ export class Checkout extends LitElement {
               .onClose=${this.toggleSuccessDialog}
             ></app-checkout-dialog>`
           : ''}
-        ${openErrorDialog
+        ${checkoutErrors
           ? html`<app-checkout-dialog
               .isSuccess=${false}
-              .onClose=${this.toggleErrorDialog}
+              .message=${checkoutErrors}
+              .onClose=${() => this.setCheckoutErrors()}
             ></app-checkout-dialog>`
           : ''}
       </div>

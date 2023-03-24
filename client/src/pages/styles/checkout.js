@@ -29,6 +29,7 @@ const styles = css`
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    margin: 20px;
   }
 
   .checkoutWrapper {
