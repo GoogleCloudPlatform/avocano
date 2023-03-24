@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -32,7 +32,15 @@ export class Checkout extends LitElement {
   constructor() {
     super();
     this.updateParent = () => {};
+
     this.onSubmit = this.onSubmit.bind(this);
+    this.toggleSuccessDialog = this.toggleSuccessDialog.bind(this);
+    this.toggleErrorDialog = this.toggleErrorDialog.bind(this);
+
+    this.state = {
+      openSuccessDialog: false,
+      openErrorDialog: false,
+    };
   }
 
   async clearCart(event) {
@@ -41,6 +49,16 @@ export class Checkout extends LitElement {
     await cache.clear();
     // Updates parent shell level component
     this.updateParent();
+  }
+
+  toggleSuccessDialog() {
+    this.state.openSuccessDialog = !this.state.openSuccessDialog;
+    this.requestUpdate();
+  }
+
+  toggleErrorDialog() {
+    this.state.openErrorDialog = !this.state.openErrorDialog;
+    this.requestUpdate();
   }
 
   async onSubmit(form) {
@@ -65,10 +83,17 @@ export class Checkout extends LitElement {
       items,
     };
 
-    return await checkout(payload);
+    const response = await checkout(payload);
+    if (response?.ok) {
+      this.toggleSuccessDialog();
+    } else {
+      this.toggleErrorDialog();
+    }
   }
 
   render() {
+    const { openSuccessDialog, openErrorDialog } = this.state;
+
     return html`
       <div class="checkoutContainer">
         <h1 class="checkoutTitle">Checkout</h1>
@@ -106,6 +131,18 @@ export class Checkout extends LitElement {
             <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>
           </div>
         </div>
+        ${openSuccessDialog
+          ? html`<app-checkout-dialog
+              .isSuccess=${true}
+              .onClose=${this.toggleSuccessDialog}
+            ></app-checkout-dialog>`
+          : ''}
+        ${openErrorDialog
+          ? html`<app-checkout-dialog
+              .isSuccess=${false}
+              .onClose=${this.toggleErrorDialog}
+            ></app-checkout-dialog>`
+          : ''}
       </div>
     `;
   }

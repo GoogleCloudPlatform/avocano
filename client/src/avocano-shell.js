@@ -31,6 +31,7 @@ import './pages/not-found.js';
 
 // Components
 import './components/checkout-form.js';
+import './components/checkout-dialog.js';
 import './components/cart-item.js';
 import './components/product-item.js';
 import './components/header.js';

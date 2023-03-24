@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -33,8 +33,6 @@ class CheckoutForm extends LitElement {
 
     this.state = {
       openFormErrorDialog: false,
-      openSuccessDialog: false,
-      openErrorDialog: false,
     };
   }
 
@@ -43,35 +41,15 @@ class CheckoutForm extends LitElement {
     this.requestUpdate();
   }
 
-  toggleSuccessDialog() {
-    this.state.openSuccessDialog = !this.state.openSuccessDialog;
-    this.requestUpdate();
-  }
-
-  toggleErrorDialog() {
-    this.state.openErrorDialog = !this.state.openErrorDialog;
-    this.requestUpdate();
-  }
-
   async submitForm(event) {
     event?.preventDefault();
     const form = new FormData(this.shadowRoot.querySelector('form') || {});
-    let response;
 
-    if (this.isValidEmail(form.get('email'))) {
-      try {
-        response = await this.onSubmit(form);
-
-        // TODO: getting called to earlier, moving up to parent checkout page to handle success/error handling
-        response?.status?.ok
-          ? this.toggleSuccessDialog()
-          : this.toggleErrorDialog();
-      } catch (error) {
-        console.error(error);
-      }
-    } else {
+    if (!this.isValidEmail(form.get('email'))) {
       this.toggleFormErrorDialog();
     }
+
+    return await this.onSubmit(form);
   }
 
   isValidEmail(text) {
@@ -79,8 +57,7 @@ class CheckoutForm extends LitElement {
   }
 
   render() {
-    const { openFormErrorDialog, openSuccessDialog, openErrorDialog } =
-      this.state;
+    const { openFormErrorDialog } = this.state;
 
     return html` <div>
       <form @submit=${this.submitForm}>
@@ -101,7 +78,6 @@ class CheckoutForm extends LitElement {
             required
             validationMessage="Field is required"
           >
-            <mwc-list-item></mwc-list-item>
             <mwc-list-item selected value="credit">Credit</mwc-list-item>
             <mwc-list-item value="collect">Collect</mwc-list-item>
           </mwc-select>
@@ -109,7 +85,7 @@ class CheckoutForm extends LitElement {
         </div>
       </form>
       ${openFormErrorDialog
-        ? html` <mwc-dialog open>
+        ? html`<mwc-dialog open>
             <div class="dialogWrapper">
               Please correctly format email (i.e foo@bar.com).
             </div>
@@ -118,36 +94,6 @@ class CheckoutForm extends LitElement {
               class="dialogButton"
               slot="primaryAction"
               @click="${this.toggleFormErrorDialog}"
-            ></mwc-button>
-          </mwc-dialog>`
-        : ''}
-      ${openErrorDialog
-        ? html` <mwc-dialog open>
-            <div class="dialogWrapper">
-              <div>
-                <h2>Oh no! 😭</h2>
-                <div>Unable to complete your checkout.</div>
-              </div>
-            </div>
-            <mwc-button
-              label="Close"
-              class="dialogButton"
-              slot="primaryAction"
-              @click="${this.toggleErrorDialog}"
-            ></mwc-button>
-          </mwc-dialog>`
-        : ''}
-      ${openSuccessDialog
-        ? html` <mwc-dialog open>
-            <div class="dialogWrapper">
-              <h2>Hooray! ⭐</h2>
-              <div>We've successfully processed your purchase request.</div>
-            </div>
-            <mwc-button
-              label="Close"
-              class="dialogButton"
-              slot="primaryAction"
-              @click="${this.toggleSuccessDialog}"
             ></mwc-button>
           </mwc-dialog>`
         : ''}
