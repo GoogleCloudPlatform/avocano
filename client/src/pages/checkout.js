@@ -47,6 +47,13 @@ export class Checkout extends LitElement {
     if (!(form || this.cart?.length)) {
       throw new Error('Error: Insufficient information to process checkout.');
     }
+    let items = this.cart.reduce((acc, item) => {
+      acc?.push({
+        id: item.id,
+        countRequested: item.count,
+      });
+      return acc;
+    }, []);
 
     let payload = {
       customer: {
@@ -55,7 +62,7 @@ export class Checkout extends LitElement {
       payment: {
         method: form.get('type'),
       },
-      items: this.cart,
+      items,
     };
 
     return await checkout(payload);
