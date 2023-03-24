@@ -13,7 +13,6 @@
 // limitations under the License.
 
 import { getConfig } from '../utils/config.js';
-import Cookies from 'js-cookie';
 
 /**
  * getProduct()
