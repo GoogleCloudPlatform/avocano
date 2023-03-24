@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.2.0...v1.3.0) (2023-03-24)
+
+
+### Features
+
+* add OpenTelemetry tracing support ([#101](https://github.com/GoogleCloudPlatform/avocano/issues/101)) ([6da95ad](https://github.com/GoogleCloudPlatform/avocano/commit/6da95ad1e42849a90f6df18171ef6a2089df8264))
+
 ## [1.2.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.1.1...v1.2.0) (2023-03-23)
 
 
