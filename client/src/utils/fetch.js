@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import { getConfig } from '../utils/config.js';
+import Cookies from 'js-cookie';
 
 /**
  * getProduct()
@@ -143,12 +144,15 @@ export const getProductList = async () => {
  */
 export const checkout = async payload => {
   const { API_URL } = getConfig();
+  const csrftoken = Cookies.get('csrftoken');
 
   if (payload?.items?.length) {
     try {
       return await fetch(`${API_URL}/checkout`, {
         method: 'POST',
         body: JSON.stringify(payload),
+        //headers: {'X-CSRFToken': csrftoken},
+        //mode: 'same-origin'
       });
     } catch (error) {
       throw new Error(error);

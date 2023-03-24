@@ -62,7 +62,7 @@ class CheckoutForm extends LitElement {
       try {
         response = await this.onSubmit(form);
       } catch (error) {
-        this.toggleFormErrorDialog();
+        console.error(error);
       }
     } else {
       this.toggleFormErrorDialog();
