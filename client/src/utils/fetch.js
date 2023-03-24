@@ -144,19 +144,18 @@ export const getProductList = async () => {
 export const checkout = async cart => {
   const { API_URL } = getConfig();
 
-  console.log(cart);
-  /*if (cart?.length) {
+  if (cart?.length) {
     try {
       await fetch(`${API_URL}/checkout`, {
         method: 'POST',
-        body: JSON.stringify(cart)
+        body: JSON.stringify(cart),
       });
     } catch (error) {
       console.error(error);
     }
   } else {
     console.error('Error: cart is required');
-  }*/
+  }
 };
 
 /**

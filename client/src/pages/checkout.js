@@ -58,7 +58,7 @@ export class Checkout extends LitElement {
   render() {
     return html`
       <div class="checkoutContainer">
-        <h1>Checkout</h1>
+        <h1 class="checkoutTitle">Checkout</h1>
         <div class="checkoutWrapper">
           <div class="checkoutPanel">
             <h2>Cart</h2>

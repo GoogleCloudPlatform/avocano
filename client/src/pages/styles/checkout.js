@@ -19,6 +19,10 @@ const styles = css`
     --mdc-theme-primary: darkgray;
   }
 
+  h1.checkoutTitle {
+    color: var(--color-secondary);
+  }
+
   .checkoutContainer {
     display: flex;
     align-items: center;
