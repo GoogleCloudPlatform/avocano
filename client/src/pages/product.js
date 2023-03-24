@@ -37,6 +37,8 @@ export class Product extends LitElement {
       productItem: {},
     };
 
+    // Initial value for updateParent
+    // Trigger parent components update lifecycle
     this.updateParent = () => {};
   }
 

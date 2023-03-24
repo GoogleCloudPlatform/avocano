@@ -16,6 +16,7 @@ import { LitElement, html } from 'lit';
 import { checkout } from '../utils/fetch.js';
 import styles from './styles/checkout.js';
 import cache from '../utils/cache.js';
+import { getCartPayload } from '../helpers/checkout.js';
 
 export class Checkout extends LitElement {
   static get properties() {
@@ -31,7 +32,6 @@ export class Checkout extends LitElement {
 
   constructor() {
     super();
-    this.updateParent = () => {};
 
     this.onSubmit = this.onSubmit.bind(this);
     this.toggleSuccessDialog = this.toggleSuccessDialog.bind(this);
@@ -41,6 +41,10 @@ export class Checkout extends LitElement {
       openSuccessDialog: false,
       checkoutErrors: undefined, // Stating this explicity for page
     };
+
+    // Initial default for updateParent
+    // Trigger parent components update lifecycle
+    this.updateParent = () => {};
   }
 
   async clearCart(event) {
@@ -59,11 +63,6 @@ export class Checkout extends LitElement {
   setCheckoutErrors(errors) {
     this.state.checkoutErrors = errors;
     this.requestUpdate();
-
-    /*setTimeout(() => {
-      this.state.openErrorDialog = !this.state.openErrorDialog;
-      this.requestUpdate();
-    }, 0);*/
   }
 
   async onSubmit(form) {
@@ -71,14 +70,7 @@ export class Checkout extends LitElement {
       throw new Error('Error: Insufficient information to process checkout.');
     }
 
-    let items = this.cart.reduce((acc, item) => {
-      acc?.push({
-        id: item.id,
-        countRequested: item.count,
-      });
-      return acc;
-    }, []);
-
+    let items = getCartPayload(this.cart);
     let payload = {
       customer: {
         email: form.get('email'),
@@ -89,12 +81,15 @@ export class Checkout extends LitElement {
       items,
     };
 
-    const response = await checkout(payload);
-
-    if (response?.errors) {
-      this.setCheckoutErrors(response.errors);
-    } else {
-      this.toggleSuccessDialog();
+    // Only process when there are items in cart
+    if (items.length) {
+      const response = await checkout(payload);
+      if (response?.errors) {
+        this.setCheckoutErrors(response.errors);
+      } else {
+        this.clearCart();
+        this.toggleSuccessDialog();
+      }
     }
   }
 

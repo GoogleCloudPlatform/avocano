@@ -30,6 +30,7 @@ class CheckoutDialog extends LitElement {
   render() {
     const { isSuccess, message } = this;
 
+    console.log(message);
     return html`
       <mwc-dialog open>
         ${isSuccess

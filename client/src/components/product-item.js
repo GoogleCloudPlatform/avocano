@@ -47,7 +47,8 @@ export class ProductItem extends LitElement {
       productItem: {},
     };
 
-    // Set default for function
+    // Initial default for updateParent
+    // Trigger parent components update lifecycle
     this.updateParent = () => {};
   }
 
@@ -191,22 +192,26 @@ export class ProductItem extends LitElement {
               : html`<div class="price">
                   <div class="discountPrice">$${discount_price}</div>
                 </div>`}
-            <div class="inventory">${`Only ${count} left!`}</div>
-            ${AVOCANO_PURCHASE_MODE === 'cart'
-              ? html`<a
-                  href="#"
-                  class="buyButton"
-                  label="Add to Cart"
-                  @click="${this.addToCart}"
-                  >Add to Cart</a
-                >`
-              : html`<a
-                  href="#"
-                  class="buyButton"
-                  label="Buy"
-                  @click="${this.buyProduct}"
-                  >Buy</a
-                >`}
+            <div class="inventory">
+              ${count > 0 ? `Only ${count} left!` : `Sold Out!`}
+            </div>
+            ${count > 0
+              ? AVOCANO_PURCHASE_MODE === 'cart'
+                ? html`<a
+                    href="#"
+                    class="buyButton"
+                    label="Add to Cart"
+                    @click="${this.addToCart}"
+                    >Add to Cart</a
+                  >`
+                : html`<a
+                    href="#"
+                    class="buyButton"
+                    label="Buy"
+                    @click="${this.buyProduct}"
+                    >Buy</a
+                  >`
+              : ''}
           </div>
         </div>
         <div class="productDescription">${description}</div>
