@@ -61,16 +61,17 @@ class CheckoutForm extends LitElement {
     if (this.isValidEmail(form.get('email'))) {
       try {
         response = await this.onSubmit(form);
+
+        // TODO: getting called to earlier, moving up to parent checkout page to handle success/error handling
+        response?.status?.ok
+          ? this.toggleSuccessDialog()
+          : this.toggleErrorDialog();
       } catch (error) {
         console.error(error);
       }
     } else {
       this.toggleFormErrorDialog();
     }
-
-    response?.status?.ok
-      ? this.toggleSuccessDialog()
-      : this.toggleErrorDialog();
   }
 
   isValidEmail(text) {
