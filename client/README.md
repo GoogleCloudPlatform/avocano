@@ -9,7 +9,7 @@ This client app uses [Lit](https://lit.dev/) front-end and [open-wc](https://ope
 - **Framework:** ⚙️ [Lit](https://lit.dev/)
 - **Scaffolding:** 🏗️ [open-wc](https://open-wc.org/)
 - **Bundler:** 🖇️ [Rollup](https://rollupjs.org/)
-- **Hosting:** 🔥 [Firebase](https://firebase.corp.google.com/)
+- **Hosting:** 🔥 [Firebase](https://firebase.google.com/)
 
 ## Requirements
 
