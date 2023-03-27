@@ -16,6 +16,7 @@
 
 
 from django.urls import include, path
+from . import views
 from rest_framework.routers import DefaultRouter
 
 from store import views
@@ -39,5 +40,6 @@ router.register(
 
 urlpatterns = [
     path("", include(router.urls)),
+    path("checkout", views.checkout, name="checkout"),
     path("api-auth/", include("rest_framework.urls")),
 ]
