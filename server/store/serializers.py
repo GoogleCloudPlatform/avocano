@@ -15,8 +15,9 @@
 # limitations under the License.
 
 
-from rest_framework import serializers
-
+from rest_framework import serializers, status
+from rest_framework.exceptions import ValidationError, APIException
+from django.http import JsonResponse
 from store.models import Product, SiteConfig, Testimonial
 
 
@@ -65,3 +66,44 @@ class SiteConfigSerializer(serializers.ModelSerializer):
             "site_name_color",
             "base_font",
         ]
+
+
+class CartPaymentSerializer(serializers.Serializer):
+    method = serializers.ChoiceField(choices=["collect"])
+
+
+class CartCustomerSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class CartItemSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    countRequested = serializers.IntegerField(required=True)
+    countFulfilled = serializers.IntegerField(required=False)
+
+    def validate(self, data):
+        try:
+            product = Product.objects.get(pk=data["id"])
+        except Product.DoesNotExist:
+            raise serializers.ValidationError(detail={"status": "product_not_found"})
+
+        requested = data["countRequested"]
+        if product.inventory_count < requested:
+            data["countFulfilled"] = product.inventory_count
+            raise serializers.ValidationError(
+                detail={"status": "insufficient_product", "items": data}
+            )
+        else:
+            data["countFulfilled"] = requested
+        return data
+
+
+class CartSerializer(serializers.Serializer):
+    customer = CartCustomerSerializer(required=True)
+    payment = CartPaymentSerializer(required=True)
+    items = CartItemSerializer(many=True)
+
+
+class CheckoutSerializer(serializers.Serializer):
+    items = CartItemSerializer(many=True)
+    status = serializers.CharField()
