@@ -28,7 +28,6 @@ export const getProduct = async productId => {
     try {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: 'GET',
-        credentials: 'include',
       });
       product = await response.json();
     } catch (error) {
@@ -54,7 +53,6 @@ export const getActiveProduct = async () => {
   try {
     const response = await fetch(`${API_URL}/active/product/`, {
       method: 'GET',
-      credentials: 'include',
     });
     activeProduct = await response.json();
   } catch (error) {
@@ -77,7 +75,6 @@ export const buyProduct = async (productId, callback) => {
     try {
       await fetch(`${API_URL}/products/${productId}/purchase/`, {
         method: 'POST',
-        credentials: 'include',
       });
       callback && callback();
     } catch (error) {
@@ -104,7 +101,6 @@ export const getProductTestimonials = async productId => {
         `${API_URL}/testimonials/?product_id=${productId}`,
         {
           method: 'GET',
-          credentials: 'include',
         }
       );
       testimonials = response.json();
@@ -131,7 +127,6 @@ export const getProductList = async () => {
   try {
     const response = await fetch(`${API_URL}/products/`, {
       method: 'GET',
-      credentials: 'include',
     });
     products = await response.json();
   } catch (error) {
@@ -154,7 +149,6 @@ export const checkout = async payload => {
     try {
       let response = await fetch(`${API_URL}/checkout`, {
         method: 'POST',
-        credentials: 'include',
         body: JSON.stringify(payload),
       });
       checkoutStatus = await response.json();
@@ -181,7 +175,6 @@ export const getSiteConfig = async () => {
   try {
     const response = await fetch(`${API_URL}/active/site_config/`, {
       method: 'GET',
-      credentials: 'include',
     });
     config = await response.json();
   } catch (error) {

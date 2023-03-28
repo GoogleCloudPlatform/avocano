@@ -33,7 +33,7 @@ export class ProductList extends navigator(LitElement) {
     };
   }
 
-  async firstpdated(changed) {
+  async firstUpdated(changed) {
     super.firstUpdated(changed);
 
     let products = await getProductList();

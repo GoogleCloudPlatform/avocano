@@ -81,11 +81,18 @@ export class Checkout extends LitElement {
       items,
     };
 
+    let response;
+    let errors;
     // Only process when there are items in cart
     if (items.length) {
-      const response = await checkout(payload);
-      if (response?.errors) {
-        this.setCheckoutErrors(response.errors);
+      try {
+        response = await checkout(payload);
+      } catch(e) {
+        errors = e;
+      }
+
+      if (response?.errors || errors) {
+        this.setCheckoutErrors(response?.errors || errors);
       } else {
         this.clearCart();
         this.toggleSuccessDialog();

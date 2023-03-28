@@ -42,6 +42,7 @@ export default [
         include: ['src/utils/config.js'],
         preventAssignment: false,
         __api_url__: '/api', // set in firebase.json
+        __purchase_mode__: process.env.AVOCANO_PURCHASE_MODE,
       }),
       /** Enable using HTML as rollup entrypoint */
       html({

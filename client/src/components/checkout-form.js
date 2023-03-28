@@ -48,7 +48,6 @@ class CheckoutForm extends LitElement {
     if (!this.isValidEmail(form.get('email'))) {
       this.toggleFormErrorDialog();
     }
-
     return await this.onSubmit(form);
   }
 
