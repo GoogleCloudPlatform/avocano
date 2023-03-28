@@ -1,7 +1,7 @@
 {
   "extends": [
     "config:base",
-   ":disableDependencyDashboard"
+    ":disableDependencyDashboard"
   ],
   "rangeStrategy": "auto",
   "packageRules": [
@@ -15,6 +15,10 @@
         "enabled": true,
         "recreateClosed": true
       }
+    },
+    {
+      "groupName": "OpenTelemetry",
+      "matchPackagePrefixes": ["opentelemetry-"]
     }
   ]
 }
