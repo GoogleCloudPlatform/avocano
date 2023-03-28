@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import { getConfig } from '../utils/config.js';
+import Cookies from 'js-cookie';
 
 /**
  * getProduct()
@@ -154,15 +155,20 @@ export const checkout = async payload => {
     try {
       let response = await fetch(`${API_URL}/checkout`, {
         method: 'POST',
-        credentials: 'include',
+        headers: {
+          'X-CSRFToken': Cookies.get('csrftoken'),
+        },
         body: JSON.stringify(payload),
+        credentials: 'include',
       });
       checkoutStatus = await response.json();
     } catch (error) {
       console.error(error);
+      checkoutStatus = { errors: [error]};
     }
   } else {
     console.error('Insufficient information to process checkout.');
+    checkoutStatus = { errors: [{ message: 'Insufficient information to process checkout.'}]};
   }
 
   return checkoutStatus;

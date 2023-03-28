@@ -29,6 +29,7 @@ class CheckoutDialog extends LitElement {
 
   render() {
     const { isSuccess, message } = this;
+    const { payment, items, general} = message || {};
 
     return html`
       <mwc-dialog open>
@@ -55,7 +56,7 @@ class CheckoutDialog extends LitElement {
                           } (${product.status?.[0]?.split('_')?.join(' ')})`}
                         </div>`
                       : ``
-                  )}
+                  ) || message}
                 </div>
               </div>
             </div>`}
