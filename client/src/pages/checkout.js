@@ -37,7 +37,7 @@ export class Checkout extends LitElement {
       openSuccessDialog: false,
       checkoutErrors: undefined, // Stating this explicity for page
     };
-    
+
     // Bind "this" component to functions
     this.onSubmit = this.onSubmit.bind(this);
     this.toggleSuccessDialog = this.toggleSuccessDialog.bind(this);
@@ -135,7 +135,7 @@ export class Checkout extends LitElement {
                   this.cart?.reduce(
                     (acc, item) => (acc += item.count * item.discount_price),
                     0
-                  )
+                  ) || 0
                 ).toFixed(2)}
               </span>
             </div>

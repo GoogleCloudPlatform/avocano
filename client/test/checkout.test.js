@@ -33,56 +33,104 @@ describe('Checkout', () => {
     expect(titleElement).to.exist;
     expect(titleElement.textContent).to.equal('Checkout');
   });
- 
+
   describe('renders cart panel: ', () => {
-    let element;
-    let cartStub;
-    let getCartPayloadStub;
-    
+    let parentElement;
+
     beforeEach(async () => {
-      //getCartPayloadStub = sinon.stub(helpers, 'getCartPayload').returns([{ countRequested: 2, id: 2}]);
-      //cartStub = sinon.stub(element, 'cart').returns([{ countRequested: 2, id: 2}]);
-      element = (await fixture(html`<app-checkout></app-checkout>`)).shadowRoot.querySelector('.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child');
+      parentElement = await fixture(html`<app-checkout></app-checkout>`);
     });
-    
-    it('empty state correctly', () => {
-      const titleElement = element.querySelector('h2');
+
+    it('renders title element correctly', () => {
+      const childElement = parentElement.shadowRoot.querySelector(
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child'
+      );
+
+      const titleElement = childElement.querySelector('h2');
       expect(titleElement).to.exist;
       expect(titleElement.textContent).to.equal('Cart');
-   
-      const emptyListElement = element.querySelector('p');
+    });
+
+    it('empty state correctly', () => {
+      const childElement = parentElement.shadowRoot.querySelector(
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child'
+      );
+
+      const emptyListElement = childElement.querySelector('p');
       expect(emptyListElement).to.exist;
       expect(emptyListElement.textContent).to.equal('No items in cart');
-      
-      const clearBtnElement = element.querySelector('mwc-button');
+
+      const clearBtnElement = childElement.querySelector('mwc-button');
       expect(clearBtnElement).to.not.exist;
     });
-    
-    it('stocked state correctly', () => {
-      const titleElement = element.querySelector('h2');
-      expect(titleElement).to.exist;
-      expect(titleElement.textContent).to.equal('Cart');
 
-      const listElement = element.querySelector('app-cart-item');
+    it('stocked state correctly', async () => {
+      // Stub out cart
+      const mockCart = [
+        { name: 'hello', count: 2, id: 2 },
+        { name: 'world', count: 3, id: 1 },
+      ];
+      const cartStub = sinon.stub(parentElement, 'cart').value(mockCart);
+      const clearStub = sinon.stub(parentElement, 'clearCart');
+
+      // Updates checkout page with stubs
+      parentElement.requestUpdate();
+      await parentElement.updateComplete;
+
+      const childElement = parentElement.shadowRoot.querySelector(
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child'
+      );
+
+      const listElement = childElement.querySelector('app-cart-item');
       expect(listElement).to.exist;
       expect(listElement.textContent).to.equal('');
-      
-      const clearBtnElement = element.querySelector('mwc-button');
+
+      const clearBtnElement = childElement.querySelector('mwc-button');
       expect(clearBtnElement).to.exist;
+      clearBtnElement.click();
+      expect(clearStub).to.have.callCount(1);
     });
   });
-  
+
   describe('renders delivery panel: ', () => {
-    let element;
-    
+    let parentElement;
+
     beforeEach(async () => {
-      element = (await fixture(html`<app-checkout></app-checkout>`)).shadowRoot.querySelector('.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child');
+      parentElement = await fixture(html`<app-checkout></app-checkout>`);
     });
-    
-    it('checkout form correctly', () => {
-      const titleElement = element.querySelector('h2');
+
+    it('title element correctly', () => {
+      const childElement = parentElement.shadowRoot.querySelector(
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child'
+      );
+
+      const titleElement = childElement.querySelector('h2');
       expect(titleElement).to.exist;
       expect(titleElement.textContent).to.equal('Delivery');
+    });
+
+    it('form element correctly', async () => {
+      // Stub out cart
+      const mockCart = [
+        { count: 1, id: 2, discount_price: 1 },
+        { count: 1, id: 1, discount_price: 1 },
+      ];
+      const cartStub = sinon.stub(parentElement, 'cart').value(mockCart);
+
+      // Updates checkout page with stubs
+      parentElement.requestUpdate();
+      await parentElement.updateComplete;
+
+      const childElement = parentElement.shadowRoot.querySelector(
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child'
+      );
+
+      const cartTotalElement = childElement.querySelector('.cartTotalWrapper');
+      expect(cartTotalElement.textContent).to.contains('Cart Total:');
+      expect(cartTotalElement.textContent).to.contains('2.00');
+
+      const formElement = childElement.querySelector('app-checkout-form');
+      expect(formElement).to.exist;
     });
   });
 });
