@@ -31,7 +31,7 @@ class CheckoutForm extends LitElement {
     this.state = {
       openFormErrorDialog: false,
     };
-    
+
     // Bind "this" component to functions
     this.onSubmit = () => {};
     this.submitForm = this.submitForm.bind(this);
