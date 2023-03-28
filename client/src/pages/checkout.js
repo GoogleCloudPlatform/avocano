@@ -87,7 +87,7 @@ export class Checkout extends LitElement {
     if (items.length) {
       try {
         response = await checkout(payload);
-      } catch(e) {
+      } catch (e) {
         errors = e;
       }
 
