@@ -33,14 +33,15 @@ export class Checkout extends LitElement {
   constructor() {
     super();
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.toggleSuccessDialog = this.toggleSuccessDialog.bind(this);
-    this.setCheckoutErrors = this.setCheckoutErrors.bind(this);
-
     this.state = {
       openSuccessDialog: false,
       checkoutErrors: undefined, // Stating this explicity for page
     };
+    
+    // Bind "this" component to functions
+    this.onSubmit = this.onSubmit.bind(this);
+    this.toggleSuccessDialog = this.toggleSuccessDialog.bind(this);
+    this.setCheckoutErrors = this.setCheckoutErrors.bind(this);
 
     // Initial default for updateParent
     // Trigger parent components update lifecycle

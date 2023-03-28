@@ -23,3 +23,5 @@ export const getCartPayload = cart => {
 
   return result || [];
 };
+
+export default { getCartPayload };
