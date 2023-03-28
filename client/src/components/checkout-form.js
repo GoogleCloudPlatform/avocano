@@ -28,12 +28,13 @@ class CheckoutForm extends LitElement {
 
   constructor() {
     super();
-    this.onSubmit = () => {};
-    this.submitForm = this.submitForm.bind(this);
-
     this.state = {
       openFormErrorDialog: false,
     };
+    
+    // Bind "this" component to functions
+    this.onSubmit = () => {};
+    this.submitForm = this.submitForm.bind(this);
   }
 
   toggleFormErrorDialog() {

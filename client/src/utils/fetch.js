@@ -159,10 +159,10 @@ export const checkout = async payload => {
       });
       checkoutStatus = await response.json();
     } catch (error) {
-      throw new Error(error);
+      console.error(error);
     }
   } else {
-    throw new Error('Error: Insufficient information to process checkout.');
+    console.error('Insufficient information to process checkout.');
   }
 
   return checkoutStatus;

@@ -14,7 +14,6 @@
 
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
-import helpers from '../src/helpers/checkout.js';
 import sinon from 'sinon';
 
 import '../src/pages/checkout.js';
