@@ -32,6 +32,12 @@ const styles = css`
     background-color: var(--color-action);
     color: var(--color-action-text);
   }
+
+  .checkoutButton:disabled {
+    background-color: lightgray;
+    color: darkgray;
+    border-color: lightgray;
+  }
 `;
 
 export default styles;

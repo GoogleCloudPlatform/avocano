@@ -14,6 +14,7 @@
 
 import { LitElement, html } from 'lit';
 import { getConfig } from '../utils/config.js';
+import { getCartItemTotal } from '../helpers/checkout.js';
 import styles from './styles/header.js';
 import './link.js';
 
@@ -59,12 +60,7 @@ export class Header extends LitElement {
                       loading="lazy"
                     />
                     ${this.cart.length
-                      ? html`<div class="shoppingCartTotal">
-                          ${this.cart.reduce(
-                            (acc, item) => (acc += item.count),
-                            0
-                          )}
-                        </div>`
+                      ? html`<div class="shoppingCartTotal">${getCartItemTotal(this.cart)}</div>`
                       : ``}
                   </div>
                 </app-link>`
