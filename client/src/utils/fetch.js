@@ -15,7 +15,7 @@
 import { getConfig } from '../utils/config.js';
 
 const baseRequest = {
-  //credentials: 'include',
+  credentials: 'include',
 };
 
 /**
