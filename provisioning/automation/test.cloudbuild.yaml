@@ -3,6 +3,8 @@ steps:
   # Only run tests against the current project
   - id: "test"
     name: python:3.10-slim
+    env:
+      - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
     dir: provisioning
     script: |
         #!/bin/bash

@@ -17,6 +17,8 @@
 steps: 
   - id: client-deploy
     name: gcr.io/$PROJECT_ID/firebase
+    env:
+      - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
     dir: client
     entrypoint: "/bin/bash"
     args: 
@@ -26,3 +28,6 @@ steps:
         npm i
         npm run build
         firebase deploy --project $PROJECT_ID --only hosting
+
+substitutions:
+  _PURCHASE_MODE: ""

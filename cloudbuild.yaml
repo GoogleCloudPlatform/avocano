@@ -49,6 +49,7 @@ steps:
     dir: client
     env:
       - PROJECT_ID=$PROJECT_ID
+      - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
     script: |
       #!/bin/bash
 
@@ -79,3 +80,4 @@ timeout: 1800s
 substitutions:
   _REGION: us-central1
   _RUN_TESTS: ""
+  _PURCHASE_MODE: ""

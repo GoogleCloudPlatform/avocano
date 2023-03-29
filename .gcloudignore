@@ -1,7 +1,9 @@
 .git
 
-# provisioning/.gitignore
+# provisioning/terraform/.gitignore
 .terraform/
+.terraform.lock.hcl
+terraform.tfstate*
 
 # client/.gitignore
 .firebaserc
