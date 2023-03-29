@@ -63,6 +63,7 @@ steps:
     dir: provisioning
     env:
       - _RUN_TESTS=$_RUN_TESTS
+      - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
     script: |
       #!/bin/bash
       if [ -z $_RUN_TESTS ]; then
