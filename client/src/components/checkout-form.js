@@ -67,6 +67,7 @@ class CheckoutForm extends LitElement {
             required
             autoValidate
             name="email"
+            label="email_input"
             helper="foo@bar.com"
             pattern="[^ @]*@[^ @]*"
             placeholder="Enter your email"
