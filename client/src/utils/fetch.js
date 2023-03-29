@@ -152,7 +152,6 @@ export const checkout = async payload => {
   let checkoutStatus;
 
   if (payload?.items?.length) {
-
     const response = await fetch(`${API_URL}/csrf_token`, {
       credentials: 'include',
     });
@@ -172,11 +171,13 @@ export const checkout = async payload => {
       checkoutStatus = await response.json();
     } catch (error) {
       console.error(error);
-      checkoutStatus = { errors: [error]};
+      checkoutStatus = { errors: [error] };
     }
   } else {
     console.error('Insufficient information to process checkout.');
-    checkoutStatus = { errors: [{ message: 'Insufficient information to process checkout.'}]};
+    checkoutStatus = {
+      errors: [{ message: 'Insufficient information to process checkout.' }],
+    };
   }
 
   return checkoutStatus;
