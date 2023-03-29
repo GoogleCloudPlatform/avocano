@@ -33,7 +33,9 @@ export class ProductList extends navigator(LitElement) {
     };
   }
 
-  async firstUpdated() {
+  async firstUpdated(changed) {
+    super.firstUpdated(changed);
+
     let products = await getProductList();
 
     this.state = {
@@ -73,7 +75,11 @@ export class ProductList extends navigator(LitElement) {
                       <div class="productItemContent">
                         <div class="itemTitle">${item.name}</div>
                         <div>${`Price: $${item.discount_price}`}</div>
-                        <div>${`Available: ${item.inventory_count}`}</div>
+                        <div>
+                          ${item.inventory_count
+                            ? `Available: ${item.inventory_count}`
+                            : `Sold Out!`}
+                        </div>
                       </div>
                     </div>
                   `

@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,25 +15,14 @@
 import { css } from 'lit';
 
 const styles = css`
-  h1.productTitle {
+  .itemTitle {
     color: var(--color-secondary);
   }
 
-  .productBase {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  img.productimage {
-    height: auto;
-    width: 100%;
-  }
-
-  .productItem {
+  .cartItem {
     display: flex;
     align-item: flex-start;
+    justify-content: space-around;
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -42,47 +31,30 @@ const styles = css`
     cursor: pointer;
   }
 
-  .productimageWrapper {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    border-radius: 10px;
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    margin-right: 20px;
-  }
-
-  .productContainer {
+  .cartItemContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    text-align: center;
     margin: 20px;
   }
 
-  .productWrapper {
+  .cartItemWrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-content: center;
+    flex-direction: row;
+  }
+
+  .cartImageWrapper {
+    display: flex;
+    margin: 15px 10px;
+  }
+
+  .cartItemContent {
+    display: flex;
     width: 100%;
-    max-width: 500px;
-    margin: auto;
-  }
-
-  .productItemContent {
-    display: flex;
-    justify-content: space-evenly;
     flex-direction: column;
-    align-items: flex-start;
-    margin: 10px;
-  }
-
-  .itemTitle {
-    font-weight: 600;
-    margin-bottom: 15px;
+    align-items: center;
+    justify-content: center;
   }
 `;
 

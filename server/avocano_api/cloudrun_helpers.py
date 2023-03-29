@@ -83,3 +83,7 @@ def _service_url(project, region, service):
 
 def get_service_url():
     return _service_url(_project_id(), _region(), _service_name())
+
+
+def get_project_id():
+    return _project_id()
