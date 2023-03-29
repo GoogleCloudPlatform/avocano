@@ -1,6 +1,6 @@
 resource "google_storage_bucket" "media" {
   name          = "media-${var.project_id}"
-  location      = "us-central1"
+  location      = var.region
   storage_class = "REGIONAL"
 }
 
