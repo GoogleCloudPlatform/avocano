@@ -152,11 +152,19 @@ export const checkout = async payload => {
   let checkoutStatus;
 
   if (payload?.items?.length) {
+
+    const response = await fetch(`${API_URL}/csrf_token`, {
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+    const csrfToken = data.csrfToken;
+
     try {
-      let response = await fetch(`${API_URL}/checkout`, {
+      const response = await fetch(`${API_URL}/checkout`, {
         method: 'POST',
         headers: {
-          'X-CSRFToken': Cookies.get('csrftoken'),
+          'X-CSRFToken': csrfToken,
         },
         body: JSON.stringify(payload),
         credentials: 'include',
