@@ -41,5 +41,6 @@ router.register(
 urlpatterns = [
     path("", include(router.urls)),
     path("checkout", views.checkout, name="checkout"),
+    path("csrf_token", views.csrf_token, name="csrf_token"),
     path("api-auth/", include("rest_framework.urls")),
 ]

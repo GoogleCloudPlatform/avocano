@@ -14,6 +14,7 @@
 
 import { LitElement, html } from 'lit';
 import { getActiveProduct } from '../utils/fetch.js';
+import cache from '../utils/cache.js';
 import styles from './styles/home.js';
 import '../components/product-item.js';
 
@@ -29,6 +30,11 @@ export class Home extends LitElement {
 
   static get styles() {
     return styles;
+  }
+
+  async disconnectedCallback() {
+    super.disconnectedCallback();
+    cache.deleteDB();
   }
 
   async firstUpdated() {
