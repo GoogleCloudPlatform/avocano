@@ -42,18 +42,16 @@ class CheckoutForm extends LitElement {
     this.requestUpdate();
   }
 
+  isValidEmail(text) {
+    return /[^ @]*@[^ @]*/.test(text);
+  }
+
   async submitForm(event) {
     event?.preventDefault();
     const form = new FormData(this.shadowRoot.querySelector('form') || {});
+    const isValid = this.isValidEmail(form.get('email'));
 
-    if (!this.isValidEmail(form.get('email'))) {
-      this.toggleFormErrorDialog();
-    }
-    return await this.onSubmit(form);
-  }
-
-  isValidEmail(text) {
-    return /[^ @]*@[^ @]*/.test(text);
+    !isValid ? this.toggleFormErrorDialog() : await this.onSubmit(form);
   }
 
   render() {

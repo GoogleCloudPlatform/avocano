@@ -15,6 +15,10 @@
 import { getConfig } from '../utils/config.js';
 import Cookies from 'js-cookie';
 
+const baseRequest = {
+  credentials: 'include',
+};
+
 /**
  * getProduct()
  *
@@ -29,7 +33,7 @@ export const getProduct = async productId => {
     try {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: 'GET',
-        credentials: 'include',
+        ...baseRequest,
       });
       product = await response.json();
     } catch (error) {
@@ -55,7 +59,7 @@ export const getActiveProduct = async () => {
   try {
     const response = await fetch(`${API_URL}/active/product/`, {
       method: 'GET',
-      credentials: 'include',
+      ...baseRequest,
     });
     activeProduct = await response.json();
   } catch (error) {
@@ -78,7 +82,7 @@ export const buyProduct = async (productId, callback) => {
     try {
       await fetch(`${API_URL}/products/${productId}/purchase/`, {
         method: 'POST',
-        credentials: 'include',
+        ...baseRequest,
       });
       callback && callback();
     } catch (error) {
@@ -105,7 +109,7 @@ export const getProductTestimonials = async productId => {
         `${API_URL}/testimonials/?product_id=${productId}`,
         {
           method: 'GET',
-          credentials: 'include',
+          ...baseRequest,
         }
       );
       testimonials = response.json();
@@ -132,7 +136,7 @@ export const getProductList = async () => {
   try {
     const response = await fetch(`${API_URL}/products/`, {
       method: 'GET',
-      credentials: 'include',
+      ...baseRequest,
     });
     products = await response.json();
   } catch (error) {
@@ -143,6 +147,25 @@ export const getProductList = async () => {
 };
 
 /**
+ * getCSRFToken()
+ *
+ * GET /csrf_token
+ */
+const getCSRFToken = async () => {
+  const { API_URL } = getConfig();
+  let token;
+
+  try {
+    const response = await fetch(`${API_URL}/csrf_token`, baseRequest);
+    token = (await response.json())?.csrfToken;
+  } catch (error) {
+    throw new Error(error);
+  }
+
+  return token;
+};
+
+/**
  * checkout()
  *
  * POST /checkout
@@ -150,34 +173,31 @@ export const getProductList = async () => {
 export const checkout = async payload => {
   const { API_URL } = getConfig();
   let checkoutStatus;
+  let errors;
 
   if (payload?.items?.length) {
-    const response = await fetch(`${API_URL}/csrf_token`, {
-      credentials: 'include',
-    });
-
-    const data = await response.json();
-    const csrfToken = data.csrfToken;
-
     try {
+      // Retrieve csrf token from server
+      const csrfToken = await getCSRFToken();
+
+      // Submit form payload and pass back csrf token
       const response = await fetch(`${API_URL}/checkout`, {
         method: 'POST',
-        headers: {
-          'X-CSRFToken': csrfToken,
-        },
+        headers: { 'X-CSRFToken': csrfToken },
         body: JSON.stringify(payload),
-        credentials: 'include',
+        ...baseRequest,
       });
       checkoutStatus = await response.json();
     } catch (error) {
-      console.error(error);
-      checkoutStatus = { errors: [error] };
+      errors = [error];
     }
   } else {
-    console.error('Insufficient information to process checkout.');
-    checkoutStatus = {
-      errors: [{ message: 'Insufficient information to process checkout.' }],
-    };
+    errors = [{ message: 'Insufficient information to process checkout.' }];
+  }
+
+  if (errors) {
+    console.error(errors);
+    checkoutStatus = { errors };
   }
 
   return checkoutStatus;
@@ -196,7 +216,7 @@ export const getSiteConfig = async () => {
   try {
     const response = await fetch(`${API_URL}/active/site_config/`, {
       method: 'GET',
-      credentials: 'include',
+      ...baseRequest,
     });
     config = await response.json();
   } catch (error) {

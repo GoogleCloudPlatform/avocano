@@ -19,7 +19,7 @@ class CheckoutDialog extends LitElement {
   static properties() {
     return {
       isSuccess: { type: Boolean },
-      message: { type: Object },
+      errors: { type: Object },
     };
   }
 
@@ -28,8 +28,7 @@ class CheckoutDialog extends LitElement {
   }
 
   render() {
-    const { isSuccess, message } = this;
-    const { payment, items, general } = message || {};
+    const { isSuccess, errors } = this;
 
     return html`
       <mwc-dialog open>
@@ -37,26 +36,14 @@ class CheckoutDialog extends LitElement {
           ? html` <div class="dialogWrapper">
               <h2>Hooray! ⭐</h2>
               <div>We've successfully processed your purchase request.</div>
-              <div>
-                (This is just a sample.)
-                <div>${message}</div>
-              </div>
+              <div>(This is just a sample.)</div>
             </div>`
           : html` <div class="dialogWrapper">
               <h2>Oh no! 😭</h2>
               <div>Unable to complete your checkout.</div>
               <div class="errors">
-                <div>${message?.payment?.method}</div>
                 <div>
-                  ${message?.items?.map(product =>
-                    product.items || product.status
-                      ? html`<div>
-                          ${`Product Id: ${
-                            product.items?.id
-                          } (${product.status?.[0]?.split('_')?.join(' ')})`}
-                        </div>`
-                      : ``
-                  ) || message}
+                  ${errors?.map(e => html`<div>${e.message}</div>`) || ''}
                 </div>
               </div>
             </div>`}

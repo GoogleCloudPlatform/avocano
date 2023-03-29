@@ -16,7 +16,7 @@ import { LitElement, html } from 'lit';
 import { checkout } from '../utils/fetch.js';
 import styles from './styles/checkout.js';
 import cache from '../utils/cache.js';
-import { getCartPayload } from '../helpers/checkout.js';
+import { getCartTotal, getCartPayload } from '../helpers/checkout.js';
 
 export class Checkout extends LitElement {
   static get properties() {
@@ -32,7 +32,6 @@ export class Checkout extends LitElement {
 
   constructor() {
     super();
-
     this.state = {
       openSuccessDialog: false,
       checkoutErrors: undefined, // Stating this explicity for page
@@ -67,33 +66,21 @@ export class Checkout extends LitElement {
   }
 
   async onSubmit(form) {
-    if (!(form || this.cart?.length)) {
-      throw new Error('Error: Insufficient information to process checkout.');
-    }
+    // Only process when form is filled out and there are items in cart
+    if (form && this.cart?.length) {
+      let items = getCartPayload(this.cart);
+      let response = await checkout({
+        customer: {
+          email: form.get('email'),
+        },
+        payment: {
+          method: form.get('type'),
+        },
+        items,
+      });
 
-    let items = getCartPayload(this.cart);
-    let payload = {
-      customer: {
-        email: form.get('email'),
-      },
-      payment: {
-        method: form.get('type'),
-      },
-      items,
-    };
-
-    let response;
-    let errors;
-    // Only process when there are items in cart
-    if (items.length) {
-      try {
-        response = await checkout(payload);
-      } catch (e) {
-        errors = e;
-      }
-
-      if (response?.errors || errors) {
-        this.setCheckoutErrors(response?.errors || errors);
+      if (response?.errors) {
+        this.setCheckoutErrors(response.errors);
       } else {
         this.clearCart();
         this.toggleSuccessDialog();
@@ -129,15 +116,7 @@ export class Checkout extends LitElement {
             <h2>Delivery</h2>
             <!-- Cart price total -->
             <div class="cartTotalWrapper">
-              <span>
-                Cart Total:
-                $${Number.parseFloat(
-                  this.cart?.reduce(
-                    (acc, item) => (acc += item.count * item.discount_price),
-                    0
-                  ) || 0
-                ).toFixed(2)}
-              </span>
+              <span>Cart Total: $${getCartTotal(this.cart)}</span>
             </div>
             <!-- Checkout Form -->
             <app-checkout-form .onSubmit=${this.onSubmit}></app-checkout-form>
@@ -152,7 +131,7 @@ export class Checkout extends LitElement {
         ${checkoutErrors
           ? html`<app-checkout-dialog
               .isSuccess=${false}
-              .message=${checkoutErrors}
+              .errors=${checkoutErrors}
               .onClose=${() => this.setCheckoutErrors()}
             ></app-checkout-dialog>`
           : ''}

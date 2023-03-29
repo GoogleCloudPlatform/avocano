@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+export const getCartTotal = cart =>
+  Number.parseFloat(
+    cart?.reduce((acc, item) => (acc += item.count * item.discount_price), 0) ||
+      0
+  ).toFixed(2);
+
 export const getCartPayload = cart => {
   let result = cart?.reduce((acc, item) => {
     acc?.push({
@@ -24,4 +30,4 @@ export const getCartPayload = cart => {
   return result || [];
 };
 
-export default { getCartPayload };
+export default { getCartTotal, getCartPayload };
