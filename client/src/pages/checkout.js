@@ -61,7 +61,8 @@ export class Checkout extends LitElement {
   }
 
   setCheckoutErrors(errors) {
-    this.state.checkoutErrors = errors || [];
+    let checkoutErrors = Array.isArray(errors) ? errors : (errors?.payment?.method || errors?.items );
+    this.state.checkoutErrors = Array.isArray(checkoutErrors) ? checkoutErrors:  [];
     this.requestUpdate();
   }
 
@@ -132,7 +133,10 @@ export class Checkout extends LitElement {
           ? html`<app-checkout-dialog
               .isSuccess=${false}
               .errors=${checkoutErrors}
-              .onClose=${() => this.setCheckoutErrors()}
+              .onClose=${() => {
+                this.state.checkoutErrors = undefined;
+                this.requestUpdate();
+              }}
             ></app-checkout-dialog>`
           : ''}
       </div>

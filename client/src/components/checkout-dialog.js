@@ -18,6 +18,7 @@ import styles from './styles/checkout-dialog.js';
 class CheckoutDialog extends LitElement {
   static properties() {
     return {
+      onClose: { type: Function },
       isSuccess: { type: Boolean },
       errors: { type: Array },
     };
@@ -28,7 +29,7 @@ class CheckoutDialog extends LitElement {
   }
 
   render() {
-    const { isSuccess, errors } = this;
+    const { isSuccess, onClose, errors } = this;
 
     return html`
       <mwc-dialog open>
@@ -43,7 +44,7 @@ class CheckoutDialog extends LitElement {
               <div>Unable to complete your checkout.</div>
               <div class="errors">
                 <div>
-                  ${errors?.map(e => html`<div>${e.message}</div>`) || ''}
+                  ${errors?.map(e => html`<div>${e?.message || JSON.stringify(e)}</div>`) || ''}
                 </div>
               </div>
             </div>`}
@@ -51,7 +52,7 @@ class CheckoutDialog extends LitElement {
           label="Close"
           class="dialogButton"
           slot="primaryAction"
-          @click="${this.onClose}"
+          @click="${onClose}"
         >
         </mwc-button>
       </mwc-dialog>
