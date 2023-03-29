@@ -89,13 +89,6 @@ local_host = "http://localhost:8080"
 # Used for Cloud Shell dev with Web Preview
 cloudshell_host = "https://cloudshell.dev"
 
-# Firebase hosting has multiple default URLs, so add those as well.
-project_id = get_project_id()
-firebase_hosts = [
-    f"https://{project_id}.web.app",
-    f"https://{project_id}.firebaseapp.com",
-]
-
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 
 # If the Cloud Run service isn't defined, try dynamically retrieving it.
@@ -107,6 +100,14 @@ if not CLOUDRUN_SERVICE_URL:
 
 if CLOUDRUN_SERVICE_URL:
     ALLOWED_HOSTS = [urlparse(CLOUDRUN_SERVICE_URL).netloc, "127.0.0.1"]
+
+    # Firebase hosting has multiple default URLs, so add those as well.
+    project_id = get_project_id()
+    firebase_hosts = [
+        f"https://{project_id}.web.app",
+        f"https://{project_id}.firebaseapp.com",
+    ]
+
     CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
