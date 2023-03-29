@@ -1,7 +1,8 @@
 {
   "extends": [
     "config:base",
-   ":disableDependencyDashboard"
+    ":disableDependencyDashboard",
+    ":prConcurrentLimitNone"
   ],
   "rangeStrategy": "auto",
   "packageRules": [
@@ -15,6 +16,17 @@
         "enabled": true,
         "recreateClosed": true
       }
+    },
+    {
+      "description": "Playright dependencies must be kept in sync",
+      "groupName": "Playwright",
+      "matchPackageNames": ["playwright", "@playwright/test", "mcr.microsoft.com/playwright"] 
+    },
+    {
+      "description": "Python OpenTelemetry dependencies must be kept in sync",
+      "groupName": "OpenTelemetry",
+      "matchLanguages": ["python"],
+      "matchPackagePrefixes": ["opentelemetry-"]
     }
   ]
 }
