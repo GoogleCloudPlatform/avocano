@@ -61,7 +61,7 @@ export class Checkout extends LitElement {
   }
 
   setCheckoutErrors(errors) {
-    this.state.checkoutErrors = errors;
+    this.state.checkoutErrors = errors || [];
     this.requestUpdate();
   }
 

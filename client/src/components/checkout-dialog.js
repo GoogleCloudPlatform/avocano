@@ -19,7 +19,7 @@ class CheckoutDialog extends LitElement {
   static properties() {
     return {
       isSuccess: { type: Boolean },
-      errors: { type: Object },
+      errors: { type: Array },
     };
   }
 
