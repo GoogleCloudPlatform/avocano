@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,10 @@
 
 import { getConfig } from '../utils/config.js';
 
+const baseRequest = {
+  credentials: 'include',
+};
+
 /**
  * getProduct()
  *
@@ -28,11 +32,11 @@ export const getProduct = async productId => {
     try {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: 'GET',
-        credentials: 'include',
+        ...baseRequest,
       });
       product = await response.json();
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   } else {
     console.error('Error: id required');
@@ -54,11 +58,11 @@ export const getActiveProduct = async () => {
   try {
     const response = await fetch(`${API_URL}/active/product/`, {
       method: 'GET',
-      credentials: 'include',
+      ...baseRequest,
     });
     activeProduct = await response.json();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
   return activeProduct;
@@ -68,7 +72,7 @@ export const getActiveProduct = async () => {
  * buyProduct()
  *
  * Achieves "product" purchase as defined from django api
- * GET /products/{productId}/purchase/
+ * POST /products/{productId}/purchase/
  */
 export const buyProduct = async (productId, callback) => {
   const { API_URL } = getConfig();
@@ -77,11 +81,11 @@ export const buyProduct = async (productId, callback) => {
     try {
       await fetch(`${API_URL}/products/${productId}/purchase/`, {
         method: 'POST',
-        credentials: 'include',
+        ...baseRequest,
       });
       callback && callback();
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   } else {
     console.error('Error: id required');
@@ -104,12 +108,12 @@ export const getProductTestimonials = async productId => {
         `${API_URL}/testimonials/?product_id=${productId}`,
         {
           method: 'GET',
-          credentials: 'include',
+          ...baseRequest,
         }
       );
       testimonials = response.json();
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
   } else {
     console.error('Error: id required');
@@ -131,14 +135,71 @@ export const getProductList = async () => {
   try {
     const response = await fetch(`${API_URL}/products/`, {
       method: 'GET',
-      credentials: 'include',
+      ...baseRequest,
     });
     products = await response.json();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
   return products;
+};
+
+/**
+ * getCSRFToken()
+ *
+ * GET /csrf_token
+ */
+const getCSRFToken = async () => {
+  const { API_URL } = getConfig();
+  let token;
+
+  try {
+    const response = await fetch(`${API_URL}/csrf_token`, baseRequest);
+    token = (await response.json())?.csrfToken;
+  } catch (error) {
+    throw new Error(error);
+  }
+
+  return token;
+};
+
+/**
+ * checkout()
+ *
+ * POST /checkout
+ */
+export const checkout = async payload => {
+  const { API_URL } = getConfig();
+  let checkoutStatus;
+  let errors;
+
+  if (payload?.items?.length) {
+    try {
+      // Retrieve csrf token from server
+      const csrfToken = await getCSRFToken();
+
+      // Submit form payload and pass back csrf token
+      const response = await fetch(`${API_URL}/checkout`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrfToken },
+        body: JSON.stringify(payload),
+        ...baseRequest,
+      });
+      checkoutStatus = await response.json();
+    } catch (error) {
+      errors = [error];
+    }
+  } else {
+    errors = [{ message: 'Insufficient information to process checkout.' }];
+  }
+
+  if (errors) {
+    console.error(errors);
+    checkoutStatus = { errors };
+  }
+
+  return checkoutStatus;
 };
 
 /**
@@ -154,11 +215,11 @@ export const getSiteConfig = async () => {
   try {
     const response = await fetch(`${API_URL}/active/site_config/`, {
       method: 'GET',
-      credentials: 'include',
+      ...baseRequest,
     });
     config = await response.json();
-  } catch (e) {
-    console.error(e);
+  } catch (error) {
+    console.error(error);
   }
 
   return config;

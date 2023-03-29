@@ -20,7 +20,8 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.middleware.csrf import get_token
 from django.views.decorators.http import require_http_methods
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
@@ -101,6 +102,7 @@ class ActiveSiteConfigViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
 
+@ensure_csrf_cookie
 @require_http_methods(["POST"])
 def checkout(request):
     def lift_item_status(data):
@@ -146,3 +148,7 @@ def checkout(request):
     response = CheckoutSerializer(data={"status": "complete", "items": items})
     response.is_valid()
     return JsonResponse(response.data)
+
+
+def csrf_token(request):
+    return JsonResponse({"csrfToken": get_token(request)})

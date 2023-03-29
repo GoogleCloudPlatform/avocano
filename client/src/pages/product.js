@@ -22,6 +22,7 @@ export class Product extends LitElement {
   static get properties() {
     return {
       productId: { type: Number },
+      updateParent: { type: Function },
     };
   }
 
@@ -35,6 +36,10 @@ export class Product extends LitElement {
       status: 'loading',
       productItem: {},
     };
+
+    // Initial value for updateParent
+    // Trigger parent components update lifecycle
+    this.updateParent = () => {};
   }
 
   async updated() {
@@ -69,6 +74,7 @@ export class Product extends LitElement {
           : html`<app-product-item
               .productId="{this.productId}"
               .productItem=${productItem}
+              .updateParent=${this.updateParent}
             ></app-product-item>`}
       </div>
     `;

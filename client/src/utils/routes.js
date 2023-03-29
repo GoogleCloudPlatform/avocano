@@ -34,6 +34,10 @@ const routes = [
     pattern: 'contact',
   },
   {
+    name: 'checkout',
+    pattern: 'checkout',
+  },
+  {
     name: 'not-found',
     pattern: '*',
   },
