@@ -69,7 +69,7 @@ export const getActiveProduct = async () => {
  * buyProduct()
  *
  * Achieves "product" purchase as defined from django api
- * GET /products/{productId}/purchase/
+ * POST /products/{productId}/purchase/
  */
 export const buyProduct = async (productId, callback) => {
   const { API_URL } = getConfig();
