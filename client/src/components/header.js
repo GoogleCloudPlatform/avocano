@@ -60,7 +60,9 @@ export class Header extends LitElement {
                       loading="lazy"
                     />
                     ${this.cart.length
-                      ? html`<div class="shoppingCartTotal">${getCartItemTotal(this.cart)}</div>`
+                      ? html`<div class="shoppingCartTotal">
+                          ${getCartItemTotal(this.cart)}
+                        </div>`
                       : ``}
                   </div>
                 </app-link>`

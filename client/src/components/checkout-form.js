@@ -49,7 +49,7 @@ class CheckoutForm extends LitElement {
 
   async submitForm(event) {
     event?.preventDefault();
-   
+
     // Disable submit while form is being sent
     this.state.disableSubmit = true;
     this.requestUpdate();
@@ -57,7 +57,7 @@ class CheckoutForm extends LitElement {
     const form = new FormData(this.shadowRoot.querySelector('form') || {});
     const isValid = this.isValidEmail(form.get('email'));
 
-    if(!isValid) {
+    if (!isValid) {
       this.toggleFormErrorDialog();
     } else {
       await this.onSubmit(form);
@@ -95,7 +95,13 @@ class CheckoutForm extends LitElement {
             <mwc-list-item selected value="credit">Credit</mwc-list-item>
             <mwc-list-item value="collect">Collect</mwc-list-item>
           </mwc-select>
-          ${disableSubmit ? html`<button disabled type="submit" class="checkoutButton">Purchase</button>` : html`<button type="submit" class="checkoutButton">Purchase</button>`}
+          ${disableSubmit
+            ? html`<button disabled type="submit" class="checkoutButton">
+                Purchase
+              </button>`
+            : html`<button type="submit" class="checkoutButton">
+                Purchase
+              </button>`}
         </div>
       </form>
       ${openFormErrorDialog

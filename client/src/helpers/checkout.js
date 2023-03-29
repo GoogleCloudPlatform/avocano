@@ -18,7 +18,8 @@ export const getCartTotal = cart =>
       0
   ).toFixed(2);
 
-export const getCartItemTotal = cart => cart?.reduce((acc, item) => (acc += item.count), 0) || 0;
+export const getCartItemTotal = cart =>
+  cart?.reduce((acc, item) => (acc += item.count), 0) || 0;
 
 export const getCartPayload = cart => {
   let result = cart?.reduce((acc, item) => {
