@@ -12,3 +12,6 @@ steps:
         playwright install-deps  
         playwright install
         python -m pytest
+
+substitutions:
+  _PURCHASE_MODE: ""
