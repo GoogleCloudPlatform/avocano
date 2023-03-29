@@ -85,40 +85,43 @@ def test_cart_interaction(firebase_url, page: Page):
 
     original_inventory = get_inventory()
 
-    page.goto(firebase_url, wait_until="networkidle")
     expect(page).to_have_title(re.compile("Avocano"))
     page.get_by_role("link", name="Add to Cart").click()
 
     expect(page.locator(".dialogWrapper")).to_have_text(re.compile("Wonderful news!"))
     page.get_by_role("button", name="close").click()
-    expect(page.locator(".shoppingCart").to_have_text(re.compile("1")))
+    
+    page.goto(firebase_url, wait_until="networkidle")
+    expect(page.locator(".shoppingCart")).to_have_text(re.compile("1"))
 
     # Confirm inventory stock
     new_inventory = get_inventory()
     assert original_inventory == new_inventory
 
-    page.get_by_role("link", name="checkout")
+    page.get_by_role("link", name="checkout").click()
 
     page_elements = ["Checkout", "Cart", "Delivery"]
     for element in page_elements:
         expect(page.locator("body")).to_contain_text(element)
 
-    # Try checkoutq
-    page.get_by_label("Email").click()
-    page.get_by_label("Email").fill("foo@bar.com")
+    # Try checkout
+    page.get_by_label("Enter your email").fill("foo@bar.com")
 
     page.get_by_role("combobox", name="Payment Type*").click()
     page.get_by_role("option", name="Credit").click()
-
     page.get_by_role("button", name="purchase").click()
+
+    # Expect failure
     expect(page.locator(".dialogWrapper")).to_have_text(re.compile("Oh no!"))
     page.get_by_role("button", name="close").click()
 
     # Actually checkout
-    page.get_by_label("Payment Type").selectOption("Collect")
-    page.get_by_role("checkoutButton").click()
+    page.get_by_role("combobox", name="Payment Type*").click()
+    page.get_by_role("option", name="Collect").click()
+    page.get_by_role("button", name="purchase").click()
     expect(page.locator(".dialogWrapper")).to_have_text(re.compile("Hooray!"))
 
     # Confirm updated inventory
+    page.goto(firebase_url, wait_until="networkidle")
     new_inventory = get_inventory()
     assert original_inventory - 1 == new_inventory
