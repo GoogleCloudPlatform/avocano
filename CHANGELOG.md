@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.3.0...v1.4.0) (2023-03-29)
+
+
+### Features
+
+* checkout API ([#113](https://github.com/GoogleCloudPlatform/avocano/issues/113)) ([26af605](https://github.com/GoogleCloudPlatform/avocano/commit/26af6051877ffa1df1190523163cbee927a30580))
+* checkout page ([#122](https://github.com/GoogleCloudPlatform/avocano/issues/122)) ([d9e078e](https://github.com/GoogleCloudPlatform/avocano/commit/d9e078e31c4c990035c423a61ab8c3ffa6a6fad7))
+
+
+### Bug Fixes
+
+* add purchase mode flag ([#123](https://github.com/GoogleCloudPlatform/avocano/issues/123)) ([0634f12](https://github.com/GoogleCloudPlatform/avocano/commit/0634f12bb6a35f5ab6c87dcecd066032146faaf2))
+* ensure playwright gets test flag ([#134](https://github.com/GoogleCloudPlatform/avocano/issues/134)) ([e6080e7](https://github.com/GoogleCloudPlatform/avocano/commit/e6080e7b68c362b065e71b8c38e3580f41323d65))
+* ensure storage is deployed to selected region ([#132](https://github.com/GoogleCloudPlatform/avocano/issues/132)) ([c2dbdf5](https://github.com/GoogleCloudPlatform/avocano/commit/c2dbdf5190a3a67ea01ffe61a4afcaa2ce07d5cb))
+
 ## [1.3.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.2.0...v1.3.0) (2023-03-24)
 
 
