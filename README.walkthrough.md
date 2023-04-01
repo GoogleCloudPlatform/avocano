@@ -49,7 +49,7 @@ To use the script, you will need to set a number of values for the `gcloud` and 
 
 ## View application
 
-Your application is now available at [https://<walkthrough-project-id/>.web.app](https://<walkthrough-project-id/>.web.app).
+Your application is now available at [https://<walkthrough-project-id/>.web.app](https://<walkthrough-project-id/>.web.app) and [https://<walkthrough-project-id/>.firebaseapp.com](https://<walkthrough-project-id/>.firebaseapp.com).
 
 See what you can now do with this application by [reading the docs][project-docs].
 
