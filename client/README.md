@@ -41,7 +41,7 @@ npm run start
 This will show you the default version of the app, where you can "buy" certain
 available products.
 
-Open your browser to `localhost:8080` to explore more.
+Open your browser to `localhost:8081` to explore more.
 
 ### Client variants
 
@@ -72,3 +72,7 @@ It can also be deployed by building an image [`provisioning/client-image.cloudbu
 ### Deploy Avocart version
 
 Before executing the root `setup.sh` script to deploy your version of Avocart, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml) and [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml)
+
+ ## FAQs
+
+ 1. If you are not seeing your changes reflected, either manually remove your browser cache or open your browser in incognito mode.
