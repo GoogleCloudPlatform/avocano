@@ -87,7 +87,7 @@ TEMPLATES = [
 local_host = "http://localhost:8080"
 
 # Used for Cloud Shell dev with Web Preview
-cloudshell_host = "https://cloudshell.dev"
+cloudshell_host = "https://*.cloudshell.dev"
 
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 
