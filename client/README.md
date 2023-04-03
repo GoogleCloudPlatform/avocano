@@ -71,7 +71,7 @@ It can also be deployed by building an image [`provisioning/client-image.cloudbu
 
 ### Deploy Avocart version
 
-Before executing the root `setup.sh` script to deploy your version of Avocart, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml) and [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml)
+Before executing the root `setup.sh` script to deploy your version of Avocart, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml), [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml), and [`cloudbuild.yaml`](cloudbuild.yaml).
 
  ## FAQs
 
