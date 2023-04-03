@@ -25,7 +25,7 @@ export API_URL=https://api-HASH-REGION.a.run.app/
 export API_URL=http://localhost:8000
 ```
 
-### Install, build, and start client
+### Install, build, and start client locally
 
 In another tab, execute the following.
 
@@ -38,26 +38,37 @@ npm run build
 npm run start
 ```
 
-To run Avocart version of the client.
+This will show you the default version of the app, where you can "buy" certain
+available products.
+
+Open your browser to `localhost:8080` to explore more.
+
+### Client variants
+
+To display the "Avocart" version of the client.
 
 ```bash
 AVOCANO_PURCHASE_MODE=cart npm run start
 ```
 
-Open your browser to `localhost:8000`.
+This will allow you to see the cart feature option of Avocano where you will be able to add 
+product items into your "cart" and go through "checkout" process with your items.
+
 
 ## Test changes in `deploy-preview`
 
+If you'd like to review your branch changes in the `deploy-preview` staged environment before merging into the `main` branch, 
+follow the [`directions`](../docs/admin/testing-changes.md) provided.
 
 ## Deployment
+
+To deploy the default version of Avocano, either run through the root `setup.sh` script or click on the "Open in Cloud Shell" walkthrough in the [`README`](../README.md).
+Completing this process will provide you with a Firebase hosted site link. To explore more, check out the [`admin documentation`](../docs/admin).
 
 This code is deployed directly in Cloud Build steps, as seen in the root [`cloudbuild.yaml`](/cloudbuild.yaml), and [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml).
 
 It can also be deployed by building an image [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml), and running as a Cloud Run job, which can be customised by environment variables (see [`docker-deploy.yaml`](docker-deploy.sh))
 
-
 ### Deploy Avocart version
 
-Before executing the root `setup.sh` script, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml) and [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml)
-
-
+Before executing the root `setup.sh` script to deploy your version of Avocart, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml) and [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml)
