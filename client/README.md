@@ -27,7 +27,7 @@ export API_URL=http://localhost:8000
 
 ### Install, build, and start client locally
 
-In another tab, execute the following.
+Once you have the API server process running locally, in another terminal tab, execute the following:
 
 ```bash
 # Install app dependencies
@@ -71,7 +71,7 @@ It can also be deployed by building an image [`provisioning/client-image.cloudbu
 
 ### Deploy Avocart version
 
-Before executing the root `setup.sh` script to deploy your version of Avocart, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml), [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml), and [`cloudbuild.yaml`](cloudbuild.yaml).
+Before executing the root `setup.sh` script to deploy your version of Avocart, assign the `_PURCHASE_MODE` substitution with value `cart`in [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml), [`provisioning/client-image.cloudbuild.yaml`](/provisioning/client-image.cloudbuild.yaml), and [`cloudbuild.yaml`](../cloudbuild.yaml).
 
  ## FAQs
 
