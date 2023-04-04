@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.4.0...v1.4.1) (2023-04-04)
+
+
+### Bug Fixes
+
+* add conventional commit check ([#143](https://github.com/GoogleCloudPlatform/avocano/issues/143)) ([e74cdc0](https://github.com/GoogleCloudPlatform/avocano/commit/e74cdc0ab77dd447b17dc185de24bd5bd5fa8180))
+
 ## [1.4.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.3.0...v1.4.0) (2023-03-29)
 
 
