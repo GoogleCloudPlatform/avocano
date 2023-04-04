@@ -17,6 +17,8 @@ Requires node 10 & npm 6 or higher, and a running [api server](../server/README.
 
 ### Run API server
 
+To get the API server running, follow the steps documented for the api server and then make sure you set up the environment variable API_URL:
+
 ```
 # Deployed container
 export API_URL=https://api-HASH-REGION.a.run.app/
@@ -45,7 +47,13 @@ Open your browser to `localhost:8081` to explore more.
 
 ### Client variants
 
-To display the "Avocart" version of the client.
+The default variant of Avocano is an example implementation of a dynamic webapp that when you 
+click on Buy, explains that this is not a real product website.
+
+The "Avocart" version of Avocano extends the web app to show implementation of a shopping cart
+and checkout process, key requirements for ecommerce sites.
+
+To display the "Avocart" version of the client:
 
 ```bash
 AVOCANO_PURCHASE_MODE=cart npm run start
