@@ -70,7 +70,7 @@ follow the [`directions`](../docs/admin/testing-changes.md) provided.
 
 ## Deployment
 
-To deploy the default version of Avocano, either run through the root `setup.sh` script or click on the "Open in Cloud Shell" walkthrough in the [`README`](../README.md).
+To deploy the default version of Avocano, either run through the root `setup.sh` script or click on the "Open in Cloud Shell" [walkthrough](../README.walkthrough.md) in the root [`README`](../README.md).
 Completing this process will provide you with a Firebase hosted site link. To explore more, check out the [`admin documentation`](../docs/admin).
 
 This code is deployed directly in Cloud Build steps, as seen in the root [`cloudbuild.yaml`](/cloudbuild.yaml), and [`provisioning/client.cloudbuild.yaml`](/provisioning/client.cloudbuild.yaml).
