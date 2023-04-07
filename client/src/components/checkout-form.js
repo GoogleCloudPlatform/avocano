@@ -92,8 +92,8 @@ class CheckoutForm extends LitElement {
             required
             validationMessage="Field is required"
           >
-            <mwc-list-item selected value="credit">Credit</mwc-list-item>
-            <mwc-list-item value="collect">Collect</mwc-list-item>
+            <mwc-list-item selected value="collect">Collect</mwc-list-item>
+            <mwc-list-item value="credit">Credit</mwc-list-item>
           </mwc-select>
           ${disableSubmit
             ? html`<button disabled type="submit" class="checkoutButton">
