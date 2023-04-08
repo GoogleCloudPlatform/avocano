@@ -32,7 +32,7 @@ export class Loading extends LitElement {
           <div class="spinnerBorder">
             <div class="spinnerCore"></div>
           </div>
-          <h2 class="loadingTitle">Loading 🥑 ...</h2>
+          <h2 class="loadingTitle">Loading... 🥑</h2>
         </div>
       </div>
     `;
