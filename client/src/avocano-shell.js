@@ -130,7 +130,7 @@ export class AvocanoShell extends router(LitElement) {
 
     return loading
       ? html`<app-loading></app-loading>`
-      : html` <app-header
+      : html`<app-header
             .headerTitle=${config.site_name}
             .cart=${this.state.cart}
           ></app-header>

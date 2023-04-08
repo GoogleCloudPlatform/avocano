@@ -29,7 +29,6 @@ export class Loading extends LitElement {
     return html`
       <div class="loadingContainer">
         <div class="loadingWrapper">
-          <div class="spinner"></div>
           <div class="spinnerBorder">
             <div class="spinnerCore"></div>
           </div>
