@@ -68,6 +68,7 @@ export class AvocanoShell extends router(LitElement) {
     this.state = {
       config: {},
       cart: [],
+      loading: true,
     };
 
     this.childUpdateRequest = this.childUpdateRequest.bind(this);
@@ -77,6 +78,12 @@ export class AvocanoShell extends router(LitElement) {
     super.connectedCallback();
 
     const config = await getSiteConfig();
+
+    // Show loading animation only when
+    // site config is available
+    if (config) {
+      this.state.loading = false;
+    }
 
     // Set django site config properties as
     // global variables for our css to leverage
@@ -118,47 +125,47 @@ export class AvocanoShell extends router(LitElement) {
   }
 
   render() {
-    const { config } = this.state;
+    const { config, loading } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
-    return html`
-      <app-header
-        .headerTitle=${config.site_name}
-        .cart=${this.state.cart}
-      ></app-header>
-      <app-main active-route=${this.route}>
-        <div class="route" route="home">
-          <app-home></app-home>
-        </div>
-        <div class="route" route="product">
-          <app-product
-            .productId=${parseInt(this.params.id, 10)}
-            .updateParent=${this.childUpdateRequest}
-          ></app-product>
-        </div>
-        <div class="route" route="product-list">
-          <app-product-list></app-product-list>
-        </div>
-        <div class="route" route="shipping">
-          <app-shipping></app-shipping>
-        </div>
-        <div class="route" route="contact">
-          <app-contact></app-contact>
-        </div>
-        ${AVOCANO_PURCHASE_MODE === 'cart'
-          ? html`<div class="route" route="checkout">
-              <app-checkout
-                .cart=${this.state.cart}
+    return loading
+      ? html`<app-loading></app-loading>`
+      : html` <app-header
+            .headerTitle=${config.site_name}
+            .cart=${this.state.cart}
+          ></app-header>
+          <app-main active-route=${this.route}>
+            <div class="route" route="home">
+              <app-home></app-home>
+            </div>
+            <div class="route" route="product">
+              <app-product
+                .productId=${parseInt(this.params.id, 10)}
                 .updateParent=${this.childUpdateRequest}
-              ></app-checkout>
-            </div>`
-          : ''}
-        <div class="route" route="not-found">
-          <app-not-found></app-not-found>
-        </div>
-      </app-main>
-      <app-footer></app-footer>
-    `;
+              ></app-product>
+            </div>
+            <div class="route" route="product-list">
+              <app-product-list></app-product-list>
+            </div>
+            <div class="route" route="shipping">
+              <app-shipping></app-shipping>
+            </div>
+            <div class="route" route="contact">
+              <app-contact></app-contact>
+            </div>
+            ${AVOCANO_PURCHASE_MODE === 'cart'
+              ? html`<div class="route" route="checkout">
+                  <app-checkout
+                    .cart=${this.state.cart}
+                    .updateParent=${this.childUpdateRequest}
+                  ></app-checkout>
+                </div>`
+              : ''}
+            <div class="route" route="not-found">
+              <app-not-found></app-not-found>
+            </div>
+          </app-main>
+          <app-footer></app-footer>`;
   }
 }
 

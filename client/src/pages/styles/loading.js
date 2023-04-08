@@ -15,45 +15,48 @@
 import { css } from 'lit';
 
 const styles = css`
-  .itemTitle {
-    color: var(--color-secondary);
+  .loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 500px;
   }
 
-  .cartItem {
-    display: flex;
-    align-item: flex-start;
-    justify-content: space-around;
-    margin: 10px;
+  .loadingTitle {
     padding: 10px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    background: white;
   }
 
-  .cartItemContainer {
+  .spinnerBorder {
+    width: 170px;
+    height: 170px;
+    padding: 5px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    flex-direction: column;
-    margin: 20px;
-  }
-
-  .cartItemWrapper {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .cartImageWrapper {
-    display: flex;
-    margin: 15px 10px;
-  }
-
-  .cartItemContent {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    border-radius: 20%;
+    background: linear-gradient(
+      0deg,
+      rgba(178, 180, 63, 0.1) 33%,
+      rgb(178, 180, 63) 100%
+    );
+    animation: 0.8s linear 0s infinite normal none running spin;
+  }
+
+  .spinnerCore {
+    width: 70%;
+    height: 70%;
+    background-color: white;
+    border-radius: 20%;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 

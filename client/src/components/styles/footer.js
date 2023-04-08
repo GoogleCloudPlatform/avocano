@@ -15,12 +15,18 @@
 import { css } from 'lit';
 
 const styles = css`
-  :host {
+  .footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     font-size: 10px;
     padding: 30px 0;
+  }
+
+  .version,
+  .footerWrapper {
+    padding: 5px 3px;
   }
 `;
 

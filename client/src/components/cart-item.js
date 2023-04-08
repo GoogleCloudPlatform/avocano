@@ -40,11 +40,7 @@ export class CartItem extends LitElement {
       this.productItem || {};
 
     return html`
-      <div
-        class="cartItem"
-        @click=${() =>
-          cartItem?.id && this.navigate(`/products/${cartItem?.id}`)}
-      >
+      <div class="cartItem">
         <div class="cartImageWrapper">
           <img
             class="productimage"
