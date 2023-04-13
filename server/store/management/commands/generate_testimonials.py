@@ -51,4 +51,4 @@ class Command(BaseCommand):
                 )
                 t.save()
 
-        print(f"Generated {count} testimonals across {len(products)} products.")
+        self.stdout.write(f"Generated {count} testimonials across {len(products)} products.")
