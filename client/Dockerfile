@@ -22,10 +22,14 @@ FROM gcr.io/$PROJECT_ID/firebase
 # Override with "--build-arg AVOCANO_PURCHASE_MODE=cart"
 ARG AVOCANO_PURCHASE_MODE=""
 
+LABEL org.opencontainers.artifact.title="Avocano Client Deployer" \
+      org.opencontainers.artifact.description="Deploy pre-built frontend to Firebase Hosting" \
+      dev.avocano.purchase_mode="${AVOCANO_PURCHASE_MODE}"
+
 COPY package*.json ./
 RUN npm i
 COPY . ./
-RUN npm run build 
+RUN npm run build
 
 RUN npm install -g json
 ENTRYPOINT ./docker-deploy.sh
