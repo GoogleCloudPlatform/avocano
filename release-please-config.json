@@ -1,9 +1,6 @@
 {
-    "packages": {
-      ".": {
-        "release-type": "simple"
-      }
-    },
+    "release-type": "simple",
+    "sentence-case": true,
     "extra-files": [
         {
           "type": "json",
