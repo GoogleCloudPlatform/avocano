@@ -91,7 +91,7 @@ export class AvocanoShell extends router(LitElement) {
     this.state.config = config;
 
     /* Dynamically pull fonts we require */
-    if (window.WebFont) {
+    if (window.WebFont && config.base_font) {
       window.WebFont.load({
         google: {
           families: [config.base_font, config.site_name_font],
