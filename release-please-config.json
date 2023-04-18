@@ -1,6 +1,10 @@
 {
-    "release-type": "simple",
     "sentence-case": true,
+    "packages": {
+        ".": {
+            "release-type": "simple"
+        }
+    },
     "extra-files": [
         {
           "type": "json",
