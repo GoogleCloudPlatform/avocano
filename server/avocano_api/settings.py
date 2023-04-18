@@ -83,12 +83,13 @@ TEMPLATES = [
     },
 ]
 
-# Used for local dev, and cloud-run-proxy
-local_host = "http://localhost:8080"
+# Used for local dev or using Cloud Run proxy
+local_host = "http://localhost:8000"
 
 # Used for Cloud Shell dev with Web Preview
 cloudshell_host = "https://*.cloudshell.dev"
 
+# Used to identify the host of the deployed service
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 
 # If the Cloud Run service isn't defined, try dynamically retrieving it.
@@ -99,6 +100,7 @@ if not CLOUDRUN_SERVICE_URL:
         pass
 
 if CLOUDRUN_SERVICE_URL:
+    # Setup as we are running in Cloud Run & Firebase
     ALLOWED_HOSTS = [urlparse(CLOUDRUN_SERVICE_URL).netloc, "127.0.0.1"]
 
     # Firebase hosting has multiple default URLs, so add those as well.
@@ -112,11 +114,13 @@ if CLOUDRUN_SERVICE_URL:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 else:
+    # Setup as we are running on localhost, or Cloud Shell
     ALLOWED_HOSTS = ["*"]
     CSRF_TRUSTED_ORIGINS = [local_host, cloudshell_host]
 
+# django-cors-headers settings
 CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = "avocano_api.wsgi.application"
 
