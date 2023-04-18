@@ -1,5 +1,4 @@
 {
-    "sentence-case": true,
     "packages": {
         ".": {
             "release-type": "simple"
