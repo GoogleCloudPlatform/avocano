@@ -7,7 +7,7 @@
   "packageRules": [
     {
       "matchPaths": [
-        "client/"
+        "client/**"
       ],
       "pinVersions": false,
       "rebaseStalePrs": true,
