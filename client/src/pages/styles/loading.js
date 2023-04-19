@@ -29,25 +29,28 @@ const styles = css`
 
   .spinnerBorder {
     width: 170px;
-    height: 170px;
+    height: 220px;
     padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 20%;
-    background: linear-gradient(
-      0deg,
-      rgba(178, 180, 63, 0.1) 33%,
-      rgb(178, 180, 63) 100%
+    border: 10px solid rgb(179, 181, 61);
+    outline: 5px solid #865b53;
+    outline-offset: 0px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: radial-gradient(
+      rgba(255, 246, 166, 0.3) 33%,
+      rgb(179, 181, 61) 100%
     );
-    animation: 0.8s linear 0s infinite normal none running spin;
+    animation: 3s linear 0s infinite normal none running spin;
   }
 
   .spinnerCore {
-    width: 70%;
-    height: 70%;
-    background-color: white;
-    border-radius: 20%;
+    margin-top: 25%;
+    width: 5em;
+    height: 5em;
+    background-color: rgb(136, 91, 82);
+    border-radius: 50%;
   }
 
   @keyframes spin {
