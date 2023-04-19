@@ -1,0 +1,14 @@
+{
+    "packages": {
+        ".": {
+            "release-type": "simple"
+        }
+    },
+    "extra-files": [
+        {
+          "type": "json",
+          "path": "client/package.json",
+          "jsonpath": "$.version"
+        }
+    ]
+  }
