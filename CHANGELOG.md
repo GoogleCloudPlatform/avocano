@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.5.0...v1.5.1) (2023-04-19)
+
+
+### Bug Fixes
+
+* only call WebFont.load if there are web fonts to load ([#162](https://github.com/GoogleCloudPlatform/avocano/issues/162)) ([3232129](https://github.com/GoogleCloudPlatform/avocano/commit/3232129c85001d504c2ca4470b729bbb7ea3eaec))
+
 ## [1.5.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.4.1...v1.5.0) (2023-04-17)
 
 
