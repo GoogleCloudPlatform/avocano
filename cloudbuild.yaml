@@ -43,6 +43,11 @@ steps:
         -var project_id=${PROJECT_ID} \
         -var region=${REGION}
 
+  - id: server migrate
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args: ["run", "jobs", "execute", "migrate", "--wait", "--region", $_REGION]
+
   # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy
     name: gcr.io/$PROJECT_ID/firebase
