@@ -1,13 +1,12 @@
 {
   "extends": [
     "config:base",
-    ":disableDependencyDashboard",
     ":prConcurrentLimitNone"
   ],
   "rangeStrategy": "auto",
   "packageRules": [
     {
-      "paths": [
+      "matchPaths": [
         "client/"
       ],
       "pinVersions": false,
