@@ -113,7 +113,7 @@ if CLOUDRUN_SERVICE_URL:
         f"https://{project_id}.firebaseapp.com",
     ]
 
-    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts + storage_host
+    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts + [storage_host]
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 else:
