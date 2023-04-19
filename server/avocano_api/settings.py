@@ -122,7 +122,7 @@ else:
     CSRF_TRUSTED_ORIGINS = [local_host, cloudshell_host]
 
 # general django-cors-headers settings
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 WSGI_APPLICATION = "avocano_api.wsgi.application"
 
