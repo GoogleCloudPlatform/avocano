@@ -89,9 +89,6 @@ local_host = "http://localhost:8000"
 # Used for Cloud Shell dev with Web Preview
 cloudshell_host = "https://*.cloudshell.dev"
 
-# Used for hosted assets
-storage_host = "https://storage.googleapis.com"
-
 # Used to identify the host of the deployed service
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 
@@ -113,17 +110,19 @@ if CLOUDRUN_SERVICE_URL:
         f"https://{project_id}.firebaseapp.com",
     ]
 
-    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts + [storage_host]
+    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+    # production django-cors-headers 
+    CORS_ALLOW_CREDENTIALS = True
 else:
     # Setup as we are running on localhost, or Cloud Shell
     ALLOWED_HOSTS = ["*"]
     CSRF_TRUSTED_ORIGINS = [local_host, cloudshell_host]
 
-# django-cors-headers settings
+# general django-cors-headers settings
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = "avocano_api.wsgi.application"
 
