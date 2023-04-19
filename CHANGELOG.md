@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.4.1...v1.5.0) (2023-04-17)
+
+
+### Features
+
+* Add container annotations for title, description, and purchase_mode ([#154](https://github.com/GoogleCloudPlatform/avocano/issues/154)) ([e9c6525](https://github.com/GoogleCloudPlatform/avocano/commit/e9c6525e2ce87e019402a2ff4b0630fb2f7e3b83))
+* change payment default to collect ([#150](https://github.com/GoogleCloudPlatform/avocano/issues/150)) ([b81c2f5](https://github.com/GoogleCloudPlatform/avocano/commit/b81c2f5a15423f03598c44bbc0d38d0ac26e3647))
+
+
+### Bug Fixes
+
+* correct cors issues in local development ([#160](https://github.com/GoogleCloudPlatform/avocano/issues/160)) ([88fce5b](https://github.com/GoogleCloudPlatform/avocano/commit/88fce5bf980543e48de71ff264349b3daa323435))
+* make setup script idempotent ([#164](https://github.com/GoogleCloudPlatform/avocano/issues/164)) ([f443f11](https://github.com/GoogleCloudPlatform/avocano/commit/f443f11bd9ae11a07d6626fe66d996f952a14ad7))
+
 ## [1.4.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.4.0...v1.4.1) (2023-04-04)
 
 
