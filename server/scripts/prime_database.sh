@@ -24,6 +24,9 @@ python3 manage.py collectstatic --noinput --clear
 # Load configurations
 python3 manage.py loaddata demo_config.yaml
 
+# Create superuser (password set in environment variable)
+python3 manage.py createsuperuser --username admin --email noop@example.com --noinput || true
+
 # Create products through management commands.
 python3 manage.py create_new_product \
     --name "Pineapple Bee" \
