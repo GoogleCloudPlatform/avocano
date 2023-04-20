@@ -41,13 +41,11 @@ class Command(BaseCommand):
         # nicely handle uniqueness constraints
         product, created = Product.objects.get_or_create(
             name=name,
-            defaults={
-                "description": options["description"],
-                "price": options["price"],
-                "active": True,
-                "discount_percent": options["discount_percent"],
-                "inventory_count": options["inventory_count"],
-            },
+            description=options["description"],
+            price=options["price"],
+            active=True,
+            discount_percent=options["discount_percent"],
+            inventory_count=options["inventory_count"],
         )
 
         if created:
