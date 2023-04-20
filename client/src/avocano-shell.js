@@ -80,7 +80,7 @@ export class AvocanoShell extends router(LitElement) {
     const config = await getSiteConfig();
 
     // Show loading animation only when
-    // site config is available
+    // site config is unavailable
     if (config) {
       this.state.loading = false;
     }
