@@ -24,7 +24,7 @@ python3 manage.py collectstatic --noinput --clear
 # Load configurations
 python3 manage.py loaddata demo_config.yaml
 
-# Create superuser (password set in environment variable)
+# Create superuser (password set in DJANGO_SUPERUSER_PASSWORD)
 # Idempotency: this command is allowed to fail on second application
 python3 manage.py createsuperuser --username admin --email noop@example.com --noinput || true
 
