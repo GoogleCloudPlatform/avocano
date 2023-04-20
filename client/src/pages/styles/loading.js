@@ -27,27 +27,45 @@ const styles = css`
     padding: 10px;
   }
 
-  .spinnerBorder {
-    width: 170px;
-    height: 170px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20%;
-    background: linear-gradient(
-      0deg,
-      rgba(178, 180, 63, 0.1) 33%,
-      rgb(178, 180, 63) 100%
-    );
-    animation: 0.8s linear 0s infinite normal none running spin;
+  .spinner {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
   }
 
-  .spinnerCore {
-    width: 70%;
-    height: 70%;
-    background-color: white;
-    border-radius: 20%;
+  .spinner div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid rgb(178, 180, 63);
+    border-radius: 50%;
+    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: rgb(178, 180, 63) transparent transparent transparent;
+  }
+
+  .spinner div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+
+  .spinner div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+
+  .spinner div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+
+  @keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes spin {

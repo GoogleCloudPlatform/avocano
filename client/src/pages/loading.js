@@ -29,10 +29,13 @@ export class Loading extends LitElement {
     return html`
       <div class="loadingContainer">
         <div class="loadingWrapper">
-          <div class="spinnerBorder">
-            <div class="spinnerCore"></div>
+          <h2 class="loadingTitle">Loading...</h2>
+          <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
-          <h2 class="loadingTitle">Loading... 🥑</h2>
         </div>
       </div>
     `;
