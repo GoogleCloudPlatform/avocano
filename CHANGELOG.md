@@ -2,6 +2,16 @@
 
 ## [1.6.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.5.1...v1.6.0) (2023-04-21)
 
+### 🥑 Features
+
+* adding in overall loading page, show version ([#155](https://github.com/GoogleCloudPlatform/avocano/issues/155)) ([ded1ca4](https://github.com/GoogleCloudPlatform/avocano/commit/ded1ca4e75bb3261ca3c69cf23f90faef709ebd0))
+
+### 🐞 Bug Fixes
+
+* add migrate to default deployment method, use unattended createsuperuser ([#179](https://github.com/GoogleCloudPlatform/avocano/issues/179)) ([6e2b10d](https://github.com/GoogleCloudPlatform/avocano/commit/6e2b10dd96e097b2a55a284be9f872063ee8d334))
+* get_or_create must be formatted like this to prevent django.db.utils.IntegrityError ([#193](https://github.com/GoogleCloudPlatform/avocano/issues/193)) ([659b8f9](https://github.com/GoogleCloudPlatform/avocano/commit/659b8f954e998a1a5d25de24a5db2648d14c4ad3))
+* renovate matchPaths syntax ([#187](https://github.com/GoogleCloudPlatform/avocano/issues/187)) ([a4bc4df](https://github.com/GoogleCloudPlatform/avocano/commit/a4bc4df69ccabd0dc67cfeda25aa6b134f55d98e))
+
 
 ### 🛠️ Automation
 
@@ -16,16 +26,6 @@
 * re-enable renovate dependency dashboard ([#184](https://github.com/GoogleCloudPlatform/avocano/issues/184)) ([52ebacf](https://github.com/GoogleCloudPlatform/avocano/commit/52ebacf61685bcc67f83834fbdb07f5507d7e3b1))
 
 
-### 🐞 Bug Fixes
-
-* add migrate to default deployment method, use unattended createsuperuser ([#179](https://github.com/GoogleCloudPlatform/avocano/issues/179)) ([6e2b10d](https://github.com/GoogleCloudPlatform/avocano/commit/6e2b10dd96e097b2a55a284be9f872063ee8d334))
-* get_or_create must be formatted like this to prevent django.db.utils.IntegrityError ([#193](https://github.com/GoogleCloudPlatform/avocano/issues/193)) ([659b8f9](https://github.com/GoogleCloudPlatform/avocano/commit/659b8f954e998a1a5d25de24a5db2648d14c4ad3))
-* renovate matchPaths syntax ([#187](https://github.com/GoogleCloudPlatform/avocano/issues/187)) ([a4bc4df](https://github.com/GoogleCloudPlatform/avocano/commit/a4bc4df69ccabd0dc67cfeda25aa6b134f55d98e))
-
-
-### 🥑 Features
-
-* adding in overall loading page, show version ([#155](https://github.com/GoogleCloudPlatform/avocano/issues/155)) ([ded1ca4](https://github.com/GoogleCloudPlatform/avocano/commit/ded1ca4e75bb3261ca3c69cf23f90faef709ebd0))
 
 ## [1.5.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.5.0...v1.5.1) (2023-04-19)
 
