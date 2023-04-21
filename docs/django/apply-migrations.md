@@ -1,15 +1,7 @@
 # Applying database migrations
 
-If you want to apply database migrations, a convenience Cloud Run job has been created for you. 
+If you want to apply database migrations, this is included as part of the `cloudbuild.yaml` file:
 
-To run migrations: 
-
-```
-gcloud beta run jobs execute migrate \
-    --region us-central1 --wait
-```
-
-To run migrations as part of the Cloud Build, add a step to the `cloudbuild.yaml` file:
 
 ```
   - id: server migrate
@@ -21,6 +13,7 @@ To run migrations as part of the Cloud Build, add a step to the `cloudbuild.yaml
 
 In this case, `CLOUDSDK_RUN_REGION` automatically sets the `--region` parameter for the `gcloud run` command. 
 
-This step must be after the image push step, but can be before or after Terraform (the terraform step
-updates the Cloud Run service to the latest image). If your database changes must be made **before**
-the application is updated, put it before the terraform step.
+
+However, if you want to generate migrations, you will need to do this separately: it's better
+to create these on your local machine and commit them to the codebase, then to have them 
+generated in CI and not saved anywhere. See [Extending example](../admin/extending-example.md#creating-migrations) for more info. 

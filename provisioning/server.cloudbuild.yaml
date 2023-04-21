@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build the new image. Doesn't deploy. See server.update.sh for complete process.
+# Build the new image.
 
 steps:
   - id: server build
