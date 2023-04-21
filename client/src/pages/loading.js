@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,30 +13,33 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import styles from './styles/footer.js';
-import { getConfig } from '../utils/config.js';
-import './link.js';
+import styles from './styles/loading.js';
 
-export class Footer extends LitElement {
+export class Loading extends LitElement {
+  constructor() {
+    super();
+    this.title = 'Loading';
+  }
+
   static get styles() {
     return styles;
   }
 
   render() {
-    const { VERSION, AVOCANO_PURCHASE_MODE } = getConfig();
-
     return html`
-      <div class="footer">
-        <div class="footerWrapper">
-          Made with 💚 from the
-          <a href="https://github.com/GoogleCloudPlatform/avocano/">Pit Crew</a>
-        </div>
-        <div class="version">
-          Avocano v${VERSION} (purchase mode: ${AVOCANO_PURCHASE_MODE})
+      <div class="loadingContainer">
+        <div class="loadingWrapper">
+          <h2 class="loadingTitle">Loading...</h2>
+          <div class="spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
         </div>
       </div>
     `;
   }
 }
 
-customElements.define('app-footer', Footer);
+customElements.define('app-loading', Loading);

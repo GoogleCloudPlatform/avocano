@@ -55,7 +55,7 @@ export class Home extends LitElement {
     return html`
       <div class="homeBase">
         ${status === 'loading'
-          ? html`<p>loading...</p>`
+          ? html`<p class="loading">loading... 🥑</p>`
           : html`<app-product-item
               .productId="{this.productId}"
               .productItem=${productItem}

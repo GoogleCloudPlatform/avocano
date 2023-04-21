@@ -28,7 +28,6 @@ const styles = css`
     border-radius: 5px;
     border: 1px solid lightgray;
     background: white;
-    cursor: pointer;
   }
 
   .cartItemContainer {

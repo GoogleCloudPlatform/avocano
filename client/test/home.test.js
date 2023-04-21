@@ -28,6 +28,6 @@ describe('Home', () => {
     const loadingElement = element.shadowRoot.querySelector('.homeBase > p');
 
     expect(loadingElement).to.exist;
-    expect(loadingElement.textContent).to.equal('loading...');
+    expect(loadingElement.textContent).to.equal('loading... 🥑');
   });
 });

@@ -20,6 +20,10 @@ const styles = css`
     justify-content: center;
     text-align: center;
   }
+
+  .loading {
+    padding: 20px;
+  }
 `;
 
 export default styles;
