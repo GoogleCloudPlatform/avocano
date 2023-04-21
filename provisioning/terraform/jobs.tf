@@ -20,7 +20,8 @@ resource "google_cloud_run_v2_job" "setup" {
           }
         }
         env {
-          name = "ADMIN_PASSWORD"
+          # https://docs.djangoproject.com/en/4.2/ref/django-admin/#createsuperuser
+          name = "DJANGO_SUPERUSER_PASSWORD"
           value_source {
             secret_key_ref {
               secret  = google_secret_manager_secret.django_admin_password.secret_id
