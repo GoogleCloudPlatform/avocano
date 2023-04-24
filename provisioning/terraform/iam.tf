@@ -27,7 +27,7 @@ resource "google_service_account" "automation" {
 }
 
 # Both the server and Cloud Build can access the database
-resource "google_project_iam_binding" "server_permissions" {
+resource "google_project_iam_member" "server_permissions" {
   project    = var.project_id
   role       = "roles/cloudsql.client"
   members    = [local.server_SA, local.automation_SA]
@@ -36,7 +36,7 @@ resource "google_project_iam_binding" "server_permissions" {
 
 
 # Server needs introspection permissions
-resource "google_project_iam_binding" "server_introspection" {
+resource "google_project_iam_member" "server_introspection" {
   project    = var.project_id
   role       = "roles/run.viewer"
   members    = [local.server_SA]
@@ -44,7 +44,7 @@ resource "google_project_iam_binding" "server_introspection" {
 }
 
 # Server needs to write to Cloud Trace
-resource "google_project_iam_binding" "server_traceagent" {
+resource "google_project_iam_member" "server_traceagent" {
   project    = var.project_id
   role       = "roles/cloudtrace.agent"
   members    = [local.server_SA]
