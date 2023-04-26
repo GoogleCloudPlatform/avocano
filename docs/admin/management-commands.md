@@ -92,7 +92,7 @@ You'd run the `update_inventory_count` command, with a value of 25.
 To set this up, create a job that runs the command as you would in the command line. The reference to `launcher` is an implementation of buildpacks ([see details](https://cloud.google.com/blog/topics/developers-practitioners/running-database-migrations-cloud-run-jobs))
 
 ```
-gcloud beta run jobs create update_inventory \
+gcloud run jobs create update_inventory \
     --image gcr.io/$PROJECT_ID/server \
     --region us-central1 \
     --command launcher \
