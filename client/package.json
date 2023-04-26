@@ -40,7 +40,7 @@
     "@custom-elements-manifest/analyzer": "^0.8.0",
     "@open-wc/eslint-config": "^10.0.0",
     "@open-wc/testing": "next",
-    "@web/test-runner": "^0.15.0",
+    "@web/test-runner": "^0.16.0",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "deepmerge": "^4.2.2",
     "eslint": "^8.0.0",
