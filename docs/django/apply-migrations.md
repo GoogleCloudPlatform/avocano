@@ -8,7 +8,7 @@ If you want to apply database migrations, this is included as part of the `cloud
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     env:
     - "CLOUDSDK_RUN_REGION=$_REGION"
-    script: gcloud beta run jobs execute migrate --wait
+    script: gcloud run jobs execute migrate --wait
 ```
 
 In this case, `CLOUDSDK_RUN_REGION` automatically sets the `--region` parameter for the `gcloud run` command. 

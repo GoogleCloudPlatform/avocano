@@ -2,7 +2,6 @@ resource "google_cloud_run_v2_job" "setup" {
 
   name         = "setup"
   location     = var.region
-  launch_stage = "BETA"
 
   template {
     template {
@@ -50,11 +49,8 @@ resource "google_cloud_run_v2_job" "setup" {
 }
 
 resource "google_cloud_run_v2_job" "migrate" {
-
-
   name         = "migrate"
   location     = var.region
-  launch_stage = "BETA"
 
   template {
     template {
@@ -93,10 +89,8 @@ resource "google_cloud_run_v2_job" "migrate" {
 
 
 resource "google_cloud_run_v2_job" "client" {
-
   name         = "client"
   location     = var.region
-  launch_stage = "BETA"
 
   template {
     template {
