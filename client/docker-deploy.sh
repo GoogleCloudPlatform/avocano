@@ -18,6 +18,12 @@ if [[ -n $SERVICE_NAME ]]; then
     echo "Supplied with service name $SERVICE_NAME. Updating config. "
     json -I -f firebase.json -e "this.hosting.rewrites[0].run.serviceId='$SERVICE_NAME'"
     UPDATED=true
+
+    # from the service_name, check for the suffix and update firebase config
+    SUFFIX=$(echo $SERVICE_NAME | cut -d'-' -f2)
+    if [[ -n $SERVICE_NAME ]]; then
+        echo "{\"projects\": {}, \"targets\": {\"${PROJECT_ID}\": {\"hosting\": {\"${SUFFIX}\": [\"${PROJECT_ID}-${SUFFIX}\"]}}},\"etags\": {}}" | json > .firebaserc
+    fi
 fi
 
 # if region supplied, update firebase.json
