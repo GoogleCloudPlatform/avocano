@@ -30,7 +30,7 @@ resource "google_service_account" "automation" {
 resource "google_project_iam_member" "server_permissions" {
   project    = var.project_id
   role       = "roles/cloudsql.client"
-  member    = local.server_SA
+  member     = local.server_SA
   depends_on = [google_service_account.server]
 }
 
@@ -38,7 +38,7 @@ resource "google_project_iam_member" "server_permissions" {
 resource "google_project_iam_member" "build_permissions" {
   project    = var.project_id
   role       = "roles/cloudsql.client"
-  member    = local.automation_SA
+  member     = local.automation_SA
   depends_on = [google_service_account.automation]
 }
 
@@ -46,7 +46,7 @@ resource "google_project_iam_member" "build_permissions" {
 resource "google_project_iam_member" "server_introspection" {
   project    = var.project_id
   role       = "roles/run.viewer"
-  member    = local.server_SA
+  member     = local.server_SA
   depends_on = [google_service_account.server]
 }
 
@@ -54,6 +54,6 @@ resource "google_project_iam_member" "server_introspection" {
 resource "google_project_iam_member" "server_traceagent" {
   project    = var.project_id
   role       = "roles/cloudtrace.agent"
-  member    = local.server_SA
+  member     = local.server_SA
   depends_on = [google_service_account.server]
 }
