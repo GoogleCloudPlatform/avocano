@@ -30,6 +30,7 @@ jobs:
         uses: bcoe/conventional-release-labels@v1
         with:
           type_labels: '{"feat": "type: feature request", "fix": "type: bug", "breaking": "semver: major"}'
+          ignored_types: '[]'
 
   label-changes:
     runs-on: ubuntu-latest
