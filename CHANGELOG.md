@@ -1,5 +1,29 @@
 # Changelog
 
+## [1.7.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.6.0...v1.7.0) (2023-04-28)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency @web/dev-server to ^0.2.0 ([#197](https://github.com/GoogleCloudPlatform/avocano/issues/197)) ([79ec5ab](https://github.com/GoogleCloudPlatform/avocano/commit/79ec5ab6e7c45f54a5c72ef171b962876528e091))
+* **deps:** update dependency @web/dev-server-rollup to ^0.5.0 ([#199](https://github.com/GoogleCloudPlatform/avocano/issues/199)) ([09c3354](https://github.com/GoogleCloudPlatform/avocano/commit/09c33547a634a190d5d36951bbdb022cae22b2f3))
+* **deps:** update dependency @web/rollup-plugin-html to v2 ([#200](https://github.com/GoogleCloudPlatform/avocano/issues/200)) ([9706d79](https://github.com/GoogleCloudPlatform/avocano/commit/9706d79c48c5e16d95ac5c35e978819c3a5fcf8d))
+* **deps:** update dependency @web/rollup-plugin-import-meta-assets to v2 ([#201](https://github.com/GoogleCloudPlatform/avocano/issues/201)) ([3c9f2ea](https://github.com/GoogleCloudPlatform/avocano/commit/3c9f2ea546fb60b684e2da37670890cdb5122c64))
+* use google_project_iam_member to manage IAM permissions ([#198](https://github.com/GoogleCloudPlatform/avocano/issues/198)) ([4323b98](https://github.com/GoogleCloudPlatform/avocano/commit/4323b9849d55e932fdd2bb7655c60662a8709a59))
+
+
+### 🧹 Chores
+
+* **deps:** bump yaml from 2.2.1 to 2.2.2 in /client ([#202](https://github.com/GoogleCloudPlatform/avocano/issues/202)) ([88e8cc8](https://github.com/GoogleCloudPlatform/avocano/commit/88e8cc858e67f279a8a4501a3c76903a460ae4f6))
+* **deps:** update dependency @web/test-runner to ^0.16.0 ([#196](https://github.com/GoogleCloudPlatform/avocano/issues/196)) ([9aca854](https://github.com/GoogleCloudPlatform/avocano/commit/9aca854da1e0271f71af55bd7212e14e85dda353))
+* Increase grouping and slow down scheduling of renovate ([#214](https://github.com/GoogleCloudPlatform/avocano/issues/214)) ([e0e6cb1](https://github.com/GoogleCloudPlatform/avocano/commit/e0e6cb15d2d5d92269b3cec67d43ec97e6b02a49))
+
+
+### 🥑 Features
+
+* support multiple firebase deployments ([#210](https://github.com/GoogleCloudPlatform/avocano/issues/210)) ([04364a9](https://github.com/GoogleCloudPlatform/avocano/commit/04364a9128dc6e8691e40bde6e23e3a80426c233))
+* update Cloud Run Jobs to GA, remove beta references ([#203](https://github.com/GoogleCloudPlatform/avocano/issues/203)) ([8e9c623](https://github.com/GoogleCloudPlatform/avocano/commit/8e9c62368180f93d32cc0d8e5a394e4d54e4e270))
+
 ## [1.6.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.5.1...v1.6.0) (2023-04-21)
 
 ### 🥑 Features
