@@ -47,7 +47,7 @@ steps:
     name: "gcr.io/google.com/cloudsdktool/cloud-sdk:slim"
     env:
       - "CLOUDSDK_RUN_REGION=$_REGION"
-    script: gcloud beta run jobs execute migrate --wait
+    script: gcloud run jobs execute migrate --wait
 
   # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy
