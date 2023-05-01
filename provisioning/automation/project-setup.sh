@@ -4,10 +4,11 @@ source provisioning/automation/bashhelpers.sh
 
 PARENT_PROJECT=$(gcloud config get-value project)
 
-while getopts f:p:r:s: flag; do
+while getopts f:p:b:r:s: flag; do
     case "${flag}" in
     f) PARENT_FOLDER=${OPTARG} ;;
     p) CI_PROJECT=${OPTARG} ;;
+    b) BILLING_ACCOUNT_ID=${OPTARG} ;;
     r) REGION=${OPTARG} ;;
     s) SA_NAME=${OPTARG} ;;
     esac
@@ -52,9 +53,15 @@ else
     stepdone
 
     stepdo "setup billing"
-    BILLING_ACCOUNT=$(gcloud beta billing projects describe ${PARENT_PROJECT} --format="value(billingAccountName)" || sed -e 's/.*\///g')
-    gcloud beta billing projects link ${CI_PROJECT} \
-        --billing-account=${BILLING_ACCOUNT} --verbosity debug
+    if [[ -z $BILLING_ACCOUNT_ID ]]; then
+        echo "Using billing account associated to parent project"
+        BILLING_ACCOUNT=$(gcloud beta billing projects describe ${PARENT_PROJECT} --format="value(billingAccountName)" || sed -e 's/.*\///g')
+    else
+        echo "Using supplied billing account"
+        BILLING_ACCOUNT=billingAccounts/$BILLING_ACCOUNT_ID
+    fi
+
+    gcloud beta billing projects link ${CI_PROJECT} --billing-account=${BILLING_ACCOUNT}
     stepdone
 
     stepdo "enable services on ci project"

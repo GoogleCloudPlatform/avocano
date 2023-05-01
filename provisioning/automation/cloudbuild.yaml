@@ -8,6 +8,7 @@ steps:
         source ./provisioning/automation/project-setup.sh \
           -f ${_PARENT_FOLDER} \
           -p ${_CI_PROJECT} \
+          -b ${_BILLING_ACCOUNT_ID} \
           -r ${_REGION} \
           -s ${_SA_NAME}
 
@@ -61,5 +62,6 @@ substitutions:
   _SA_NAME: ci-serviceaccount
   _CI_PROJECT: "avocano-ephemeral-${BUILD_ID:0:8}"
   _CLOUDBUILD_CONFIG: provisioning/automation/deploy.cloudbuild.yaml
+  _BILLING_ACCOUNT_ID: ""
 
 timeout: "1500s"
