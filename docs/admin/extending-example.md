@@ -60,7 +60,7 @@ results to source. You will follow a fairly standard practice, but you'll provid
 1. Apply the database migrations using Cloud Run Jobs:
  
     ```bash
-    gcloud beta run jobs execute migrate
+    gcloud run jobs execute migrate
     ```
  
 Open the linked execution logs to see the output from this command. 

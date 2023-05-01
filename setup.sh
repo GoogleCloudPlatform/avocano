@@ -66,6 +66,6 @@ aecho "Running Cloud Build"
 gcloud builds submit --substitutions _REGION=${REGION}
 
 aecho "Setup database"
-gcloud beta run jobs execute setup --wait --region $REGION
+gcloud run jobs execute setup --wait --region $REGION
 
 eecho "Website now available at https://${PROJECT_ID}.web.app"

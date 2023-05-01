@@ -18,6 +18,17 @@ if [[ -n $SERVICE_NAME ]]; then
     echo "Supplied with service name $SERVICE_NAME. Updating config. "
     json -I -f firebase.json -e "this.hosting.rewrites[0].run.serviceId='$SERVICE_NAME'"
     UPDATED=true
+
+# if deploying with a suffix, adjust the config to suit the custom site
+# https://firebase.google.com/docs/hosting/multisites#set_up_deploy_targets
+if [[ -n $SUFFIX ]]; then
+    json -I -f firebase.json -e "this.hosting.target='$SUFFIX'"
+    UPDATED=true
+    
+    echo "{\"projects\": {}, \"targets\": {\"${PROJECT_ID}\": {\"hosting\": {\"${SUFFIX}\": [\"${PROJECT_ID}-${SUFFIX}\"]}}},\"etags\": {}}" | json > .firebaserc
+    echo "Customised .firebaserc created to support site."
+    cat .firebaserc
+    fi
 fi
 
 # if region supplied, update firebase.json
