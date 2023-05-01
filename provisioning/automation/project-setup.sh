@@ -61,8 +61,7 @@ else
         BILLING_ACCOUNT=billingAccounts/$BILLING_ACCOUNT_ID
     fi
 
-    gcloud beta billing projects link ${CI_PROJECT} \
-        --billing-account=${BILLING_ACCOUNT} --verbosity debug
+    gcloud beta billing projects link ${CI_PROJECT} --billing-account=${BILLING_ACCOUNT}
     stepdone
 
     stepdo "enable services on ci project"
