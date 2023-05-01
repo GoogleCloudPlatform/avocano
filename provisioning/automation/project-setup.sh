@@ -58,6 +58,7 @@ else
         BILLING_ACCOUNT=$(gcloud beta billing projects describe ${PARENT_PROJECT} --format="value(billingAccountName)" || sed -e 's/.*\///g')
     else
         echo "Using supplied billing account"
+        BILLING_ACCOUNT=billingAccounts/$BILLING_ACCOUNT_ID
     fi
 
     gcloud beta billing projects link ${CI_PROJECT} \
