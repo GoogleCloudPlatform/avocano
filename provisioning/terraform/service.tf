@@ -30,11 +30,6 @@ resource "google_cloud_run_v2_service" "server" {
         name  = "OTEL_TRACES_EXPORTER"
         value = "gcp_trace"
       }
-      startup_probe {
-        http_get {
-          path = "/ready"
-        }
-      }
       liveness_probe {
         http_get {
           path = "/healthy"
