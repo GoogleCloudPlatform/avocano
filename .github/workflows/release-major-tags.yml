@@ -30,7 +30,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6
         id: parse-major
         with:
           script: |
@@ -42,7 +42,7 @@ jobs:
             }
             return "";
           result-encoding: string
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
         with:
           fetch-depth: 0
         if: ${{ steps.parse-major.outputs.result }}
