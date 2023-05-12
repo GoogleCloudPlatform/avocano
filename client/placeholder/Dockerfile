@@ -18,4 +18,4 @@ ARG PROJECT_ID=YOURPROJECTID
 FROM gcr.io/$PROJECT_ID/firebase
 
 COPY . ./
-ENTRYPOINT firebase deploy --project $PROJECT_ID --only hosting
+ENTRYPOINT ./placeholder-deploy.sh
