@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-# Execute with "--build-arg PROJECT_ID=$PROJECT_ID"
+# Execute with "docker run --build-arg PROJECT_ID=$PROJECT_ID ..."
 ARG PROJECT_ID=YOURPROJECTID
 FROM gcr.io/$PROJECT_ID/firebase
 
