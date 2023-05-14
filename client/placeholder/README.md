@@ -6,7 +6,7 @@ This folder is designed to hold a static page that can be deployed to Firebase a
 
 Features: 
 
- * replaces the "Site Not Found" 404 page with a placeholder
+ * replaces the Firebase Hosting "Site Not Found" 404 page with a placeholder
  * page set to automatically refresh every 5 seconds
  * uses embedded image (like the "Site Not Found" does) to prevent image loading flickering. 
 
