@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.8.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.7.0...v1.8.0) (2023-05-09)
+
+
+### 🥑 Features
+
+* offer customisable billing account id option ([#222](https://github.com/GoogleCloudPlatform/avocano/issues/222)) ([c1fa873](https://github.com/GoogleCloudPlatform/avocano/commit/c1fa873fa8cecad7ea56042437249cf41bdf4630))
+
+
+### 🐞 Bug Fixes
+
+* remove startup probe ([#225](https://github.com/GoogleCloudPlatform/avocano/issues/225)) ([107ee6b](https://github.com/GoogleCloudPlatform/avocano/commit/107ee6b25944890678a21c0ebc72aa2c94a8a7e9))
+
+
+### 🧹 Chores
+
+* **deps:** pin dependencies ([#219](https://github.com/GoogleCloudPlatform/avocano/issues/219)) ([e418705](https://github.com/GoogleCloudPlatform/avocano/commit/e418705a3dc41c94c89dc4015b2f6170a8fd3976))
+* use pull_request_target for GHA commenting workflow ([#227](https://github.com/GoogleCloudPlatform/avocano/issues/227)) ([447ed75](https://github.com/GoogleCloudPlatform/avocano/commit/447ed756c2d4f33fc2b4109cd5c0eec6bcb0e896))
+
 ## [1.7.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.6.0...v1.7.0) (2023-04-28)
 
 
