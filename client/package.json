@@ -11,7 +11,8 @@
     "test:watch": "web-test-runner --watch",
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
-    "start": "web-dev-server"
+    "start": "web-dev-server",
+    "prepare": "cd .. && husky install client/.husky"
   },
   "dependencies": {
     "@material/mwc-button": "^0.27.0",
@@ -45,7 +46,7 @@
     "deepmerge": "^4.2.2",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.3.0",
-    "husky": "^4.3.8",
+    "husky": "^8.0.3",
     "lint-staged": "^13.0.0",
     "prettier": "^2.4.1",
     "rimraf": "^5.0.0",
