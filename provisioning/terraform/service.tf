@@ -62,16 +62,9 @@ resource "google_cloud_run_v2_service" "server" {
 
 
 # Allow server to be public readable. 
-data "google_iam_policy" "noauth" {
-  binding {
-    role    = "roles/run.invoker"
-    members = ["allUsers"]
-  }
-}
-
-resource "google_cloud_run_service_iam_policy" "server_noauth" {
-  location    = google_cloud_run_v2_service.server.location
-  project     = google_cloud_run_v2_service.server.project
-  service     = google_cloud_run_v2_service.server.name
-  policy_data = data.google_iam_policy.noauth.policy_data
+resource "google_project_iam_member" "server_noauth" {
+  location = google_cloud_run_service.default.location
+  service  = google_cloud_run_service.default.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
