@@ -62,9 +62,10 @@ resource "google_cloud_run_v2_service" "server" {
 
 
 # Allow server to be public readable. 
-resource "google_project_iam_member" "server_noauth" {
-  location = google_cloud_run_service.default.location
-  service  = google_cloud_run_service.default.name
+resource "google_cloud_run_service_iam_member" "server_noauth" {
+  project  = google_cloud_run_v2_service.server.project
+  location = google_cloud_run_v2_service.server.location
+  service  = google_cloud_run_v2_service.server.name
   role     = "roles/run.invoker"
   member   = "allUsers"
 }
