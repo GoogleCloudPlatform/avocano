@@ -41,7 +41,6 @@ resource "google_cloud_run_v2_service" "server" {
       }
     }
     annotations = {
-      "autoscaling.knative.dev/maxScale"      = "100"
       "run.googleapis.com/client-name"        = "terraform"
     }
     volumes {
