@@ -41,7 +41,7 @@ resource "google_cloud_run_v2_service" "server" {
       }
     }
     annotations = {
-      "run.googleapis.com/client-name"        = "terraform"
+      "run.googleapis.com/client-name" = "terraform"
     }
     volumes {
       name = "cloudsql"
