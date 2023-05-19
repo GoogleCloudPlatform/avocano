@@ -40,9 +40,6 @@ resource "google_cloud_run_v2_service" "server" {
         mount_path = "/cloudsql"
       }
     }
-    annotations = {
-      "run.googleapis.com/client-name" = "terraform"
-    }
     volumes {
       name = "cloudsql"
       cloud_sql_instance {
