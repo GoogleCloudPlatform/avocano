@@ -35,11 +35,20 @@ resource "google_cloud_run_v2_service" "server" {
           path = "/healthy"
         }
       }
+      volume_mounts {
+        name       = "cloudsql"
+        mount_path = "/cloudsql"
+      }
     }
     annotations = {
       "autoscaling.knative.dev/maxScale"      = "100"
-      "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.postgres.connection_name
       "run.googleapis.com/client-name"        = "terraform"
+    }
+    volumes {
+      name = "cloudsql"
+      cloud_sql_instance {
+        instances = [google_sql_database_instance.postgres.connection_name]
+      }
     }
   }
   traffic {
