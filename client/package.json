@@ -33,7 +33,7 @@
     "lit": "^2.3.0",
     "lit-element-router": "^2.0.3",
     "replace": "^1.2.1",
-    "rollup": "^2.60.0"
+    "rollup": "^3.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.4",
