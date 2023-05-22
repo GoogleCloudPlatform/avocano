@@ -35,11 +35,16 @@ resource "google_cloud_run_v2_service" "server" {
           path = "/healthy"
         }
       }
+      volume_mounts {
+        name       = "cloudsql"
+        mount_path = "/cloudsql"
+      }
     }
-    annotations = {
-      "autoscaling.knative.dev/maxScale"      = "100"
-      "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.postgres.connection_name
-      "run.googleapis.com/client-name"        = "terraform"
+    volumes {
+      name = "cloudsql"
+      cloud_sql_instance {
+        instances = [google_sql_database_instance.postgres.connection_name]
+      }
     }
   }
   traffic {
@@ -54,16 +59,10 @@ resource "google_cloud_run_v2_service" "server" {
 
 
 # Allow server to be public readable. 
-data "google_iam_policy" "noauth" {
-  binding {
-    role    = "roles/run.invoker"
-    members = ["allUsers"]
-  }
-}
-
-resource "google_cloud_run_service_iam_policy" "server_noauth" {
-  location    = google_cloud_run_v2_service.server.location
-  project     = google_cloud_run_v2_service.server.project
-  service     = google_cloud_run_v2_service.server.name
-  policy_data = data.google_iam_policy.noauth.policy_data
+resource "google_cloud_run_service_iam_member" "server_noauth" {
+  project  = google_cloud_run_v2_service.server.project
+  location = google_cloud_run_v2_service.server.location
+  service  = google_cloud_run_v2_service.server.name
+  role     = "roles/run.invoker"
+  member   = "allUsers"
 }
