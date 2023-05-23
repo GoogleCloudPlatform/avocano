@@ -55,7 +55,7 @@ class CheckoutForm extends LitElement {
   }
 
   isValidEmail(text) {
-    return /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/.test(text);
+    return /[^ @]*@[^ @]*/.test(text);
   }
 
   async submitForm(event) {
