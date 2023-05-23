@@ -84,11 +84,12 @@ class CheckoutForm extends LitElement {
           <mwc-textfield
             outlined
             required
+            autoValidate
             id="email"
             name="email"
-            type="email"
             label="Enter your email"
             helper="foo@bar.com"
+            pattern="[^ @]*@[^ @]*"
             placeholder="Enter your email"
             validationMessage="Requires email format."
           ></mwc-textfield>
