@@ -29,17 +29,28 @@ class CheckoutForm extends LitElement {
   constructor() {
     super();
     this.state = {
-      disableSubmit: false,
+      disableSubmit: true,
       openFormErrorDialog: false,
     };
 
     // Bind "this" component to functions
     this.onSubmit = () => {};
     this.submitForm = this.submitForm.bind(this);
+    this.onEmailChange = this.onEmailChange.bind(this);
   }
 
-  toggleFormErrorDialog() {
-    this.state.openFormErrorDialog = !this.state.openFormErrorDialog;
+  firstUpdated() {
+    // Add input change callback for email input
+    const email = this.shadowRoot.getElementById('email');
+    email.addEventListener('change', this.onEmailChange);
+  }
+
+  onEmailChange(event) {
+    const form = new FormData(this.shadowRoot.querySelector('form') || {});
+    const isValid = this.isValidEmail(form.get('email'));
+
+    // Disable submit while form is being sent
+    this.state.disableSubmit = !isValid;
     this.requestUpdate();
   }
 
@@ -55,18 +66,13 @@ class CheckoutForm extends LitElement {
     this.requestUpdate();
 
     const form = new FormData(this.shadowRoot.querySelector('form') || {});
-    const isValid = this.isValidEmail(form.get('email'));
 
-    if (!isValid) {
-      this.toggleFormErrorDialog();
-    } else {
-      await this.onSubmit(form);
-      // Waiting till callstack is empty to re-enable submit button
-      setTimeout(() => {
-        this.state.disableSubmit = false;
-        this.requestUpdate();
-      }, 0);
-    }
+    await this.onSubmit(form);
+    // Waiting till callstack is empty to re-enable submit button
+    setTimeout(() => {
+      this.state.disableSubmit = false;
+      this.requestUpdate();
+    }, 0);
   }
 
   render() {
@@ -79,12 +85,13 @@ class CheckoutForm extends LitElement {
             outlined
             required
             autoValidate
+            id="email"
             name="email"
             label="Enter your email"
             helper="foo@bar.com"
             pattern="[^ @]*@[^ @]*"
             placeholder="Enter your email"
-            validationMessage="Field is required"
+            validationMessage="Requires email format."
           ></mwc-textfield>
           <mwc-select
             name="type"
@@ -104,19 +111,6 @@ class CheckoutForm extends LitElement {
               </button>`}
         </div>
       </form>
-      ${openFormErrorDialog
-        ? html`<mwc-dialog open>
-            <div class="dialogWrapper">
-              Please correctly format email (i.e foo@bar.com).
-            </div>
-            <mwc-button
-              label="Close"
-              class="dialogButton"
-              slot="primaryAction"
-              @click="${this.toggleFormErrorDialog}"
-            ></mwc-button>
-          </mwc-dialog>`
-        : ''}
     </div>`;
   }
 }
