@@ -23,6 +23,7 @@ from urllib.parse import urlparse
 import environ
 
 from .cloudrun_helpers import MetadataError, get_service_url, get_project_id
+from corsheaders.defaults import default_headers
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -124,6 +125,10 @@ CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = "avocano_api.wsgi.application"
 
+CORS_ALLOW_HEADERS = (
+    *default_headers,
+    "X-Cloud-Trace-Context",
+)
 
 # Database
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases

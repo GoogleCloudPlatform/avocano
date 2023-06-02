@@ -32,6 +32,9 @@ export const getProduct = async productId => {
     try {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: 'GET',
+        headers: {
+          "X-Cloud-Trace-Context" : `${crypto.randomUUID().replace(/-/g,"")}/${Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)};o=1`
+      },  
         ...baseRequest,
       });
       product = await response.json();
