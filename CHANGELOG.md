@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.8.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.8.0...v1.8.1) (2023-05-31)
+
+
+### 🧹 Chores
+
+* **deps:** update github actions ([#260](https://github.com/GoogleCloudPlatform/avocano/issues/260)) ([d65d050](https://github.com/GoogleCloudPlatform/avocano/commit/d65d050eadf7b0f0bd9ce698444356d1eaf10de0))
+
+
+### 🐞 Bug Fixes
+
+* **issue-149:** update email validation on input change ([#237](https://github.com/GoogleCloudPlatform/avocano/issues/237)) ([a4ebdc8](https://github.com/GoogleCloudPlatform/avocano/commit/a4ebdc80a90e44b119bc590e398ca3a01130e853))
+* **minor:** formatting shell script ([#239](https://github.com/GoogleCloudPlatform/avocano/issues/239)) ([54213d6](https://github.com/GoogleCloudPlatform/avocano/commit/54213d648ca0670e0bd3dc3518b52e5905e4d19c))
+
 ## [1.8.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.7.0...v1.8.0) (2023-05-09)
 
 
