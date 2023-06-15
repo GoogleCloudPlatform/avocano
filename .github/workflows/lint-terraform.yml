@@ -25,4 +25,4 @@ jobs:
       - name: Analysing the code with terraform
         timeout-minutes: 5
         run: |
-          terraform fmt -check
+          terraform fmt -check -diff
