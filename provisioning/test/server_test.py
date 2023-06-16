@@ -57,6 +57,3 @@ def test_server_api_content(cloudrun_url):
         endpoint_url = base_json[endpoint]
         response = httpclient.get(endpoint_url)
         assert len(response.json()) > 0
-
-
-

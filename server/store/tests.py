@@ -78,8 +78,7 @@ class CartSerializerErrorsTest(TransactionTestCase):
 
 
 class CartRequestTest(TransactionTestCase):
-
-    def setUp(self): 
+    def setUp(self):
         Product.objects.create(
             id=1,
             name="test",
@@ -122,7 +121,6 @@ class CartRequestTest(TransactionTestCase):
         self.assertEqual(response.status_code, 501)
         self.assertEqual(response.json()["status"], "invalid_choice")
 
-
     def test_cart_invalid_email(self):
         data = {
             "payment": {"method": "collect"},
@@ -138,7 +136,6 @@ class CartRequestTest(TransactionTestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json()["status"], "validation_error")
 
-
     def test_cart_insufficient_inventory(self):
         data = {
             "payment": {"method": "collect"},
@@ -153,7 +150,6 @@ class CartRequestTest(TransactionTestCase):
         )
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.json()["status"], "insufficient_product")
-
 
     def test_cart_invalid_inventory(self):
         data = {

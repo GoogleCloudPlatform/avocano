@@ -34,7 +34,6 @@ class Command(BaseCommand):
         parser.add_argument("--base-font", type=str)
 
     def handle(self, *args, **options):
-
         # Deacivate any existing active site configs
         SiteConfig.objects.filter(active=True).update(active=False)
 
