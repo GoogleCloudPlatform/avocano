@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("store", "0003_alter_testimonial_reviewer_location"),
     ]

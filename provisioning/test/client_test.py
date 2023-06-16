@@ -90,7 +90,7 @@ def test_cart_interaction(firebase_url, page: Page):
 
     expect(page.locator(".dialogWrapper")).to_have_text(re.compile("Wonderful news!"))
     page.get_by_role("button", name="close").click()
-    
+
     page.goto(firebase_url, wait_until="networkidle")
     expect(page.locator(".shoppingCart")).to_have_text(re.compile("1"))
 
