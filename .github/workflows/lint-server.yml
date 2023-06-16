@@ -28,4 +28,4 @@ jobs:
       - name: Analysing the code with black
         timeout-minutes: 20
         run: |
-            black **/*.py
+            black --check **/*.py

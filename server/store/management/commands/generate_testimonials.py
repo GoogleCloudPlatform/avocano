@@ -40,7 +40,6 @@ class Command(BaseCommand):
 
         for p in products:
             for _ in range(count):
-
                 t = Testimonial(
                     product_id=p,
                     reviewer_name=fake.first_name(),
@@ -51,4 +50,6 @@ class Command(BaseCommand):
                 )
                 t.save()
 
-        self.stdout.write(f"Generated {count} testimonials across {len(products)} products.")
+        self.stdout.write(
+            f"Generated {count} testimonials across {len(products)} products."
+        )
