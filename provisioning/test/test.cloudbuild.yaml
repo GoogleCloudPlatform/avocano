@@ -12,8 +12,7 @@ steps:
     script: |
         #!/bin/bash
         python -m pip install -r test/requirements.txt
-        playwright install-deps  
-        playwright install
+        playwright install --with-deps
         python -m pytest
 
 substitutions:
