@@ -64,8 +64,10 @@ steps:
       firebase deploy --project $PROJECT_ID --only hosting
 
   # Optionally run tests, confirming deployment (run with '--substitutions=_RUN_TESTS=yes')
+  # Use Debian 11 Bullseye until Playwright supports Debian 12 Bookworm
+  #   - https://playwright.dev/python/docs/intro#system-requirements
   - id: "test deployment"
-    name: python:3.11-slim
+    name: python:3.11-slim-bullseye
     dir: provisioning
     env:
       - _RUN_TESTS=$_RUN_TESTS
@@ -78,8 +80,7 @@ steps:
       fi
 
       python -m pip install -r test/requirements.txt
-      playwright install-deps
-      playwright install
+      playwright install --with-deps
       python -m pytest
 
 timeout: 1800s

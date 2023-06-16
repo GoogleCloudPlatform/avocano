@@ -17,8 +17,7 @@ Install the dependencies
 
 ```
 python -m pip install -r test/requirements.txt
-playwright install-deps  
-playwright install
+playwright install --with-deps
 ```
 
 Then run the tests: 
