@@ -1,8 +1,11 @@
 steps:
 
   # Only run tests against the current project
+  # Use latest Python version
+  # Use Debian 11 Bullseye until Playwright supports Debian 12 Bookworm
+  #   - https://playwright.dev/python/docs/intro#system-requirements
   - id: "test"
-    name: python:3.10-slim
+    name: python:3.11-slim-bullseye
     env:
       - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
     dir: provisioning
