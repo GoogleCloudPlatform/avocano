@@ -22,7 +22,7 @@ echo "🔧 configure parent folder $PARENT_FOLDER"
 export ORGANIZATION=$(gcloud organizations list --format "value(name)")
 echo "🗜 configure organisation $ORGANIZATION"
 
-export BILLING_ACCOUNT=$(gcloud beta billing projects describe ${PARENT_PROJECT} --format="value(billingAccountName)" || sed -e 's/.*\///g')
+export BILLING_ACCOUNT=$(gcloud beta billing projects describe ${PARENT_PROJECT} --format="value(billingAccountName)" | sed -e 's/.*\///g')
 echo "💳 configure billing account $BILLING_ACCOUNT"
 
 export PARENT_PROJECTNUM=$(gcloud projects describe ${PARENT_PROJECT} --format='value(projectNumber)')

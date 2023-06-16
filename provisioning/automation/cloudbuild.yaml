@@ -24,8 +24,11 @@ steps:
         "--project=$_CI_PROJECT"
       ]
 
+
+  # Use Debian 11 Bullseye until Playwright supports Debian 12 Bookworm
+  #   - https://playwright.dev/python/docs/intro#system-requirements
   - id: "test"
-    name: python:3.11-slim
+    name: python:3.11-slim-bullseye
     dir: provisioning
     env: 
       - 'CI_PROJECT=$_CI_PROJECT'
@@ -33,8 +36,7 @@ steps:
         #!/bin/bash
 
         python -m pip install -r test/requirements.txt
-        playwright install-deps
-        playwright install
+        playwright install --with-deps
         python -m pytest
 
 
