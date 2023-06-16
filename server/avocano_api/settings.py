@@ -105,9 +105,19 @@ if CLOUDRUN_SERVICE_URL:
 
     # Firebase hosting has multiple default URLs, so add those as well.
     project_id = get_project_id()
+
+    # If a deployment suffix is provided, presume this is being used as
+    # the Firebase Site URL, rather than just the default site (project-id).
+    # From variable `random_suffix` in https://github.com/GoogleCloudPlatform/terraform-dynamic-python-webapp/blob/main/infra/variables.tf#L44
+    DEPLOYMENT_SUFFIX = env("DEPLOYMENT_SUFFIX", default=None)
+    if DEPLOYMENT_SUFFIX:
+        firebase_site_id = f"{project_id}-{DEPLOYMENT_SUFFIX}"
+    else:
+        firebase_site_id = project_id
+
     firebase_hosts = [
-        f"https://{project_id}.web.app",
-        f"https://{project_id}.firebaseapp.com",
+        f"https://{firebase_site_id}.web.app",
+        f"https://{firebase_site_id}.firebaseapp.com",
     ]
 
     CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts
