@@ -211,6 +211,7 @@ export const checkout = async payload => {
 export const getSiteConfig = async () => {
   const { API_URL } = getConfig();
   let config;
+  let errors;
 
   try {
     const response = await fetch(`${API_URL}/active/site_config/`, {
@@ -219,7 +220,12 @@ export const getSiteConfig = async () => {
     });
     config = await response.json();
   } catch (error) {
-    console.error(error);
+      errors = [{"error": "placeholder error"}]
+  } 
+
+  if (errors) {
+    console.error(errors);
+    config = { errors }
   }
 
   return config;
