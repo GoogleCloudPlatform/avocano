@@ -22,7 +22,7 @@ export class Product extends LitElement {
   static get properties() {
     return {
       productId: { type: Number },
-      updateParent: { type: Function },
+      updateParent: { type: Function }
     };
   }
 
@@ -42,8 +42,10 @@ export class Product extends LitElement {
     this.updateParent = () => {};
   }
 
+  //TODO(glasnt): Unsure why this is not firstUpdated, but without it, loading different productIds 'caches'(?) 
   async updated() {
     const prevItem = this.state.productItem;
+    const prevStatus = this.state.apiError?.status
     let productItem;
 
     // Fetch the product
@@ -56,18 +58,29 @@ export class Product extends LitElement {
         productItem,
       };
 
+      //BUG(glasnt): going from 404 page to actual page doesn't reload.
+
       // Only update if the previously loaded product
       // is different than the requested product
-      if (prevItem?.id !== this.productId) {
+      if (productItem?.apiError?.status != 404 && prevItem?.id !== this.productId ) {
+        this.requestUpdate();
+      }
+      // If there was an error, make sure this is captured. 
+      if (productItem?.apiError && prevStatus !== 404) { 
+        this.state.apiError = productItem.apiError
         this.requestUpdate();
       }
     }
   }
 
   render() {
-    const { status, productItem } = this.state;
+    const { status, productItem, apiError } = this.state;
 
-    return html`
+    if (apiError) { 
+      return html`<app-error .apiError=${apiError}></app-error>`
+    }
+
+    return  html`
       <div class="productBase">
         ${status === 'loading'
           ? html`<p>loading...</p>`

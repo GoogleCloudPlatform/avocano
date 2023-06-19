@@ -46,13 +46,19 @@ export class Home extends LitElement {
       productItem,
     };
 
+    if (productItem?.apiError) { 
+      this.state.apiError = productItem.apiError
+    }
+
     this.requestUpdate();
   }
 
   render() {
-    const { status, productItem } = this.state;
+    const { status, productItem, apiError } = this.state;
 
-    return html`
+    return apiError
+    ? html`<app-error .apiError=${apiError}></app-error>`
+    : html`
       <div class="homeBase">
         ${status === 'loading'
           ? html`<p class="loading">loading... 🥑</p>`

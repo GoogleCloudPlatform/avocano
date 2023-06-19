@@ -79,18 +79,15 @@ export class AvocanoShell extends router(LitElement) {
     super.connectedCallback();
 
     const config = await getSiteConfig();
-
     // Show loading animation only when
     // site config is unavailable
     if (config) {
-      if (config.errors) { 
-        // An error was encountered, pass it along to the UI. 
-        this.state.apiErrors = config.errors
-
-        //this.requestUpdate();
-        //return;
-      }
       this.state.loading = false;
+    }
+
+    if (config?.apiError) { 
+      // An error was encountered, pass it along to the UI. 
+      this.state.apiError = config.apiError
     }
 
     // Set django site config properties as
@@ -133,11 +130,11 @@ export class AvocanoShell extends router(LitElement) {
   }
 
   render() {
-    const { config, loading, apiErrors } = this.state;
+    const { config, loading, apiError } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
-    return apiErrors 
-      ? html`<app-error .errorMessage=${apiErrors}></app-error>`
+    return apiError 
+      ? html`<app-error .apiError=${apiError}></app-error>`
       : loading
       ? html`<app-loading></app-loading>`
       : html`<app-header

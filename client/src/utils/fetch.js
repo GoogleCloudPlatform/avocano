@@ -27,10 +27,14 @@ const baseRequest = {
 export const getProduct = async productId => {
   const { API_URL } = getConfig();
   let product;
+  let response;
+  let apiError;
+  let url;
 
   if (productId) {
     try {
-      const response = await fetch(`${API_URL}/products/${productId}`, {
+      url = `${API_URL}/products/${productId}`
+      response = await fetch(url, {
         method: 'GET',
         ...baseRequest,
       });
@@ -40,6 +44,15 @@ export const getProduct = async productId => {
     }
   } else {
     console.error('Error: id required');
+  }
+
+  if (response?.status == 404) {
+    apiError = {message: "Product not found", url: url, error: response.statusText, status: response.status}
+  }
+
+  if (apiError) {
+    console.error(apiError);
+    product = { apiError }
   }
 
   return product;
@@ -54,15 +67,27 @@ export const getProduct = async productId => {
 export const getActiveProduct = async () => {
   const { API_URL } = getConfig();
   let activeProduct;
+  let apiError;
+  let url; 
+  let response;
 
   try {
-    const response = await fetch(`${API_URL}/active/product/`, {
+    url = `${API_URL}/active/product/`
+    response = await fetch(url, {
       method: 'GET',
       ...baseRequest,
     });
     activeProduct = await response.json();
   } catch (error) {
     console.error(error);
+  }
+  if (response?.status == 404) {
+    apiError = {message: "No active products found. Have you created any?", error: response.statusText, url: url}
+  }
+
+  if (apiError) {
+    console.error(apiError);
+    activeProduct = { apiError }
   }
 
   return activeProduct;
@@ -79,8 +104,13 @@ export const buyProduct = async (productId, callback) => {
 
   if (productId) {
     try {
+
+      // Retrieve csrf token from server
+      const csrfToken = await getCSRFToken();
+
       await fetch(`${API_URL}/products/${productId}/purchase/`, {
         method: 'POST',
+        headers: { 'X-CSRFToken': csrfToken },
         ...baseRequest,
       });
       callback && callback();
@@ -210,32 +240,39 @@ export const checkout = async payload => {
  */
 export const getSiteConfig = async () => {
   const { API_URL } = getConfig();
+  let url; 
   let config;
-  let errors;
+  let apiError;
+  let response; 
 
   try {
-    const response = await fetch(`${API_URL}/active/site_config/`, {
+    url = `${API_URL}/active/site_config/`
+    response = await fetch(url, {
       method: 'GET',
       ...baseRequest,
     });
     config = await response.json();
-  } catch (error) {
-      let message = { message: error.toString() }
+  } catch (error) {      
       //TODO(glasnt) this should be generic and not in this fetch method, nor probably in this file. 
-      if (error.name == "SyntaxError") { 
-        message.debugging = "The API didn't respond with valid JSON."
-      } else if (error.name == "TypeError") { 
-        message.debugging = "The API didn't respond. Is it down?"
-      } else { 
-        message.debugging = "Returned " + error.name
+      apiError = { error: error.toString(), url: url}
+      if (error instanceof SyntaxError) { 
+        apiError.message = `Server returned: ${response?.status} = ${response?.statusText}`
       }
-
-      errors = [message]
+      else if (error instanceof TypeError) { 
+        apiError.message = `The API didn't respond. Is the API up?`
+      } else { 
+        apiError.message = `Returned ${error.name}`
+      }
   } 
 
-  if (errors) {
-    console.error(errors);
-    config = { errors }
+  if (response?.status == 404) { 
+    // No active site config. 
+    apiError = {message: "No active site config found. Has the database been primed?", error: response.statusText, url: url}
+  }
+
+  if (apiError) {
+    console.error(apiError);
+    config = { apiError }
   }
 
   return config;

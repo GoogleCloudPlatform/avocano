@@ -55,6 +55,8 @@ export class ProductList extends navigator(LitElement) {
         <div class="productWrapper">
           ${this.state.status === 'loading'
             ? html`<p>loading...</p>`
+            : this.state.products.length == 0
+            ? html`<p>No products found.</p>`
             : this.state.products.map(
                 item =>
                   html`
