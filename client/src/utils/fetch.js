@@ -256,7 +256,7 @@ export const getSiteConfig = async () => {
       //TODO(glasnt) this should be generic and not in this fetch method, nor probably in this file. 
       apiError = { error: error.toString(), url: url}
       if (error instanceof SyntaxError) { 
-        apiError.message = `Server returned: ${response?.status} = ${response?.statusText}`
+        apiError.message = `Server returned ${response?.status} - ${response?.statusText}`
       }
       else if (error instanceof TypeError) { 
         apiError.message = `The API didn't respond. Is the API up?`
@@ -267,7 +267,7 @@ export const getSiteConfig = async () => {
 
   if (response?.status == 404) { 
     // No active site config. 
-    apiError = {message: "No active site config found. Has the database been primed?", error: response.statusText, url: url}
+    apiError = {message: "No active site config found. Has the database been configured?", error: response.statusText, url: url}
   }
 
   if (apiError) {

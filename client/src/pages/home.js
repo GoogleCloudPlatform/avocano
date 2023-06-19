@@ -58,6 +58,7 @@ export class Home extends LitElement {
 
     return apiError
     ? html`<app-error .apiError=${apiError}></app-error>`
+    //? html`<div class="homeBase"><p>No active product found</a></div>`
     : html`
       <div class="homeBase">
         ${status === 'loading'
