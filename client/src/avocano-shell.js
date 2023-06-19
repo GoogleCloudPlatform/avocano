@@ -82,6 +82,13 @@ export class AvocanoShell extends router(LitElement) {
     // Show loading animation only when
     // site config is unavailable
     if (config) {
+      if (config.errors) { 
+        // An error was encountered, pass it along to the UI. 
+        this.state.apiErrors = config.errors
+
+        //this.requestUpdate();
+        //return;
+      }
       this.state.loading = false;
     }
 
@@ -130,7 +137,7 @@ export class AvocanoShell extends router(LitElement) {
   }
 
   render() {
-    const { config, loading, apiError } = this.state;
+    const { config, loading, apiErrors } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
     if (apiError) {
