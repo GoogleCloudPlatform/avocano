@@ -220,7 +220,17 @@ export const getSiteConfig = async () => {
     });
     config = await response.json();
   } catch (error) {
-      errors = [{"error": "placeholder error"}]
+      let message = { message: error.toString() }
+      //TODO(glasnt) this should be generic and not in this fetch method, nor probably in this file. 
+      if (error.name == "SyntaxError") { 
+        message.debugging = "The API didn't respond with valid JSON."
+      } else if (error.name == "TypeError") { 
+        message.debugging = "The API didn't respond. Is it down?"
+      } else { 
+        message.debugging = "Returned " + error.name
+      }
+
+      errors = [message]
   } 
 
   if (errors) {

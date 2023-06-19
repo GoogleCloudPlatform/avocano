@@ -28,6 +28,7 @@ import './pages/product.js';
 import './pages/product-list.js';
 import './pages/shipping.js';
 import './pages/not-found.js';
+import './pages/error.js';
 
 // Components
 import './components/checkout-form.js';
@@ -136,7 +137,7 @@ export class AvocanoShell extends router(LitElement) {
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
     return apiErrors 
-      ? html`<app-error>Error: ${JSON.stringify(apiErrors)}</app-error>`
+      ? html`<app-error .errorMessage=${apiErrors}></app-error>`
       : loading
       ? html`<app-loading></app-loading>`
       : html`<app-header
