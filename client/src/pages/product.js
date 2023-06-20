@@ -60,14 +60,14 @@ export class Product extends LitElement {
 
       //BUG(glasnt): going from 404 page to actual page doesn't reload.
 
-      // Only update if the previously loaded product
-      // is different than the requested product
-      if (productItem?.apiError?.status != 404 && prevItem?.id !== this.productId ) {
+      // If there was an error, make sure this is captured. 
+      if (productItem?.apiError) { 
+        this.state.apiError = productItem.apiError
         this.requestUpdate();
       }
-      // If there was an error, make sure this is captured. 
-      if (productItem?.apiError && prevStatus !== 404) { 
-        this.state.apiError = productItem.apiError
+      // Only update if the previously loaded product
+      // is different than the requested product
+      if (prevItem?.id !== this.productId) {
         this.requestUpdate();
       }
     }
@@ -80,7 +80,7 @@ export class Product extends LitElement {
       return html`<app-error .apiError=${apiError}></app-error>`
     }
 
-    return  html`
+    return html`
       <div class="productBase">
         ${status === 'loading'
           ? html`<p>loading...</p>`

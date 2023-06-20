@@ -26,10 +26,7 @@ const baseRequest = {
  */
 export const getProduct = async productId => {
   const { API_URL } = getConfig();
-  let product;
-  let response;
-  let apiError;
-  let url;
+  let product, response, apiError, url;
 
   if (productId) {
     try {
@@ -46,9 +43,7 @@ export const getProduct = async productId => {
     console.error('Error: id required');
   }
 
-  if (response?.status == 404) {
-    apiError = {message: "Product not found", url: url, error: response.statusText, status: response.status}
-  }
+  apiError = parse404(apiError, url, response, "Product not found. Does the product exist in the API?")
 
   if (apiError) {
     console.error(apiError);
@@ -66,10 +61,7 @@ export const getProduct = async productId => {
  */
 export const getActiveProduct = async () => {
   const { API_URL } = getConfig();
-  let activeProduct;
-  let apiError;
-  let url; 
-  let response;
+  let activeProduct, apiError, url, response;
 
   try {
     url = `${API_URL}/active/product/`
@@ -81,9 +73,8 @@ export const getActiveProduct = async () => {
   } catch (error) {
     console.error(error);
   }
-  if (response?.status == 404) {
-    apiError = {message: "No active products found. Have you created any?", error: response.statusText, url: url}
-  }
+
+  apiError = parse404(apiError, url, response, "No active products found. Have you created any?") 
 
   if (apiError) {
     console.error(apiError);
@@ -240,10 +231,7 @@ export const checkout = async payload => {
  */
 export const getSiteConfig = async () => {
   const { API_URL } = getConfig();
-  let url; 
-  let config;
-  let apiError;
-  let response; 
+  let url, config, apiError, response;
 
   try {
     url = `${API_URL}/active/site_config/`
@@ -252,23 +240,11 @@ export const getSiteConfig = async () => {
       ...baseRequest,
     });
     config = await response.json();
-  } catch (error) {      
-      //TODO(glasnt) this should be generic and not in this fetch method, nor probably in this file. 
-      apiError = { error: error.toString(), url: url}
-      if (error instanceof SyntaxError) { 
-        apiError.message = `Server returned ${response?.status} - ${response?.statusText}`
-      }
-      else if (error instanceof TypeError) { 
-        apiError.message = `The API didn't respond. Is the API up?`
-      } else { 
-        apiError.message = `Returned ${error.name}`
-      }
-  } 
-
-  if (response?.status == 404) { 
-    // No active site config. 
-    apiError = {message: "No active site config found. Has the database been configured?", error: response.statusText, url: url}
+  } catch (error) {
+    apiError = parseError(url, response, error)
   }
+
+  apiError = parse404(apiError, url, response, "No active site config found. Has the database been configured?")
 
   if (apiError) {
     console.error(apiError);
@@ -277,3 +253,33 @@ export const getSiteConfig = async () => {
 
   return config;
 };
+
+// Process common errors with human information
+function parseError(url, response, error) {
+  let apiError = { error: error.toString(), url: url }
+
+  if (error instanceof SyntaxError) {
+    apiError.message = `Server returned ${response?.status} - ${response?.statusText}`
+  }
+  else if (error instanceof TypeError) {
+    apiError.message = `The API didn't respond. Is the API server up?`
+  } else {
+    apiError.message = `Returned ${error.name}`
+  }
+  return apiError
+}
+
+// Process a 404 error with human information
+function parse404(apiError, url, response, message) {
+  if (apiError) {  // if we've already got an error, don't override in this case
+    return apiError
+  }
+
+  if (response?.status == 404) {
+    apiError = {
+      message: message,
+      error: response.statusText, url: url
+    }
+  }
+  return apiError
+}

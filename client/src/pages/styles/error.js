@@ -15,10 +15,6 @@
 import { css } from 'lit';
 
 const styles = css`
-  h1 {
-    color: var(--color-secondary);
-  }
-
   .errorContainer {
     display: flex;
     align-items: center;
@@ -46,7 +42,6 @@ const styles = css`
   }
   .errorDetails {
     flex-direction: column;
-
   }
 `;
 

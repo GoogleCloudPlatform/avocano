@@ -133,9 +133,11 @@ export class AvocanoShell extends router(LitElement) {
     const { config, loading, apiError } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
-    return apiError 
-      ? html`<app-error .apiError=${apiError}></app-error>`
-      : loading
+    if (apiError) { 
+      return html`<app-error .apiError=${apiError}></app-error>`
+    }
+    
+    return loading
       ? html`<app-loading></app-loading>`
       : html`<app-header
             .headerTitle=${config.site_name}
