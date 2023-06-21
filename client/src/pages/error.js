@@ -40,6 +40,7 @@ export class Error extends LitElement {
         <div class="errorMessage">${this.apiError.message}</div>
         <div class="errorURL"><a href="${this.apiError.url}" target=_blank>${this.apiError.url}</a></div>
         <div class="errorError">${this.apiError.error}</div>
+        <div class="errorError">${this.apiError.extra_error}</div>
         </div>
       </div>
     `;

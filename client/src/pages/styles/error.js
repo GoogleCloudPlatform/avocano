@@ -20,7 +20,7 @@ const styles = css`
     align-items: center;
     justify-content: center;
     margin: 60px;
-    width: 500px;
+    width: 800px;
   }
   .errorImage { 
     margin: 50px; 

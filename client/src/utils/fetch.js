@@ -18,268 +18,124 @@ const baseRequest = {
   credentials: 'include',
 };
 
-/**
- * getProduct()
- *
- * Retrieves product at specified id defined from django api
- * GET /product/{productId}
- */
+
+
+async function _getAPI(uri) {
+  const { API_URL } = getConfig();
+
+  let url = `${API_URL}/${uri}`
+  let apiError = { url: url };
+  let response, data
+
+  try {
+    response = await fetch(url, {
+      method: 'GET',
+      ...baseRequest,
+    });
+    data = await response.clone().json();
+  } catch (error) {
+    console.error(error);
+
+    apiError.error = error.toString()
+
+    // Based on common reasons for failure cases, make nicer messages
+
+    // Network Errors
+    if (error instanceof TypeError && error.message == "Failed to fetch") {
+      apiError.message = `The API didn't respond. Is the API server up?`
+
+      // Django Errors
+    } else if (error instanceof SyntaxError && error.message.includes("is not valid JSON")) {
+      apiError.message = `The server returned invalid JSON. Is Django returning an error?`
+      apiError.error = `Error: "${response.statusText}"`
+
+      // try and parse out something more from Django's debugging screen
+      data = await response.text()
+      if (data.includes("exception_value")) { // css class from Django default debug screen
+        let myDoc = new DOMParser();
+        let djDoc = myDoc.parseFromString(data, 'text/html')
+        let djError = djDoc.getElementsByClassName("exception_value")[0].innerText
+
+        apiError.extra_error = `Django Debug: "${djError}"`
+      }
+
+      // Fallback Error
+    } else {
+      apiError.message = `Request encountered an error: ${error.name}`
+    }
+    return { apiError }
+  }
+
+  // Capture not OK responses
+  if (!response?.ok) {
+    apiError.message = response?.text
+    apiError.error = `Server returned ${response?.status} - ${response?.statusText}`
+    return { apiError }
+  }
+
+  return data
+
+}
+
+async function _postAPI(uri, callback) {
+
+  const { API_URL } = getConfig();
+
+  let url = `${API_URL}/${uri}`
+  try {
+    const csrfToken = _getAPI("csrf_token")
+
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'X-CSRFToken': csrfToken },
+      ...baseRequest,
+    });
+    callback && callback(); // callbacks handle error message parsing directly. 
+  } catch (error) {
+    console.error(error);
+  }
+
+  return { data }
+}
+
 export const getProduct = async productId => {
-  const { API_URL } = getConfig();
-  let product, response, apiError, url;
-
-  if (productId) {
-    try {
-      url = `${API_URL}/products/${productId}`
-      response = await fetch(url, {
-        method: 'GET',
-        ...baseRequest,
-      });
-      product = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.error('Error: id required');
-  }
-
-  apiError = parse404(apiError, url, response, "Product not found. Does the product exist in the API?")
-
-  if (apiError) {
-    console.error(apiError);
-    product = { apiError }
-  }
-
-  return product;
+  return _getAPI(`products/${productId}`)
 };
 
-/**
- * getActiveProduct()
- *
- * Retrieves active product as defined from django api
- * GET /active/product/
- */
 export const getActiveProduct = async () => {
-  const { API_URL } = getConfig();
-  let activeProduct, apiError, url, response;
-
-  try {
-    url = `${API_URL}/active/product/`
-    response = await fetch(url, {
-      method: 'GET',
-      ...baseRequest,
-    });
-    activeProduct = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-
-  apiError = parse404(apiError, url, response, "No active products found. Have you created any?") 
-
-  if (apiError) {
-    console.error(apiError);
-    activeProduct = { apiError }
-  }
-
-  return activeProduct;
+  return _getAPI('active/product/')
 };
 
-/**
- * buyProduct()
- *
- * Achieves "product" purchase as defined from django api
- * POST /products/{productId}/purchase/
- */
 export const buyProduct = async (productId, callback) => {
-  const { API_URL } = getConfig();
-
-  if (productId) {
-    try {
-
-      // Retrieve csrf token from server
-      const csrfToken = await getCSRFToken();
-
-      await fetch(`${API_URL}/products/${productId}/purchase/`, {
-        method: 'POST',
-        headers: { 'X-CSRFToken': csrfToken },
-        ...baseRequest,
-      });
-      callback && callback();
-    } catch (error) {
-      console.error(error);
-    }
-  } else {
-    console.error('Error: id required');
-  }
+  _postAPI(`products/${productId}/purchase/`, callback)
 };
 
-/**
- * getProductTestimonials()
- *
- * Retrieves testimonials for product as defined from django api
- * GET /testimonials/{productId}
- */
 export const getProductTestimonials = async productId => {
-  const { API_URL } = getConfig();
-  let testimonials = [];
-
   if (productId) {
-    try {
-      const response = await fetch(
-        `${API_URL}/testimonials/?product_id=${productId}`,
-        {
-          method: 'GET',
-          ...baseRequest,
-        }
-      );
-      testimonials = response.json();
-    } catch (error) {
-      console.error(error);
-    }
+    return _getAPI(`testimonials/?product_id=${productId}`)
   } else {
-    console.error('Error: id required');
+    let errorMessage = "productId required"
+    console.log(errorMessage)
+    return [{ message: errorMessage }];
   }
-
-  return testimonials;
 };
 
-/**
- * getProductList()
- *
- * Retrieves product list as defined from django api
- * GET /products
- */
 export const getProductList = async () => {
-  const { API_URL } = getConfig();
-  let products;
-
-  try {
-    const response = await fetch(`${API_URL}/products/`, {
-      method: 'GET',
-      ...baseRequest,
-    });
-    products = await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-
-  return products;
+  return _getAPI(`products/`)
 };
 
-/**
- * getCSRFToken()
- *
- * GET /csrf_token
- */
-const getCSRFToken = async () => {
-  const { API_URL } = getConfig();
-  let token;
-
-  try {
-    const response = await fetch(`${API_URL}/csrf_token`, baseRequest);
-    token = (await response.json())?.csrfToken;
-  } catch (error) {
-    throw new Error(error);
-  }
-
-  return token;
-};
-
-/**
- * checkout()
- *
- * POST /checkout
- */
-export const checkout = async payload => {
-  const { API_URL } = getConfig();
-  let checkoutStatus;
-  let errors;
-
-  if (payload?.items?.length) {
-    try {
-      // Retrieve csrf token from server
-      const csrfToken = await getCSRFToken();
-
-      // Submit form payload and pass back csrf token
-      const response = await fetch(`${API_URL}/checkout`, {
-        method: 'POST',
-        headers: { 'X-CSRFToken': csrfToken },
-        body: JSON.stringify(payload),
-        ...baseRequest,
-      });
-      checkoutStatus = await response.json();
-    } catch (error) {
-      errors = [error];
-    }
-  } else {
-    errors = [{ message: 'Insufficient information to process checkout.' }];
-  }
-
-  if (errors) {
-    console.error(errors);
-    checkoutStatus = { errors };
-  }
-
-  return checkoutStatus;
-};
-
-/**
- * getSiteConfig()
- *
- * Retrieves site_config as defined from django api
- * GET /active/site_config
- */
 export const getSiteConfig = async () => {
-  const { API_URL } = getConfig();
-  let url, config, apiError, response;
-
-  try {
-    url = `${API_URL}/active/site_config/`
-    response = await fetch(url, {
-      method: 'GET',
-      ...baseRequest,
-    });
-    config = await response.json();
-  } catch (error) {
-    apiError = parseError(url, response, error)
-  }
-
-  apiError = parse404(apiError, url, response, "No active site config found. Has the database been configured?")
-
-  if (apiError) {
-    console.error(apiError);
-    config = { apiError }
-  }
-
-  return config;
+  return _getAPI('active/site_config')
 };
 
-// Process common errors with human information
-function parseError(url, response, error) {
-  let apiError = { error: error.toString(), url: url }
+export const checkout = async payload => {
+  if (payload?.items?.length) {
+    return _postAPI("checkout/")
 
-  if (error instanceof SyntaxError) {
-    apiError.message = `Server returned ${response?.status} - ${response?.statusText}`
-  }
-  else if (error instanceof TypeError) {
-    apiError.message = `The API didn't respond. Is the API server up?`
   } else {
-    apiError.message = `Returned ${error.name}`
-  }
-  return apiError
-}
-
-// Process a 404 error with human information
-function parse404(apiError, url, response, message) {
-  if (apiError) {  // if we've already got an error, don't override in this case
-    return apiError
+    let errorMessage = 'Insufficient information to process checkout.'
+    console.log(errorMessage)
+    return [{ message: errorMessage }];
   }
 
-  if (response?.status == 404) {
-    apiError = {
-      message: message,
-      error: response.statusText, url: url
-    }
-  }
-  return apiError
-}
+};
