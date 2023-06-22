@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import { navigator } from 'lit-element-router';
+import { navigator } from '../vendor/lit-element-router-2.0.3a/lit-element-router.js';
 import { getProductList } from '../utils/fetch.js';
 import styles from './styles/product.js';
 

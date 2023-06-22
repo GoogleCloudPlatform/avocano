@@ -28,7 +28,6 @@ export class Error extends LitElement {
   }
 
   render() {
-    // TODO(glasnt): Nicer styling
     const sadimage = new URL('../../assets/sad-avocado.png', import.meta.url).href;
     return html`
       <div class="errorContainer">

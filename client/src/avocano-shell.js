@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import { router } from 'lit-element-router';
+import { router } from './vendor/lit-element-router-2.0.3a/lit-element-router.js';
 import { getSiteConfig } from './utils/fetch.js';
 import { getConfig } from './utils/config.js';
 import cache from './utils/cache.js';

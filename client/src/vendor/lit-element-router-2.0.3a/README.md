@@ -1,0 +1,1 @@
+Vendored package: https://github.com/hamedasemi/lit-element-router/tree/v2.0.3
