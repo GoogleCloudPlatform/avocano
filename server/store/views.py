@@ -119,7 +119,6 @@ def checkout(request):
     if not serializer.is_valid():
         status_code = 400
         status = "validation_error"
-        breakpoint()
         if "payment" in serializer.errors:
             status_code = 501
             status = serializer.errors["payment"]["method"][0].code
