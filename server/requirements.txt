@@ -16,6 +16,7 @@ gunicorn
 
 google-api-python-client
 google-auth
+google-cloud-logging
 
 pyyaml
 model_bakery
