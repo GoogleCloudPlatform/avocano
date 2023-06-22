@@ -119,7 +119,9 @@ export function outlet(base) {
         attributeChangedCallback(...args) {
             super.attributeChangedCallback(...args);
 
-            args.some(arg => arg === 'active-route') && this.outlet();
+            // VENDORED FIX: https://github.com/hamedasemi/lit-element-router/pull/47
+            setTimeout(() => {
+                args.some(arg => arg === 'active-route') && this.outlet()});
         }
 
         connectedCallback(...args) {
