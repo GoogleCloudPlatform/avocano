@@ -6,7 +6,8 @@ export function stripExtraTrailingSlash(str) {
 }
 
 export function parseQuery(querystring) {
-    return querystring ? JSON.parse('{"' + querystring.substring(1).replace(/&/g, '","').replace(/=/g, '":"') + '"}') : {}
+    //VENDORED FIX: use URLSearchParams instead of re-implementing RFC3986 parsing
+    return Object.fromEntries(new URLSearchParams(querystring))
 }
 
 export function parseParams(pattern, uri) {
