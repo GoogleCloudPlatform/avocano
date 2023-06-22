@@ -85,9 +85,9 @@ export class AvocanoShell extends router(LitElement) {
       this.state.loading = false;
     }
 
-    if (config?.apiError) { 
-      // An error was encountered, pass it along to the UI. 
-      this.state.apiError = config.apiError
+    if (config?.apiError) {
+      // An error was encountered, pass it along to the UI.
+      this.state.apiError = config.apiError;
     }
 
     // Set django site config properties as
@@ -133,10 +133,10 @@ export class AvocanoShell extends router(LitElement) {
     const { config, loading, apiError } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
-    if (apiError) { 
-      return html`<app-error .apiError=${apiError}></app-error>`
+    if (apiError) {
+      return html`<app-error .apiError=${apiError}></app-error>`;
     }
-    
+
     return loading
       ? html`<app-loading></app-loading>`
       : html`<app-header

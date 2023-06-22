@@ -22,7 +22,7 @@ export class Product extends LitElement {
   static get properties() {
     return {
       productId: { type: Number },
-      updateParent: { type: Function }
+      updateParent: { type: Function },
     };
   }
 
@@ -56,9 +56,9 @@ export class Product extends LitElement {
         productItem,
       };
 
-      // If there was an error, make sure this is captured. 
-      if (productItem?.apiError) { 
-        this.state.apiError = productItem.apiError
+      // If there was an error, make sure this is captured.
+      if (productItem?.apiError) {
+        this.state.apiError = productItem.apiError;
         this.requestUpdate(); // BUG(glasnt): with this, the page API loops. Without, it doesn't update at all.
       }
       // Only update if the previously loaded product
@@ -72,8 +72,8 @@ export class Product extends LitElement {
   render() {
     const { status, productItem, apiError } = this.state;
 
-    if (apiError) { 
-      return html`<app-error .apiError=${apiError}></app-error>`
+    if (apiError) {
+      return html`<app-error .apiError=${apiError}></app-error>`;
     }
 
     return html`

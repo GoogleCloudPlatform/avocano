@@ -21,9 +21,9 @@ const baseRequest = {
 async function _getAPI(uri) {
   const { API_URL } = getConfig();
 
-  let url = `${API_URL}/${uri}`
+  let url = `${API_URL}/${uri}`;
   let apiError = { url: url };
-  let response, data
+  let response, data;
 
   try {
     response = await fetch(url, {
@@ -34,104 +34,107 @@ async function _getAPI(uri) {
   } catch (error) {
     console.error(error);
 
-    apiError.error = error.toString()
+    apiError.error = error.toString();
 
     // Based on common reasons for failure cases, make nicer messages
 
     // Network Errors
-    if (error instanceof TypeError && error.message == "Failed to fetch") {
-      apiError.message = `The API didn't respond. Is the API server up?`
+    if (error instanceof TypeError && error.message == 'Failed to fetch') {
+      apiError.message = `The API didn't respond. Is the API server up?`;
 
       // Django Errors
-    } else if (error instanceof SyntaxError && error.message.includes("is not valid JSON")) {
-      apiError.message = `The server returned invalid JSON. Is Django returning an error?`
-      apiError.error = `Error: "${response.statusText}"`
+    } else if (
+      error instanceof SyntaxError &&
+      error.message.includes('is not valid JSON')
+    ) {
+      apiError.message = `The server returned invalid JSON. Is Django returning an error?`;
+      apiError.error = `Error: "${response.statusText}"`;
 
       // try and parse out something more from Django's debugging screen
-      data = await response.text()
-      if (data.includes("exception_value")) { // css class from Django default debug screen
+      data = await response.text();
+      if (data.includes('exception_value')) {
+        // css class from Django default debug screen
         let myDoc = new DOMParser();
-        let djDoc = myDoc.parseFromString(data, 'text/html')
-        let djError = djDoc.getElementsByClassName("exception_value")[0].innerText
+        let djDoc = myDoc.parseFromString(data, 'text/html');
+        let djError =
+          djDoc.getElementsByClassName('exception_value')[0].innerText;
 
-        apiError.extra_error = `Django Debug: "${djError}"`
+        apiError.extra_error = `Django Debug: "${djError}"`;
       }
 
       // Fallback Error
     } else {
-      apiError.message = `Request encountered an error: ${error.name}`
+      apiError.message = `Request encountered an error: ${error.name}`;
     }
-    return { apiError }
+    return { apiError };
   }
 
   // Capture not OK responses
   if (!response?.ok) {
-    apiError.message = await response?.text()
-    apiError.error = `Server returned ${response?.status} - ${response?.statusText}`
-    return { apiError }
+    apiError.message = await response?.text();
+    apiError.error = `Server returned ${response?.status} - ${response?.statusText}`;
+    return { apiError };
   }
 
-  return data
+  return data;
 }
 
 async function _postAPI(uri, callback) {
   const { API_URL } = getConfig();
 
-  let url = `${API_URL}/${uri}`
+  let url = `${API_URL}/${uri}`;
   try {
-    const csrfToken = _getAPI("csrf_token")
+    const csrfToken = _getAPI('csrf_token');
 
     await fetch(url, {
       method: 'POST',
       headers: { 'X-CSRFToken': csrfToken },
       ...baseRequest,
     });
-    callback && callback(); // callbacks handle error message parsing directly. 
+    callback && callback(); // callbacks handle error message parsing directly.
   } catch (error) {
     console.error(error);
   }
 
-  return { data }
+  return { data };
 }
 
 export const getProduct = async productId => {
-  return _getAPI(`products/${productId}`)
+  return _getAPI(`products/${productId}`);
 };
 
 export const getActiveProduct = async () => {
-  return _getAPI('active/product/')
+  return _getAPI('active/product/');
 };
 
 export const buyProduct = async (productId, callback) => {
-  _postAPI(`products/${productId}/purchase/`, callback)
+  _postAPI(`products/${productId}/purchase/`, callback);
 };
 
 export const getProductTestimonials = async productId => {
   if (productId) {
-    return _getAPI(`testimonials/?product_id=${productId}`)
+    return _getAPI(`testimonials/?product_id=${productId}`);
   } else {
-    let errorMessage = "productId required"
-    console.log(errorMessage)
+    let errorMessage = 'productId required';
+    console.log(errorMessage);
     return [{ message: errorMessage }];
   }
 };
 
 export const getProductList = async () => {
-  return _getAPI(`products/`)
+  return _getAPI(`products/`);
 };
 
 export const getSiteConfig = async () => {
-  return _getAPI('active/site_config')
+  return _getAPI('active/site_config');
 };
 
 export const checkout = async payload => {
   if (payload?.items?.length) {
-    return _postAPI("checkout/")
-
+    return _postAPI('checkout/');
   } else {
-    let errorMessage = 'Insufficient information to process checkout.'
-    console.log(errorMessage)
+    let errorMessage = 'Insufficient information to process checkout.';
+    console.log(errorMessage);
     return [{ message: errorMessage }];
   }
-
 };

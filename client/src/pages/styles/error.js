@@ -22,23 +22,22 @@ const styles = css`
     margin: 60px;
     width: 800px;
   }
-  .errorImage { 
-    margin: 50px; 
+  .errorImage {
+    margin: 50px;
   }
 
-  .errorImage img { 
-    width: 80px; 
-    height: 80px; 
+  .errorImage img {
+    width: 80px;
+    height: 80px;
   }
 
-  .errorLeft { 
+  .errorLeft {
     display: flex;
     align-item: flex-start;
     flex-direction: column;
-
   }
-  .errorMessage { 
-    margin-bottom: 20px; 
+  .errorMessage {
+    margin-bottom: 20px;
   }
   .errorDetails {
     flex-direction: column;
