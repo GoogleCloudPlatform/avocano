@@ -25,6 +25,7 @@ from django.middleware.csrf import get_token
 from django.views.decorators.http import require_http_methods
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
+from google.cloud import logging
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
@@ -37,6 +38,9 @@ from store.serializers import (
     CartSerializer,
     CheckoutSerializer,
 )
+
+logging_client = logging.Client()
+logger = logging_client.logger("avocano_log")
 
 
 class ProductPurchaseException(APIException):
@@ -51,13 +55,6 @@ class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    class ProductPurchaseException(APIException):
-        status_code = 405
-        default_detail = {
-            "code": status_code,
-            "message": "Unable to complete purchase - no inventory",
-        }
-
     @action(detail=True, methods=["get", "post"])
     def purchase(self, request, pk):
         product = get_object_or_404(Product, id=pk)
@@ -68,7 +65,34 @@ class ProductViewSet(viewsets.ModelViewSet):
                 datetime=timezone.now(), product_id=product, unit_price=product.price
             )
         else:
+            # Log error, which can be alerted on using log-based alerting
+            logger.log_struct(
+                {
+                    "error": "INVENTORY_COUNT_ERROR",
+                    "message": "A purchase was attempted where there was insufficient inventory to fulfil the order.",
+                    "method": "ProductViewSet.purchase()",
+                    "product": product.id,
+                    "countRequested": 1,
+                    "countFulfilled": product.inventory_count,
+                },
+                severity="ERROR",
+            )
+
             raise ProductPurchaseException()
+
+        # If the transaction caused a product to sell out, log an error
+        if product.inventory_count == 0:
+            logger.log_struct(
+                {
+                    "error": "INVENTORY_SOLDOUT_ERROR",
+                    "message": "A purchase just caused a product to sell out. More inventory will be required.",
+                    "method": "ProductViewSet.purchase()",
+                    "product": product.id,
+                    "countRequested": 1,
+                    "countFulfilled": product.inventory_count,
+                },
+                severity="ERROR",
+            )
 
         serializer = ProductSerializer(product)
         return Response(serializer.data)

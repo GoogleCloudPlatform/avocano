@@ -15,10 +15,13 @@
 # limitations under the License.
 
 
-from rest_framework import serializers, status
-from rest_framework.exceptions import ValidationError, APIException
-from django.http import JsonResponse
+from google.cloud import logging
+from rest_framework import serializers
 from store.models import Product, SiteConfig, Testimonial
+
+
+logging_client = logging.Client()
+logger = logging_client.logger("avocano_log")
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -90,6 +93,20 @@ class CartItemSerializer(serializers.Serializer):
         requested = data["countRequested"]
         if product.inventory_count < requested:
             data["countFulfilled"] = product.inventory_count
+
+            # Log error, which can be alerted on using log-based alerting
+            logger.log_struct(
+                {
+                    "error": "INSUFFICIENT_PRODUCT_ERROR",
+                    "message": "A purchase was attempted where there was insufficient inventory to fulfil the order.",
+                    "product": product.id,
+                    "method": "CartItemSerializer.validate()",
+                    "countRequested": data["countRequested"],
+                    "countFulfilled": data["countFulfilled"],
+                },
+                severity="ERROR",
+            )
+
             raise serializers.ValidationError(
                 detail={"status": "insufficient_product", "items": data}
             )
