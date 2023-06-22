@@ -18,8 +18,6 @@ const baseRequest = {
   credentials: 'include',
 };
 
-
-
 async function _getAPI(uri) {
   const { API_URL } = getConfig();
 
@@ -68,17 +66,15 @@ async function _getAPI(uri) {
 
   // Capture not OK responses
   if (!response?.ok) {
-    apiError.message = response?.text
+    apiError.message = await response?.text()
     apiError.error = `Server returned ${response?.status} - ${response?.statusText}`
     return { apiError }
   }
 
   return data
-
 }
 
 async function _postAPI(uri, callback) {
-
   const { API_URL } = getConfig();
 
   let url = `${API_URL}/${uri}`

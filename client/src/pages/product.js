@@ -42,10 +42,8 @@ export class Product extends LitElement {
     this.updateParent = () => {};
   }
 
-  //TODO(glasnt): Unsure why this is not firstUpdated, but without it, loading different productIds 'caches'(?) 
   async updated() {
     const prevItem = this.state.productItem;
-    const prevStatus = this.state.apiError?.status
     let productItem;
 
     // Fetch the product
@@ -58,12 +56,10 @@ export class Product extends LitElement {
         productItem,
       };
 
-      //BUG(glasnt): going from 404 page to actual page doesn't reload.
-
       // If there was an error, make sure this is captured. 
       if (productItem?.apiError) { 
         this.state.apiError = productItem.apiError
-        this.requestUpdate();
+        this.requestUpdate(); // BUG(glasnt): with this, the page API loops. Without, it doesn't update at all.
       }
       // Only update if the previously loaded product
       // is different than the requested product
