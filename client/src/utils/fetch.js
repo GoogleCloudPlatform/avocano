@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import { getConfig } from '../utils/config.js';
+import { getDjangoError } from '../helpers/fetch.js';
 
 const baseRequest = {
   credentials: 'include',
@@ -43,24 +44,10 @@ async function _getAPI(uri) {
       apiError.message = `The API didn't respond. Is the API server up?`;
 
       // Django Errors
-    } else if (
-      error instanceof SyntaxError &&
-      error.message.includes('is not valid JSON')
-    ) {
+    } else if (error instanceof SyntaxError && error.message.includes('is not valid JSON')) {
       apiError.message = `The server returned invalid JSON. Is Django returning an error?`;
       apiError.error = `Error: "${response.statusText}"`;
-
-      // try and parse out something more from Django's debugging screen
-      data = await response.text();
-      if (data.includes('exception_value')) {
-        // css class from Django default debug screen
-        let myDoc = new DOMParser();
-        let djDoc = myDoc.parseFromString(data, 'text/html');
-        let djError =
-          djDoc.getElementsByClassName('exception_value')[0].innerText;
-
-        apiError.extra_error = `Django Debug: "${djError}"`;
-      }
+      apiError.extra_error = getDjangoError(await response.text())
 
       // Fallback Error
     } else {
