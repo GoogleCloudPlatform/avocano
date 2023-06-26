@@ -15,6 +15,8 @@
 import { LitElement, html } from 'lit';
 import styles from './styles/error.js';
 
+const sadimage = new URL('../../assets/sad-avocado.png', import.meta.url).href;
+
 export class Error extends LitElement {
   static get properties() {
     return {
@@ -27,8 +29,6 @@ export class Error extends LitElement {
   }
 
   render() {
-    const sadimage = new URL('../../assets/sad-avocado.png', import.meta.url)
-      .href;
     return html`
       <div class="errorContainer">
       <div class="errorLeft">
