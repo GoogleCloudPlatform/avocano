@@ -12,21 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+export const getDjangoError = data => {
+  // try and parse out something more from Django's debugging screen
+  let errorText = '';
 
-export const getDjangoError = data =>  {
-    // try and parse out something more from Django's debugging screen
-    let errorText = ""
+  if (data.includes('exception_value')) {
+    // css class from Django default debug screen
+    let myDoc = new DOMParser();
+    let djDoc = myDoc.parseFromString(data, 'text/html');
+    let djError = djDoc.getElementsByClassName('exception_value')[0].innerText;
 
-    if (data.includes('exception_value')) {
-        // css class from Django default debug screen
-        let myDoc = new DOMParser();
-        let djDoc = myDoc.parseFromString(data, 'text/html');
-        let djError =
-            djDoc.getElementsByClassName('exception_value')[0].innerText;
-
-        errorText = `Django Debug: "${djError}"`;
-    }
-    return errorText
-}
+    errorText = `Django Debug: "${djError}"`;
+  }
+  return errorText;
+};
 
 export default { getDjangoError };

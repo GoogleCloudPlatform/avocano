@@ -44,10 +44,13 @@ async function _getAPI(uri) {
       apiError.message = `The API didn't respond. Is the API server up?`;
 
       // Django Errors
-    } else if (error instanceof SyntaxError && error.message.includes('is not valid JSON')) {
+    } else if (
+      error instanceof SyntaxError &&
+      error.message.includes('is not valid JSON')
+    ) {
       apiError.message = `The server returned invalid JSON. Is Django returning an error?`;
       apiError.error = `Error: "${response.statusText}"`;
-      apiError.extra_error = getDjangoError(await response.text())
+      apiError.extra_error = getDjangoError(await response.text());
 
       // Fallback Error
     } else {
