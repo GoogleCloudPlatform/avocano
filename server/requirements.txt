@@ -4,24 +4,24 @@ djangorestframework
 django-filter
 django-colorfield
 django-cors-headers
-
 drf-spectacular
 
 django-environ
 django-storages[google]
 
 psycopg2-binary
-
 gunicorn
 
-google-api-python-client
-google-auth
+# for cloudrun_helpers
+google-auth==2.21.0
+urllib3==1.26.16  # once google-auth supports urllib3 2.x, update cloudrun_helpers
 
+# for testing
 pyyaml
 model_bakery
 Faker
-httpx
 
+# for telemetry
 opentelemetry-api
 opentelemetry-sdk
 opentelemetry-distro

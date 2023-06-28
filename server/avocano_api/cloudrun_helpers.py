@@ -14,26 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-import logging
+import json
 import os
-
+import urllib3
 import google.auth
-import httpx
-from googleapiclient.discovery import build as google_api
-from googleapiclient.errors import HttpError as GAPIHTTPError
 
 ## Dynamically determine the Cloud Run Service URL
 
 # Interrogates the metadata service to determine the URL of itself.
 # Requires the Cloud Run service account have run.services.get permissions.
 
-# Removes the need to provide the service URL as an enviroment variable to
+# Removes the need to provide the service URL as an environment variable to
 # pass onto CSRF settings for trusted domain permissions.
 
 # Will only work if the service is running Cloud Run, and will quickly error
 # at the first point of issue trying to contact the metadata server.
 
+# update this and json.loads calls when urllib3 is updated to 2.x
+http = urllib3.PoolManager()
 
 class MetadataError(Exception):
     def __init__(self, message):
@@ -41,49 +39,69 @@ class MetadataError(Exception):
         super().__init__(self.message)
 
 
-def _project_id():
+def _auth():
     """Use the Google Auth helper (via the metadata service) to get the Google Cloud Project"""
     try:
-        _, project = google.auth.default()
+        creds, project = google.auth.default(
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        )
     except google.auth.exceptions.DefaultCredentialsError:
         raise MetadataError("Could not automatically determine credentials")
     if not project:
         raise MetadataError("Could not determine project from credentials.")
-    return project
+    return creds, project
 
 
 def _region():
     """Use the local metadata service to get the region"""
     try:
-        resp = httpx.get(
+        resp = http.request(
+            "GET",
             "http://metadata.google.internal/computeMetadata/v1/instance/region",
             headers={"Metadata-Flavor": "Google"},
         )
-        return resp.text.split("/")[-1]
-    except httpx.RequestError as e:
+        return resp.data.decode("utf-8").split("/")[-1]
+    except urllib3.exceptions.HTTPError as e:
         raise MetadataError(f"Could not determine region. Error: {e}")
 
 
 def _service_name():
+    """Use Cloud Run provided envvar to return service name"""
     service = os.environ.get("K_SERVICE")
     if not service:
         raise MetadataError("Did not find K_SERVICE. Are you running in Cloud Run?")
     return service
 
 
-def _service_url(project, region, service):
+def _service_url(region, service):
+    """Use helper methods and Cloud Run API to pull the service URL"""
     try:
-        run_api = google_api("run", "v2")
+        creds, project = _auth()
+
+        # Build authentication token for calling the API
+        request = google.auth.transport.requests.Request()
+        creds.refresh(request)
+        token = creds.token
+        headers = {"Authorization": "Bearer " + token}
+
+        # Build identifier for Cloud Run service
         fqname = f"projects/{project}/locations/{region}/services/{service}"
-        service = run_api.projects().locations().services().get(name=fqname).execute()
-        return service["uri"]
-    except (GAPIHTTPError, KeyError) as e:
+
+        # Request the information (requires run.services.get auth)
+        resp = http.request(
+            "GET", f"https://run.googleapis.com/v2/{fqname}", headers=headers
+        )
+
+        # return service URL
+        return json.loads(resp.data)["uri"]
+    except urllib3.exceptions.HTTPError as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
 def get_service_url():
-    return _service_url(_project_id(), _region(), _service_name())
+    return _service_url(_region(), _service_name())
 
 
 def get_project_id():
-    return _project_id()
+    _, project_id = _auth()
+    return project_id
