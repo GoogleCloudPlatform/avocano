@@ -33,6 +33,7 @@ import google.auth
 # update this and json.loads calls when urllib3 is updated to 2.x
 http = urllib3.PoolManager()
 
+
 class MetadataError(Exception):
     def __init__(self, message):
         self.message = message
