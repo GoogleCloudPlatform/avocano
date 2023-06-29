@@ -14,14 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-import logging
 import os
+from google.cloud import run_v2
 
 import google.auth
 import httpx
-from googleapiclient.discovery import build as google_api
-from googleapiclient.errors import HttpError as GAPIHTTPError
 
 ## Dynamically determine the Cloud Run Service URL
 
@@ -73,11 +70,12 @@ def _service_name():
 
 def _service_url(project, region, service):
     try:
-        run_api = google_api("run", "v2")
+        client = run_v2.ServicesClient()
         fqname = f"projects/{project}/locations/{region}/services/{service}"
-        service = run_api.projects().locations().services().get(name=fqname).execute()
-        return service["uri"]
-    except (GAPIHTTPError, KeyError) as e:
+        request = run_v2.GetServiceRequest(name=fqname)
+        response = client.get_service(request=request)
+        return response.uri
+    except (google.api_core.exceptions.PermissionDenied, google.api_core.exceptions.NotFound) as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
