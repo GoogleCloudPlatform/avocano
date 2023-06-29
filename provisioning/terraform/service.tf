@@ -1,6 +1,8 @@
 resource "google_cloud_run_v2_service" "server" {
   name     = var.service_name
   location = var.region
+  client   = "terraform"
+
   template {
     service_account = google_service_account.server.email
     containers {
