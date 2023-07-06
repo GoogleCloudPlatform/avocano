@@ -1,6 +1,8 @@
 resource "google_cloud_run_v2_service" "server" {
   name     = var.service_name
   location = var.region
+  client   = "terraform"
+
   template {
     service_account = google_service_account.server.email
     containers {
@@ -29,6 +31,15 @@ resource "google_cloud_run_v2_service" "server" {
       env {
         name  = "OTEL_TRACES_EXPORTER"
         value = "gcp_trace"
+      }
+      startup_probe {
+        http_get {
+          path = "/ready"
+        }
+        period_seconds        = 1
+        initial_delay_seconds = 0
+        timeout_seconds       = 1
+        failure_threshold     = 10
       }
       liveness_probe {
         http_get {
