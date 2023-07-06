@@ -82,9 +82,9 @@ export class AvocanoShell extends router(LitElement) {
     // Show loading animation only when
     // site config is unavailable
     if (config) {
-      if (config.errors) { 
-        // An error was encountered, pass it along to the UI. 
-        this.state.apiError = config.errors
+      if (config.errors) {
+        // An error was encountered, pass it along to the UI.
+        this.state.apiError = config.errors;
 
         //this.requestUpdate();
         //return;
