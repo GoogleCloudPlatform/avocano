@@ -84,7 +84,7 @@ export class AvocanoShell extends router(LitElement) {
     if (config) {
       if (config.errors) { 
         // An error was encountered, pass it along to the UI. 
-        this.state.apiErrors = config.errors
+        this.state.apiError = config.errors
 
         //this.requestUpdate();
         //return;
@@ -137,7 +137,7 @@ export class AvocanoShell extends router(LitElement) {
   }
 
   render() {
-    const { config, loading, apiErrors } = this.state;
+    const { config, loading, apiError } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
 
     if (apiError) {
