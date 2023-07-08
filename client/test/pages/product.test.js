@@ -21,7 +21,8 @@ describe('Product', () => {
   it('renders loading element', async () => {
     const element = await fixture(html`<app-product></app-product>`);
     const contentElem = element.shadowRoot.querySelector('.productBase > p');
-    const productItemElem = element.shadowRoot.querySelector('app-product-item');
+    const productItemElem =
+      element.shadowRoot.querySelector('app-product-item');
 
     expect(productItemElem).to.not.exist;
     expect(contentElem).to.exist;
@@ -29,8 +30,10 @@ describe('Product', () => {
   });
 
   it('renders product item element properly', async () => {
-    const mockState = { status: 'loaded', productItem: { name: 'hello' }};
-    const loadedElem = await fixture(html`<app-product .state=${mockState}></app-product>`);
+    const mockState = { status: 'loaded', productItem: { name: 'hello' } };
+    const loadedElem = await fixture(
+      html`<app-product .state=${mockState}></app-product>`
+    );
 
     await waitUntil(() => loadedElem.state, 'Element did not become ready');
 
