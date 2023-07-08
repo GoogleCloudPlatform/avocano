@@ -16,7 +16,7 @@ import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 import sinon from 'sinon';
 
-import '../src/pages/checkout.js';
+import '../../src/pages/checkout.js';
 
 describe('Checkout', () => {
   let element;
