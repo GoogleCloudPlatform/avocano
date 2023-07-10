@@ -15,22 +15,21 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import '../src/pages/contact.js';
+import '../../src/pages/product-list.js';
 
-describe('Contact', () => {
+describe('ProductList', () => {
   let element;
 
   beforeEach(async () => {
-    element = await fixture(html`<app-contact></app-contact>`);
+    element = await fixture(html`<app-product-list></app-product-list>`);
   });
 
-  it('renders main text element', () => {
-    const contactElement = element.shadowRoot.querySelector(
-      '.contactContainer > .contactWrapper'
+  it('renders title element', () => {
+    const titleElement = element.shadowRoot.querySelector(
+      '.productContainer > h1'
     );
-    expect(contactElement).to.exist;
-    expect(contactElement.textContent).to.equal(
-      '\n          This website was deployed from sample code in the\n          GoogleCloudPlatform/avocano\n          repo on GitHub.\n        '
-    );
+
+    expect(titleElement).to.exist;
+    expect(titleElement.textContent).to.equal('Product List');
   });
 });
