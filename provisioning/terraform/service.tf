@@ -3,10 +3,16 @@ resource "google_cloud_run_v2_service" "server" {
   location = var.region
   client   = "terraform"
 
+  provider     = google-beta
+  launch_stage = "BETA"
+
   template {
     service_account = google_service_account.server.email
     containers {
       image = data.google_container_registry_image.server.image_url
+      ports {
+        container_port = 8080
+      }
       env {
         name = "DJANGO_ENV"
         value_source {
@@ -32,6 +38,10 @@ resource "google_cloud_run_v2_service" "server" {
         name  = "OTEL_TRACES_EXPORTER"
         value = "gcp_trace"
       }
+      env {
+        name  = "USE_CLOUD_SQL_AUTH_PROXY"
+        value = "True"
+      }
       startup_probe {
         http_get {
           path = "/ready"
@@ -46,16 +56,11 @@ resource "google_cloud_run_v2_service" "server" {
           path = "/healthy"
         }
       }
-      volume_mounts {
-        name       = "cloudsql"
-        mount_path = "/cloudsql"
-      }
     }
-    volumes {
-      name = "cloudsql"
-      cloud_sql_instance {
-        instances = [google_sql_database_instance.postgres.connection_name]
-      }
+    containers {
+      name  = "cloud-sql-proxy"
+      image = "gcr.io/cloud-sql-connectors/cloud-sql-proxy:latest"
+      args  = ["--port=5432", google_sql_database_instance.postgres.connection_name]
     }
   }
   traffic {
