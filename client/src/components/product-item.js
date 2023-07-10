@@ -16,7 +16,7 @@ import { LitElement, html } from 'lit';
 import styles from './styles/product-item.js';
 import { buyProduct, getProductTestimonials } from '../utils/fetch.js';
 import cache from '../utils/cache.js';
-import { getConfig } from '../utils/config.js';
+import config from '../utils/config.js';
 
 const noimage = new URL('../../assets/noimage.png', import.meta.url).href;
 const oopsAvocado = new URL('../../assets/oops-avocado.png', import.meta.url)
@@ -151,7 +151,7 @@ export class ProductItem extends LitElement {
   }
 
   render() {
-    const { AVOCANO_PURCHASE_MODE } = getConfig();
+    const { AVOCANO_PURCHASE_MODE } = config.getConfig();
     const {
       count,
       testimonials,
@@ -199,7 +199,7 @@ export class ProductItem extends LitElement {
               ? AVOCANO_PURCHASE_MODE === 'cart'
                 ? html`<a
                     href="#"
-                    class="buyButton"
+                    class="cartButton"
                     label="Add to Cart"
                     @click="${this.addToCart}"
                     >Add to Cart</a
