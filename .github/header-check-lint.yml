@@ -13,6 +13,7 @@ ignoreFiles:
   - "**/requirements.txt"
   - "**/requirements-test.txt"
   - "**/__init__.py"
+  - "client/src/vendor/**"
 
 ignoreLicenseYear: true
 
