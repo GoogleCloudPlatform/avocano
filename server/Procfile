@@ -1,4 +1,4 @@
-web: opentelemetry-instrument gunicorn --bind 0.0.0.0:$PORT --workers 1 avocano_api.wsgi:application
+web: gunicorn --bind 0.0.0.0:$PORT --workers 1 avocano_api.wsgi:application
 migrate: python3 manage.py migrate && python3 manage.py collectstatic --noinput --clear
 
 setup: bash scripts/prime_database.sh
