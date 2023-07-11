@@ -75,7 +75,7 @@ def _service_url(project, region, service):
         request = run_v2.GetServiceRequest(name=fqname)
         response = client.get_service(request=request)
         return response.uri
-    except google.api_core.exceptions.GoogleAPIError as e:
+    except google.api_core.exceptions.GoogleAPICallError as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
