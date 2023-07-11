@@ -15,19 +15,22 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import '../src/pages/product.js';
+import '../../src/pages/contact.js';
 
-describe('Product', () => {
+describe('Contact', () => {
   let element;
 
   beforeEach(async () => {
-    element = await fixture(html`<app-product></app-product>`);
+    element = await fixture(html`<app-contact></app-contact>`);
   });
 
-  it('renders loading element', () => {
-    const loadingElement = element.shadowRoot.querySelector('.productBase > p');
-
-    expect(loadingElement).to.exist;
-    expect(loadingElement.textContent).to.equal('loading...');
+  it('renders main text element', () => {
+    const contactElement = element.shadowRoot.querySelector(
+      '.contactContainer > .contactWrapper'
+    );
+    expect(contactElement).to.exist;
+    expect(contactElement.textContent).to.equal(
+      '\n          This website was deployed from sample code in the\n          GoogleCloudPlatform/avocano\n          repo on GitHub.\n        '
+    );
   });
 });

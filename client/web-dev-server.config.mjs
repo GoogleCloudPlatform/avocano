@@ -39,7 +39,7 @@ export default {
       preventAssignment: false,
       __api_url__: (process.env.API_URL || 'http://localhost:8000') + '/api',
       __purchase_mode__: process.env.AVOCANO_PURCHASE_MODE || 'buynow',
-      __version__: process.env.npm_package_version
+      __version__: process.env.npm_package_version,
     }),
   ],
 };

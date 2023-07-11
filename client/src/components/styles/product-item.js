@@ -15,6 +15,7 @@
 import { css } from 'lit';
 
 const styles = css`
+  .cartButton,
   .buyButton {
     margin-top: 10px;
     padding: 10px;
