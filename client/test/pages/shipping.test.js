@@ -15,19 +15,22 @@
 import { html } from 'lit';
 import { fixture, expect } from '@open-wc/testing';
 
-import '../src/pages/home.js';
+import '../../src/pages/shipping.js';
 
-describe('Home', () => {
+describe('Shipping', () => {
   let element;
 
   beforeEach(async () => {
-    element = await fixture(html`<app-home></app-home>`);
+    element = await fixture(html`<app-shipping></app-shipping>`);
   });
 
-  it('renders loading element', () => {
-    const loadingElement = element.shadowRoot.querySelector('.homeBase > p');
-
-    expect(loadingElement).to.exist;
-    expect(loadingElement.textContent).to.equal('loading... 🥑');
+  it('renders main text element', () => {
+    const shippingElement = element.shadowRoot.querySelector(
+      '.shippingContainer > .shippingWrapper'
+    );
+    expect(shippingElement).to.exist;
+    expect(shippingElement.textContent).to.equal(
+      '\n          This website ships no products, but this website was shipped through\n          Google Cloud automation.\n          Learn more.\n        '
+    );
   });
 });

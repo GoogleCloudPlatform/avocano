@@ -17,3 +17,5 @@ export const getConfig = () => ({
   AVOCANO_PURCHASE_MODE: '__purchase_mode__',
   VERSION: '__version__',
 });
+
+export default { getConfig };
