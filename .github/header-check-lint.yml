@@ -18,7 +18,6 @@ ignoreFiles:
 ignoreLicenseYear: true
 
 sourceFileExtensions:
-  - "js"
   - "sh"
   - "Dockerfile"
   - "yml"
