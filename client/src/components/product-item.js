@@ -222,25 +222,22 @@ export class ProductItem extends LitElement {
           <div class="testimonialsContent">
             ${testimonials?.length
               ? testimonials.map(
-                  (item, index) =>
-                    html`
-                      <div class="testimonialsItem">
-                        <div class="testimonialItemContent">
-                          <div class="rating">
-                            ${`★`.repeat(item.rating)}${`☆`.repeat(
-                              5 - item.rating
-                            )}
-                          </div>
-                          <div class="reviewerDetails">
-                            ${item.reviewer_name} from ${item.reviewer_location}
-                          </div>
-                          <div class="reviewSummary">${item.summary}</div>
-                          <div class="reviewDescription">
-                            ${item.description}
-                          </div>
+                  (item, index) => html`
+                    <div class="testimonialsItem">
+                      <div class="testimonialItemContent">
+                        <div class="rating">
+                          ${`★`.repeat(item.rating)}${`☆`.repeat(
+                            5 - item.rating,
+                          )}
                         </div>
+                        <div class="reviewerDetails">
+                          ${item.reviewer_name} from ${item.reviewer_location}
+                        </div>
+                        <div class="reviewSummary">${item.summary}</div>
+                        <div class="reviewDescription">${item.description}</div>
                       </div>
-                    `
+                    </div>
+                  `,
                 )
               : html`<p>No testimonials ... yet</p>`}
           </div>
