@@ -106,7 +106,7 @@ export class Checkout extends LitElement {
             ${this.cart?.length
               ? this.cart.map(
                   item =>
-                    html`<app-cart-item .productItem=${item}></app-cart-item>`
+                    html`<app-cart-item .productItem=${item}></app-cart-item>`,
                 )
               : html`<p>No items in cart</p>`}
             <!-- Clear Cart Button -->

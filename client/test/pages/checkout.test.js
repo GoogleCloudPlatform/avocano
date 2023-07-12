@@ -27,7 +27,7 @@ describe('Checkout', () => {
 
   it('renders title element correctly', () => {
     const titleElement = element.shadowRoot.querySelector(
-      '.checkoutContainer > .checkoutTitle'
+      '.checkoutContainer > .checkoutTitle',
     );
     expect(titleElement).to.exist;
     expect(titleElement.textContent).to.equal('Checkout');
@@ -42,7 +42,7 @@ describe('Checkout', () => {
 
     it('renders title element correctly', () => {
       const childElement = parentElement.shadowRoot.querySelector(
-        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child'
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child',
       );
 
       const titleElement = childElement.querySelector('h2');
@@ -52,7 +52,7 @@ describe('Checkout', () => {
 
     it('empty state correctly', () => {
       const childElement = parentElement.shadowRoot.querySelector(
-        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child'
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child',
       );
 
       const emptyListElement = childElement.querySelector('p');
@@ -77,7 +77,7 @@ describe('Checkout', () => {
       await parentElement.updateComplete;
 
       const childElement = parentElement.shadowRoot.querySelector(
-        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child'
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:first-child',
       );
 
       const listElement = childElement.querySelector('app-cart-item');
@@ -100,7 +100,7 @@ describe('Checkout', () => {
 
     it('title element correctly', () => {
       const childElement = parentElement.shadowRoot.querySelector(
-        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child'
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child',
       );
 
       const titleElement = childElement.querySelector('h2');
@@ -121,7 +121,7 @@ describe('Checkout', () => {
       await parentElement.updateComplete;
 
       const childElement = parentElement.shadowRoot.querySelector(
-        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child'
+        '.checkoutContainer > .checkoutWrapper >.checkoutPanel:last-child',
       );
 
       const cartTotalElement = childElement.querySelector('.cartTotalWrapper');
