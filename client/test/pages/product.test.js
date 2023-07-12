@@ -32,7 +32,7 @@ describe('Product', () => {
   it('renders product item element properly', async () => {
     const mockState = { status: 'loaded', productItem: { name: 'hello' } };
     const loadedElem = await fixture(
-      html`<app-product .state=${mockState}></app-product>`
+      html`<app-product .state=${mockState}></app-product>`,
     );
 
     await waitUntil(() => loadedElem.state, 'Element did not become ready');

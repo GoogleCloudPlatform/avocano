@@ -109,7 +109,7 @@ export const getProductTestimonials = async productId => {
         {
           method: 'GET',
           ...baseRequest,
-        }
+        },
       );
       testimonials = response.json();
     } catch (error) {
