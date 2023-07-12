@@ -26,11 +26,11 @@ describe('Contact', () => {
 
   it('renders main text element', () => {
     const contactElement = element.shadowRoot.querySelector(
-      '.contactContainer > .contactWrapper'
+      '.contactContainer > .contactWrapper',
     );
     expect(contactElement).to.exist;
     expect(contactElement.textContent).to.equal(
-      '\n          This website was deployed from sample code in the\n          GoogleCloudPlatform/avocano\n          repo on GitHub.\n        '
+      '\n          This website was deployed from sample code in the\n          GoogleCloudPlatform/avocano\n          repo on GitHub.\n        ',
     );
   });
 });

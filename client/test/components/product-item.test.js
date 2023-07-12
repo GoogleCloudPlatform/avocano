@@ -36,13 +36,13 @@ describe('ProductItem', () => {
       html`<app-product-item
         .state=${mockState}
         .productItem=${mockItem}
-      ></app-product-item>`
+      ></app-product-item>`,
     );
 
     // Ensure properties have been applied to component
     await waitUntil(
       () => element.productItem && element.state,
-      'Element did not become ready'
+      'Element did not become ready',
     );
 
     // Stubbing out buyProduct() to test click
@@ -54,11 +54,11 @@ describe('ProductItem', () => {
 
     // Retrieve title element
     const titleElement = element.shadowRoot.querySelector(
-      '.productItemContent > h2'
+      '.productItemContent > h2',
     );
     // Retrieve button element
     const buyButton = element.shadowRoot.querySelector(
-      '.productItemContent > .buyButton'
+      '.productItemContent > .buyButton',
     );
 
     // Asset title element with correct name exists
@@ -84,13 +84,13 @@ describe('ProductItem', () => {
       html`<app-product-item
         .state=${mockState}
         .productItem=${mockItem}
-      ></app-product-item>`
+      ></app-product-item>`,
     );
 
     // Ensure properties have been applied to component
     await waitUntil(
       () => element.productItem && element.state,
-      'Element did not become ready'
+      'Element did not become ready',
     );
 
     // Stubbing out addToCart() to test click
@@ -102,7 +102,7 @@ describe('ProductItem', () => {
 
     // Retrieve cart button element
     const cartButton = element.shadowRoot.querySelector(
-      '.productItemContent > .cartButton'
+      '.productItemContent > .cartButton',
     );
 
     // Assert button exists in with cart flag applied

@@ -15,7 +15,7 @@
 export const getCartTotal = cart =>
   Number.parseFloat(
     cart?.reduce((acc, item) => (acc += item.count * item.discount_price), 0) ||
-      0
+      0,
   ).toFixed(2);
 
 export const getCartItemTotal = cart =>

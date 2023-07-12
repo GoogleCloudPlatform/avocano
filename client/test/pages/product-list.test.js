@@ -26,7 +26,7 @@ describe('ProductList', () => {
 
   it('renders title element', () => {
     const titleElement = element.shadowRoot.querySelector(
-      '.productContainer > h1'
+      '.productContainer > h1',
     );
 
     expect(titleElement).to.exist;
