@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import { router } from 'lit-element-router';
+import { router } from './vendor/lit-element-router-2.0.3a/lit-element-router.js';
 import { getSiteConfig } from './utils/fetch.js';
 import { getConfig } from './utils/config.js';
 import cache from './utils/cache.js';
@@ -28,6 +28,7 @@ import './pages/product.js';
 import './pages/product-list.js';
 import './pages/shipping.js';
 import './pages/not-found.js';
+import './pages/error.js';
 
 // Components
 import './components/checkout-form.js';
@@ -78,11 +79,22 @@ export class AvocanoShell extends router(LitElement) {
     super.connectedCallback();
 
     const config = await getSiteConfig();
-
     // Show loading animation only when
     // site config is unavailable
     if (config) {
+      if (config.errors) {
+        // An error was encountered, pass it along to the UI.
+        this.state.apiError = config.errors;
+
+        //this.requestUpdate();
+        //return;
+      }
       this.state.loading = false;
+    }
+
+    if (config?.apiError) {
+      // An error was encountered, pass it along to the UI.
+      this.state.apiError = config.apiError;
     }
 
     // Set django site config properties as
@@ -125,8 +137,12 @@ export class AvocanoShell extends router(LitElement) {
   }
 
   render() {
-    const { config, loading } = this.state;
+    const { config, loading, apiError } = this.state;
     const { AVOCANO_PURCHASE_MODE } = getConfig();
+
+    if (apiError) {
+      return html`<app-error .apiError=${apiError}></app-error>`;
+    }
 
     return loading
       ? html`<app-loading></app-loading>`

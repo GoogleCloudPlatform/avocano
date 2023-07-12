@@ -45,7 +45,7 @@ class CheckoutDialog extends LitElement {
               <div class="errors">
                 <div>
                   ${errors?.map(
-                    e => html`<div>${e?.message || JSON.stringify(e)}</div>`
+                    e => html`<div>${e?.message || JSON.stringify(e)}</div>`,
                   ) || ''}
                 </div>
               </div>

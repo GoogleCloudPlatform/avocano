@@ -12,24 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { html } from 'lit';
-import { fixture, expect } from '@open-wc/testing';
+import { css } from 'lit';
 
-import '../src/pages/product-list.js';
+const styles = css`
+  .errorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 60px;
+    width: 800px;
+  }
+  .errorImage {
+    margin: 50px;
+  }
 
-describe('ProductList', () => {
-  let element;
+  .errorImage img {
+    width: 80px;
+    height: 80px;
+  }
 
-  beforeEach(async () => {
-    element = await fixture(html`<app-product-list></app-product-list>`);
-  });
+  .errorLeft {
+    display: flex;
+    align-item: flex-start;
+    flex-direction: column;
+  }
+  .errorMessage {
+    margin-bottom: 20px;
+  }
+  .errorDetails {
+    flex-direction: column;
+  }
+`;
 
-  it('renders title element', () => {
-    const titleElement = element.shadowRoot.querySelector(
-      '.productContainer > h1'
-    );
-
-    expect(titleElement).to.exist;
-    expect(titleElement.textContent).to.equal('Product List');
-  });
-});
+export default styles;

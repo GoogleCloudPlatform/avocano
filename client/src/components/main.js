@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import { outlet } from 'lit-element-router';
+import { outlet } from '../vendor/lit-element-router-2.0.3a/lit-element-router.js';
 import styles from './styles/main.js';
 
 class AppMain extends outlet(LitElement) {

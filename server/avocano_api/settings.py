@@ -84,7 +84,7 @@ TEMPLATES = [
 ]
 
 # Used for local dev or using Cloud Run proxy
-local_host = "http://localhost:8000"
+local_hosts = ["http://localhost:8000", "http://localhost:8081"]
 
 # Used for Cloud Shell dev with Web Preview
 cloudshell_host = "https://*.cloudshell.dev"
@@ -120,13 +120,13 @@ if CLOUDRUN_SERVICE_URL:
         f"https://{firebase_site_id}.firebaseapp.com",
     ]
 
-    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, local_host] + firebase_hosts
+    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL] + local_hosts + firebase_hosts
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 else:
     # Setup as we are running on localhost, or Cloud Shell
     ALLOWED_HOSTS = ["*"]
-    CSRF_TRUSTED_ORIGINS = [local_host, cloudshell_host]
+    CSRF_TRUSTED_ORIGINS = [cloudshell_host] + local_hosts
 
 # django-cors-headers settings
 CORS_ORIGIN_ALLOW_ALL = True

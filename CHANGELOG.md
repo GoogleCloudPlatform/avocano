@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.8.2](https://github.com/GoogleCloudPlatform/avocano/compare/v1.8.1...v1.8.2) (2023-07-06)
+
+
+### 🐞 Bug Fixes
+
+* remove extra pipe from shell command ([#281](https://github.com/GoogleCloudPlatform/avocano/issues/281)) ([de41cd2](https://github.com/GoogleCloudPlatform/avocano/commit/de41cd275f6578306dd29b04f88babf3b6cf27ac))
+* restore client annotation to cloud run service ([#293](https://github.com/GoogleCloudPlatform/avocano/issues/293)) ([89fa240](https://github.com/GoogleCloudPlatform/avocano/commit/89fa2409522012f18620a3ab46a8074cfa365f22))
+* restore startup probe, 1s period ([#294](https://github.com/GoogleCloudPlatform/avocano/issues/294)) ([30db75f](https://github.com/GoogleCloudPlatform/avocano/commit/30db75fcd48f1149cae0eb44a2dd6394a1bc2fb6))
+* support deployment suffix IDs to customise CSRF trusted domains ([#282](https://github.com/GoogleCloudPlatform/avocano/issues/282)) ([f987d94](https://github.com/GoogleCloudPlatform/avocano/commit/f987d945e9530224e45864ab76d37bd8646bd37b))
+
+
+### 🧹 Chores
+
+* **deps:** update dependency @open-wc/eslint-config to v11 ([#265](https://github.com/GoogleCloudPlatform/avocano/issues/265)) ([1188fbf](https://github.com/GoogleCloudPlatform/avocano/commit/1188fbf71199521491d27340a11a6f94a81c6354))
+* **deps:** update dependency @open-wc/eslint-config to v12 ([#299](https://github.com/GoogleCloudPlatform/avocano/issues/299)) ([bf6c2c9](https://github.com/GoogleCloudPlatform/avocano/commit/bf6c2c9bb44ae93f085cc3c134860259877150ae))
+* **deps:** update github actions ([#264](https://github.com/GoogleCloudPlatform/avocano/issues/264)) ([17ad288](https://github.com/GoogleCloudPlatform/avocano/commit/17ad28829496591eaaf60ba25c5fef99a9be602a))
+* **deps:** update github actions ([#298](https://github.com/GoogleCloudPlatform/avocano/issues/298)) ([959e0e1](https://github.com/GoogleCloudPlatform/avocano/commit/959e0e11c88c216befecac0110b967582cbe28da))
+
 ## [1.8.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.8.0...v1.8.1) (2023-05-31)
 
 

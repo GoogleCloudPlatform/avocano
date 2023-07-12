@@ -12,22 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { html } from 'lit';
-import { fixture, expect } from '@open-wc/testing';
+export const getDjangoError = data => {
+  // try and parse out something more from Django's debugging screen
+  let errorText = '';
 
-import '../src/pages/product.js';
+  if (data.includes('exception_value')) {
+    // css class from Django default debug screen
+    let myDoc = new DOMParser();
+    let djDoc = myDoc.parseFromString(data, 'text/html');
+    let djError = djDoc.getElementsByClassName('exception_value')[0].innerText;
 
-describe('Product', () => {
-  let element;
+    errorText = `Django Debug: "${djError}"`;
+  }
+  return errorText;
+};
 
-  beforeEach(async () => {
-    element = await fixture(html`<app-product></app-product>`);
-  });
-
-  it('renders loading element', () => {
-    const loadingElement = element.shadowRoot.querySelector('.productBase > p');
-
-    expect(loadingElement).to.exist;
-    expect(loadingElement.textContent).to.equal('loading...');
-  });
-});
+export default { getDjangoError };

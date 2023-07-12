@@ -12,25 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-export const getCartTotal = cart =>
-  Number.parseFloat(
-    cart?.reduce((acc, item) => (acc += item.count * item.discount_price), 0) ||
-      0,
-  ).toFixed(2);
+import { html } from 'lit';
+import { fixture, expect } from '@open-wc/testing';
 
-export const getCartItemTotal = cart =>
-  cart?.reduce((acc, item) => (acc += item.count), 0) || 0;
+import '../../src/pages/home.js';
 
-export const getCartPayload = cart => {
-  let result = cart?.reduce((acc, item) => {
-    acc?.push({
-      id: item.id,
-      countRequested: item.count,
-    });
-    return acc;
-  }, []);
+describe('Home', () => {
+  let element;
 
-  return result || [];
-};
+  beforeEach(async () => {
+    element = await fixture(html`<app-home></app-home>`);
+  });
 
-export default { getCartTotal, getCartPayload, getCartItemTotal };
+  it('renders loading element', () => {
+    const loadingElement = element.shadowRoot.querySelector('.homeBase > p');
+
+    expect(loadingElement).to.exist;
+    expect(loadingElement.textContent).to.equal('loading... 🥑');
+  });
+});

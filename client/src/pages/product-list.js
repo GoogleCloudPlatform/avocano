@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import { LitElement, html } from 'lit';
-import { navigator } from 'lit-element-router';
+import { navigator } from '../vendor/lit-element-router-2.0.3a/lit-element-router.js';
 import { getProductList } from '../utils/fetch.js';
 import styles from './styles/product.js';
 
@@ -55,34 +55,35 @@ export class ProductList extends navigator(LitElement) {
         <div class="productWrapper">
           ${this.state.status === 'loading'
             ? html`<p>loading...</p>`
+            : this.state.products.length == 0
+            ? html`<p>No products found.</p>`
             : this.state.products.map(
-                item =>
-                  html`
-                    <div
-                      class="productItem"
-                      @click=${() =>
-                        item.id && this.navigate(`/products/${item.id}`)}
-                    >
-                      <div class="productimageWrapper">
-                        <img
-                          class="productimage"
-                          alt="Product Image"
-                          src=${item.image}
-                          loading="lazy"
-                          onerror=${`this.src='${noimage}';`}
-                        />
-                      </div>
-                      <div class="productItemContent">
-                        <div class="itemTitle">${item.name}</div>
-                        <div>${`Price: $${item.discount_price}`}</div>
-                        <div>
-                          ${item.inventory_count
-                            ? `Available: ${item.inventory_count}`
-                            : `Sold Out!`}
-                        </div>
+                item => html`
+                  <div
+                    class="productItem"
+                    @click=${() =>
+                      item.id && this.navigate(`/products/${item.id}`)}
+                  >
+                    <div class="productimageWrapper">
+                      <img
+                        class="productimage"
+                        alt="Product Image"
+                        src=${item.image}
+                        loading="lazy"
+                        onerror=${`this.src='${noimage}';`}
+                      />
+                    </div>
+                    <div class="productItemContent">
+                      <div class="itemTitle">${item.name}</div>
+                      <div>${`Price: $${item.discount_price}`}</div>
+                      <div>
+                        ${item.inventory_count
+                          ? `Available: ${item.inventory_count}`
+                          : `Sold Out!`}
                       </div>
                     </div>
-                  `
+                  </div>
+                `,
               )}
         </div>
       </div>
