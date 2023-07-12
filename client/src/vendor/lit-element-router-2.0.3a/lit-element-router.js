@@ -53,7 +53,7 @@ export function router(base) {
       window.addEventListener('route', () => {
         // @ts-ignore
         this.routing(this.constructor.routes, (...args) =>
-          this.router(...args)
+          this.router(...args),
         );
       });
 
@@ -75,7 +75,7 @@ export function router(base) {
 
       let notFoundRoute = routes.filter(route => route.pattern === '*')[0];
       let activeRoute = routes.filter(
-        route => route.pattern !== '*' && testRoute(uri, route.pattern)
+        route => route.pattern !== '*' && testRoute(uri, route.pattern),
       )[0];
       let query = parseQuery(querystring);
 
@@ -89,7 +89,7 @@ export function router(base) {
         ) {
           this.canceled = false;
           Promise.resolve(
-            activeRoute.authentication.authenticate.bind(this).call()
+            activeRoute.authentication.authenticate.bind(this).call(),
           ).then(authenticated => {
             if (!this.canceled) {
               if (authenticated) {
@@ -100,7 +100,7 @@ export function router(base) {
                 ) {
                   this.canceled = false;
                   Promise.resolve(
-                    activeRoute.authorization.authorize.bind(this).call()
+                    activeRoute.authorization.authorize.bind(this).call(),
                   ).then(authorizatied => {
                     if (!this.canceled) {
                       if (authorizatied) {
@@ -110,7 +110,7 @@ export function router(base) {
                           query,
                           activeRoute.data,
                           callback,
-                          activeRoute.callback
+                          activeRoute.callback,
                         );
                       } else {
                         this.routed(
@@ -119,7 +119,7 @@ export function router(base) {
                           query,
                           activeRoute.data,
                           callback,
-                          activeRoute.callback
+                          activeRoute.callback,
                         );
                       }
                     }
@@ -131,7 +131,7 @@ export function router(base) {
                     query,
                     activeRoute.data,
                     callback,
-                    activeRoute.callback
+                    activeRoute.callback,
                   );
                 }
               } else {
@@ -141,7 +141,7 @@ export function router(base) {
                   query,
                   activeRoute.data,
                   callback,
-                  activeRoute.callback
+                  activeRoute.callback,
                 );
               }
             }
@@ -153,7 +153,7 @@ export function router(base) {
         ) {
           this.canceled = false;
           Promise.resolve(
-            activeRoute.authorization.authorize.bind(this).call()
+            activeRoute.authorization.authorize.bind(this).call(),
           ).then(authorizatied => {
             if (!this.canceled) {
               if (authorizatied) {
@@ -163,7 +163,7 @@ export function router(base) {
                   query,
                   activeRoute.data,
                   callback,
-                  activeRoute.callback
+                  activeRoute.callback,
                 );
               } else {
                 this.routed(
@@ -172,7 +172,7 @@ export function router(base) {
                   query,
                   activeRoute.data,
                   callback,
-                  activeRoute.callback
+                  activeRoute.callback,
                 );
               }
             }
@@ -184,7 +184,7 @@ export function router(base) {
             query,
             activeRoute.data,
             callback,
-            activeRoute.callback
+            activeRoute.callback,
           );
         }
       } else if (notFoundRoute) {
@@ -195,7 +195,7 @@ export function router(base) {
           query,
           notFoundRoute.data,
           callback,
-          notFoundRoute.callback
+          notFoundRoute.callback,
         );
       }
     }
@@ -247,10 +247,10 @@ export function outlet(base) {
         Array.from(this.querySelectorAll(`[route~=${this.activeRoute}]`)).map(
           active => {
             active.style.display = '';
-          }
+          },
         );
         Array.from(
-          this.shadowRoot.querySelectorAll(`[route~=${this.activeRoute}]`)
+          this.shadowRoot.querySelectorAll(`[route~=${this.activeRoute}]`),
         ).map(active => {
           active.style.display = '';
         });
