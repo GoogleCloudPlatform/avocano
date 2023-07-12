@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,18 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { LitElement, html } from 'lit';
-import { outlet } from '../vendor/lit-element-router-2.0.3a/lit-element-router.js';
-import styles from './styles/main.js';
+export const getDjangoError = data => {
+  // try and parse out something more from Django's debugging screen
+  let errorText = '';
 
-class AppMain extends outlet(LitElement) {
-  static get styles() {
-    return styles;
+  if (data.includes('exception_value')) {
+    // css class from Django default debug screen
+    let myDoc = new DOMParser();
+    let djDoc = myDoc.parseFromString(data, 'text/html');
+    let djError = djDoc.getElementsByClassName('exception_value')[0].innerText;
+
+    errorText = `Django Debug: "${djError}"`;
   }
+  return errorText;
+};
 
-  render() {
-    return html`<slot></slot> `;
-  }
-}
-
-customElements.define('app-main', AppMain);
+export default { getDjangoError };
