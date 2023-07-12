@@ -56,33 +56,32 @@ export class ProductList extends navigator(LitElement) {
           ${this.state.status === 'loading'
             ? html`<p>loading...</p>`
             : this.state.products.map(
-                item =>
-                  html`
-                    <div
-                      class="productItem"
-                      @click=${() =>
-                        item.id && this.navigate(`/products/${item.id}`)}
-                    >
-                      <div class="productimageWrapper">
-                        <img
-                          class="productimage"
-                          alt="Product Image"
-                          src=${item.image}
-                          loading="lazy"
-                          onerror=${`this.src='${noimage}';`}
-                        />
-                      </div>
-                      <div class="productItemContent">
-                        <div class="itemTitle">${item.name}</div>
-                        <div>${`Price: $${item.discount_price}`}</div>
-                        <div>
-                          ${item.inventory_count
-                            ? `Available: ${item.inventory_count}`
-                            : `Sold Out!`}
-                        </div>
+                item => html`
+                  <div
+                    class="productItem"
+                    @click=${() =>
+                      item.id && this.navigate(`/products/${item.id}`)}
+                  >
+                    <div class="productimageWrapper">
+                      <img
+                        class="productimage"
+                        alt="Product Image"
+                        src=${item.image}
+                        loading="lazy"
+                        onerror=${`this.src='${noimage}';`}
+                      />
+                    </div>
+                    <div class="productItemContent">
+                      <div class="itemTitle">${item.name}</div>
+                      <div>${`Price: $${item.discount_price}`}</div>
+                      <div>
+                        ${item.inventory_count
+                          ? `Available: ${item.inventory_count}`
+                          : `Sold Out!`}
                       </div>
                     </div>
-                  `
+                  </div>
+                `,
               )}
         </div>
       </div>
