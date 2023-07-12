@@ -26,11 +26,11 @@ describe('Shipping', () => {
 
   it('renders main text element', () => {
     const shippingElement = element.shadowRoot.querySelector(
-      '.shippingContainer > .shippingWrapper'
+      '.shippingContainer > .shippingWrapper',
     );
     expect(shippingElement).to.exist;
     expect(shippingElement.textContent).to.equal(
-      '\n          This website ships no products, but this website was shipped through\n          Google Cloud automation.\n          Learn more.\n        '
+      '\n          This website ships no products, but this website was shipped through\n          Google Cloud automation.\n          Learn more.\n        ',
     );
   });
 });
