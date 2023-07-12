@@ -14,14 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-from google.cloud import logging
 from rest_framework import serializers
+
 from store.models import Product, SiteConfig, Testimonial
+from store.logging import setup_logging
 
-
-logging_client = logging.Client()
-logger = logging_client.logger("avocano_log")
+logger = setup_logging()
 
 
 class ProductSerializer(serializers.ModelSerializer):

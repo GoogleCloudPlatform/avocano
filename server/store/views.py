@@ -18,29 +18,29 @@
 import json
 
 from django.http import JsonResponse
+from django.middleware.csrf import get_token
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
-from django.middleware.csrf import get_token
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.http import require_http_methods
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
-from google.cloud import logging
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
+
+from store.logging import setup_logging
 from store.models import Product, SiteConfig, Testimonial, Transaction
 from store.serializers import (
+    CartSerializer,
+    CheckoutSerializer,
     ProductSerializer,
     SiteConfigSerializer,
     TestimonialSerializer,
-    CartSerializer,
-    CheckoutSerializer,
 )
 
-logging_client = logging.Client()
-logger = logging_client.logger("avocano_log")
+logger = setup_logging()
 
 
 class ProductPurchaseException(APIException):
