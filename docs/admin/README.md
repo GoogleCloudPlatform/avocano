@@ -8,6 +8,7 @@ As a infrastructure administrator, I want to:
  * [extend this example application.](extending-example.md)
  * [verify changes to this application.](testing-changes.md)
  * [perform management commands.](management-commands.md)
+ * [see telemetry for my application.](opentelemetry.md)
 
 
 *Want more options? [Request some new docs!](https://github.com/GoogleCloudPlatform/avocano/issues/new/choose)*
