@@ -77,7 +77,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class ActiveProductViewSet(viewsets.ViewSet):
     @extend_schema(request=None, responses=ProductSerializer)
     def list(self, request, formatting=None):
-        active_product = Product.objects.get(active=True)
+        active_product = get_object_or_404(Product, active=True)
         serializer = ProductSerializer(active_product, context={"request": request})
         return Response(serializer.data)
 
@@ -97,7 +97,7 @@ class SiteConfigViewSet(viewsets.ModelViewSet):
 class ActiveSiteConfigViewSet(viewsets.ViewSet):
     @extend_schema(responses=SiteConfigSerializer)
     def list(self, request, formatting=None):
-        active = SiteConfig.objects.get(active=True)
+        active = get_object_or_404(SiteConfig, active=True)
         serializer = SiteConfigSerializer(active)
         return Response(serializer.data)
 

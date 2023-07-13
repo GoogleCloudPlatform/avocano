@@ -6,9 +6,19 @@
     },
     "extra-files": [
         {
-          "type": "json",
-          "path": "client/package.json",
-          "jsonpath": "$.version"
+            "type": "json",
+            "path": "client/package.json",
+            "jsonpath": "$.version"
+        },
+        {
+            "type": "json",
+            "path": "client/package-lock.json",
+            "jsonpath": "$.version"
+        },
+        {
+            "type": "json",
+            "path": "client/package-lock.json",
+            "jsonpath": "$['packages']['']['version']"
         }
     ],
     "changelog-sections": [

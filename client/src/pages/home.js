@@ -46,11 +46,21 @@ export class Home extends LitElement {
       productItem,
     };
 
+    if (productItem?.apiError) {
+      this.state.apiError = productItem.apiError;
+    }
+
     this.requestUpdate();
   }
 
   render() {
-    const { status, productItem } = this.state;
+    const { status, productItem, apiError } = this.state;
+
+    if (apiError) {
+      return html`<div class="homeBase">
+        <p>No active product found. Check <a href="/products">Products</a>.</p>
+      </div>`;
+    }
 
     return html`
       <div class="homeBase">

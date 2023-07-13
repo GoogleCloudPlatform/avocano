@@ -1,4 +1,4 @@
-// Copyright 2022 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,18 +12,36 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { LitElement, html } from 'lit';
-import { outlet } from '../vendor/lit-element-router-2.0.3a/lit-element-router.js';
-import styles from './styles/main.js';
+import { css } from 'lit';
 
-class AppMain extends outlet(LitElement) {
-  static get styles() {
-    return styles;
+const styles = css`
+  .errorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 60px;
+    width: 800px;
+  }
+  .errorImage {
+    margin: 50px;
   }
 
-  render() {
-    return html`<slot></slot> `;
+  .errorImage img {
+    width: 80px;
+    height: 80px;
   }
-}
 
-customElements.define('app-main', AppMain);
+  .errorLeft {
+    display: flex;
+    align-item: flex-start;
+    flex-direction: column;
+  }
+  .errorMessage {
+    margin-bottom: 20px;
+  }
+  .errorDetails {
+    flex-direction: column;
+  }
+`;
+
+export default styles;
