@@ -19,7 +19,7 @@ const baseRequest = {
   credentials: 'include',
 };
 
-const _getAPI = async (uri) => {
+const _getAPI = async uri => {
   const { API_URL } = getConfig();
 
   let url = `${API_URL}/${uri}`;
@@ -67,8 +67,7 @@ const _getAPI = async (uri) => {
   }
 
   return data;
-}
-
+};
 
 export const getProduct = async productId => {
   return _getAPI(`products/${productId}`);
@@ -79,7 +78,7 @@ export const getActiveProduct = async () => {
 };
 
 export const buyProduct = async (productId, callback) => {
-  let uri = `products/${productId}/purchase/`
+  let uri = `products/${productId}/purchase/`;
   const { API_URL } = getConfig();
 
   let url = `${API_URL}/${uri}`;
