@@ -71,7 +71,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             raise ProductPurchaseException()
 
         serializer = ProductSerializer(product)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class ActiveProductViewSet(viewsets.ViewSet):
@@ -147,7 +147,7 @@ def checkout(request):
 
     response = CheckoutSerializer(data={"status": "complete", "items": items})
     response.is_valid()
-    return JsonResponse(response.data)
+    return JsonResponse(response.data, status=status.HTTP_201_CREATED)
 
 
 def csrf_token(request):
