@@ -1,6 +1,5 @@
 pytest
-google-api-python-client
+google-cloud-run
 httpx
-google-api-core
 google-cloud-secret-manager
 pytest-playwright
