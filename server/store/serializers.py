@@ -17,10 +17,6 @@
 import json
 
 from rest_framework import serializers
-
-from rest_framework import serializers, status
-from rest_framework.exceptions import ValidationError, APIException
-from django.http import JsonResponse
 from store.models import Product, SiteConfig, Testimonial
 
 
