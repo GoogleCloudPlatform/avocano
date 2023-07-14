@@ -60,6 +60,22 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["get", "post"])
     def purchase(self, request, pk):
+        def log_error(error_name, error_message, product):
+            # Log error by writing structured JSON. Can be then used with log-based alerting, metrics, etc.
+            print(
+                json.dumps(
+                    {
+                        "severity": "ERROR",
+                        "error": error_name,
+                        "message": f"{error_name}: {error_message}",
+                        "method": "ProductViewSet.purchase()",
+                        "product": product.id,
+                        "countRequested": 1,
+                        "countFulfilled": product.inventory_count,
+                    }
+                )
+            )
+
         product = get_object_or_404(Product, id=pk)
         if product.inventory_count > 0:
             product.inventory_count -= 1
@@ -68,7 +84,20 @@ class ProductViewSet(viewsets.ModelViewSet):
                 datetime=timezone.now(), product_id=product, unit_price=product.price
             )
         else:
+            log_error(
+                "INVENTORY_COUNT_ERROR",
+                "A purchase was attempted where there was insufficient inventory to fulfil the order.",
+                product,
+            )
             raise ProductPurchaseException()
+
+        # If the transaction caused a product to sell out, log an error
+        if product.inventory_count == 0:
+            log_error(
+                "INVENTORY_SOLDOUT_ERROR",
+                "A purchase just caused a product to sell out. More inventory will be required.",
+                product,
+            )
 
         serializer = ProductSerializer(product)
         return Response(serializer.data)
