@@ -14,12 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
+
 from rest_framework import serializers
 
 from store.models import Product, SiteConfig, Testimonial
-from store.logging import setup_logging
-
-logger = setup_logging()
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -92,17 +91,20 @@ class CartItemSerializer(serializers.Serializer):
         if product.inventory_count < requested:
             data["countFulfilled"] = product.inventory_count
 
-            # Log error, which can be alerted on using log-based alerting
-            logger.log_struct(
-                {
-                    "error": "INSUFFICIENT_PRODUCT_ERROR",
-                    "message": "A purchase was attempted where there was insufficient inventory to fulfil the order.",
-                    "product": product.id,
-                    "method": "CartItemSerializer.validate()",
-                    "countRequested": data["countRequested"],
-                    "countFulfilled": data["countFulfilled"],
-                },
-                severity="ERROR",
+            # Log error by writing structured JSON. Can be then used with log-based alerting, metrics, etc.
+            error_name = "INSUFFICIENT_PRODUCT_ERROR"
+            print(
+                json.dumps(
+                    {
+                        "severity": "ERROR",
+                        "error": error_name,
+                        "message": f"{error_name}: A purchase was attempted where there was insufficient inventory to fulfil the order.",
+                        "product": product.id,
+                        "method": "CartItemSerializer.validate()",
+                        "countRequested": data["countRequested"],
+                        "countFulfilled": data["countFulfilled"],
+                    }
+                )
             )
 
             raise serializers.ValidationError(
