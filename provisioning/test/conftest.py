@@ -1,8 +1,24 @@
+#!/usr/bin/python
+#
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import pytest
 import os
 import google.auth
 from google.cloud import secretmanager
-from googleapiclient.discovery import build
+from google.cloud import run_v2
 
 
 @pytest.fixture()
@@ -40,14 +56,15 @@ def firebase_url(project_id):
 
 @pytest.fixture
 def cloudrun_service(project_id, region, service_name):
-    run_api = build("run", "v1")
+    client = run_v2.ServicesClient()
     service_fqn = f"projects/{project_id}/locations/{region}/services/{service_name}"
-    return run_api.projects().locations().services().get(name=service_fqn).execute()
+    request = run_v2.GetServiceRequest(name=service_fqn)
+    return client.get_service(request=request)
 
 
 @pytest.fixture
 def cloudrun_url(cloudrun_service):
-    return cloudrun_service["status"]["address"]["url"]
+    return cloudrun_service.uri
 
 
 @pytest.fixture
@@ -59,3 +76,14 @@ def django_admin_password(project_id, django_admin_secret_name):
     )
     payload = secret_client.access_secret_version(name=secret_fqn).payload
     return payload.data.decode("UTF-8")
+
+
+@pytest.fixture
+def checkout_url(cloudrun_url):
+    return cloudrun_url + "/api/checkout"
+
+
+@pytest.fixture
+def csrf_token(checkout_client, cloudrun_url):
+    response = checkout_client.get(cloudrun_url + "/api/csrf_token")
+    return response.json()["csrfToken"]
