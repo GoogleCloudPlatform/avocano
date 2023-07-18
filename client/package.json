@@ -25,7 +25,7 @@
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-replace": "^5.0.0",
     "@rollup/plugin-terser": "^0.4.1",
-    "@web/dev-server": "^0.2.0",
+    "@web/dev-server": "^0.3.0",
     "@web/dev-server-rollup": "^0.5.0",
     "@web/rollup-plugin-html": "^2.0.0",
     "@web/rollup-plugin-import-meta-assets": "^2.0.0",
