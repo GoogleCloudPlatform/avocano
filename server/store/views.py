@@ -47,6 +47,23 @@ class ProductPurchaseException(APIException):
     }
 
 
+def log_error(error_name, error_message, product):
+    # Log error by writing structured JSON. Can be then used with log-based alerting, metrics, etc.
+    print(
+        json.dumps(
+            {
+                "severity": "ERROR",
+                "error": error_name,
+                "message": f"{error_name}: {error_message}",
+                "method": "ProductViewSet.purchase()",
+                "product": product.id,
+                "countRequested": 1,
+                "countFulfilled": product.inventory_count,
+            }
+        )
+    )
+
+
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -60,22 +77,6 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["get", "post"])
     def purchase(self, request, pk):
-        def log_error(error_name, error_message, product):
-            # Log error by writing structured JSON. Can be then used with log-based alerting, metrics, etc.
-            print(
-                json.dumps(
-                    {
-                        "severity": "ERROR",
-                        "error": error_name,
-                        "message": f"{error_name}: {error_message}",
-                        "method": "ProductViewSet.purchase()",
-                        "product": product.id,
-                        "countRequested": 1,
-                        "countFulfilled": product.inventory_count,
-                    }
-                )
-            )
-
         product = get_object_or_404(Product, id=pk)
         if product.inventory_count > 0:
             product.inventory_count -= 1
@@ -173,6 +174,13 @@ def checkout(request):
         items.append(
             {"id": product.id, "countRequested": count, "countFulfilled": count}
         )
+
+        if product.inventory_count == 0:
+            log_error(
+                "INVENTORY_SOLDOUT_ERROR",
+                "A purchase just caused a product to sell out. More inventory will be required.",
+                product,
+            )
 
     response = CheckoutSerializer(data={"status": "complete", "items": items})
     response.is_valid()
