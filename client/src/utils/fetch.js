@@ -19,7 +19,7 @@ const baseRequest = {
   credentials: 'include',
 };
 
-async function _getAPI(uri) {
+const _getAPI = async uri => {
   const { API_URL } = getConfig();
 
   let url = `${API_URL}/${uri}`;
@@ -67,27 +67,7 @@ async function _getAPI(uri) {
   }
 
   return data;
-}
-
-async function _postAPI(uri, callback) {
-  const { API_URL } = getConfig();
-
-  let url = `${API_URL}/${uri}`;
-  try {
-    const csrfToken = _getAPI('csrf_token');
-
-    await fetch(url, {
-      method: 'POST',
-      headers: { 'X-CSRFToken': csrfToken },
-      ...baseRequest,
-    });
-    callback && callback(); // callbacks handle error message parsing directly.
-  } catch (error) {
-    console.error(error);
-  }
-
-  return { data };
-}
+};
 
 export const getProduct = async productId => {
   return _getAPI(`products/${productId}`);
@@ -98,7 +78,24 @@ export const getActiveProduct = async () => {
 };
 
 export const buyProduct = async (productId, callback) => {
-  _postAPI(`products/${productId}/purchase/`, callback);
+  let uri = `products/${productId}/purchase/`;
+  const { API_URL } = getConfig();
+
+  let url = `${API_URL}/${uri}`;
+  try {
+    const token = await _getAPI('csrf_token');
+
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'X-CSRFToken': token.csrfToken },
+      ...baseRequest,
+    });
+    callback && callback(); // callbacks handle error message parsing directly.
+  } catch (error) {
+    console.error(error);
+  }
+
+  return { data };
 };
 
 export const getProductTestimonials = async productId => {
@@ -120,11 +117,34 @@ export const getSiteConfig = async () => {
 };
 
 export const checkout = async payload => {
+  const { API_URL } = getConfig();
+  let checkoutStatus;
+  let errors;
+
   if (payload?.items?.length) {
-    return _postAPI('checkout/');
+    try {
+      // Retrieve csrf token from server
+      const token = await _getAPI('csrf_token');
+
+      // Submit form payload and pass back csrf token
+      const response = await fetch(`${API_URL}/checkout`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': token.csrfToken },
+        body: JSON.stringify(payload),
+        ...baseRequest,
+      });
+      checkoutStatus = await response.json();
+    } catch (error) {
+      errors = [error];
+    }
   } else {
-    let errorMessage = 'Insufficient information to process checkout.';
-    console.log(errorMessage);
-    return [{ message: errorMessage }];
+    errors = [{ message: 'Insufficient information to process checkout.' }];
   }
+
+  if (errors) {
+    console.error(errors);
+    checkoutStatus = { errors };
+  }
+
+  return checkoutStatus;
 };
