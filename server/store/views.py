@@ -20,12 +20,12 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.middleware.csrf import get_token
 from django.views.decorators.http import require_http_methods
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import APIException
 from rest_framework.response import Response
@@ -45,6 +45,23 @@ class ProductPurchaseException(APIException):
         "code": status_code,
         "message": "Unable to complete purchase - no inventory",
     }
+
+
+def log_error(error_name, error_message, product):
+    # Log error by writing structured JSON. Can be then used with log-based alerting, metrics, etc.
+    print(
+        json.dumps(
+            {
+                "severity": "ERROR",
+                "error": error_name,
+                "message": f"{error_name}: {error_message}",
+                "method": "ProductViewSet.purchase()",
+                "product": product.id,
+                "countRequested": 1,
+                "countFulfilled": product.inventory_count,
+            }
+        )
+    )
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -68,7 +85,20 @@ class ProductViewSet(viewsets.ModelViewSet):
                 datetime=timezone.now(), product_id=product, unit_price=product.price
             )
         else:
+            log_error(
+                "INVENTORY_COUNT_ERROR",
+                "A purchase was attempted where there was insufficient inventory to fulfil the order.",
+                product,
+            )
             raise ProductPurchaseException()
+
+        # If the transaction caused a product to sell out, log an error
+        if product.inventory_count == 0:
+            log_error(
+                "INVENTORY_SOLDOUT_ERROR",
+                "A purchase just caused a product to sell out. More inventory will be required.",
+                product,
+            )
 
         serializer = ProductSerializer(product)
         return Response(serializer.data)
@@ -144,6 +174,13 @@ def checkout(request):
         items.append(
             {"id": product.id, "countRequested": count, "countFulfilled": count}
         )
+
+        if product.inventory_count == 0:
+            log_error(
+                "INVENTORY_SOLDOUT_ERROR",
+                "A purchase just caused a product to sell out. More inventory will be required.",
+                product,
+            )
 
     response = CheckoutSerializer(data={"status": "complete", "items": items})
     response.is_valid()

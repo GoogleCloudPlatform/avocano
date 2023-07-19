@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 
-from rest_framework import serializers, status
-from rest_framework.exceptions import ValidationError, APIException
-from django.http import JsonResponse
+from rest_framework import serializers
 from store.models import Product, SiteConfig, Testimonial
 
 
@@ -90,6 +89,23 @@ class CartItemSerializer(serializers.Serializer):
         requested = data["countRequested"]
         if product.inventory_count < requested:
             data["countFulfilled"] = product.inventory_count
+
+            # Log error by writing structured JSON. Can be then used with log-based alerting, metrics, etc.
+            error_name = "INSUFFICIENT_PRODUCT_ERROR"
+            print(
+                json.dumps(
+                    {
+                        "severity": "ERROR",
+                        "error": error_name,
+                        "message": f"{error_name}: A purchase was attempted where there was insufficient inventory to fulfil the order.",
+                        "product": product.id,
+                        "method": "CartItemSerializer.validate()",
+                        "countRequested": data["countRequested"],
+                        "countFulfilled": data["countFulfilled"],
+                    }
+                )
+            )
+
             raise serializers.ValidationError(
                 detail={"status": "insufficient_product", "items": data}
             )
