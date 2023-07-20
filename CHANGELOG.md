@@ -1,5 +1,33 @@
 # Changelog
 
+## [1.9.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.8.2...v1.9.0) (2023-07-20)
+
+
+### 🥑 Features
+
+* improve error messages on API failures ([#290](https://github.com/GoogleCloudPlatform/avocano/issues/290)) ([ef03957](https://github.com/GoogleCloudPlatform/avocano/commit/ef0395795cc8a255d83f3897adbd54b70cd77523))
+
+
+### 🧹 Chores
+
+* Add additional tests to cart logic ([#326](https://github.com/GoogleCloudPlatform/avocano/issues/326)) ([007f3f9](https://github.com/GoogleCloudPlatform/avocano/commit/007f3f99f866821c311add2df180909632180cfe))
+* **deps:** update dependency @web/test-runner to ^0.17.0 ([#330](https://github.com/GoogleCloudPlatform/avocano/issues/330)) ([d6f126a](https://github.com/GoogleCloudPlatform/avocano/commit/d6f126a7cca23debd2fcc9fdeae9c46f42acdf4f))
+* **deps:** update github actions ([#329](https://github.com/GoogleCloudPlatform/avocano/issues/329)) ([aa171d9](https://github.com/GoogleCloudPlatform/avocano/commit/aa171d9c42f1513944ff705a3e662cd7ec6e418e))
+* **issue-194:** adding new tests for cart feature flag in product item component ([#305](https://github.com/GoogleCloudPlatform/avocano/issues/305)) ([b7b57a3](https://github.com/GoogleCloudPlatform/avocano/commit/b7b57a3cda965c5f59d3cad89aaa6d3e5c68773c))
+* npm audit fix ([#315](https://github.com/GoogleCloudPlatform/avocano/issues/315)) ([d2587a5](https://github.com/GoogleCloudPlatform/avocano/commit/d2587a5a0680639583e1d65ff7d1e7fde6ae1d07))
+* update licence headers ([#337](https://github.com/GoogleCloudPlatform/avocano/issues/337)) ([a9f6527](https://github.com/GoogleCloudPlatform/avocano/commit/a9f6527c68a51b3f694588043d335e496b3c2a0a))
+
+
+### 🐞 Bug Fixes
+
+* add headerlint ignore for [#290](https://github.com/GoogleCloudPlatform/avocano/issues/290) ([#310](https://github.com/GoogleCloudPlatform/avocano/issues/310)) ([b5c6de5](https://github.com/GoogleCloudPlatform/avocano/commit/b5c6de598fbd36423bdf9dfede2ca5e476498bdd))
+* correct csrftoken promise issues ([#325](https://github.com/GoogleCloudPlatform/avocano/issues/325)) ([3ed044c](https://github.com/GoogleCloudPlatform/avocano/commit/3ed044c067afc0f2f6a4af4c1d0b4a384dd6e042))
+* **deps:** update dependency @web/dev-server to ^0.3.0 ([#331](https://github.com/GoogleCloudPlatform/avocano/issues/331)) ([6f98992](https://github.com/GoogleCloudPlatform/avocano/commit/6f9899286aa523fe97cd79c9091037bcbed85a4b))
+* Remove .txt files from requiring licence headers ([#341](https://github.com/GoogleCloudPlatform/avocano/issues/341)) ([a0a5119](https://github.com/GoogleCloudPlatform/avocano/commit/a0a51193eda49fd33610ae9d024fe7c750500f1a))
+* remove autodiscovery for otel ([#307](https://github.com/GoogleCloudPlatform/avocano/issues/307)) ([e72330f](https://github.com/GoogleCloudPlatform/avocano/commit/e72330f944e7a30f5028dd30717930886e5b0c1e))
+* replace googleapidiscovery with google-cloud-run ([#297](https://github.com/GoogleCloudPlatform/avocano/issues/297)) ([8afc2b9](https://github.com/GoogleCloudPlatform/avocano/commit/8afc2b99fd0be3c3e4a37277ef4447b9b7a38065))
+* update release-please.json to update package-lock.json ([#313](https://github.com/GoogleCloudPlatform/avocano/issues/313)) ([25edd65](https://github.com/GoogleCloudPlatform/avocano/commit/25edd65180cd329ddf9f2dfe57966dc43dff565c))
+
 ## [1.8.2](https://github.com/GoogleCloudPlatform/avocano/compare/v1.8.1...v1.8.2) (2023-07-06)
 
 
