@@ -9,3 +9,4 @@ Depending on the persona you want to use, there are many things you can now do w
 * [I want to use the website.](user)
 * [I want to configure the Django application.](django)
 * [I want to configure the Google Cloud project.](admin)
+* [I want to deploy with Jump Start Solutions in Google Cloud.](https://pantheon.corp.google.com/products/solutions/details/dynamic-web-app)
