@@ -1,4 +1,4 @@
-django
+django==5.0a1
 
 djangorestframework
 django-filter
