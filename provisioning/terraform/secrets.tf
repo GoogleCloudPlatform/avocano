@@ -9,7 +9,7 @@ resource "random_password" "django_admin_password" {
 resource "google_secret_manager_secret" "django_admin_password" {
   secret_id = "django_admin_password"
   replication {
-    automatic = true
+    auto {}
   }
   depends_on = [google_project_service.enabled]
 }
@@ -34,7 +34,7 @@ resource "random_password" "django_secret_key" {
 resource "google_secret_manager_secret" "django_settings" {
   secret_id = "django_settings"
   replication {
-    automatic = true
+    auto {}
   }
   depends_on = [google_project_service.enabled]
 }
