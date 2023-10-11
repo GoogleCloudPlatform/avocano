@@ -34,7 +34,7 @@ export class Error extends LitElement {
       <div class="errorLeft">
         <div class="errorImage"><img src=${sadimage} /></div>
         </div>
-        <div class="errorDetails":">
+        <div class="errorDetails">
         <h1>Oh no-vocado!</h1>
         <div class="errorMessage">${this.apiError.message}</div>
         <div class="errorURL"><a href="${this.apiError.url}" target=_blank>${this.apiError.url}</a></div>
