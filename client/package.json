@@ -38,7 +38,7 @@
     "@babel/preset-env": "^7.22.20",
     "@custom-elements-manifest/analyzer": "^0.8.4",
     "@open-wc/eslint-config": "^12.0.0",
-    "@open-wc/testing": "next",
+    "@open-wc/testing": "^3.2.0",
     "@web/test-runner": "^0.17.1",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "deepmerge": "^4.3.1",
