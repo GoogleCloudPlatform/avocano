@@ -68,6 +68,20 @@ else
 fi
 stepdone
 
+stepdo "Create CI logs bucket"
+LOGS_BUCKET=gs://${PARENT_PROJECT}-buildlogs
+
+if gsutil ls $LOGS_BUCKET 2>&1 | grep -q 'BucketNotFoundException'; then
+    gsutil mb -p $PARENT_PROJECT $LOGS_BUCKET
+
+    gsutil iam ch \
+        serviceAccount:${DEFAULT_GCB}:roles/storage.objectAdmin \
+        $LOGS_BUCKET
+else
+    echo "Bucket $LOGS_BUCKET already exists. Skipping"
+fi
+stepdone
+
 stepdo "Grant access to default logs bucket"
 DEFAULT_BUCKET=gs://${PARENT_PROJECT}_cloudbuild
 

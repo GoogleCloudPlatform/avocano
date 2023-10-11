@@ -27,7 +27,5 @@ steps:
           do gcloud projects delete $project --quiet
         done
 
-options:
-  logging: CLOUD_LOGGING_ONLY
-
+logsBucket: ${PROJECT_ID}-buildlogs
 serviceAccount: projects/${PROJECT_ID}/serviceAccounts/ci-serviceaccount@${PROJECT_ID}.iam.gserviceaccount.com
