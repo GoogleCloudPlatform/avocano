@@ -31,15 +31,19 @@ export class Error extends LitElement {
   render() {
     return html`
       <div class="errorContainer">
-      <div class="errorLeft">
-        <div class="errorImage"><img src=${sadimage} /></div>
+        <div class="errorLeft">
+          <div class="errorImage"><img src=${sadimage} /></div>
         </div>
         <div class="errorDetails">
-        <h1>Oh no-vocado!</h1>
-        <div class="errorMessage">${this.apiError.message}</div>
-        <div class="errorURL"><a href="${this.apiError.url}" target=_blank>${this.apiError.url}</a></div>
-        <div class="errorError">${this.apiError.error}</div>
-        <div class="errorError">${this.apiError.extra_error}</div>
+          <h1>Oh no-vocado!</h1>
+          <div class="errorMessage">${this.apiError.message}</div>
+          <div class="errorURL">
+            <a href="${this.apiError.url}" target="_blank"
+              >${this.apiError.url}</a
+            >
+          </div>
+          <div class="errorError">${this.apiError.error}</div>
+          <div class="errorError">${this.apiError.extra_error}</div>
         </div>
       </div>
     `;
