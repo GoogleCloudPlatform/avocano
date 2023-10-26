@@ -13,7 +13,7 @@ data "google_client_config" "default" {}
 
 locals {
   # these match the values in /cloudbuild.yaml
-  gcr_hostname   = "gcr.io"
+  gcr_hostname   = "gcr.io" # TODO update for artifact registry
   server_image   = var.service_name
   client_image   = "client"
   image_registry = "${local.gcr_hostname}/${var.project_id}"
