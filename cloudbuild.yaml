@@ -18,7 +18,7 @@ steps:
     entrypoint: pack
     args:
       - build
-      - gcr.io/$PROJECT_ID/server
+      - us-docker.pkg.dev/$PROJECT_ID/containers/server
       - --builder=gcr.io/buildpacks/builder:v1
       - --path=server/
 
@@ -27,7 +27,7 @@ steps:
     name: gcr.io/cloud-builders/docker
     args:
       - push
-      - gcr.io/$PROJECT_ID/server
+      - us-docker.pkg.dev/$PROJECT_ID/containers/server
 
   - id: terraform
     name: hashicorp/terraform
@@ -51,7 +51,7 @@ steps:
 
   # Only since the client is also node-based can the firebase image can be used for this step.
   - id: client deploy
-    name: gcr.io/$PROJECT_ID/firebase
+    name: us-docker.pkg.dev/$PROJECT_ID/containers/firebase
     dir: client
     env:
       - PROJECT_ID=$PROJECT_ID

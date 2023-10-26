@@ -16,7 +16,7 @@
 
 steps: 
   - id: client-deploy
-    name: gcr.io/$PROJECT_ID/firebase
+    name: us-docker.pkg.dev/$PROJECT_ID/containers/firebase
     env:
       - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
     dir: client

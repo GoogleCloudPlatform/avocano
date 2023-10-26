@@ -43,6 +43,11 @@ export PROJECTNUM=$(gcloud projects describe ${PROJECT_ID} --format='value(proje
 
 aecho "Running setup.sh against ${PROJECT_ID} in ${REGION}"
 
+aecho "Setup Artifact Registry"
+gcloud artifacts repositories create containers \
+    --repository-format=docker \
+    --location=us 
+
 aecho "Setup Firebase Builder"
 gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
 

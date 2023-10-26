@@ -26,7 +26,7 @@ steps:
       - --build-arg
       - AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE
       - "-t"
-      - gcr.io/$PROJECT_ID/$_CLIENT_IMAGE_NAME:$TAG_NAME
+      - us-docker.pkg.dev/$PROJECT_ID/containers/$_CLIENT_IMAGE_NAME:$TAG_NAME
       - "."
       
   - id: server build
@@ -34,14 +34,14 @@ steps:
     entrypoint: pack
     args:
       - build
-      - gcr.io/$PROJECT_ID/$_SERVER_IMAGE_NAME:$TAG_NAME
+      - us-docker.pkg.dev/$PROJECT_ID/containers/$_SERVER_IMAGE_NAME:$TAG_NAME
       - --builder=gcr.io/buildpacks/builder:v1
       - --path=server/
 
 
 images:
-  - gcr.io/$PROJECT_ID/$_CLIENT_IMAGE_NAME:$TAG_NAME
-  - gcr.io/$PROJECT_ID/$_SERVER_IMAGE_NAME:$TAG_NAME
+  - us-docker.pkg.dev/$PROJECT_ID/containers/$_CLIENT_IMAGE_NAME:$TAG_NAME
+  - us-docker.pkg.dev/$PROJECT_ID/containers/$_SERVER_IMAGE_NAME:$TAG_NAME
 
 substitutions:
   _CLIENT_IMAGE_NAME: client
