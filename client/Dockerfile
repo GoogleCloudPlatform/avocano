@@ -17,7 +17,7 @@
 
 # Execute with "--build-arg PROJECT_ID=$PROJECT_ID"
 ARG PROJECT_ID=YOURPROJECTID
-FROM gcr.io/$PROJECT_ID/firebase
+FROM us-docker.pkg.dev/$PROJECT_ID/containers/firebase
 
 # Override with "--build-arg AVOCANO_PURCHASE_MODE=cart"
 ARG AVOCANO_PURCHASE_MODE=""

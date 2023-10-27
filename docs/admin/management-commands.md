@@ -93,7 +93,7 @@ To set this up, create a job that runs the command as you would in the command l
 
 ```
 gcloud run jobs create update_inventory \
-    --image gcr.io/$PROJECT_ID/server \
+    --image us-docker.pkg.dev/$PROJECT_ID/containers/server \
     --region us-central1 \
     --command launcher \
     --args "python manage.py update_inventory_count --add 25"
