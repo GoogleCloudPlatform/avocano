@@ -94,8 +94,6 @@ export const buyProduct = async (productId, callback) => {
   } catch (error) {
     console.error(error);
   }
-
-  return { data };
 };
 
 export const getProductTestimonials = async productId => {
