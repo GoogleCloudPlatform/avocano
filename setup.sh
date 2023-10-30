@@ -44,6 +44,12 @@ export CURRENT_USER=$(gcloud config list account --format "value(core.account)")
 
 aecho "Running setup.sh against ${PROJECT_ID} in ${REGION} as ${CURRENT_USER}"
 
+aecho "Granting Cloud Build permissions"
+export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
+    --format 'value(projectNumber)')@cloudbuild.gserviceaccount.com"
+quiet gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:$CLOUDBUILD_SA --role roles/owner
+
 aecho "Setup Artifact Registry in us mulit-region"
 gcloud artifacts repositories create containers \
     --repository-format=docker \
@@ -59,11 +65,6 @@ aecho "Configuring Terraform"
 export TFSTATE_BUCKET=terraform-${PROJECT_ID}
 gsutil mb gs://$TFSTATE_BUCKET || true 
 
-aecho "Granting Cloud Build permissions"
-export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
-    --format 'value(projectNumber)')@cloudbuild.gserviceaccount.com"
-quiet gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member serviceAccount:$CLOUDBUILD_SA --role roles/owner
 quiet gsutil iam ch \
         serviceAccount:${CLOUDBUILD_SA}:roles/storage.admin \
         gs://$TFSTATE_BUCKET
