@@ -40,8 +40,9 @@ echo "Configuring active project and region..."
 export PROJECT_ID=${PROJECT_ID:=$(gcloud config get project)}
 export REGION=${REGION:=us-central1} # default us-central1 region if not defined
 export PROJECTNUM=$(gcloud projects describe ${PROJECT_ID} --format='value(projectNumber)')  
+export CURRENT_USER=$(gcloud config list account --format "value(core.account)")
 
-aecho "Running setup.sh against ${PROJECT_ID} in ${REGION}"
+aecho "Running setup.sh against ${PROJECT_ID} in ${REGION} as ${CURRENT_USER}"
 
 aecho "Setup Artifact Registry in us mulit-region"
 gcloud artifacts repositories create containers \
