@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
-    "@custom-elements-manifest/analyzer": "^0.8.4",
+    "@custom-elements-manifest/analyzer": "^0.9.0",
     "@open-wc/eslint-config": "^12.0.0",
     "@open-wc/testing": "^3.2.0",
     "@web/test-runner": "^0.17.1",
@@ -45,10 +45,10 @@
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.0.0",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
-    "sinon": "^16.1.0"
+    "sinon": "^17.0.0"
   },
   "eslintConfig": {
     "extends": [
