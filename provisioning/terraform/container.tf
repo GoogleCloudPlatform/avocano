@@ -8,51 +8,44 @@
 # Images are built in /cloudbuild.yaml
 #
 
-# Registry
-data "google_client_config" "default" {}
 
 locals {
-  # these match the values in /cloudbuild.yaml
-  gcr_hostname   = "gcr.io" # TODO update for artifact registry
-  server_image   = var.service_name
-  client_image   = "client"
-  image_registry = "${local.gcr_hostname}/${var.project_id}"
+  # match values in setup.sh and cloudbuild.yaml
+  server_image_name = "server"
+  server_image_tag  = "latest"
+  client_image_name = "client"
+  client_image_tag  = "latest"
+  registry_region   = "us"
+  registry_name     = "containers"
+
+  # Formatted registry information
+  registry_hostname = "${local.registry_region}-docker.pkg.dev"
+  image_registry    = "${local.registry_hostname}/${var.project_id}/${local.registry_name}"
+
+  # Images in formats (use NAME_image in services, jobs, etc.)
+  server_image_sha    = "${data.docker_registry_image.server_image.name}@${data.docker_registry_image.server_image.sha256_digest}"
+  server_image_tagged = data.docker_registry_image.server_image.name
+  server_image        = local.server_image_tag == "latest" ? local.server_image_sha : local.server_image_tagged
+
+  client_image_sha    = "${data.docker_registry_image.client_image.name}@${data.docker_registry_image.client_image.sha256_digest}"
+  client_image_tagged = data.docker_registry_image.client_image.name
+  client_image        = local.client_image_tag == "latest" ? local.client_image_sha : local.client_image_tagged
 }
 
+data "google_client_config" "default" {}
 
-# Authenticate to our container registry
 provider "docker" {
   registry_auth {
-    address  = local.gcr_hostname
+    address  = local.registry_hostname
     username = "oauth2accesstoken"
     password = data.google_client_config.default.access_token
   }
 }
 
-
-# Server
-# Establish image name
-data "docker_registry_image" "server" {
-  name = "${local.image_registry}/${local.server_image}"
+data "docker_registry_image" "server_image" {
+  name = "${local.image_registry}/${local.server_image_name}"
 }
 
-# Get exact image information
-data "google_container_registry_image" "server" {
-  name    = local.server_image
-  project = var.project_id
-  digest  = data.docker_registry_image.server.sha256_digest
-}
-
-
-# Client
-# Establish image name
-data "docker_registry_image" "client" {
-  name = "${local.image_registry}/${local.client_image}"
-}
-
-# Get exact image information
-data "google_container_registry_image" "client" {
-  name    = local.client_image
-  project = var.project_id
-  digest  = data.docker_registry_image.client.sha256_digest
+data "docker_registry_image" "client_image" {
+  name = "${local.image_registry}/${local.client_image_name}"
 }

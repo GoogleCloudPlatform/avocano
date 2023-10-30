@@ -7,7 +7,7 @@ resource "google_cloud_run_v2_job" "setup" {
     template {
       service_account = google_service_account.automation.email
       containers {
-        image   = data.google_container_registry_image.server.image_url
+        image   = local.server_image_sha
         command = ["setup"]
         env {
           name = "DJANGO_ENV"
@@ -56,7 +56,7 @@ resource "google_cloud_run_v2_job" "migrate" {
     template {
       service_account = google_service_account.automation.email
       containers {
-        image   = data.google_container_registry_image.server.image_url
+        image   = local.server_image_sha
         command = ["migrate"]
         env {
           name = "DJANGO_ENV"
@@ -94,7 +94,7 @@ resource "google_cloud_run_v2_job" "client" {
   template {
     template {
       containers {
-        image   = data.google_container_registry_image.client.image_url
+        image   = local.client_image
         command = ["firebase"]
         args    = ["deploy", "--project", var.project_id, "--only", "hosting"]
 
