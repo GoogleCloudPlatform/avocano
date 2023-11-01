@@ -49,16 +49,6 @@ export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
 quiet gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member serviceAccount:$CLOUDBUILD_SA --role roles/owner
 
-aecho "Setup Artifact Registry in us multi-region"
-gcloud artifacts repositories create containers \
-    --repository-format=docker \
-    --location=us
-
-aecho "Setup Firebase Builder"
-gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
-
-aecho "Build client image"
-gcloud builds submit --config provisioning/client-image.cloudbuild.yaml
 
 aecho "Configuring Terraform"
 export TFSTATE_BUCKET=terraform-${PROJECT_ID}
@@ -68,10 +58,21 @@ quiet gsutil iam ch \
     serviceAccount:${CLOUDBUILD_SA}:roles/storage.admin \
     gs://$TFSTATE_BUCKET
 
+aecho "Setup Artifact Registry in us multi-region"
+gcloud artifacts repositories create containers \
+    --repository-format=docker \
+    --location=us
+
+aecho "Build firebase image (one time)"
+gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
+
+aecho "Build client image"
+gcloud builds submit --config provisioning/client-image.cloudbuild.yaml
+
 aecho "Running Cloud Build"
 gcloud builds submit --substitutions _REGION=${REGION}
 
-aecho "Setup database"
+aecho "Setup database (one time)"
 gcloud run jobs execute setup --wait --region $REGION
 
 eecho "Website now available at https://${PROJECT_ID}.web.app"
