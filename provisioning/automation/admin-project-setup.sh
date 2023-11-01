@@ -95,7 +95,7 @@ gsutil iam ch \
 stepdone
 
 stepdo "Grant roles to service account on project"
-for role in storage.admin iam.serviceAccountUser; do
+for role in storage.admin iam.serviceAccountUser artifactregistry.admin; do
     quiet gcloud projects add-iam-policy-binding $PARENT_PROJECT \
         --member serviceAccount:${SA_EMAIL} \
         --role roles/${role}

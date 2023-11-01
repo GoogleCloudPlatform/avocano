@@ -82,7 +82,7 @@ else
     stepdo "enable services on ci project"
     gcloud services enable --project $CI_PROJECT \
         cloudresourcemanager.googleapis.com \
-        containerregistry.googleapis.com \
+        artifactregistry.googleapis.com \
         cloudbuild.googleapis.com \
         cloudbilling.googleapis.com \
         iam.googleapis.com \

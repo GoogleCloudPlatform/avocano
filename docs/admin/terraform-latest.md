@@ -8,6 +8,6 @@ But since Terraform will be told "latest", and it detects the service is using "
 
 In this case, this repo uses a [solution](https://github.com/hashicorp/terraform-provider-google/issues/6706#issuecomment-657039775) that sources the exact current "latest" by the sha as detected in the Container Registry. 
 
-The Terraform uses the `docker` provider and [`registry_auth`](https://github.com/GoogleCloudPlatform/avocano/search?q=registry_auth) to talk to Container Registry, and [`google_container_registry_image`](https://github.com/GoogleCloudPlatform/avocano/search?q=google_container_registry_image`) to build the fully qualified image name to pass to Terraform. 
+The Terraform config in this repo uses the `docker` provider and [`registry_auth`](https://github.com/GoogleCloudPlatform/avocano/search?q=registry_auth) to talk to Artifact Registry, and from that data, build the fully qualified image name to pass to Terraform. 
 
-This way, the exact current latest image is passed to Terraform. 
+This way, the "latest" image is always used by Terraform. 

@@ -27,12 +27,12 @@ steps:
         "--build-arg", 
         "AVOCANO_PURCHASE_MODE=$_PURCHASE_MODE",
         "-t",
-        "gcr.io/$PROJECT_ID/$_IMAGE_NAME",
+        "us-docker.pkg.dev/$PROJECT_ID/containers/$_IMAGE_NAME",
         ".",
       ]
 
 images:
-  - gcr.io/$PROJECT_ID/$_IMAGE_NAME
+  - us-docker.pkg.dev/$PROJECT_ID/containers/$_IMAGE_NAME
 
 substitutions:
   _IMAGE_NAME: client

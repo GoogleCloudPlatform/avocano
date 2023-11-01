@@ -10,6 +10,7 @@ As a infrastructure administrator, I want to:
  * [perform management commands.](management-commands.md)
  * [see telemetry for my application.](opentelemetry.md)
  * [improve performance around cold starts.](cold-starts.md)
+ * [know about the change to use Artifact Registry.](artifact-registry.md)
 
 
 *Want more options? [Request some new docs!](https://github.com/GoogleCloudPlatform/avocano/issues/new/choose)*

@@ -6,7 +6,7 @@ resource "google_cloud_run_v2_service" "server" {
   template {
     service_account = google_service_account.server.email
     containers {
-      image = data.google_container_registry_image.server.image_url
+      image = local.server_image_sha
       env {
         name = "DJANGO_ENV"
         value_source {
