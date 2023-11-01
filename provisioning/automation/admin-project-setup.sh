@@ -19,10 +19,11 @@
 # param:
 #   folder_id: a folder to use for tests, to borrow configs. 
 
-# borrows heavily from fourkeys https://github.com/GoogleCloudPlatform/fourkeys/blob/main/experimental/terraform/setup.sh
+# borrows heavily from fourkeys https://github.com/GoogleCloudPlatform/fourkeys/blob/v0.1/experimental/terraform/setup.sh
 # this script copied from unicodex https://github.com/GoogleCloudPlatform/django-demo-app-unicodex/blob/latest/experimental/project_setup.sh
 
-source bashhelpers.sh
+
+source $(dirname "$0")/bashhelpers.sh
 
 # Sets up a parent project for CI work
 export PARENT_PROJECT=$(gcloud config get-value project)

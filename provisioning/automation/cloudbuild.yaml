@@ -70,7 +70,7 @@ options:
   machineType: "E2_HIGHCPU_8"
 
 logsBucket: ${PROJECT_ID}-buildlogs
-serviceAccount: projects/${PROJECT_ID}/serviceAccounts/ci-serviceaccount@avocano-admin.iam.gserviceaccount.com
+serviceAccount: projects/${PROJECT_ID}/serviceAccounts/ci-serviceaccount@${PROJECT_ID}.iam.gserviceaccount.com
 
 substitutions:
   _KEEP_PROJECT: "false"
