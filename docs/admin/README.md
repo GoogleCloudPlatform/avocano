@@ -9,6 +9,7 @@ As a infrastructure administrator, I want to:
  * [verify changes to this application.](testing-changes.md)
  * [perform management commands.](management-commands.md)
  * [see telemetry for my application.](opentelemetry.md)
+ * [improve performance around cold starts.](cold-starts.md)
 
 
 *Want more options? [Request some new docs!](https://github.com/GoogleCloudPlatform/avocano/issues/new/choose)*
