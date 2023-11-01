@@ -4,10 +4,12 @@ This folder is for meta automation.
 
 This folder defines the tests and configurations to test deployments that themselves create new projects. 
 
+You need to have organisation level access in order to set folder level permissions, and permissions on billing accounts. 
+
 ## Setup
 
 Run once:
- * `admin-project-setup.sh $FOLDER_ID`
+ * `source provisioning/automation/admin-project-setup.sh $FOLDER_ID`
      - sets up current project and designated folder as a place to automatically create projects. 
 
 Run periodically: 
