@@ -66,9 +66,6 @@ gcloud artifacts repositories create containers \
 aecho "Build firebase image (one time)"
 gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
 
-aecho "Build client image"
-gcloud builds submit --config provisioning/client-image.cloudbuild.yaml
-
 aecho "Running Cloud Build"
 gcloud builds submit --substitutions _REGION=${REGION}
 
