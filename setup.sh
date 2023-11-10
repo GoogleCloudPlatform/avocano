@@ -43,13 +43,6 @@ export CURRENT_USER=$(gcloud config list account --format "value(core.account)")
 
 aecho "Running setup.sh against ${PROJECT_ID} in ${REGION} as ${CURRENT_USER}"
 
-aecho "Granting Cloud Build permissions"
-export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
-    --format 'value(projectNumber)')@cloudbuild.gserviceaccount.com"
-quiet gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member serviceAccount:$CLOUDBUILD_SA --role roles/owner
-
-
 aecho "Configuring Terraform"
 export TFSTATE_BUCKET=terraform-${PROJECT_ID}
 gsutil mb gs://$TFSTATE_BUCKET || true
@@ -57,6 +50,34 @@ gsutil mb gs://$TFSTATE_BUCKET || true
 quiet gsutil iam ch \
     serviceAccount:${CLOUDBUILD_SA}:roles/storage.admin \
     gs://$TFSTATE_BUCKET
+
+aecho "Granting Cloud Build permissions"
+export CLOUDBUILD_SA="$(gcloud projects describe $PROJECT_ID \
+    --format 'value(projectNumber)')@cloudbuild.gserviceaccount.com"
+quiet gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:$CLOUDBUILD_SA --role roles/owner
+
+aecho "Checking for Artifact Registry IAM propagation..."
+ARTIFACT_CHECK=(curl -X POST \
+    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+    -H "Content-Type: application/json; charset=utf-8" \
+    -d "{'permissions':  [ 'artifactregistry.repositories.create' ] } " \
+    "https://cloudresourcemanager.googleapis.com/v1/projects/${PROJECT_ID}:testIamPermissions")
+
+TIMEOUT_LIMIT=6
+TIMEOUT_SLEEP=10
+TIMEOUT=1
+while ! [[ $ARTIFACT_CHECK =~ "artifactregistry.repositories.create" ]]; do
+    echo "Permissions not yet ready. Sleeping for $TIMEOUT_SLEEP seconds (Attempt number $TIMEOUT)"
+    if [[ $TIMEOUT -eq $TIMEOUT_LIMIT ]]; then
+        echo "Tried $TIMEOUT times, IAM didn't propagate in $((TIMEOUT_LIMIT*TIMEOUT_SLEEP)) seconds. There might be a bigger issue with this permission. Exiting. "
+        exit 1
+    fi
+    TIMEOUT=$((TIMEOUT+1))
+    sleep 10
+done
+echo "Artifact Registry permissions should now be ready."
+
 
 aecho "Setup Artifact Registry in us multi-region"
 gcloud artifacts repositories create containers \
