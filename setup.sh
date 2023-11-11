@@ -70,8 +70,10 @@ TIMEOUT=1
 while ! [[ $ARTIFACT_CHECK =~ "artifactregistry.repositories.create" ]]; do
     echo "Permissions not yet ready. Sleeping for $TIMEOUT_SLEEP seconds (Attempt number $TIMEOUT)"
     if [[ $TIMEOUT -eq $TIMEOUT_LIMIT ]]; then
-        echo "Tried $TIMEOUT times, IAM didn't propagate in $((TIMEOUT_LIMIT*TIMEOUT_SLEEP)) seconds. There might be a bigger issue with this permission. Exiting. "
-        exit 1
+        echo "Tried $TIMEOUT times, IAM didn't propagate in $((TIMEOUT_LIMIT*TIMEOUT_SLEEP)) seconds."
+        echo "The next statement may fail."
+        #echo "There might be a bigger issue with this permission. Exiting. "
+        #exit 1
     fi
     TIMEOUT=$((TIMEOUT+1))
     sleep 10
