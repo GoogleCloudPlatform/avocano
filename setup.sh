@@ -58,27 +58,34 @@ quiet gsutil iam ch \
     gs://$TFSTATE_BUCKET
 
 aecho "Checking for Artifact Registry IAM propagation..."
-ARTIFACT_CHECK=(curl -X POST \
-    -H "Authorization: Bearer $(gcloud auth print-access-token)" \
-    -H "Content-Type: application/json; charset=utf-8" \
-    -d "{'permissions':  [ 'artifactregistry.repositories.create' ] } " \
-    "https://cloudresourcemanager.googleapis.com/v1/projects/${PROJECT_ID}:testIamPermissions")
+permission_missing() {
+    result=$(curl -X POST \
+        -H "Authorization: Bearer $(gcloud auth print-access-token)" \
+        -H "Content-Type: application/json; charset=utf-8" \
+        -d "{'permissions':  [ 'artifactregistry.repositories.create' ] } " \
+        "https://cloudresourcemanager.googleapis.com/v1/projects/${PROJECT_ID}:testIamPermissions")
+    if [[ $result =~ "artifactregistry.repositories.create" ]]; then
+        # permission is found, break the loop with a failure, causing while loop to stop. 
+        return 1
+    else
+        return 0
+    fi
+}
 
 TIMEOUT_LIMIT=6
 TIMEOUT_SLEEP=10
 TIMEOUT=1
-while ! [[ $ARTIFACT_CHECK =~ "artifactregistry.repositories.create" ]]; do
+while [[ permission_missing ]]; do
     echo "Permissions not yet ready. Sleeping for $TIMEOUT_SLEEP seconds (Attempt number $TIMEOUT)"
     if [[ $TIMEOUT -eq $TIMEOUT_LIMIT ]]; then
-        echo "Tried $TIMEOUT times, IAM didn't propagate in $((TIMEOUT_LIMIT*TIMEOUT_SLEEP)) seconds."
+        echo "Tried $TIMEOUT times, IAM didn't propagate in $((TIMEOUT_LIMIT * TIMEOUT_SLEEP)) seconds."
         echo "The next statement may fail."
         break
     fi
-    TIMEOUT=$((TIMEOUT+1))
+    TIMEOUT=$((TIMEOUT + 1))
     sleep 10
 done
 echo "Artifact Registry permissions should now be ready."
-
 
 aecho "Setup Artifact Registry in us multi-region"
 gcloud artifacts repositories create containers \
