@@ -13,8 +13,6 @@ locals {
   # match values in setup.sh and cloudbuild.yaml
   server_image_name = "server"
   server_image_tag  = "latest"
-  client_image_name = "client"
-  client_image_tag  = "latest"
   registry_region   = "us"
   registry_name     = "containers"
 
@@ -26,10 +24,6 @@ locals {
   server_image_sha    = "${data.docker_registry_image.server_image.name}@${data.docker_registry_image.server_image.sha256_digest}"
   server_image_tagged = data.docker_registry_image.server_image.name
   server_image        = local.server_image_tag == "latest" ? local.server_image_sha : local.server_image_tagged
-
-  client_image_sha    = "${data.docker_registry_image.client_image.name}@${data.docker_registry_image.client_image.sha256_digest}"
-  client_image_tagged = data.docker_registry_image.client_image.name
-  client_image        = local.client_image_tag == "latest" ? local.client_image_sha : local.client_image_tagged
 }
 
 data "google_client_config" "default" {}
@@ -44,8 +38,4 @@ provider "docker" {
 
 data "docker_registry_image" "server_image" {
   name = "${local.image_registry}/${local.server_image_name}"
-}
-
-data "docker_registry_image" "client_image" {
-  name = "${local.image_registry}/${local.client_image_name}"
 }
