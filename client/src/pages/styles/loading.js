@@ -34,38 +34,31 @@ const styles = css`
     height: 80px;
   }
 
-  .spinner div {
-    box-sizing: border-box;
-    display: block;
+  .avocado {
+    width: 120px;
+    height: 150px;
+    position: relative;
+    animation: spin 2s linear infinite;
+    background: radial-gradient(
+      ellipse at center,
+      #568203 0%,
+      #568203 40%,
+      #4D6D31 41%,
+      #568203 50%,
+      #4D6D31 51%,
+      #568203 100%
+    );
+    border-radius: 50% 50% 40% 40%;
+  }
+
+  .pit {
     position: absolute;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border: 8px solid rgb(178, 180, 63);
+    top: 40%;
+    left: 45%;
+    width: 15px;
+    height: 20px;
+    background-color: #402e18;
     border-radius: 50%;
-    animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: rgb(178, 180, 63) transparent transparent transparent;
-  }
-
-  .spinner div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-
-  .spinner div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-
-  .spinner div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-
-  @keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 
   @keyframes spin {
