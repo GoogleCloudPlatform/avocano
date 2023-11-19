@@ -30,12 +30,9 @@ export class Loading extends LitElement {
       <div class="loadingContainer">
         <div class="loadingWrapper">
           <h2 class="loadingTitle">Loading...</h2>
-          <div class="spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
+            <div class="avocado">
+              <div class="pit"></div>
+            </div>
         </div>
       </div>
     `;
