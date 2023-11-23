@@ -1,5 +1,44 @@
 # Changelog
 
+## [1.10.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.9.0...v1.10.0) (2023-11-23)
+
+
+### 🥑 Features
+
+* Migrate from Container Registry to Artifact Registry ([#378](https://github.com/GoogleCloudPlatform/avocano/issues/378)) ([65020ac](https://github.com/GoogleCloudPlatform/avocano/commit/65020acf09d3a069a8c63def05b6f368e333b120))
+
+
+### 🐞 Bug Fixes
+
+* add an IAM check for permission propagation ([#397](https://github.com/GoogleCloudPlatform/avocano/issues/397)) ([351b1a0](https://github.com/GoogleCloudPlatform/avocano/commit/351b1a0804503b0fd50ae505d90bae32fbb292bd))
+* **deps:** update js runtime ([#394](https://github.com/GoogleCloudPlatform/avocano/issues/394)) ([779d98a](https://github.com/GoogleCloudPlatform/avocano/commit/779d98ab305b5d6b1ed44d705dc9d35e55884374))
+* pin google provider &lt; 5.0.0 ([#356](https://github.com/GoogleCloudPlatform/avocano/issues/356)) ([1ee9708](https://github.com/GoogleCloudPlatform/avocano/commit/1ee97084fdcc81aa7348f43e1e9347f554eb6cee))
+* remove client-image building ([#391](https://github.com/GoogleCloudPlatform/avocano/issues/391)) ([b353e13](https://github.com/GoogleCloudPlatform/avocano/commit/b353e13ab3a522b9a57117993d46640f6c65e8a3))
+
+
+### 📑 Documentation
+
+* add cold start improvement suggestions ([#371](https://github.com/GoogleCloudPlatform/avocano/issues/371)) ([759170c](https://github.com/GoogleCloudPlatform/avocano/commit/759170c811b87329989db0e9c9341e90947b2554))
+
+
+### 🧹 Chores
+
+* add reference to jump start ([#346](https://github.com/GoogleCloudPlatform/avocano/issues/346)) ([c611179](https://github.com/GoogleCloudPlatform/avocano/commit/c611179ecf727f9ecf5729d9988e3e3130f6d7aa))
+* **deps:** bump @babel/traverse from 7.23.0 to 7.23.2 in /client ([#374](https://github.com/GoogleCloudPlatform/avocano/issues/374)) ([8b4dc1e](https://github.com/GoogleCloudPlatform/avocano/commit/8b4dc1edd4432cd64232f0c49b256bf5d2515ed5))
+* **deps:** update actions/checkout action to v4 ([#350](https://github.com/GoogleCloudPlatform/avocano/issues/350)) ([04855a6](https://github.com/GoogleCloudPlatform/avocano/commit/04855a623ec78510862badb69623ab5dc64b1d87))
+* **deps:** update actions/setup-node action to v4 ([#379](https://github.com/GoogleCloudPlatform/avocano/issues/379)) ([c987e9d](https://github.com/GoogleCloudPlatform/avocano/commit/c987e9d58dae71732eae0bf0d1d400d8f06bf3d1))
+* **deps:** update dependency @custom-elements-manifest/analyzer to ^0.9.0 ([#376](https://github.com/GoogleCloudPlatform/avocano/issues/376)) ([5708c5e](https://github.com/GoogleCloudPlatform/avocano/commit/5708c5ec886036d2d97fdd1f5f3f143756a67dec))
+* **deps:** update dependency @open-wc/testing to v4 ([#400](https://github.com/GoogleCloudPlatform/avocano/issues/400)) ([1125dc6](https://github.com/GoogleCloudPlatform/avocano/commit/1125dc6feba2b9cb138623f55ef22cc580ffd677))
+* **deps:** update dependency @web/test-runner to ^0.18.0 ([#393](https://github.com/GoogleCloudPlatform/avocano/issues/393)) ([03c4610](https://github.com/GoogleCloudPlatform/avocano/commit/03c461002b3a4dd2f575d3a2ddc2196bd399dc3e))
+* **deps:** update github actions ([#348](https://github.com/GoogleCloudPlatform/avocano/issues/348)) ([fd6ff3b](https://github.com/GoogleCloudPlatform/avocano/commit/fd6ff3b5dca53c4460156c1f72a13d75b874274b))
+* **deps:** update github actions ([#375](https://github.com/GoogleCloudPlatform/avocano/issues/375)) ([ad6a211](https://github.com/GoogleCloudPlatform/avocano/commit/ad6a2112573b9a21ea3d5fe95d37b2c810baa17c))
+* **deps:** update hashicorp/setup-terraform action to v3 ([#392](https://github.com/GoogleCloudPlatform/avocano/issues/392)) ([d6380e0](https://github.com/GoogleCloudPlatform/avocano/commit/d6380e019a0155166bdcba2e2b4d67bcdb9c2630))
+* **deps:** update javascript dependencies ([#373](https://github.com/GoogleCloudPlatform/avocano/issues/373)) ([09962ca](https://github.com/GoogleCloudPlatform/avocano/commit/09962ca9318e60e2317ddaff2e13c7b200730f6b))
+* **deps:** update js build ([#347](https://github.com/GoogleCloudPlatform/avocano/issues/347)) ([2d5ba0e](https://github.com/GoogleCloudPlatform/avocano/commit/2d5ba0e96c71f9925b721c595b14744560954d39))
+* **deps:** update js build ([#377](https://github.com/GoogleCloudPlatform/avocano/issues/377)) ([1e08cd2](https://github.com/GoogleCloudPlatform/avocano/commit/1e08cd28cf9df38e785fca28e71035f17adc737c))
+* **deps:** update python docker tag to v3.12 ([#364](https://github.com/GoogleCloudPlatform/avocano/issues/364)) ([3b0fb18](https://github.com/GoogleCloudPlatform/avocano/commit/3b0fb1849bde6fe73af53db27e980ce1a6666af5))
+* **deps:** update terraform google to v5 ([#365](https://github.com/GoogleCloudPlatform/avocano/issues/365)) ([a0c831d](https://github.com/GoogleCloudPlatform/avocano/commit/a0c831ddaa0dc7e7fa54539708a7768962d94028))
+
 ## [1.9.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.8.2...v1.9.0) (2023-07-20)
 
 
