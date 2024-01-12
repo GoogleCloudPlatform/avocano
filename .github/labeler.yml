@@ -15,17 +15,25 @@
 # Labeler assigns GitHub labels to PRs based on changed files.
 
 # component labels are used in release notes.
-'component: client':
-- 'client/*'
-- 'client/**/*'
-'component: server':
-- 'server/*'
-- 'server/**/*'
-'component: provisioning':
-- 'provisioning/*'
-- 'provisioning/**/*'
-- 'cloudbuild.yaml'
-- 'setup.sh'
-'component: docs':
-- 'docs/*'
-- 'docs/**/*'
+"component: client":
+  - changed-files:
+      - any-glob-to-all-files:
+          - "client/*"
+          - "client/**/*"
+"component: server":
+  - changed-files:
+      - any-glob-to-all-files:
+          - "server/*"
+          - "server/**/*"
+"component: provisioning":
+  - changed-files:
+      - any-glob-to-all-files:
+          - "provisioning/*"
+          - "provisioning/**/*"
+          - "cloudbuild.yaml"
+          - "setup.sh"
+"component: docs":
+  - changed-files:
+      - any-glob-to-all-files:
+          - "docs/*"
+          - "docs/**/*"
