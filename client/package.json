@@ -3,7 +3,7 @@
   "description": "Avocano app",
   "license": "MIT",
   "author": "avocano-shell",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "scripts": {
     "lint": "eslint --ext .js . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "eslint --ext .js . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
