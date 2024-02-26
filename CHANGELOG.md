@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.2](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.1...v1.10.2) (2024-02-26)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump ip from 1.1.8 to 1.1.9 in /client ([#418](https://github.com/GoogleCloudPlatform/avocano/issues/418)) ([0fa1309](https://github.com/GoogleCloudPlatform/avocano/commit/0fa130961bd93c7b88b5e749232c27a16000fd68))
+
 ## [1.10.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.0...v1.10.1) (2024-02-21)
 
 
