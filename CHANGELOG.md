@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.10.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.0...v1.10.1) (2024-02-21)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency idb to v8 ([#410](https://github.com/GoogleCloudPlatform/avocano/issues/410)) ([cf7d3e7](https://github.com/GoogleCloudPlatform/avocano/commit/cf7d3e7cd53069d638684a251120407649432ba5))
+
+
+### 🧹 Chores
+
+* **deps:** update actions/github-script action to v7 ([#407](https://github.com/GoogleCloudPlatform/avocano/issues/407)) ([720f817](https://github.com/GoogleCloudPlatform/avocano/commit/720f817dcadf1872ecf92fabfcbcd4b5ce1615df))
+* **deps:** update actions/setup-node action to v4.0.1 ([#411](https://github.com/GoogleCloudPlatform/avocano/issues/411)) ([da3b4f9](https://github.com/GoogleCloudPlatform/avocano/commit/da3b4f9099adc34a0c900139e031db65b2021861))
+* **deps:** update actions/setup-node action to v4.0.2 ([#417](https://github.com/GoogleCloudPlatform/avocano/issues/417)) ([83bb79d](https://github.com/GoogleCloudPlatform/avocano/commit/83bb79d73ff4a6b7e005d357c27e4f01019acf90))
+* **deps:** update dependency husky to v9 ([#415](https://github.com/GoogleCloudPlatform/avocano/issues/415)) ([9f260b1](https://github.com/GoogleCloudPlatform/avocano/commit/9f260b1f986bd012000895b3afa4e8d0120558ab))
+* **deps:** update github actions to v5 ([#409](https://github.com/GoogleCloudPlatform/avocano/issues/409)) ([36f0846](https://github.com/GoogleCloudPlatform/avocano/commit/36f0846293a95dd04c12d17ed011dd2e672fd8ed))
+
 ## [1.10.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.9.0...v1.10.0) (2023-11-23)
 
 
