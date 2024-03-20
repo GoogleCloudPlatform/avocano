@@ -31,6 +31,7 @@ steps:
     entrypoint: gcloud
     args:
       [
+        "beta",
         "builds",
         "submit",
         "--config=$_CLOUDBUILD_CONFIG",
