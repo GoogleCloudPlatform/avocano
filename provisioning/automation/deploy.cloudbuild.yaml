@@ -21,7 +21,3 @@ steps:
     script: |
       #!/bin/bash
       bash setup.sh
-
-
-options:
-  logging: CLOUD_LOGGING_ONLY
