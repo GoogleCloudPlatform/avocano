@@ -97,13 +97,6 @@ else
         --role roles/owner
     stepdone
 
-    stepdo "assign Log Bucket writer to Cloud Build service account"
-    LOGS_BUCKET=gs://${PARENT_PROJECT}-buildlogs
-    gsutil iam ch \
-        serviceAccount:${CLOUDBUILD_SA}:roles/storage.admin \
-        $LOGS_BUCKET
-    stepdone
-
     stepdo "setup Terraform bucket"
     gsutil mb -p ${CI_PROJECT} gs://$TF_STATE_BUCKET
     echo "Created $TF_STATE_BUCKET bucket"
