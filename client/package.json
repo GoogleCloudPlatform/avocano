@@ -4,15 +4,16 @@
   "license": "MIT",
   "author": "avocano-shell",
   "version": "1.10.2",
+  "type": "module",
   "scripts": {
-    "lint": "eslint --ext .js . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
-    "format": "eslint --ext .js . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "eslint",
+    "format": "eslint --fix",
     "test": "web-test-runner 'test/**/*.test.js' --node-resolve",
     "test:watch": "web-test-runner --watch",
     "build": "rimraf dist && rollup -c rollup.config.mjs",
     "start:build": "web-dev-server --root-dir dist --app-index index.html --open",
     "start": "web-dev-server",
-    "prepare": "cd .. && husky install client/.husky"
+    "prepare": "cd .. && husky client/.husky"
   },
   "dependencies": {
     "@material/mwc-button": "^0.27.0",
@@ -37,24 +38,17 @@
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
     "@custom-elements-manifest/analyzer": "^0.10.0",
-    "@open-wc/eslint-config": "^12.0.0",
     "@open-wc/testing": "^4.0.0",
     "@web/test-runner": "^0.18.0",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "deepmerge": "^4.3.1",
-    "eslint": "^8.51.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint": "^9.2.0",
     "husky": "^9.0.0",
+    "globals": "^15.3.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.3",
     "rimraf": "^5.0.5",
     "sinon": "^17.0.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ]
   },
   "prettier": {
     "singleQuote": true,

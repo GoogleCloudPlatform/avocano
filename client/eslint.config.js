@@ -1,4 +1,4 @@
-// Copyright 2023 Google LLC
+// Copyright 2024 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
-  parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module',
-  },
-  rules: {
-    'no-console': 'off',
-    'no-unexpected-token': 'off',
-    'no-restricted-syntax': [
-      'error',
-      {
-        selector:
-          "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
-        message: 'Unexpected property on console object was called',
-      },
-    ],
-  },
-};
+
+import js from "@eslint/js";
+import globals from "globals";
+
+export default [
+    js.configs.recommended,
+    {
+        languageOptions: {
+            globals: {
+                ...globals.node,
+                ...globals.browser,
+                ...globals.mocha,
+            }
+        },
+    }]
