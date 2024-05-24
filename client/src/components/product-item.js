@@ -222,7 +222,7 @@ export class ProductItem extends LitElement {
           <div class="testimonialsContent">
             ${testimonials?.length
               ? testimonials.map(
-                  (item, index) => html`
+                  (item) => html`
                     <div class="testimonialsItem">
                       <div class="testimonialItemContent">
                         <div class="rating">

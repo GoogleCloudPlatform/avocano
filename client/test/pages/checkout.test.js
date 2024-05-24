@@ -87,6 +87,7 @@ describe('Checkout', () => {
       const clearBtnElement = childElement.querySelector('mwc-button');
       expect(clearBtnElement).to.exist;
       clearBtnElement.click();
+      expect(cartStub).to.have.callCount(1);
       expect(clearStub).to.have.callCount(1);
     });
   });
@@ -130,6 +131,7 @@ describe('Checkout', () => {
 
       const formElement = childElement.querySelector('app-checkout-form');
       expect(formElement).to.exist;
+      expect(cartStub).to.have.callCount(1);
     });
   });
 });

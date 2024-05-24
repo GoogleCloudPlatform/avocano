@@ -36,7 +36,7 @@ export class CartItem extends LitElement {
   }
 
   render() {
-    const { name, discount_price, count, image, description } =
+    const { name, discount_price, count, image } =
       this.productItem || {};
 
     return html`
