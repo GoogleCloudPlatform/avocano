@@ -69,7 +69,7 @@ describe('Checkout', () => {
         { name: 'hello', count: 2, id: 2 },
         { name: 'world', count: 3, id: 1 },
       ];
-      const cartStub = sinon.stub(parentElement, 'cart').value(mockCart);
+      sinon.stub(parentElement, 'cart').value(mockCart);
       const clearStub = sinon.stub(parentElement, 'clearCart');
 
       // Updates checkout page with stubs
@@ -114,7 +114,7 @@ describe('Checkout', () => {
         { count: 1, id: 2, discount_price: 1 },
         { count: 1, id: 1, discount_price: 1 },
       ];
-      const cartStub = sinon.stub(parentElement, 'cart').value(mockCart);
+      sinon.stub(parentElement, 'cart').value(mockCart);
 
       // Updates checkout page with stubs
       parentElement.requestUpdate();

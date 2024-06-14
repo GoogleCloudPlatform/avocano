@@ -45,7 +45,7 @@ class CheckoutForm extends LitElement {
     email.addEventListener('change', this.onEmailChange);
   }
 
-  onEmailChange(event) {
+  onEmailChange() {
     const form = new FormData(this.shadowRoot.querySelector('form') || {});
     const isValid = this.isValidEmail(form.get('email'));
 
@@ -76,7 +76,7 @@ class CheckoutForm extends LitElement {
   }
 
   render() {
-    const { openFormErrorDialog, disableSubmit } = this.state;
+    const { disableSubmit } = this.state;
 
     return html` <div>
       <form @submit=${this.submitForm}>

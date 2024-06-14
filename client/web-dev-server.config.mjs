@@ -22,7 +22,6 @@ export default {
   open: '/',
   watch: !hmr,
   port: 8081,
-  open: true,
   rootDir: '.',
   basePath: '/',
   appIndex: 'index.html',
