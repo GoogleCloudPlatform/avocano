@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.10.3](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.2...v1.10.3) (2024-06-18)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency express to v4.19.2 [security] ([#441](https://github.com/GoogleCloudPlatform/avocano/issues/441)) ([9c7263b](https://github.com/GoogleCloudPlatform/avocano/commit/9c7263bd0808d462bd41e902a970724e3b86e8e3))
+* remove logging bucket logic ([#428](https://github.com/GoogleCloudPlatform/avocano/issues/428)) ([3f64e8f](https://github.com/GoogleCloudPlatform/avocano/commit/3f64e8fe2751fcff4acd35a6bc6e5c8a0624ed67))
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump ws from 7.5.9 to 7.5.10 in /client ([#458](https://github.com/GoogleCloudPlatform/avocano/issues/458)) ([1648aaf](https://github.com/GoogleCloudPlatform/avocano/commit/1648aaf84a70fe72a91d117a7c599b30b389a91b))
+* **deps:** bump braces from 3.0.2 to 3.0.3 in /client ([#455](https://github.com/GoogleCloudPlatform/avocano/issues/455)) ([079ab3c](https://github.com/GoogleCloudPlatform/avocano/commit/079ab3c1f2abe0c588fe1d479a94ed7df38db6b9))
+* **deps:** update actions/checkout digest to 692973e ([#456](https://github.com/GoogleCloudPlatform/avocano/issues/456)) ([bdd9f3d](https://github.com/GoogleCloudPlatform/avocano/commit/bdd9f3d00e962cc8e0e76fbf39029e35aecbae42))
+* **deps:** update actions/checkout digest to a5ac7e5 ([#451](https://github.com/GoogleCloudPlatform/avocano/issues/451)) ([266bb13](https://github.com/GoogleCloudPlatform/avocano/commit/266bb133c10ffbbb2d6640b302e1e16831fa6146))
+* **deps:** update actions/setup-python digest to 82c7e63 ([#442](https://github.com/GoogleCloudPlatform/avocano/issues/442)) ([982363b](https://github.com/GoogleCloudPlatform/avocano/commit/982363b8a720a98e908b6480e2c064596c406752))
+* **deps:** update dependency @custom-elements-manifest/analyzer to ^0.10.0 ([#447](https://github.com/GoogleCloudPlatform/avocano/issues/447)) ([5614252](https://github.com/GoogleCloudPlatform/avocano/commit/561425253e17f55453db757aa3fbc1f3bfa00229))
+* **deps:** update dependency sinon to v18 ([#457](https://github.com/GoogleCloudPlatform/avocano/issues/457)) ([cb9676c](https://github.com/GoogleCloudPlatform/avocano/commit/cb9676c64cf3112e9b13e396050bf985951f6826))
+* **deps:** update github actions ([#446](https://github.com/GoogleCloudPlatform/avocano/issues/446)) ([a6eb8da](https://github.com/GoogleCloudPlatform/avocano/commit/a6eb8da7a5c42279864edbd7b590914e346c3ba7))
+
 ## [1.10.2](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.1...v1.10.2) (2024-02-26)
 
 
