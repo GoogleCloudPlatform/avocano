@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.10.4](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.3...v1.10.4) (2024-07-25)
+
+
+### 🧹 Chores
+
+* **deps:** update dependency rimraf to v6 ([#462](https://github.com/GoogleCloudPlatform/avocano/issues/462)) ([55e24ff](https://github.com/GoogleCloudPlatform/avocano/commit/55e24ff0b1733f33022a5f36643ec697f8ef4464))
+* **deps:** update github actions ([#461](https://github.com/GoogleCloudPlatform/avocano/issues/461)) ([86bc1ef](https://github.com/GoogleCloudPlatform/avocano/commit/86bc1ef23b304e4892ab92cddf6c65a39f4f5949))
+
+
+### 🛠️ Automation
+
+* Add inline guidance on pull_request_target usage ([#464](https://github.com/GoogleCloudPlatform/avocano/issues/464)) ([1cb45dd](https://github.com/GoogleCloudPlatform/avocano/commit/1cb45ddba3881228613d3ca5045ef765470e8e43))
+
 ## [1.10.3](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.2...v1.10.3) (2024-06-18)
 
 
