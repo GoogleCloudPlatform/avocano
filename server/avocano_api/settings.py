@@ -198,6 +198,11 @@ if GS_BUCKET_NAME := env("GS_BUCKET_NAME", default=None):
 
     GS_DEFAULT_ACL = "publicRead"
 else:
-    STORAGES = {"default": {"BACKEND": "django.core.files.storage.FileSystemStorage"}}
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
     STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL.replace("/", ""))
     MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL.replace("/", ""))
