@@ -33,10 +33,10 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     # Display preview of image in admin
+    @admin.display(description="Product Image Preview")
     def image_tag(self, obj):
         return format_html('<img src="{}" style="width: 200px"/>'.format(obj.image.url))
 
-    image_tag.short_description = "Product Image Preview"
     readonly_fields = ["image_tag"]
 
     # Formatted discount display for admin list
