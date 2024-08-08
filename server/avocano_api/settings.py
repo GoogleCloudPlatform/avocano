@@ -191,10 +191,18 @@ MEDIA_URL = "/media/"
 
 # Use Cloud Storage if configured, otherwise use local storage.
 if GS_BUCKET_NAME := env("GS_BUCKET_NAME", default=None):
+    STORAGES = {
+        "default": {"BACKEND": "storages.backends.gcloud.GoogleCloudStorage"},
+        "staticfiles": {"BACKEND": "storages.backends.gcloud.GoogleCloudStorage"},
+    }
+
     GS_DEFAULT_ACL = "publicRead"
-    DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
-    STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
 else:
-    DEFAULT_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
     STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL.replace("/", ""))
     MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL.replace("/", ""))
