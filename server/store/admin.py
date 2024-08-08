@@ -33,9 +33,7 @@ class ProductAdmin(admin.ModelAdmin):
     )
 
     # Display preview of image in admin
-    @admin.display(
-        description="Product Image Preview"
-    )
+    @admin.display(description="Product Image Preview")
     def image_tag(self, obj):
         return format_html('<img src="{}" style="width: 200px"/>'.format(obj.image.url))
 
