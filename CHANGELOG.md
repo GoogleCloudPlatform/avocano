@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.11.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.4...v1.11.0) (2024-08-08)
+
+
+### 🥑 Features
+
+* update to Django 5.1 ([#467](https://github.com/GoogleCloudPlatform/avocano/issues/467)) ([2acc518](https://github.com/GoogleCloudPlatform/avocano/commit/2acc5182292f1def2912b518976616c75af98397))
+
+
+### 🧹 Chores
+
+* **deps:** bump @75lb/deep-merge from 1.1.1 to 1.1.2 in /client ([#469](https://github.com/GoogleCloudPlatform/avocano/issues/469)) ([94bf9e1](https://github.com/GoogleCloudPlatform/avocano/commit/94bf9e180f75c98bfea6ec998be84e5f2f555de2))
+* django-upgrade suggestions ([#470](https://github.com/GoogleCloudPlatform/avocano/issues/470)) ([5f77a06](https://github.com/GoogleCloudPlatform/avocano/commit/5f77a060d1ab09e828e212a3b6829dae007771e9))
+
 ## [1.10.4](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.3...v1.10.4) (2024-07-25)
 
 
