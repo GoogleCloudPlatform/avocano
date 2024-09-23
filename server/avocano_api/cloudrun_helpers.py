@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 from google.cloud import run_v2
 
@@ -68,19 +69,22 @@ def _service_name():
     return service
 
 
-def _service_url(project, region, service):
+def _service_urls(project, region, service):
     try:
         client = run_v2.ServicesClient()
         fqname = f"projects/{project}/locations/{region}/services/{service}"
         request = run_v2.GetServiceRequest(name=fqname)
         response = client.get_service(request=request)
-        return response.uri
+
+        ## This will return multiple values
+        annotations = response["metadata"]["annotations"]["run.googleapis.com/urls"]
+        return json.loads(annotations)
     except google.api_core.exceptions.GoogleAPICallError as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
-def get_service_url():
-    return _service_url(_project_id(), _region(), _service_name())
+def get_service_urls():
+    return _service_urls(_project_id(), _region(), _service_name())
 
 
 def get_project_id():
