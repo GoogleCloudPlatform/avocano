@@ -101,7 +101,9 @@ if not CLOUDRUN_SERVICE_URLS:
 
 if CLOUDRUN_SERVICE_URLS:
     # Setup as we are running in Cloud Run & Firebase
-    ALLOWED_HOSTS = [urlparse(url).netloc for urls in CLOUDRUN_SERVICE_URLS] + ["127.0.0.1"]
+    ALLOWED_HOSTS = [urlparse(url).netloc for url in CLOUDRUN_SERVICE_URLS] + [
+        "127.0.0.1"
+    ]
 
     # Firebase hosting has multiple default URLs, so add those as well.
     project_id = get_project_id()
