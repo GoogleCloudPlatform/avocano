@@ -31,10 +31,10 @@ jobs:
         working-directory: client
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - name: Use Node.js 16
+      - name: Use Node.js 22
         uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b # v4.0.3
         with:
-          node-version: 16
+          node-version: 22
       - run: npm install
       - run: npm run build --if-present
       - run: npm test
