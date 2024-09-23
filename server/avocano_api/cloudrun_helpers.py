@@ -69,7 +69,7 @@ def _service_name():
     return service
 
 
-def _service_urls(project, region, service):
+def _service_url(project, region, service):
     try:
         client = run_v2.ServicesClient()
         fqname = f"projects/{project}/locations/{region}/services/{service}"
@@ -78,13 +78,15 @@ def _service_urls(project, region, service):
 
         ## This will return multiple values
         annotations = response["metadata"]["annotations"]["run.googleapis.com/urls"]
-        return json.loads(annotations)
+
+        ## Return a comma-separated list
+        return ",".join(json.loads(annotations))
     except google.api_core.exceptions.GoogleAPICallError as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
 def get_service_urls():
-    return _service_urls(_project_id(), _region(), _service_name())
+    return _service_url(_project_id(), _region(), _service_name())
 
 
 def get_project_id():
