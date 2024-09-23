@@ -85,7 +85,7 @@ def _service_url(project, region, service):
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
 
-def get_service_urls():
+def get_service_url():
     return _service_url(_project_id(), _region(), _service_name())
 
 
