@@ -90,6 +90,7 @@ local_hosts = ["http://localhost:8000", "http://localhost:8081"]
 cloudshell_host = "https://*.cloudshell.dev"
 
 # Used to identify the host of the deployed service
+# Supports a comma separated list of full URLs
 CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
 
 # If the Cloud Run service isn't defined, try dynamically retrieving it.
@@ -101,7 +102,8 @@ if not CLOUDRUN_SERVICE_URL:
 
 if CLOUDRUN_SERVICE_URL:
     # Setup as we are running in Cloud Run & Firebase
-    ALLOWED_HOSTS = [urlparse(CLOUDRUN_SERVICE_URL).netloc, "127.0.0.1"]
+    service_urls = CLOUDRUN_SERVICE_URL.split(",")
+    ALLOWED_HOSTS = [urlparse(url).netloc for url in service_urls] + ["127.0.0.1"]
 
     # Firebase hosting has multiple default URLs, so add those as well.
     project_id = get_project_id()
@@ -120,7 +122,7 @@ if CLOUDRUN_SERVICE_URL:
         f"https://{firebase_site_id}.firebaseapp.com",
     ]
 
-    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL] + local_hosts + firebase_hosts
+    CSRF_TRUSTED_ORIGINS = service_urls + local_hosts + firebase_hosts
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 else:
