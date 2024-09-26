@@ -72,7 +72,14 @@ def _service_name():
 def _service_url(project, region, service):
     try:
         fqname = f"projects/{project}/locations/{region}/services/{service}"
-        service = build("run", "v1").projects().locations().services().get(name=fqname).execute()
+        service = (
+            build("run", "v1")
+            .projects()
+            .locations()
+            .services()
+            .get(name=fqname)
+            .execute()
+        )
 
         ## This will return multiple values
         annotations = service["metadata"]["annotations"]["run.googleapis.com/urls"]
