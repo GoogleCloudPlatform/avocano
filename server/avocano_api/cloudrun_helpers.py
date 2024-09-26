@@ -16,9 +16,9 @@
 
 import json
 import os
-from google.cloud import run_v2
 
 import google.auth
+from googleapiclient.discovery import build
 import httpx
 
 ## Dynamically determine the Cloud Run Service URL
@@ -71,13 +71,18 @@ def _service_name():
 
 def _service_url(project, region, service):
     try:
-        client = run_v2.ServicesClient()
         fqname = f"projects/{project}/locations/{region}/services/{service}"
-        request = run_v2.GetServiceRequest(name=fqname)
-        response = client.get_service(request=request)
+        service = (
+            build("run", "v1")
+            .projects()
+            .locations()
+            .services()
+            .get(name=fqname)
+            .execute()
+        )
 
         ## This will return multiple values
-        annotations = response["metadata"]["annotations"]["run.googleapis.com/urls"]
+        annotations = service["metadata"]["annotations"]["run.googleapis.com/urls"]
 
         ## Return a comma-separated list
         return ",".join(json.loads(annotations))
