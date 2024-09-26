@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
-from google.cloud import run_v2
 
 import google.auth
+from googleapiclient.discovery import build
 import httpx
 
 ## Dynamically determine the Cloud Run Service URL
@@ -70,11 +71,21 @@ def _service_name():
 
 def _service_url(project, region, service):
     try:
-        client = run_v2.ServicesClient()
         fqname = f"projects/{project}/locations/{region}/services/{service}"
-        request = run_v2.GetServiceRequest(name=fqname)
-        response = client.get_service(request=request)
-        return response.uri
+        service = (
+            build("run", "v1")
+            .projects()
+            .locations()
+            .services()
+            .get(name=fqname)
+            .execute()
+        )
+
+        ## This will return multiple values
+        annotations = service["metadata"]["annotations"]["run.googleapis.com/urls"]
+
+        ## Return a comma-separated list
+        return ",".join(json.loads(annotations))
     except google.api_core.exceptions.GoogleAPICallError as e:
         raise MetadataError(f"Could not determine service url. Error: {e}")
 
