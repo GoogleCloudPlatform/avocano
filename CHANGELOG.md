@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.12.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.11.0...v1.12.0) (2024-09-26)
+
+
+### 🥑 Features
+
+* handle deterministic URLs ([#497](https://github.com/GoogleCloudPlatform/avocano/issues/497)) ([bc0ce4b](https://github.com/GoogleCloudPlatform/avocano/commit/bc0ce4b704625dfc58ebad4d5551194f903b7f93))
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency express to v4.20.0 [security] ([#484](https://github.com/GoogleCloudPlatform/avocano/issues/484)) ([76f97ca](https://github.com/GoogleCloudPlatform/avocano/commit/76f97cafd88b91a46d34bdb7f029647a6ae79861))
+* **deps:** update dependency rollup to v4.22.4 [security] ([#499](https://github.com/GoogleCloudPlatform/avocano/issues/499)) ([df533a3](https://github.com/GoogleCloudPlatform/avocano/commit/df533a337c5bf20d5d5c3cd3d7e4a67318b98fba))
+* use metadata-aware client sdk ([#505](https://github.com/GoogleCloudPlatform/avocano/issues/505)) ([f673f82](https://github.com/GoogleCloudPlatform/avocano/commit/f673f8293f630ce9d6ec0562502a38452433d29d))
+
+
+### 🧹 Chores
+
+* **deps:** bump micromatch and lint-staged in /client ([#477](https://github.com/GoogleCloudPlatform/avocano/issues/477)) ([33e0f03](https://github.com/GoogleCloudPlatform/avocano/commit/33e0f03f10e2ee5ad34b1def198dbebea91d65c2))
+* **deps:** bump rollup from 3.29.4 to 4.22.4 in /client ([#502](https://github.com/GoogleCloudPlatform/avocano/issues/502)) ([0bb1d0d](https://github.com/GoogleCloudPlatform/avocano/commit/0bb1d0d2a3579705ee3c89120325ac992d984fa3))
+* **deps:** bump send and express in /client ([#488](https://github.com/GoogleCloudPlatform/avocano/issues/488)) ([6fab995](https://github.com/GoogleCloudPlatform/avocano/commit/6fab995c101ecbd59362c04b14d0fed0b1e61b6d))
+* **deps:** update actions/setup-node action to v4.0.4 ([#494](https://github.com/GoogleCloudPlatform/avocano/issues/494)) ([dbea5a3](https://github.com/GoogleCloudPlatform/avocano/commit/dbea5a33bd4d32cc14abc6972970d695175c1a2e))
+* **deps:** update dependency @web/test-runner to ^0.19.0 ([#489](https://github.com/GoogleCloudPlatform/avocano/issues/489)) ([3630260](https://github.com/GoogleCloudPlatform/avocano/commit/363026060af031443a41f70482b76b6e21cca9ed))
+* **deps:** update dependency faker to v28 ([#480](https://github.com/GoogleCloudPlatform/avocano/issues/480)) ([0fae91f](https://github.com/GoogleCloudPlatform/avocano/commit/0fae91f3b520cdfbc850b24b5116d0671d30bedd))
+* **deps:** update dependency faker to v29 ([#495](https://github.com/GoogleCloudPlatform/avocano/issues/495)) ([f17ff46](https://github.com/GoogleCloudPlatform/avocano/commit/f17ff469e6c92535d0c4cd073e0d6b20f808df92))
+* **deps:** update dependency google-auth to v2.35.0 ([#496](https://github.com/GoogleCloudPlatform/avocano/issues/496)) ([4f1072d](https://github.com/GoogleCloudPlatform/avocano/commit/4f1072d6570dfb7fc4765de359fd19ac1fae5ca9))
+* **deps:** update dependency gunicorn to v23 ([#473](https://github.com/GoogleCloudPlatform/avocano/issues/473)) ([072a27c](https://github.com/GoogleCloudPlatform/avocano/commit/072a27ce7556171e0982d23619afcc13ea7ed6e8))
+* **deps:** update dependency httpx to v0.27.2 ([#478](https://github.com/GoogleCloudPlatform/avocano/issues/478)) ([1f16914](https://github.com/GoogleCloudPlatform/avocano/commit/1f169141bd7fa6de32fb9afe6de55e73ed62d27e))
+* **deps:** update dependency sinon to v19 ([#490](https://github.com/GoogleCloudPlatform/avocano/issues/490)) ([7f0a8fe](https://github.com/GoogleCloudPlatform/avocano/commit/7f0a8fe73b36647dc7b13c00ce9d889c232ab106))
+* **deps:** update github actions ([#474](https://github.com/GoogleCloudPlatform/avocano/issues/474)) ([eddd5c6](https://github.com/GoogleCloudPlatform/avocano/commit/eddd5c6e0ccc5b013e36e50edd510a6c091a6e8e))
+* **deps:** update python ([#471](https://github.com/GoogleCloudPlatform/avocano/issues/471)) ([1f05c0e](https://github.com/GoogleCloudPlatform/avocano/commit/1f05c0e722f7a2058144313f9f103fd865cdc5fd))
+* **deps:** update python ([#483](https://github.com/GoogleCloudPlatform/avocano/issues/483)) ([8f8be97](https://github.com/GoogleCloudPlatform/avocano/commit/8f8be97bad17eb57a012c61ccc255b37687ef763))
+* **deps:** update terraform google to v6 ([#481](https://github.com/GoogleCloudPlatform/avocano/issues/481)) ([73a8ac9](https://github.com/GoogleCloudPlatform/avocano/commit/73a8ac935812f0953b5e852a48cdf2850443bb5d))
+
 ## [1.11.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.10.4...v1.11.0) (2024-08-08)
 
 
