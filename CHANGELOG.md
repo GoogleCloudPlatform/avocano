@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.12.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.0...v1.12.1) (2024-10-07)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency @rollup/plugin-replace to v6 ([#508](https://github.com/GoogleCloudPlatform/avocano/issues/508)) ([938e1ac](https://github.com/GoogleCloudPlatform/avocano/commit/938e1ace8e578317dc6aa0511300c61f0cf10dd6))
+
+
+### 🧹 Chores
+
+* **deps:** update actions/setup-node action to v4.0.4 ([#511](https://github.com/GoogleCloudPlatform/avocano/issues/511)) ([7484998](https://github.com/GoogleCloudPlatform/avocano/commit/74849987c1b521391d6a0c679863f357a70234e2))
+* **deps:** update caniuse-lite ([#498](https://github.com/GoogleCloudPlatform/avocano/issues/498)) ([b380aaa](https://github.com/GoogleCloudPlatform/avocano/commit/b380aaaa3f4e78f864d1a64f271469010a68ae4d))
+* **deps:** update dependency faker to v30 ([#509](https://github.com/GoogleCloudPlatform/avocano/issues/509)) ([6d394f7](https://github.com/GoogleCloudPlatform/avocano/commit/6d394f78cbfc372764faecb892024708c8350031))
+* **deps:** update dependency faker to v30.1.0 ([#512](https://github.com/GoogleCloudPlatform/avocano/issues/512)) ([bffbf7e](https://github.com/GoogleCloudPlatform/avocano/commit/bffbf7e4e21b483166735dbe14b17c54893a8512))
+
 ## [1.12.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.11.0...v1.12.0) (2024-09-26)
 
 
