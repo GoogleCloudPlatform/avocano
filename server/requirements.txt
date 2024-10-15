@@ -27,11 +27,11 @@ Faker==30.3.0
 httpx==0.27.2
 
 # Telemetry
-opentelemetry-api==1.26.0
-opentelemetry-sdk==1.26.0
-opentelemetry-distro==0.47b0
-opentelemetry-exporter-gcp-trace==1.6.0
-opentelemetry-instrumentation==0.47b0
-opentelemetry-resourcedetector-gcp==1.6.0a0
-opentelemetry-semantic-conventions==0.47b0
-opentelemetry-instrumentation-django==0.47b0
+opentelemetry-api==1.27.0
+opentelemetry-sdk==1.27.0
+opentelemetry-distro==0.48b0
+opentelemetry-exporter-gcp-trace==1.7.0
+opentelemetry-instrumentation==0.48b0
+opentelemetry-resourcedetector-gcp==1.7.0a0
+opentelemetry-semantic-conventions==0.48b0
+opentelemetry-instrumentation-django==0.48b0
