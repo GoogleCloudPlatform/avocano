@@ -33,5 +33,5 @@ opentelemetry-distro==0.47b0
 opentelemetry-exporter-gcp-trace==1.7.0
 opentelemetry-instrumentation==0.47b0
 opentelemetry-resourcedetector-gcp==1.6.0a0
-opentelemetry-semantic-conventions==0.47b0
+opentelemetry-semantic-conventions==0.48b0
 opentelemetry-instrumentation-django==0.47b0
