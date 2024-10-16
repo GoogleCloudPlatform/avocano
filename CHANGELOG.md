@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.12.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.0...v1.12.1) (2024-10-15)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency @rollup/plugin-replace to v6 ([#508](https://github.com/GoogleCloudPlatform/avocano/issues/508)) ([938e1ac](https://github.com/GoogleCloudPlatform/avocano/commit/938e1ace8e578317dc6aa0511300c61f0cf10dd6))
+
+
+### 🧹 Chores
+
+* **deps:** bump cookie and express in /client ([#519](https://github.com/GoogleCloudPlatform/avocano/issues/519)) ([63e8232](https://github.com/GoogleCloudPlatform/avocano/commit/63e823205bc0ef282150e2da222fde262f6b725a))
+* **deps:** update actions/checkout digest to eef6144 ([#515](https://github.com/GoogleCloudPlatform/avocano/issues/515)) ([f360ee1](https://github.com/GoogleCloudPlatform/avocano/commit/f360ee1a4405f037e533139047616d19a794da92))
+* **deps:** update actions/setup-node action to v4.0.4 ([#511](https://github.com/GoogleCloudPlatform/avocano/issues/511)) ([7484998](https://github.com/GoogleCloudPlatform/avocano/commit/74849987c1b521391d6a0c679863f357a70234e2))
+* **deps:** update caniuse-lite ([#498](https://github.com/GoogleCloudPlatform/avocano/issues/498)) ([b380aaa](https://github.com/GoogleCloudPlatform/avocano/commit/b380aaaa3f4e78f864d1a64f271469010a68ae4d))
+* **deps:** update dependency faker to v30 ([#509](https://github.com/GoogleCloudPlatform/avocano/issues/509)) ([6d394f7](https://github.com/GoogleCloudPlatform/avocano/commit/6d394f78cbfc372764faecb892024708c8350031))
+* **deps:** update dependency faker to v30.1.0 ([#512](https://github.com/GoogleCloudPlatform/avocano/issues/512)) ([bffbf7e](https://github.com/GoogleCloudPlatform/avocano/commit/bffbf7e4e21b483166735dbe14b17c54893a8512))
+* **deps:** update opentelemetry ([#514](https://github.com/GoogleCloudPlatform/avocano/issues/514)) ([1b4d249](https://github.com/GoogleCloudPlatform/avocano/commit/1b4d249b80d218b6d455dc5bfc37f26e674d1e2a))
+* **deps:** update python ([#516](https://github.com/GoogleCloudPlatform/avocano/issues/516)) ([0e41369](https://github.com/GoogleCloudPlatform/avocano/commit/0e41369ad7f8f2af8bf4ff8fb3c4dc7675bf0a51))
+* **deps:** update python docker tag to v3.13 ([#517](https://github.com/GoogleCloudPlatform/avocano/issues/517)) ([67604d6](https://github.com/GoogleCloudPlatform/avocano/commit/67604d62b1cdaef6cbdcad5b6d86cc75540cef4c))
+
 ## [1.12.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.11.0...v1.12.0) (2024-09-26)
 
 
