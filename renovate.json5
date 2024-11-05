@@ -1,100 +1,130 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":prConcurrentLimitNone",
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+    ':prConcurrentLimitNone',
   ],
-  "rangeStrategy": "auto",
-  "stabilityDays": 3,
-  "schedule": "every weekend",
-  "timezone": "America/Los_Angeles",
-  "packageRules": [
-    // Report impact of a dependency update via PR label to assist reviewers.
+  rangeStrategy: 'auto',
+  minimumReleaseAge: '3 days',
+  schedule: 'every weekend',
+  timezone: 'America/Los_Angeles',
+  packageRules: [
     {
-      "matchUpdateTypes": ["patch"],
-      "labels": ["semver: patch"],
-    },
-    {
-      "matchUpdateTypes": ["minor"],
-       "labels": ["semver: minor"],
-    },
-    {
-      "matchUpdateTypes": ["major"],
-       "labels": ["semver: major"],
-    },
-    {
-      "matchPaths": [
-        "client/**",
+      matchUpdateTypes: [
+        'patch',
       ],
-      "lockFileMaintenance": {
-        "enabled": true,
-        "recreateClosed": true,
+      labels: [
+        'semver: patch',
+      ],
+    },
+    {
+      matchUpdateTypes: [
+        'minor',
+      ],
+      labels: [
+        'semver: minor',
+      ],
+    },
+    {
+      matchUpdateTypes: [
+        'major',
+      ],
+      labels: [
+        'semver: major',
+      ],
+    },
+    {
+      matchFileNames: [
+        'client/**',
+      ],
+      lockFileMaintenance: {
+        enabled: true,
+        recreateWhen: 'always',
       },
-      "pinVersions": false,
-      "rebaseWhen": "behind-base-branch",
+      rangeStrategy: 'replace',
+      rebaseWhen: 'behind-base-branch',
     },
     {
-      // Group runtime updates.
-      // Applies to Dockerfile, cloudbuild.yaml, and others.
-      "groupName": "Language & Runtimes",
-      "matchDatasources": ["docker"],
-    },
-    {
-      // Group terraform updates together.
-      "groupName": "Terraform",
-      "matchManagers": ["terraform"],
-    },
-    {
-      // Group GitHub Actions and pin digests for immutable use.
-      "groupName": "GitHub Actions",
-      "matchManagers": ["github-actions"],
-      "pinDigests": true,
-    },
-    {
-      // Group non-major Python updates.
-      "groupName": "Python",
-      "matchLanguages": ["python"],
-      "matchUpdateTypes": ["minor", "patch"],
-    },
-    {
-      // Group non-major runtime dependencies for Node.js.
-      "groupName": "JS Runtime",
-      "matchLanguages": ["js", "node"],
-      "matchUpdateTypes": ["minor", "patch"],
-      // Scope the code to what we use in production operation.
-      "matchDepTypes": ["dependencies"],
-    },
-    {
-      // Group non-major build dependencies for Node.js.
-      "groupName": "JS Build",
-      "matchLanguages": ["js", "node"],
-      "matchDepTypes": ["devDependencies"],
-    },
-    {
-      // Playwright dependencies require tight alignment.
-      "groupName": "Playwright",
-      "matchPackageNames": ["playwright", "@playwright/test", "mcr.microsoft.com/playwright"],
-      // Run daily to add delayed but related updates to the group PR.
-      "schedule": "before 9am",
-      "prBodyNotes": [
-        ":warning: Playwright dependencies may roll out on a staggered schedule.",
-        "If tests are not passing due to version conflict, wait for other packages",
-        "and re-run renovate on this PR to retry the update.",
+      groupName: 'Language & Runtimes',
+      matchDatasources: [
+        'docker',
       ],
     },
     {
-      // OpenTelemetry dependencies require tight alignment.
-      "groupName": "OpenTelemetry",
-      "matchLanguages": ["python"],
-      "matchPackagePrefixes": ["opentelemetry-"],
-      // Run daily to add delayed but related updates to the group PR.
-      "schedule": "before 9am",
-      "prBodyNotes": [
-        ":warning: OpenTelemetry dependencies may roll out on a staggered schedule.",
-        "If tests are not passing due to version conflict, wait for other packages",
-        "and re-run renovate on this PR to retry the update.",
+      groupName: 'Terraform',
+      matchManagers: [
+        'terraform',
+      ],
+    },
+    {
+      groupName: 'GitHub Actions',
+      matchManagers: [
+        'github-actions',
+      ],
+      pinDigests: true,
+    },
+    {
+      groupName: 'Python',
+      matchCategories: [
+        'python',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+    },
+    {
+      groupName: 'JS Runtime',
+      matchCategories: [
+        'js',
+        'node',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+      matchDepTypes: [
+        'dependencies',
+      ],
+    },
+    {
+      groupName: 'JS Build',
+      matchCategories: [
+        'js',
+        'node',
+      ],
+      matchDepTypes: [
+        'devDependencies',
+      ],
+    },
+    {
+      groupName: 'Playwright',
+      matchPackageNames: [
+        'playwright',
+        '@playwright/test',
+        'mcr.microsoft.com/playwright',
+      ],
+      schedule: 'before 9am',
+      prBodyNotes: [
+        ':warning: Playwright dependencies may roll out on a staggered schedule.',
+        'If tests are not passing due to version conflict, wait for other packages',
+        'and re-run renovate on this PR to retry the update.',
+      ],
+    },
+    {
+      groupName: 'OpenTelemetry',
+      matchCategories: [
+        'python',
+      ],
+      schedule: 'before 9am',
+      prBodyNotes: [
+        ':warning: OpenTelemetry dependencies may roll out on a staggered schedule.',
+        'If tests are not passing due to version conflict, wait for other packages',
+        'and re-run renovate on this PR to retry the update.',
+      ],
+      matchPackageNames: [
+        'opentelemetry-{/,}**',
       ],
     },
   ],
 }
-
