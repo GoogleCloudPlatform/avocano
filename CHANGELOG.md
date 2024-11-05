@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.12.2](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.1...v1.12.2) (2024-11-05)
+
+
+### 🧹 Chores
+
+* **config:** migrate config renovate.json5 ([#530](https://github.com/GoogleCloudPlatform/avocano/issues/530)) ([95b61ee](https://github.com/GoogleCloudPlatform/avocano/commit/95b61eed1c6b15ff79e961b2bd5f978b154d7bd1))
+* **deps:** update github actions ([#528](https://github.com/GoogleCloudPlatform/avocano/issues/528)) ([4c5ec74](https://github.com/GoogleCloudPlatform/avocano/commit/4c5ec7471b9bb223ccdd6bed25e167691c37e637))
+* **deps:** update python ([#526](https://github.com/GoogleCloudPlatform/avocano/issues/526)) ([d7f66e4](https://github.com/GoogleCloudPlatform/avocano/commit/d7f66e4fb1668b315f3c0190ca142e4bfa55b754))
+
 ## [1.12.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.0...v1.12.1) (2024-10-15)
 
 
