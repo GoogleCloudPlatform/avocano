@@ -42,7 +42,7 @@ steps:
   # Use Debian 11 Bullseye until Playwright supports Debian 12 Bookworm
   #   - https://playwright.dev/python/docs/intro#system-requirements
   - id: "test"
-    name: python:3.12-bullseye
+    name: python:3.13-bullseye
     dir: provisioning
     env: 
       - 'CI_PROJECT=$_CI_PROJECT'
