@@ -3,13 +3,13 @@ django==5.1.2
 djangorestframework==3.15.2
 django-filter==24.3
 django-colorfield==0.11.0
-django-cors-headers==4.4.0
+django-cors-headers==4.5.0
 drf-spectacular==0.27.2
 
 
 # Database
 django-environ==0.11.2
-psycopg2-binary==2.9.9
+psycopg2-binary==2.9.10
 
 # WSGI
 gunicorn==23.0.0
@@ -23,7 +23,7 @@ google-api-python-client==2.149.0
 # Testing
 pyyaml==6.0.2
 model_bakery==1.20.0
-Faker==30.3.0
+Faker==30.8.1
 httpx==0.27.2
 
 # Telemetry
