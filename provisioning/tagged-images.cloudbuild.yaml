@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build containers with tags. 
+# Build containers with tags.
 # Must be used with Cloud Build's "Push new tag" Events
 
 steps:
@@ -28,10 +28,9 @@ steps:
       - "-t"
       - us-docker.pkg.dev/$PROJECT_ID/containers/$_CLIENT_IMAGE_NAME:$TAG_NAME
       - "."
-      
+
   - id: server build
-    name: gcr.io/k8s-skaffold/pack
-    entrypoint: pack
+    name: buildpacksio/pack
     args:
       - build
       - us-docker.pkg.dev/$PROJECT_ID/containers/$_SERVER_IMAGE_NAME:$TAG_NAME
