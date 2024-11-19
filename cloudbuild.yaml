@@ -14,8 +14,7 @@
 
 steps:
   - id: server build
-    name: gcr.io/k8s-skaffold/pack
-    entrypoint: pack
+    name: buildpacksio/pack
     args:
       - build
       - us-docker.pkg.dev/$PROJECT_ID/containers/server
