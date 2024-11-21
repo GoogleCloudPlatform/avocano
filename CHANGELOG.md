@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.13.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.1...v1.13.0) (2024-11-21)
+
+
+### 🥑 Features
+
+* update pack image to dockerhub version ([#536](https://github.com/GoogleCloudPlatform/avocano/issues/536)) ([5e0f0c2](https://github.com/GoogleCloudPlatform/avocano/commit/5e0f0c29a990aee092125a4e0239101931812134))
+
+
+### 🧹 Chores
+
+* **config:** migrate config renovate.json5 ([#530](https://github.com/GoogleCloudPlatform/avocano/issues/530)) ([95b61ee](https://github.com/GoogleCloudPlatform/avocano/commit/95b61eed1c6b15ff79e961b2bd5f978b154d7bd1))
+* **deps:** update dependency faker to v33 ([#535](https://github.com/GoogleCloudPlatform/avocano/issues/535)) ([d5cbd1d](https://github.com/GoogleCloudPlatform/avocano/commit/d5cbd1d5136c3def7fd594e9fb6637a2edcc30bf))
+* **deps:** update github actions ([#528](https://github.com/GoogleCloudPlatform/avocano/issues/528)) ([4c5ec74](https://github.com/GoogleCloudPlatform/avocano/commit/4c5ec7471b9bb223ccdd6bed25e167691c37e637))
+* **deps:** update python ([#526](https://github.com/GoogleCloudPlatform/avocano/issues/526)) ([d7f66e4](https://github.com/GoogleCloudPlatform/avocano/commit/d7f66e4fb1668b315f3c0190ca142e4bfa55b754))
+* **deps:** update python ([#533](https://github.com/GoogleCloudPlatform/avocano/issues/533)) ([fa0d6f8](https://github.com/GoogleCloudPlatform/avocano/commit/fa0d6f80770cc6b6135e87301c38c0e66d0419fe))
+* **deps:** update python docker tag to v3.13 ([#527](https://github.com/GoogleCloudPlatform/avocano/issues/527)) ([e823a7b](https://github.com/GoogleCloudPlatform/avocano/commit/e823a7bdbd53b6e95199dd4faa48ea649ccbc352))
+
 ## [1.12.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.0...v1.12.1) (2024-10-15)
 
 
