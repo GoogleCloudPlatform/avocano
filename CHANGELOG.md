@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.0...v1.13.1) (2024-12-09)
+
+
+### 🧹 Chores
+
+* **deps:** update dependency django to v5.1.4 [security] ([#542](https://github.com/GoogleCloudPlatform/avocano/issues/542)) ([682982f](https://github.com/GoogleCloudPlatform/avocano/commit/682982f86614cba80f8ccab13895ed1e330b29a0))
+
 ## [1.13.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.1...v1.13.0) (2024-11-21)
 
 
