@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.0...v1.13.1) (2024-12-10)
+
+
+### 🧹 Chores
+
+* **deps:** bump path-to-regexp and express in /client ([#544](https://github.com/GoogleCloudPlatform/avocano/issues/544)) ([8026f59](https://github.com/GoogleCloudPlatform/avocano/commit/8026f59665dee8d5fd939075d0fc8b11ce5ae2ed))
+* **deps:** update dependency django to v5.1.4 [security] ([#542](https://github.com/GoogleCloudPlatform/avocano/issues/542)) ([682982f](https://github.com/GoogleCloudPlatform/avocano/commit/682982f86614cba80f8ccab13895ed1e330b29a0))
+
 ## [1.13.0](https://github.com/GoogleCloudPlatform/avocano/compare/v1.12.1...v1.13.0) (2024-11-21)
 
 
