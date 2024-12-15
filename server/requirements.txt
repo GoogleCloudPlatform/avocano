@@ -27,8 +27,8 @@ Faker==33.1.0
 httpx==0.28.1
 
 # Telemetry
-opentelemetry-api==1.27.0
-opentelemetry-sdk==1.27.0
+opentelemetry-api==1.29.0
+opentelemetry-sdk==1.29.0
 opentelemetry-distro==0.48b0
 opentelemetry-exporter-gcp-trace==1.7.0
 opentelemetry-instrumentation==0.48b0
