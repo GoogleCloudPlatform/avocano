@@ -30,7 +30,7 @@ httpx==0.28.1
 opentelemetry-api==1.29.0
 opentelemetry-sdk==1.29.0
 opentelemetry-distro==0.50b0
-opentelemetry-exporter-gcp-trace==1.7.0
+opentelemetry-exporter-gcp-trace==1.8.0
 opentelemetry-instrumentation==0.50b0
 opentelemetry-resourcedetector-gcp==1.7.0a0
 opentelemetry-semantic-conventions==0.50b0
