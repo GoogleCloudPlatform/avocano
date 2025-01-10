@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.13.2](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.1...v1.13.2) (2025-01-10)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency @rollup/plugin-node-resolve to v16 ([#550](https://github.com/GoogleCloudPlatform/avocano/issues/550)) ([f0d4265](https://github.com/GoogleCloudPlatform/avocano/commit/f0d426506a08a60d46e07cbc7b463ccf64942d08))
+
+
+### 🧹 Chores
+
+* **deps:** update dependency faker to v33.3.0 ([#554](https://github.com/GoogleCloudPlatform/avocano/issues/554)) ([6515392](https://github.com/GoogleCloudPlatform/avocano/commit/65153925fee20cdfcf9bafc680e03280aea22d26))
+* **deps:** update dependency google-api-python-client to v2.157.0 ([#549](https://github.com/GoogleCloudPlatform/avocano/issues/549)) ([67aad25](https://github.com/GoogleCloudPlatform/avocano/commit/67aad252dd8add0f30ee24f455251c2189e05857))
+* **deps:** update dependency opentelemetry-exporter-gcp-trace to v1.8.0 ([#555](https://github.com/GoogleCloudPlatform/avocano/issues/555)) ([fd88b59](https://github.com/GoogleCloudPlatform/avocano/commit/fd88b594e98d69e50a32a2b5afa2957c0d13d26d))
+
 ## [1.13.1](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.0...v1.13.1) (2024-12-20)
 
 
