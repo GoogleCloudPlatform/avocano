@@ -18,11 +18,11 @@ gunicorn==23.0.0
 google-cloud-run==0.10.14
 google-auth==2.37.0
 django-storages[google]==1.14.4
-google-api-python-client==2.157.0
+google-api-python-client==2.158.0
 
 # Testing
 pyyaml==6.0.2
-model_bakery==1.20.0
+model_bakery==1.20.1
 Faker==33.3.0
 httpx==0.28.1
 
