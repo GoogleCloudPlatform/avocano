@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.4](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.3...v1.13.4) (2025-02-04)
+
+
+### 🧹 Chores
+
+* **deps:** npm update ([#569](https://github.com/GoogleCloudPlatform/avocano/issues/569)) ([d5aff35](https://github.com/GoogleCloudPlatform/avocano/commit/d5aff35a8609182f96616550cb3b333b6d70383b))
+* **deps:** update actions/setup-node action to v4.2.0 ([#565](https://github.com/GoogleCloudPlatform/avocano/issues/565)) ([458b943](https://github.com/GoogleCloudPlatform/avocano/commit/458b943c89652088090cb52320051f1a283803bb))
+* **deps:** update actions/setup-python digest to 4237552 ([#567](https://github.com/GoogleCloudPlatform/avocano/issues/567)) ([e9445b1](https://github.com/GoogleCloudPlatform/avocano/commit/e9445b1d293eef36a34968c5376999ebfcc4e1fa))
+* **deps:** update dependency faker to v35 ([#564](https://github.com/GoogleCloudPlatform/avocano/issues/564)) ([f925496](https://github.com/GoogleCloudPlatform/avocano/commit/f925496a99ba4e46cfeaadad90f10d76a6c02edd))
+* **deps:** update dependency google-auth to v2.38.0 ([#563](https://github.com/GoogleCloudPlatform/avocano/issues/563)) ([075f00d](https://github.com/GoogleCloudPlatform/avocano/commit/075f00dbd12cbe28a758e4a130fbac1b7b307643))
+* **deps:** update python ([#568](https://github.com/GoogleCloudPlatform/avocano/issues/568)) ([947371d](https://github.com/GoogleCloudPlatform/avocano/commit/947371da54418315dc04126b2ac5379920e8095c))
+
 ## [1.13.3](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.2...v1.13.3) (2025-01-20)
 
 
