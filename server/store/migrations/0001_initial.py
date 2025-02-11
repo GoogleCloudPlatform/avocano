@@ -132,7 +132,7 @@ class Migration(migrations.Migration):
                 (
                     "color_secondary",
                     colorfield.fields.ColorField(
-                        default="#BE0000",
+                        default="#BE0001",
                         help_text="For headings",
                         image_field=None,
                         max_length=18,
