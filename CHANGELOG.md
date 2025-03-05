@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.13.4](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.3...v1.13.4) (2025-03-05)
+
+
+### 🧹 Chores
+
+* **deps:** bump koa from 2.15.3 to 2.15.4 in /client ([#573](https://github.com/GoogleCloudPlatform/avocano/issues/573)) ([d61f6ba](https://github.com/GoogleCloudPlatform/avocano/commit/d61f6bafcc0cd11f189dc3de4cffc8ddb02845f3))
+* **deps:** npm update ([#569](https://github.com/GoogleCloudPlatform/avocano/issues/569)) ([d5aff35](https://github.com/GoogleCloudPlatform/avocano/commit/d5aff35a8609182f96616550cb3b333b6d70383b))
+* **deps:** update actions/setup-node action to v4.2.0 ([#565](https://github.com/GoogleCloudPlatform/avocano/issues/565)) ([458b943](https://github.com/GoogleCloudPlatform/avocano/commit/458b943c89652088090cb52320051f1a283803bb))
+* **deps:** update actions/setup-python digest to 4237552 ([#567](https://github.com/GoogleCloudPlatform/avocano/issues/567)) ([e9445b1](https://github.com/GoogleCloudPlatform/avocano/commit/e9445b1d293eef36a34968c5376999ebfcc4e1fa))
+* **deps:** update dependency @web/test-runner to ^0.20.0 ([#575](https://github.com/GoogleCloudPlatform/avocano/issues/575)) ([b0ce695](https://github.com/GoogleCloudPlatform/avocano/commit/b0ce695e1591895aeaf8530013b8adcd6d7163f4))
+* **deps:** update dependency django-filter to v25 ([#579](https://github.com/GoogleCloudPlatform/avocano/issues/579)) ([355cfe6](https://github.com/GoogleCloudPlatform/avocano/commit/355cfe62647f33cfff534ae54c1315b7cd5a2ac9))
+* **deps:** update dependency faker to v35 ([#564](https://github.com/GoogleCloudPlatform/avocano/issues/564)) ([f925496](https://github.com/GoogleCloudPlatform/avocano/commit/f925496a99ba4e46cfeaadad90f10d76a6c02edd))
+* **deps:** update dependency faker to v36 ([#574](https://github.com/GoogleCloudPlatform/avocano/issues/574)) ([f43934d](https://github.com/GoogleCloudPlatform/avocano/commit/f43934df71e1f3068938544cb3ab95a149d43b63))
+* **deps:** update dependency globals to v16 ([#580](https://github.com/GoogleCloudPlatform/avocano/issues/580)) ([ae12f71](https://github.com/GoogleCloudPlatform/avocano/commit/ae12f7143c924578dd28a0978b27620d06ec613d))
+* **deps:** update dependency google-auth to v2.38.0 ([#563](https://github.com/GoogleCloudPlatform/avocano/issues/563)) ([075f00d](https://github.com/GoogleCloudPlatform/avocano/commit/075f00dbd12cbe28a758e4a130fbac1b7b307643))
+* **deps:** update dependency google-cloud-run to v0.10.16 ([#578](https://github.com/GoogleCloudPlatform/avocano/issues/578)) ([17e295b](https://github.com/GoogleCloudPlatform/avocano/commit/17e295b7383866ff0e00c550abd0fe66173b2528))
+* **deps:** update opentelemetry ([#571](https://github.com/GoogleCloudPlatform/avocano/issues/571)) ([0395062](https://github.com/GoogleCloudPlatform/avocano/commit/0395062687bd4f49ba95be859b2ed3829de42ef9))
+* **deps:** update python ([#568](https://github.com/GoogleCloudPlatform/avocano/issues/568)) ([947371d](https://github.com/GoogleCloudPlatform/avocano/commit/947371da54418315dc04126b2ac5379920e8095c))
+* **deps:** update python ([#570](https://github.com/GoogleCloudPlatform/avocano/issues/570)) ([16dbf87](https://github.com/GoogleCloudPlatform/avocano/commit/16dbf87b79052ba2c0232bf0e4d5f14f0e68b84b))
+* **deps:** update python ([#582](https://github.com/GoogleCloudPlatform/avocano/issues/582)) ([9a36295](https://github.com/GoogleCloudPlatform/avocano/commit/9a36295da46e679fc4a06344ada3e14380dd8e58))
+
 ## [1.13.3](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.2...v1.13.3) (2025-01-20)
 
 
