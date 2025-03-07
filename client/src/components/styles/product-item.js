@@ -26,6 +26,10 @@ const styles = css`
     text-decoration: none;
   }
 
+  .buyButton {
+    border: 1px solid green; /* Add the green border */
+  }
+
   .itemTitle {
     color: var(--color-secondary);
   }
