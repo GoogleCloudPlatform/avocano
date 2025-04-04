@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.5](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.4...v1.13.5) (2025-03-16)
+
+
+### 🧹 Chores
+
+* **deps:** bump @babel/helpers from 7.26.7 to 7.26.10 in /client ([#589](https://github.com/GoogleCloudPlatform/avocano/issues/589)) ([2d1bc16](https://github.com/GoogleCloudPlatform/avocano/commit/2d1bc16e9161b53096af9b5e47a1834fa874fa48))
+* **deps:** bump django from 5.1.6 to 5.1.7 in /server ([#583](https://github.com/GoogleCloudPlatform/avocano/issues/583)) ([23638b2](https://github.com/GoogleCloudPlatform/avocano/commit/23638b2f43e4c33cd342ce103809a9bb52a5fe29))
+* **deps:** update dependency faker to v37 ([#593](https://github.com/GoogleCloudPlatform/avocano/issues/593)) ([c988a5b](https://github.com/GoogleCloudPlatform/avocano/commit/c988a5ba2343a52a65b359e298e870f9477ab598))
+* **deps:** update dependency google-api-python-client to v2.164.0 ([#592](https://github.com/GoogleCloudPlatform/avocano/issues/592)) ([ce9223e](https://github.com/GoogleCloudPlatform/avocano/commit/ce9223ee872a4d4033f6ca6a9178656c2f2ffb20))
+* **deps:** update opentelemetry to v1.31.0 ([#587](https://github.com/GoogleCloudPlatform/avocano/issues/587)) ([05e054f](https://github.com/GoogleCloudPlatform/avocano/commit/05e054f7dd9c812c72347969301f23193b0fe30c))
+* **deps:** update python ([#586](https://github.com/GoogleCloudPlatform/avocano/issues/586)) ([6042dc1](https://github.com/GoogleCloudPlatform/avocano/commit/6042dc188876c6bf8aa1661457aaa386afc243a8))
+
 ## [1.13.4](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.3...v1.13.4) (2025-03-05)
 
 
