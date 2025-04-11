@@ -29,7 +29,7 @@
     "@web/dev-server-rollup": "^0.6.0",
     "@web/rollup-plugin-html": "^2.0.1",
     "@web/rollup-plugin-import-meta-assets": "^2.1.0",
-    "express": "^4.21.2",
+    "express": "^5.0.0",
     "idb": "^8.0.0",
     "lit": "^3.0.0",
     "replace": "^1.2.2",
@@ -48,7 +48,7 @@
     "lint-staged": "^15.2.9",
     "prettier": "^3.0.3",
     "rimraf": "^6.0.0",
-    "sinon": "^19.0.0"
+    "sinon": "^20.0.0"
   },
   "prettier": {
     "singleQuote": true,
