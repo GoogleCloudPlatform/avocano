@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.13.6](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.5...v1.13.6) (2025-04-17)
+
+
+### 🐞 Bug Fixes
+
+* **deps:** update dependency express to v5 ([#602](https://github.com/GoogleCloudPlatform/avocano/issues/602)) ([c1fe6cc](https://github.com/GoogleCloudPlatform/avocano/commit/c1fe6cc6e2110bccd039149dd6f34df04cb63769))
+
+
+### 🧹 Chores
+
+* **deps:** bump koa from 2.15.4 to 2.16.1 in /client ([#603](https://github.com/GoogleCloudPlatform/avocano/issues/603)) ([a5e9e2e](https://github.com/GoogleCloudPlatform/avocano/commit/a5e9e2e030d1442fa0c254b69cefcb9c9f210300))
+* **deps:** update actions/setup-node action to v4.4.0 ([#605](https://github.com/GoogleCloudPlatform/avocano/issues/605)) ([56bb0e2](https://github.com/GoogleCloudPlatform/avocano/commit/56bb0e20f67de44d8e888d49e033c7814b0532c3))
+* **deps:** update actions/setup-python digest to 8d9ed9a ([#599](https://github.com/GoogleCloudPlatform/avocano/issues/599)) ([6a03527](https://github.com/GoogleCloudPlatform/avocano/commit/6a03527f957a17c54c83d4e8ffff04bb651aaa7b))
+* **deps:** update dependency django to v5.1.8 [security] ([#596](https://github.com/GoogleCloudPlatform/avocano/issues/596)) ([3109441](https://github.com/GoogleCloudPlatform/avocano/commit/3109441a33d3ee06099f9c2185fef51a5295f8b6))
+* **deps:** update dependency sinon to v20 ([#601](https://github.com/GoogleCloudPlatform/avocano/issues/601)) ([408c369](https://github.com/GoogleCloudPlatform/avocano/commit/408c369eb90387c5a06f75200d50ae4011c1e0e1))
+* **deps:** update opentelemetry ([#598](https://github.com/GoogleCloudPlatform/avocano/issues/598)) ([1161d88](https://github.com/GoogleCloudPlatform/avocano/commit/1161d8883bd88173b869aeec482a7be5dc4fc55c))
+* **deps:** update python ([#600](https://github.com/GoogleCloudPlatform/avocano/issues/600)) ([49103ed](https://github.com/GoogleCloudPlatform/avocano/commit/49103ed11705434c727354ee7d0d126bda991c0a))
+
 ## [1.13.5](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.4...v1.13.5) (2025-03-16)
 
 
