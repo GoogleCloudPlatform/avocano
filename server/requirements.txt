@@ -2,7 +2,7 @@ django==5.2.1
 
 djangorestframework==3.16.0
 django-filter==25.1
-django-colorfield==0.13.0
+django-colorfield==0.14.0
 django-cors-headers==4.7.0
 drf-spectacular==0.28.0
 
@@ -16,9 +16,9 @@ gunicorn==23.0.0
 
 # Google Cloud
 google-cloud-run==0.10.17
-google-auth==2.39.0
+google-auth==2.40.0
 django-storages[google]==1.14.6
-google-api-python-client==2.168.0
+google-api-python-client==2.169.0
 
 # Testing
 pyyaml==6.0.2
