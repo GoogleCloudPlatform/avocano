@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.13.7](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.6...v1.13.7) (2025-05-09)
+
+
+### 🧹 Chores
+
+* **deps:** update actions/setup-python digest to a26af69 ([#608](https://github.com/GoogleCloudPlatform/avocano/issues/608)) ([be4675a](https://github.com/GoogleCloudPlatform/avocano/commit/be4675a56bf06cccb7bcddff424fc54e2278973b))
+* **deps:** update dependency django to v5.2.1 [security] ([#612](https://github.com/GoogleCloudPlatform/avocano/issues/612)) ([d57ced4](https://github.com/GoogleCloudPlatform/avocano/commit/d57ced494d8b6066df75677864d3f0f8a13b7579))
+* **deps:** update opentelemetry to v1.32.1 ([#610](https://github.com/GoogleCloudPlatform/avocano/issues/610)) ([4194bc7](https://github.com/GoogleCloudPlatform/avocano/commit/4194bc7a1ac6989b2e8ad1f2b55b977bba70dad5))
+* **deps:** update python ([#607](https://github.com/GoogleCloudPlatform/avocano/issues/607)) ([a8ba545](https://github.com/GoogleCloudPlatform/avocano/commit/a8ba54573cb8614104e0bde787e3d6158087584d))
+* **deps:** update python ([#611](https://github.com/GoogleCloudPlatform/avocano/issues/611)) ([60bbc03](https://github.com/GoogleCloudPlatform/avocano/commit/60bbc034d877011c0d5fcc03e0e24447349e71ff))
+
 ## [1.13.6](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.5...v1.13.6) (2025-04-17)
 
 
