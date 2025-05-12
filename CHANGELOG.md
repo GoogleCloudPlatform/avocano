@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.13.8](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.7...v1.13.8) (2025-05-12)
+
+
+### 🧹 Chores
+
+* **deps:** update dependency google-auth to v2.40.1 ([#613](https://github.com/GoogleCloudPlatform/avocano/issues/613)) ([db91386](https://github.com/GoogleCloudPlatform/avocano/commit/db9138667c3fd99e06f3a680b343ec25d08d634b))
+* **deps:** update opentelemetry to v1.33.0 ([#614](https://github.com/GoogleCloudPlatform/avocano/issues/614)) ([322fa7b](https://github.com/GoogleCloudPlatform/avocano/commit/322fa7bee1394617916836d584e759d7c2009fb6))
+
 ## [1.13.7](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.6...v1.13.7) (2025-05-09)
 
 
