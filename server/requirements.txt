@@ -15,7 +15,7 @@ psycopg2-binary==2.9.10
 gunicorn==23.0.0
 
 # Google Cloud
-google-cloud-run==0.10.17
+google-cloud-run==0.10.18
 google-auth==2.40.1
 django-storages[google]==1.14.6
 google-api-python-client==2.169.0
@@ -23,7 +23,7 @@ google-api-python-client==2.169.0
 # Testing
 pyyaml==6.0.2
 model_bakery==1.20.4
-Faker==37.1.0
+Faker==37.3.0
 httpx==0.28.1
 
 # Telemetry
