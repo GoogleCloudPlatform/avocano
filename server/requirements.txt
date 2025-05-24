@@ -16,9 +16,9 @@ gunicorn==23.0.0
 
 # Google Cloud
 google-cloud-run==0.10.18
-google-auth==2.40.1
+google-auth==2.40.2
 django-storages[google]==1.14.6
-google-api-python-client==2.169.0
+google-api-python-client==2.170.0
 
 # Testing
 pyyaml==6.0.2
