@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.8](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.7...v1.13.8) (2025-05-26)
+
+
+### 🧹 Chores
+
+* **deps:** update dependency google-auth to v2.40.1 ([#613](https://github.com/GoogleCloudPlatform/avocano/issues/613)) ([db91386](https://github.com/GoogleCloudPlatform/avocano/commit/db9138667c3fd99e06f3a680b343ec25d08d634b))
+* **deps:** update dependency lint-staged to v16 ([#618](https://github.com/GoogleCloudPlatform/avocano/issues/618)) ([40c654b](https://github.com/GoogleCloudPlatform/avocano/commit/40c654be4658aa6af8e3e1d0afa904cd923e9917))
+* **deps:** update opentelemetry ([#617](https://github.com/GoogleCloudPlatform/avocano/issues/617)) ([94110b7](https://github.com/GoogleCloudPlatform/avocano/commit/94110b717e729f0b75c6dc2e17a46650efcba465))
+* **deps:** update opentelemetry to v1.33.0 ([#614](https://github.com/GoogleCloudPlatform/avocano/issues/614)) ([322fa7b](https://github.com/GoogleCloudPlatform/avocano/commit/322fa7bee1394617916836d584e759d7c2009fb6))
+* **deps:** update python ([#619](https://github.com/GoogleCloudPlatform/avocano/issues/619)) ([2f5bdce](https://github.com/GoogleCloudPlatform/avocano/commit/2f5bdcedb47181f9bb335b3e99ca13187f1e197c))
+* **deps:** update python ([#621](https://github.com/GoogleCloudPlatform/avocano/issues/621)) ([bd3f5d9](https://github.com/GoogleCloudPlatform/avocano/commit/bd3f5d9ebbd85fc6f947523503e865482e89f2aa))
+
 ## [1.13.7](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.6...v1.13.7) (2025-05-09)
 
 
