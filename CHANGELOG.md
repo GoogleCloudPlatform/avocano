@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.9](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.8...v1.13.9) (2025-06-04)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump tar-fs from 3.0.8 to 3.0.9 in /client ([#622](https://github.com/GoogleCloudPlatform/avocano/issues/622)) ([4f24f77](https://github.com/GoogleCloudPlatform/avocano/commit/4f24f777057cfd7b6b6f2ea0115400110fa3bf0e))
+
 ## [1.13.8](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.7...v1.13.8) (2025-05-26)
 
 
