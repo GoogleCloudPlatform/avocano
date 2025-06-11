@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.13.9](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.8...v1.13.9) (2025-06-11)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump tar-fs from 3.0.8 to 3.0.9 in /client ([#622](https://github.com/GoogleCloudPlatform/avocano/issues/622)) ([4f24f77](https://github.com/GoogleCloudPlatform/avocano/commit/4f24f777057cfd7b6b6f2ea0115400110fa3bf0e))
+* **deps:** update dependency django to v5.2.2 [security] ([#625](https://github.com/GoogleCloudPlatform/avocano/issues/625)) ([62cec9f](https://github.com/GoogleCloudPlatform/avocano/commit/62cec9fe8a6950de45633785cae7589632b3b6d7))
+* **deps:** update python ([#626](https://github.com/GoogleCloudPlatform/avocano/issues/626)) ([d768457](https://github.com/GoogleCloudPlatform/avocano/commit/d76845739cc5f3c7a5a595f150451b7634ffdea5))
+
 ## [1.13.8](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.7...v1.13.8) (2025-05-26)
 
 
