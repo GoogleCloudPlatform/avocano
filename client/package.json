@@ -48,7 +48,7 @@
     "lint-staged": "^16.0.0",
     "prettier": "^3.0.3",
     "rimraf": "^6.0.0",
-    "sinon": "^20.0.0"
+    "sinon": "^21.0.0"
   },
   "prettier": {
     "singleQuote": true,
