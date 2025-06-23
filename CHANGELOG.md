@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.9](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.8...v1.13.9) (2025-06-23)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump tar-fs from 3.0.8 to 3.0.9 in /client ([#622](https://github.com/GoogleCloudPlatform/avocano/issues/622)) ([4f24f77](https://github.com/GoogleCloudPlatform/avocano/commit/4f24f777057cfd7b6b6f2ea0115400110fa3bf0e))
+* **deps:** update dependency django to v5.2.2 [security] ([#625](https://github.com/GoogleCloudPlatform/avocano/issues/625)) ([62cec9f](https://github.com/GoogleCloudPlatform/avocano/commit/62cec9fe8a6950de45633785cae7589632b3b6d7))
+* **deps:** update dependency sinon to v21 ([#629](https://github.com/GoogleCloudPlatform/avocano/issues/629)) ([17c8991](https://github.com/GoogleCloudPlatform/avocano/commit/17c8991e34584e73bd5083829c50e93f89c4dce4))
+* **deps:** update opentelemetry to v1.34.1 ([#624](https://github.com/GoogleCloudPlatform/avocano/issues/624)) ([7b297c1](https://github.com/GoogleCloudPlatform/avocano/commit/7b297c1ccba4a880fc7958a28eebb0075f6f3f9b))
+* **deps:** update python ([#626](https://github.com/GoogleCloudPlatform/avocano/issues/626)) ([d768457](https://github.com/GoogleCloudPlatform/avocano/commit/d76845739cc5f3c7a5a595f150451b7634ffdea5))
+* **deps:** update python ([#628](https://github.com/GoogleCloudPlatform/avocano/issues/628)) ([ac7b7dc](https://github.com/GoogleCloudPlatform/avocano/commit/ac7b7dc846de3c54bf5dade72624836e0cc56056))
+
 ## [1.13.8](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.7...v1.13.8) (2025-05-26)
 
 
