@@ -1,4 +1,4 @@
-django==5.2.3
+django==5.2.4
 
 djangorestframework==3.16.0
 django-filter==25.1
@@ -18,7 +18,7 @@ gunicorn==23.0.0
 google-cloud-run==0.10.18
 google-auth==2.40.3
 django-storages[google]==1.14.6
-google-api-python-client==2.174.0
+google-api-python-client==2.175.0
 
 # Testing
 pyyaml==6.0.2
