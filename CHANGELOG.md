@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.13.9](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.8...v1.13.9) (2025-07-18)
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump tar-fs from 3.0.8 to 3.0.9 in /client ([#622](https://github.com/GoogleCloudPlatform/avocano/issues/622)) ([4f24f77](https://github.com/GoogleCloudPlatform/avocano/commit/4f24f777057cfd7b6b6f2ea0115400110fa3bf0e))
+* **deps:** update dependency django to v5.2.2 [security] ([#625](https://github.com/GoogleCloudPlatform/avocano/issues/625)) ([62cec9f](https://github.com/GoogleCloudPlatform/avocano/commit/62cec9fe8a6950de45633785cae7589632b3b6d7))
+* **deps:** update dependency google-api-python-client to v2.174.0 ([#631](https://github.com/GoogleCloudPlatform/avocano/issues/631)) ([c70f8f1](https://github.com/GoogleCloudPlatform/avocano/commit/c70f8f1099a10f6658424dd8c5fbff0da8ccb8d9))
+* **deps:** update dependency google-api-python-client to v2.176.0 ([#633](https://github.com/GoogleCloudPlatform/avocano/issues/633)) ([9c779d9](https://github.com/GoogleCloudPlatform/avocano/commit/9c779d9d0c561735f087f05ecc488f8f95d7c69f))
+* **deps:** update dependency sinon to v21 ([#629](https://github.com/GoogleCloudPlatform/avocano/issues/629)) ([17c8991](https://github.com/GoogleCloudPlatform/avocano/commit/17c8991e34584e73bd5083829c50e93f89c4dce4))
+* **deps:** update opentelemetry to v1.34.1 ([#624](https://github.com/GoogleCloudPlatform/avocano/issues/624)) ([7b297c1](https://github.com/GoogleCloudPlatform/avocano/commit/7b297c1ccba4a880fc7958a28eebb0075f6f3f9b))
+* **deps:** update python ([#626](https://github.com/GoogleCloudPlatform/avocano/issues/626)) ([d768457](https://github.com/GoogleCloudPlatform/avocano/commit/d76845739cc5f3c7a5a595f150451b7634ffdea5))
+* **deps:** update python ([#628](https://github.com/GoogleCloudPlatform/avocano/issues/628)) ([ac7b7dc](https://github.com/GoogleCloudPlatform/avocano/commit/ac7b7dc846de3c54bf5dade72624836e0cc56056))
+* **deps:** update python ([#632](https://github.com/GoogleCloudPlatform/avocano/issues/632)) ([8a03a02](https://github.com/GoogleCloudPlatform/avocano/commit/8a03a02fd7bea5c0a523489a7fa77dfc07f42bbe))
+* remove verbose deps ([#630](https://github.com/GoogleCloudPlatform/avocano/issues/630)) ([0732284](https://github.com/GoogleCloudPlatform/avocano/commit/07322849a56c3e112eaf8c6a81d1503b7fd95a4d))
+
 ## [1.13.8](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.7...v1.13.8) (2025-05-26)
 
 
