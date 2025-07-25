@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.10](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.9...v1.13.10) (2025-07-25)
+
+
+### 🧹 Chores
+
+* **deps:** update dependency faker to v37.4.2 ([#635](https://github.com/GoogleCloudPlatform/avocano/issues/635)) ([d24fb1e](https://github.com/GoogleCloudPlatform/avocano/commit/d24fb1e08f42f2fec48cb7028a7b38b2a224a9a4))
+
 ## [1.13.9](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.8...v1.13.9) (2025-07-18)
 
 
