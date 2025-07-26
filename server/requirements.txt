@@ -15,10 +15,10 @@ psycopg2-binary==2.9.10
 gunicorn==23.0.0
 
 # Google Cloud
-google-cloud-run==0.10.18
+google-cloud-run==0.10.19
 google-auth==2.40.3
 django-storages[google]==1.14.6
-google-api-python-client==2.176.0
+google-api-python-client==2.177.0
 
 # Testing
 pyyaml==6.0.2
