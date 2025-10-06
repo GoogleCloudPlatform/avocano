@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.13.10](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.9...v1.13.10) (2025-10-06)
+
+
+### 🧹 Chores
+
+* **deps:** bump brace-expansion from 1.1.11 to 1.1.12 in /client ([#642](https://github.com/GoogleCloudPlatform/avocano/issues/642)) ([99ccaa8](https://github.com/GoogleCloudPlatform/avocano/commit/99ccaa866c8ccb8b28b689edde35a769521ddf25))
+* **deps:** update actions/checkout action to v5 ([#641](https://github.com/GoogleCloudPlatform/avocano/issues/641)) ([432a9a0](https://github.com/GoogleCloudPlatform/avocano/commit/432a9a00bee3b7e5206a87cfa47550d68611c3be))
+* **deps:** update actions/github-script digest to f28e40c ([#645](https://github.com/GoogleCloudPlatform/avocano/issues/645)) ([1542607](https://github.com/GoogleCloudPlatform/avocano/commit/1542607020780a2ca001def28a34f031c02187ec))
+* **deps:** update dependency django to v5.2.6 [security] ([#647](https://github.com/GoogleCloudPlatform/avocano/issues/647)) ([bd9d50c](https://github.com/GoogleCloudPlatform/avocano/commit/bd9d50ca7b1e28c14b83645f0bad72100d6886c3))
+* **deps:** update dependency django to v5.2.7 [security] ([#651](https://github.com/GoogleCloudPlatform/avocano/issues/651)) ([baee967](https://github.com/GoogleCloudPlatform/avocano/commit/baee9671afce262b62a402b5129219309bff88be))
+* **deps:** update dependency faker to v37.4.2 ([#635](https://github.com/GoogleCloudPlatform/avocano/issues/635)) ([d24fb1e](https://github.com/GoogleCloudPlatform/avocano/commit/d24fb1e08f42f2fec48cb7028a7b38b2a224a9a4))
+* **deps:** update dependency faker to v37.5.3 ([#638](https://github.com/GoogleCloudPlatform/avocano/issues/638)) ([41a3793](https://github.com/GoogleCloudPlatform/avocano/commit/41a37938b1b8b30b217e8cc3d7e1248e8df700b8))
+* **deps:** update python ([#637](https://github.com/GoogleCloudPlatform/avocano/issues/637)) ([e54497b](https://github.com/GoogleCloudPlatform/avocano/commit/e54497b7da4f1d4f8121c6056bfd49e16365a0ac))
+* **deps:** update python ([#639](https://github.com/GoogleCloudPlatform/avocano/issues/639)) ([4feb263](https://github.com/GoogleCloudPlatform/avocano/commit/4feb263e4c14b1152e106c8318d015407ccc727c))
+
 ## [1.13.9](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.8...v1.13.9) (2025-07-18)
 
 
