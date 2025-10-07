@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.11](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.10...v1.13.11) (2025-10-07)
+
+
+### 🧹 Chores
+
+* **deps:** update python ([#643](https://github.com/GoogleCloudPlatform/avocano/issues/643)) ([a7bcab8](https://github.com/GoogleCloudPlatform/avocano/commit/a7bcab8185303d139ed5d11abc6561020780d8df))
+
 ## [1.13.10](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.9...v1.13.10) (2025-10-06)
 
 
