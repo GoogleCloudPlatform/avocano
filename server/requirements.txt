@@ -1,9 +1,9 @@
-django==5.2.5
+django==5.2.7
 
 djangorestframework==3.16.1
 django-filter==25.1
 django-colorfield==0.14.0
-django-cors-headers==4.7.0
+django-cors-headers==4.9.0
 drf-spectacular==0.28.0
 
 
@@ -15,15 +15,15 @@ psycopg2-binary==2.9.10
 gunicorn==23.0.0
 
 # Google Cloud
-google-cloud-run==0.10.19
-google-auth==2.40.3
+google-cloud-run==0.11.0
+google-auth==2.41.1
 django-storages[google]==1.14.6
-google-api-python-client==2.179.0
+google-api-python-client==2.184.0
 
 # Testing
-pyyaml==6.0.2
+pyyaml==6.0.3
 model_bakery==1.20.5
-Faker==37.5.3
+Faker==37.8.0
 httpx==0.28.1
 
 # Telemetry
