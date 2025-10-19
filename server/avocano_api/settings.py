@@ -208,3 +208,7 @@ else:
     }
     STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL.replace("/", ""))
     MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_URL.replace("/", ""))
+
+import os
+
+ALLOWED_HOSTS = ['*']

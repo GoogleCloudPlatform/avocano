@@ -20,6 +20,7 @@ steps:
       - us-docker.pkg.dev/$PROJECT_ID/containers/server
       - --builder=gcr.io/buildpacks/builder:v1
       - --path=server/
+      - --env=GOOGLE_ENTRYPOINT=gunicorn --bind 0.0.0.0:$$PORT avocano.wsgi
 
   # Because this image is immediately used in the next step, this action must happen now.
   - id: server push

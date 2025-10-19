@@ -88,15 +88,28 @@ done
 echo "Artifact Registry permissions should now be ready."
 
 aecho "Setup Artifact Registry in us multi-region"
-gcloud artifacts repositories create containers \
-    --repository-format=docker \
-    --location=us
+# gcloud artifacts repositories create containers \
+#     --repository-format=docker \
+#     --location=us
 
 aecho "Build firebase image (one time)"
 gcloud builds submit --config provisioning/firebase-builder.cloudbuild.yaml --no-source
 
 aecho "Running Cloud Build"
-gcloud builds submit --substitutions _REGION=${REGION}
+BUILD_ID=$(gcloud builds submit --substitutions _REGION=${REGION} --async --format='value(id)')
+
+while true; do
+  STATUS=$(gcloud builds describe $BUILD_ID --format='value(status)')
+  if [ "$STATUS" == "SUCCESS" ]; then
+    echo "Build succeeded!"
+    break
+  elif [ "$STATUS" == "FAILURE" ] || [ "$STATUS" == "INTERNAL_ERROR" ] || [ "$STATUS" == "TIMEOUT" ]; then
+    echo "Build failed with status: $STATUS"
+    exit 1
+  fi
+  echo "Build status is: $STATUS. Waiting..."
+  sleep 10
+done
 
 aecho "Setup database (one time)"
 gcloud run jobs execute setup --wait --region $REGION
