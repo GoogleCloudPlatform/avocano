@@ -23,7 +23,7 @@ google-api-python-client==2.186.0
 # Testing
 pyyaml==6.0.3
 model_bakery==1.20.5
-Faker==37.12.0
+Faker==39.0.0
 httpx==0.28.1
 
 # Telemetry
