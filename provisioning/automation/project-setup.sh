@@ -98,7 +98,7 @@ else
     stepdone
 
     stepdo "setup Terraform bucket"
-    gsutil mb -p ${CI_PROJECT} gs://$TF_STATE_BUCKET
+    gcloud storage buckets create --project ${CI_PROJECT} gs://$TF_STATE_BUCKET
     echo "Created $TF_STATE_BUCKET bucket"
 
     echo ""

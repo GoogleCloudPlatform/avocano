@@ -51,11 +51,12 @@ quiet gcloud projects add-iam-policy-binding $PROJECT_ID \
 
 aecho "Configuring Terraform"
 export TFSTATE_BUCKET=terraform-${PROJECT_ID}
-gsutil mb gs://$TFSTATE_BUCKET || true
+gcloud storage buckets create gs://$TFSTATE_BUCKET || true
 
-quiet gsutil iam ch \
-    serviceAccount:${CLOUDBUILD_SA}:roles/storage.admin \
-    gs://$TFSTATE_BUCKET
+quiet gcloud storage buckets add-iam-policy-binding \
+    gs://$TFSTATE_BUCKET \
+    --member serviceAccount:${CLOUDBUILD_SA} \
+    --role roles/storage.admin
 
 aecho "Checking for Artifact Registry IAM propagation..."
 permission_missing() {
