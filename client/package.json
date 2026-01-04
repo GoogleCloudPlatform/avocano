@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.22.20",
-    "@custom-elements-manifest/analyzer": "^0.10.0",
+    "@custom-elements-manifest/analyzer": "^0.11.0",
     "@open-wc/testing": "^4.0.0",
     "@web/test-runner": "^0.20.0",
     "babel-plugin-template-html-minifier": "^4.1.0",
