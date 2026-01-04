@@ -27,7 +27,7 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@web/dev-server": "^0.4.0",
     "@web/dev-server-rollup": "^0.6.0",
-    "@web/rollup-plugin-html": "^2.0.1",
+    "@web/rollup-plugin-html": "^3.0.0",
     "@web/rollup-plugin-import-meta-assets": "^2.1.0",
     "express": "^5.0.0",
     "idb": "^8.0.0",
