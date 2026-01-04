@@ -71,12 +71,10 @@ stepdone
 stepdo "Create CI logs bucket"
 LOGS_BUCKET=gs://${PARENT_PROJECT}-buildlogs
 
-if gsutil ls $LOGS_BUCKET 2>&1 | grep -q 'BucketNotFoundException'; then
-    gsutil mb -p $PARENT_PROJECT $LOGS_BUCKET
+if gcloud storage ls $LOGS_BUCKET 2>&1 | grep -q 'BucketNotFoundException'; then
+    gcloud storage buckets create $LOGS_BUCKET --project $PARENT_PROJECT
 
-    gsutil iam ch \
-        serviceAccount:${DEFAULT_GCB}:roles/storage.objectAdmin \
-        $LOGS_BUCKET
+    gcloud storage buckets add-iam-policy-binding $LOGS_BUCKET --member="serviceAccount:${DEFAULT_GCB}" --role="roles/storage.objectAdmin"
 else
     echo "Bucket $LOGS_BUCKET already exists. Skipping"
 fi
@@ -85,13 +83,11 @@ stepdone
 stepdo "Grant access to default logs bucket"
 DEFAULT_BUCKET=gs://${PARENT_PROJECT}_cloudbuild
 
-if gsutil ls $DEFAULT_BUCKET 2>&1 | grep -q 'BucketNotFoundException'; then
+if gcloud storage ls $DEFAULT_BUCKET 2>&1 | grep -q 'BucketNotFoundException'; then
     echo "Default Cloud Build log bucket not automatically created. Fixing."
-    gsutil mb -p $PARENT_PROJECT $DEFAULT_BUCKET
+    gcloud storage buckets create $DEFAULT_BUCKET --project $PARENT_PROJECT
 fi
-gsutil iam ch \
-    serviceAccount:${SA_EMAIL}:roles/storage.admin \
-    $DEFAULT_BUCKET
+gcloud storage buckets add-iam-policy-binding $DEFAULT_BUCKET --member="serviceAccount:${SA_EMAIL}" --role="roles/storage.admin"
 stepdone
 
 stepdo "Grant roles to service account on project"
