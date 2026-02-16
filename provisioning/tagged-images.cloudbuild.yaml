@@ -30,7 +30,7 @@ steps:
       - "."
 
   - id: server build
-    name: buildpacksio/pack
+    name: gcr.io/k8s-skaffold/pack
     args:
       - build
       - us-docker.pkg.dev/$PROJECT_ID/containers/$_SERVER_IMAGE_NAME:$TAG_NAME
