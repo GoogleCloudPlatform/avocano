@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.13.11](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.10...v1.13.11) (2026-06-10)
+
+
+### 🐞 Bug Fixes
+
+* revert pack images to k8s-skaffold version ([#711](https://github.com/GoogleCloudPlatform/avocano/issues/711)) ([bc97e18](https://github.com/GoogleCloudPlatform/avocano/commit/bc97e1887aa5861c0359562bedd86c2be11ce4ab))
+
+
+### 🧹 Chores
+
+* **deps-dev:** bump tar-fs from 3.0.9 to 3.1.1 in /client ([#650](https://github.com/GoogleCloudPlatform/avocano/issues/650)) ([5cd4170](https://github.com/GoogleCloudPlatform/avocano/commit/5cd417055a2d1d6df21fd14c6d69019d77da9ba4))
+* **deps:** bump django from 5.2.7 to 5.2.8 in /server ([#658](https://github.com/GoogleCloudPlatform/avocano/issues/658)) ([3fb6c42](https://github.com/GoogleCloudPlatform/avocano/commit/3fb6c4268404477cc3f495de1db81d7492534936))
+* **deps:** update github actions ([#646](https://github.com/GoogleCloudPlatform/avocano/issues/646)) ([46964e2](https://github.com/GoogleCloudPlatform/avocano/commit/46964e21659fdcef61952d4ba479bea968ac0d09))
+* **deps:** update github actions ([#734](https://github.com/GoogleCloudPlatform/avocano/issues/734)) ([6a5ac22](https://github.com/GoogleCloudPlatform/avocano/commit/6a5ac220087b526e1371dc18417ca99f9af632b3))
+* **deps:** update python ([#643](https://github.com/GoogleCloudPlatform/avocano/issues/643)) ([a7bcab8](https://github.com/GoogleCloudPlatform/avocano/commit/a7bcab8185303d139ed5d11abc6561020780d8df))
+* **deps:** update python ([#654](https://github.com/GoogleCloudPlatform/avocano/issues/654)) ([a68721d](https://github.com/GoogleCloudPlatform/avocano/commit/a68721d3bef2b41080e21189b0b51d27b656f152))
+* **deps:** update terraform google to v7 ([#644](https://github.com/GoogleCloudPlatform/avocano/issues/644)) ([afa5a43](https://github.com/GoogleCloudPlatform/avocano/commit/afa5a43886e2e8d2e8236dbfdb37a9a7ee51fb95))
+
 ## [1.13.10](https://github.com/GoogleCloudPlatform/avocano/compare/v1.13.9...v1.13.10) (2025-10-06)
 
 
