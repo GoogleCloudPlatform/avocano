@@ -27,5 +27,5 @@ Faker==37.12.0
 httpx==0.28.1
 
 # Telemetry
-opentelemetry-resourcedetector-gcp==1.7.0a0
+opentelemetry-resourcedetector-gcp==1.14.0
 opentelemetry-instrumentation-django==0.55b1
