@@ -4,25 +4,25 @@ djangorestframework==3.16.1
 django-filter==25.2
 django-colorfield==0.14.0
 django-cors-headers==4.9.0
-drf-spectacular==0.29.0
+drf-spectacular==0.30.0
 
 
 # Database
-django-environ==0.12.0
-psycopg2-binary==2.9.11
+django-environ==0.14.0
+psycopg2-binary==2.9.13
 
 # WSGI
 gunicorn==23.0.0
 
 # Google Cloud
-google-cloud-run==0.12.0
-google-auth==2.42.1
+google-cloud-run==0.16.2
+google-auth==2.62.0
 django-storages[google]==1.14.6
-google-api-python-client==2.186.0
+google-api-python-client==2.201.0
 
 # Testing
 pyyaml==6.0.3
-model_bakery==1.20.5
+model_bakery==1.24.2
 Faker==37.12.0
 httpx==0.28.1
 
