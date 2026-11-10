@@ -36,19 +36,19 @@
     "rollup": "^4.22.4"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.22.20",
+    "@babel/preset-env": "^8.0.0",
     "@custom-elements-manifest/analyzer": "^0.10.0",
-    "@open-wc/testing": "^4.0.0",
-    "@web/test-runner": "^0.20.0",
+    "@open-wc/testing": "^5.0.0",
+    "@web/test-runner": "^1.0.0",
     "babel-plugin-template-html-minifier": "^4.1.0",
     "deepmerge": "^4.3.1",
-    "eslint": "^9.2.0",
-    "globals": "^16.0.0",
+    "eslint": "^10.0.0",
+    "globals": "^17.0.0",
     "husky": "^9.0.0",
-    "lint-staged": "^16.0.0",
+    "lint-staged": "^17.0.0",
     "prettier": "^3.0.3",
     "rimraf": "^6.0.0",
-    "sinon": "^21.0.0"
+    "sinon": "^22.0.0"
   },
   "prettier": {
     "singleQuote": true,
