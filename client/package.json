@@ -3,7 +3,7 @@
   "description": "Avocano app",
   "license": "MIT",
   "author": "avocano-shell",
-  "version": "1.13.10",
+  "version": "1.13.11",
   "type": "module",
   "scripts": {
     "lint": "eslint",
