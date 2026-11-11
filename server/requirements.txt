@@ -1,7 +1,7 @@
 django==5.2.8
 
 djangorestframework==3.16.1
-django-filter==25.2
+django-filter==26.2
 django-colorfield==0.14.0
 django-cors-headers==4.9.0
 drf-spectacular==0.29.0
