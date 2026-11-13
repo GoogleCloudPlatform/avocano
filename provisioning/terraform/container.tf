@@ -1,7 +1,7 @@
 
 # Use the docker registry providers to get accurate latest image information
 # Allows Terraform to always update to the container image associated as "latest" without
-# locking to the literal string "latest". 
+# locking to the literal string "latest".
 # https://github.com/hashicorp/terraform-provider-google/issues/6706#issuecomment-657039775
 
 #
@@ -21,9 +21,9 @@ locals {
   image_registry    = "${local.registry_hostname}/${var.project_id}/${local.registry_name}"
 
   # Images in formats (use NAME_image in services, jobs, etc.)
-  server_image_sha    = "${data.docker_registry_image.server_image.name}@${data.docker_registry_image.server_image.sha256_digest}"
-  server_image_tagged = data.docker_registry_image.server_image.name
-  server_image        = local.server_image_tag == "latest" ? local.server_image_sha : local.server_image_tagged
+  server_image_sha     = "${data.docker_registry_image.server_image.name}@${data.docker_registry_image.server_image.sha256_digest}"
+  server_image_tagged  = data.docker_registry_image.server_image.name
+  server_image_version = local.server_image_tag == "latest" ? local.server_image_sha : local.server_image_tagged
 }
 
 data "google_client_config" "default" {}
@@ -37,5 +37,5 @@ provider "docker" {
 }
 
 data "docker_registry_image" "server_image" {
-  name = "${local.image_registry}/${local.server_image_name}"
+  name = "${local.image_registry}/${local.server_image_name}:${local.server_image_version}"
 }
